@@ -1,3 +1,88 @@
-﻿Public Class frmLogin
+﻿Imports System.Data
+
+Public Class frmLogin
+
+    Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.StartPosition = FormStartPosition.CenterScreen
+        Me.AcceptButton = btnLogin          ' Enter key signs in
+    End Sub
+
+    ''' <summary>Called by frmMain after "Sign Out" to bring the sign-in screen back.</summary>
+    Public Sub ShowAgain()
+        txtUsername.Clear()
+        txtPassword.Clear()
+        Me.Show()
+        txtUsername.Focus()
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        Application.Exit()
+    End Sub
+
+    Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+        Dim user As String = txtUsername.Text.Trim()
+        Dim pass As String = txtPassword.Text
+        If user.Length = 0 OrElse pass.Length = 0 Then
+            Ui.Warn("Enter your username and password.")
+            Return
+        End If
+
+        Try
+            Dim table As DataTable = Db.Query("
+                SELECT u.UserID, u.PasswordHash, u.IsActive, r.RoleName, s.Status AS StaffStatus,
+                       CONCAT(s.FirstName, ' ', s.LastName) AS FullName
+                FROM tblUsers u
+                INNER JOIN tblRoles r ON r.RoleID = u.RoleID
+                INNER JOIN tblStaff s ON s.StaffID = u.StaffID
+                WHERE u.Username = @u", ("@u", user))
+
+            If table.Rows.Count = 0 Then
+                Fail(user)
+                Return
+            End If
+
+            Dim row As DataRow = table.Rows(0)
+            Dim userId As Integer = Convert.ToInt32(row("UserID"))
+            Dim hash As String = row("PasswordHash").ToString()
+
+            If Not Convert.ToBoolean(row("IsActive")) OrElse row("StaffStatus").ToString() <> "Active" Then
+                Ui.Warn("This account is disabled. Please contact the administrator.")
+                Return
+            End If
+
+            If hash = Pwd.FirstRunHash Then
+                ' The SQL script ships a placeholder: the first sign-in chooses the real password.
+                Dim chosen As String = Ui.AskPassword("First sign-in for '" & user & "'." & vbCrLf & "Choose a password for this account.")
+                If chosen Is Nothing Then Return
+                hash = Pwd.Hash(chosen)
+                Db.Exec("UPDATE tblUsers SET PasswordHash = @h WHERE UserID = @id", ("@h", hash), ("@id", userId))
+            ElseIf Not Pwd.Verify(pass, hash) Then
+                Fail(user)
+                Return
+            End If
+
+            Session.UserId = userId
+            Session.Username = user
+            Session.FullName = row("FullName").ToString()
+            Session.Role = row("RoleName").ToString()
+
+            Db.Exec("UPDATE tblUsers SET LastLogin = NOW() WHERE UserID = @id", ("@id", userId))
+            Audit.Log("Login", "tblUsers", userId)
+
+            ' One window only: hide the sign-in screen and show the main form (all pages are panels in it).
+            txtPassword.Clear()
+            Me.Hide()
+            frmMain.Show()
+        Catch ex As Exception
+            Ui.Error(ex)
+        End Try
+    End Sub
+
+    Private Sub Fail(user As String)
+        Audit.Log("Login Failed", "tblUsers", Nothing, Nothing, user)
+        Ui.Warn("Incorrect username or password.")
+        txtPassword.Clear()
+        txtPassword.Focus()
+    End Sub
 
 End Class
