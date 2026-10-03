@@ -449,7 +449,7 @@ Partial Class frmMain
         Me.pnlSidebar.Controls.Add(Me.btnLogout)
         Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
-        Me.pnlSidebar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlSidebar.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlSidebar.Name = "pnlSidebar"
         Me.pnlSidebar.Size = New System.Drawing.Size(293, 1102)
         Me.pnlSidebar.TabIndex = 6
@@ -457,7 +457,7 @@ Partial Class frmMain
         'picLogo
         '
         Me.picLogo.Location = New System.Drawing.Point(47, 4)
-        Me.picLogo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.picLogo.Margin = New System.Windows.Forms.Padding(4)
         Me.picLogo.Name = "picLogo"
         Me.picLogo.Size = New System.Drawing.Size(204, 192)
         Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -497,7 +497,7 @@ Partial Class frmMain
         Me.btnNavDashboard.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.btnNavDashboard.ForeColor = System.Drawing.Color.White
         Me.btnNavDashboard.Location = New System.Drawing.Point(13, 289)
-        Me.btnNavDashboard.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNavDashboard.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNavDashboard.Name = "btnNavDashboard"
         Me.btnNavDashboard.Padding = New System.Windows.Forms.Padding(19, 0, 0, 0)
         Me.btnNavDashboard.Size = New System.Drawing.Size(267, 49)
@@ -516,7 +516,7 @@ Partial Class frmMain
         Me.btnNavPatients.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.btnNavPatients.ForeColor = System.Drawing.Color.White
         Me.btnNavPatients.Location = New System.Drawing.Point(13, 346)
-        Me.btnNavPatients.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNavPatients.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNavPatients.Name = "btnNavPatients"
         Me.btnNavPatients.Padding = New System.Windows.Forms.Padding(19, 0, 0, 0)
         Me.btnNavPatients.Size = New System.Drawing.Size(267, 49)
@@ -535,7 +535,7 @@ Partial Class frmMain
         Me.btnNavAppointments.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.btnNavAppointments.ForeColor = System.Drawing.Color.White
         Me.btnNavAppointments.Location = New System.Drawing.Point(13, 402)
-        Me.btnNavAppointments.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNavAppointments.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNavAppointments.Name = "btnNavAppointments"
         Me.btnNavAppointments.Padding = New System.Windows.Forms.Padding(19, 0, 0, 0)
         Me.btnNavAppointments.Size = New System.Drawing.Size(267, 49)
@@ -554,7 +554,7 @@ Partial Class frmMain
         Me.btnNavBilling.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.btnNavBilling.ForeColor = System.Drawing.Color.White
         Me.btnNavBilling.Location = New System.Drawing.Point(13, 459)
-        Me.btnNavBilling.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNavBilling.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNavBilling.Name = "btnNavBilling"
         Me.btnNavBilling.Padding = New System.Windows.Forms.Padding(19, 0, 0, 0)
         Me.btnNavBilling.Size = New System.Drawing.Size(267, 49)
@@ -573,7 +573,7 @@ Partial Class frmMain
         Me.btnNavClinical.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.btnNavClinical.ForeColor = System.Drawing.Color.White
         Me.btnNavClinical.Location = New System.Drawing.Point(13, 516)
-        Me.btnNavClinical.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNavClinical.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNavClinical.Name = "btnNavClinical"
         Me.btnNavClinical.Padding = New System.Windows.Forms.Padding(19, 0, 0, 0)
         Me.btnNavClinical.Size = New System.Drawing.Size(267, 49)
@@ -592,7 +592,7 @@ Partial Class frmMain
         Me.btnNavProcedures.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.btnNavProcedures.ForeColor = System.Drawing.Color.White
         Me.btnNavProcedures.Location = New System.Drawing.Point(13, 572)
-        Me.btnNavProcedures.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNavProcedures.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNavProcedures.Name = "btnNavProcedures"
         Me.btnNavProcedures.Padding = New System.Windows.Forms.Padding(19, 0, 0, 0)
         Me.btnNavProcedures.Size = New System.Drawing.Size(267, 49)
@@ -611,7 +611,7 @@ Partial Class frmMain
         Me.btnNavInventory.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.btnNavInventory.ForeColor = System.Drawing.Color.White
         Me.btnNavInventory.Location = New System.Drawing.Point(13, 629)
-        Me.btnNavInventory.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNavInventory.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNavInventory.Name = "btnNavInventory"
         Me.btnNavInventory.Padding = New System.Windows.Forms.Padding(19, 0, 0, 0)
         Me.btnNavInventory.Size = New System.Drawing.Size(267, 49)
@@ -630,7 +630,7 @@ Partial Class frmMain
         Me.btnNavStaff.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.btnNavStaff.ForeColor = System.Drawing.Color.White
         Me.btnNavStaff.Location = New System.Drawing.Point(13, 686)
-        Me.btnNavStaff.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNavStaff.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNavStaff.Name = "btnNavStaff"
         Me.btnNavStaff.Padding = New System.Windows.Forms.Padding(19, 0, 0, 0)
         Me.btnNavStaff.Size = New System.Drawing.Size(267, 49)
@@ -649,7 +649,7 @@ Partial Class frmMain
         Me.btnNavAudit.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.btnNavAudit.ForeColor = System.Drawing.Color.White
         Me.btnNavAudit.Location = New System.Drawing.Point(13, 742)
-        Me.btnNavAudit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNavAudit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNavAudit.Name = "btnNavAudit"
         Me.btnNavAudit.Padding = New System.Windows.Forms.Padding(19, 0, 0, 0)
         Me.btnNavAudit.Size = New System.Drawing.Size(267, 49)
@@ -668,7 +668,7 @@ Partial Class frmMain
         Me.btnChangePassword.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.btnChangePassword.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnChangePassword.Location = New System.Drawing.Point(13, 967)
-        Me.btnChangePassword.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnChangePassword.Margin = New System.Windows.Forms.Padding(4)
         Me.btnChangePassword.Name = "btnChangePassword"
         Me.btnChangePassword.Size = New System.Drawing.Size(267, 47)
         Me.btnChangePassword.TabIndex = 17
@@ -685,7 +685,7 @@ Partial Class frmMain
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.Location = New System.Drawing.Point(13, 1026)
-        Me.btnLogout.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnLogout.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(267, 47)
         Me.btnLogout.TabIndex = 18
@@ -699,7 +699,7 @@ Partial Class frmMain
         Me.pnlHeader.Controls.Add(Me.lblUser)
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(293, 0)
-        Me.pnlHeader.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlHeader.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlHeader.Name = "pnlHeader"
         Me.pnlHeader.Size = New System.Drawing.Size(1649, 69)
         Me.pnlHeader.TabIndex = 20
@@ -738,7 +738,7 @@ Partial Class frmMain
         Me.pnlDashboard.Controls.Add(Me.dgvToday)
         Me.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlDashboard.Location = New System.Drawing.Point(293, 69)
-        Me.pnlDashboard.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlDashboard.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlDashboard.Name = "pnlDashboard"
         Me.pnlDashboard.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.pnlDashboard.Size = New System.Drawing.Size(1649, 1033)
@@ -750,7 +750,7 @@ Partial Class frmMain
         Me.pnlCardToday.Controls.Add(Me.lblCardTodayCaption)
         Me.pnlCardToday.Controls.Add(Me.lblTodayCount)
         Me.pnlCardToday.Location = New System.Drawing.Point(45, 37)
-        Me.pnlCardToday.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlCardToday.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlCardToday.Name = "pnlCardToday"
         Me.pnlCardToday.Size = New System.Drawing.Size(315, 123)
         Me.pnlCardToday.TabIndex = 17
@@ -784,7 +784,7 @@ Partial Class frmMain
         Me.pnlCardPending.Controls.Add(Me.lblCardPendingCaption)
         Me.pnlCardPending.Controls.Add(Me.lblPendingCount)
         Me.pnlCardPending.Location = New System.Drawing.Point(371, 37)
-        Me.pnlCardPending.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlCardPending.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlCardPending.Name = "pnlCardPending"
         Me.pnlCardPending.Size = New System.Drawing.Size(315, 123)
         Me.pnlCardPending.TabIndex = 18
@@ -819,7 +819,7 @@ Partial Class frmMain
         Me.pnlCardUnpaid.Controls.Add(Me.lblUnpaidCount)
         Me.pnlCardUnpaid.Controls.Add(Me.lblUnpaidAmount)
         Me.pnlCardUnpaid.Location = New System.Drawing.Point(696, 37)
-        Me.pnlCardUnpaid.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlCardUnpaid.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlCardUnpaid.Name = "pnlCardUnpaid"
         Me.pnlCardUnpaid.Size = New System.Drawing.Size(315, 123)
         Me.pnlCardUnpaid.TabIndex = 19
@@ -864,7 +864,7 @@ Partial Class frmMain
         Me.pnlCardLow.Controls.Add(Me.lblCardLowCaption)
         Me.pnlCardLow.Controls.Add(Me.lblLowStockCount)
         Me.pnlCardLow.Location = New System.Drawing.Point(1021, 37)
-        Me.pnlCardLow.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlCardLow.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlCardLow.Name = "pnlCardLow"
         Me.pnlCardLow.Size = New System.Drawing.Size(315, 123)
         Me.pnlCardLow.TabIndex = 20
@@ -914,7 +914,7 @@ Partial Class frmMain
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnRefresh.Location = New System.Drawing.Point(630, 172)
-        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(133, 37)
         Me.btnRefresh.TabIndex = 22
@@ -934,7 +934,7 @@ Partial Class frmMain
         Me.dgvToday.ColumnHeadersHeight = 29
         Me.dgvToday.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvToday.Location = New System.Drawing.Point(45, 219)
-        Me.dgvToday.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvToday.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvToday.MultiSelect = False
         Me.dgvToday.Name = "dgvToday"
         Me.dgvToday.ReadOnly = True
@@ -950,7 +950,7 @@ Partial Class frmMain
         Me.pnlInventory.Controls.Add(Me.tabInventory)
         Me.pnlInventory.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlInventory.Location = New System.Drawing.Point(293, 69)
-        Me.pnlInventory.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlInventory.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlInventory.Name = "pnlInventory"
         Me.pnlInventory.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.pnlInventory.Size = New System.Drawing.Size(1649, 1033)
@@ -962,7 +962,7 @@ Partial Class frmMain
         Me.tabInventory.Controls.Add(Me.tabSuppliers)
         Me.tabInventory.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabInventory.Location = New System.Drawing.Point(13, 12)
-        Me.tabInventory.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabInventory.Margin = New System.Windows.Forms.Padding(4)
         Me.tabInventory.Name = "tabInventory"
         Me.tabInventory.SelectedIndex = 0
         Me.tabInventory.Size = New System.Drawing.Size(1623, 1009)
@@ -974,7 +974,7 @@ Partial Class frmMain
         Me.tabProducts.Controls.Add(Me.pnlProdRight)
         Me.tabProducts.Controls.Add(Me.pnlProdLeft)
         Me.tabProducts.Location = New System.Drawing.Point(4, 25)
-        Me.tabProducts.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabProducts.Margin = New System.Windows.Forms.Padding(4)
         Me.tabProducts.Name = "tabProducts"
         Me.tabProducts.Padding = New System.Windows.Forms.Padding(8, 7, 8, 7)
         Me.tabProducts.Size = New System.Drawing.Size(1615, 980)
@@ -989,7 +989,7 @@ Partial Class frmMain
         Me.pnlProdRight.Controls.Add(Me.grpStock)
         Me.pnlProdRight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlProdRight.Location = New System.Drawing.Point(635, 7)
-        Me.pnlProdRight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlProdRight.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlProdRight.Name = "pnlProdRight"
         Me.pnlProdRight.Size = New System.Drawing.Size(972, 966)
         Me.pnlProdRight.TabIndex = 4
@@ -1018,9 +1018,9 @@ Partial Class frmMain
         Me.grpProduct.Controls.Add(Me.btnSaveProduct)
         Me.grpProduct.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpProduct.Location = New System.Drawing.Point(11, 10)
-        Me.grpProduct.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpProduct.Margin = New System.Windows.Forms.Padding(4)
         Me.grpProduct.Name = "grpProduct"
-        Me.grpProduct.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpProduct.Padding = New System.Windows.Forms.Padding(4)
         Me.grpProduct.Size = New System.Drawing.Size(1372, 357)
         Me.grpProduct.TabIndex = 9
         Me.grpProduct.TabStop = False
@@ -1040,7 +1040,7 @@ Partial Class frmMain
         'txtProdCode
         '
         Me.txtProdCode.Location = New System.Drawing.Point(19, 54)
-        Me.txtProdCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtProdCode.Margin = New System.Windows.Forms.Padding(4)
         Me.txtProdCode.Name = "txtProdCode"
         Me.txtProdCode.Size = New System.Drawing.Size(299, 22)
         Me.txtProdCode.TabIndex = 11
@@ -1059,7 +1059,7 @@ Partial Class frmMain
         'txtProdName
         '
         Me.txtProdName.Location = New System.Drawing.Point(339, 54)
-        Me.txtProdName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtProdName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtProdName.Name = "txtProdName"
         Me.txtProdName.Size = New System.Drawing.Size(299, 22)
         Me.txtProdName.TabIndex = 13
@@ -1080,7 +1080,7 @@ Partial Class frmMain
         Me.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboCategory.FormattingEnabled = True
         Me.cboCategory.Location = New System.Drawing.Point(19, 123)
-        Me.cboCategory.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboCategory.Margin = New System.Windows.Forms.Padding(4)
         Me.cboCategory.Name = "cboCategory"
         Me.cboCategory.Size = New System.Drawing.Size(299, 24)
         Me.cboCategory.TabIndex = 15
@@ -1099,7 +1099,7 @@ Partial Class frmMain
         'txtUnit
         '
         Me.txtUnit.Location = New System.Drawing.Point(339, 123)
-        Me.txtUnit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtUnit.Margin = New System.Windows.Forms.Padding(4)
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.Size = New System.Drawing.Size(299, 22)
         Me.txtUnit.TabIndex = 17
@@ -1118,7 +1118,7 @@ Partial Class frmMain
         'numReorder
         '
         Me.numReorder.Location = New System.Drawing.Point(19, 192)
-        Me.numReorder.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numReorder.Margin = New System.Windows.Forms.Padding(4)
         Me.numReorder.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
         Me.numReorder.Name = "numReorder"
         Me.numReorder.Size = New System.Drawing.Size(300, 22)
@@ -1140,7 +1140,7 @@ Partial Class frmMain
         '
         Me.numCost.DecimalPlaces = 2
         Me.numCost.Location = New System.Drawing.Point(339, 192)
-        Me.numCost.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numCost.Margin = New System.Windows.Forms.Padding(4)
         Me.numCost.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numCost.Name = "numCost"
         Me.numCost.Size = New System.Drawing.Size(300, 22)
@@ -1162,7 +1162,7 @@ Partial Class frmMain
         '
         Me.txtStock.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
         Me.txtStock.Location = New System.Drawing.Point(19, 261)
-        Me.txtStock.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtStock.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStock.Name = "txtStock"
         Me.txtStock.ReadOnly = True
         Me.txtStock.Size = New System.Drawing.Size(299, 22)
@@ -1185,7 +1185,7 @@ Partial Class frmMain
         Me.cboProdStatus.FormattingEnabled = True
         Me.cboProdStatus.Items.AddRange(New Object() {"Active", "Inactive"})
         Me.cboProdStatus.Location = New System.Drawing.Point(339, 261)
-        Me.cboProdStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboProdStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.cboProdStatus.Name = "cboProdStatus"
         Me.cboProdStatus.Size = New System.Drawing.Size(299, 24)
         Me.cboProdStatus.TabIndex = 25
@@ -1199,7 +1199,7 @@ Partial Class frmMain
         Me.btnNewProduct.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewProduct.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnNewProduct.Location = New System.Drawing.Point(19, 300)
-        Me.btnNewProduct.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNewProduct.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNewProduct.Name = "btnNewProduct"
         Me.btnNewProduct.Size = New System.Drawing.Size(173, 39)
         Me.btnNewProduct.TabIndex = 26
@@ -1215,7 +1215,7 @@ Partial Class frmMain
         Me.btnSaveProduct.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveProduct.ForeColor = System.Drawing.Color.White
         Me.btnSaveProduct.Location = New System.Drawing.Point(203, 300)
-        Me.btnSaveProduct.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveProduct.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveProduct.Name = "btnSaveProduct"
         Me.btnSaveProduct.Size = New System.Drawing.Size(173, 39)
         Me.btnSaveProduct.TabIndex = 27
@@ -1238,9 +1238,9 @@ Partial Class frmMain
         Me.grpStock.Controls.Add(Me.dgvTransactions)
         Me.grpStock.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpStock.Location = New System.Drawing.Point(11, 377)
-        Me.grpStock.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpStock.Margin = New System.Windows.Forms.Padding(4)
         Me.grpStock.Name = "grpStock"
-        Me.grpStock.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpStock.Padding = New System.Windows.Forms.Padding(4)
         Me.grpStock.Size = New System.Drawing.Size(1372, 418)
         Me.grpStock.TabIndex = 28
         Me.grpStock.TabStop = False
@@ -1263,7 +1263,7 @@ Partial Class frmMain
         Me.cboTxType.FormattingEnabled = True
         Me.cboTxType.Items.AddRange(New Object() {"Stock In", "Stock Out", "Adjustment In", "Adjustment Out", "Expired", "Damaged"})
         Me.cboTxType.Location = New System.Drawing.Point(19, 54)
-        Me.cboTxType.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboTxType.Margin = New System.Windows.Forms.Padding(4)
         Me.cboTxType.Name = "cboTxType"
         Me.cboTxType.Size = New System.Drawing.Size(299, 24)
         Me.cboTxType.TabIndex = 30
@@ -1282,7 +1282,7 @@ Partial Class frmMain
         'numTxQty
         '
         Me.numTxQty.Location = New System.Drawing.Point(339, 54)
-        Me.numTxQty.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numTxQty.Margin = New System.Windows.Forms.Padding(4)
         Me.numTxQty.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
         Me.numTxQty.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numTxQty.Name = "numTxQty"
@@ -1305,7 +1305,7 @@ Partial Class frmMain
         'txtTxRef
         '
         Me.txtTxRef.Location = New System.Drawing.Point(19, 123)
-        Me.txtTxRef.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtTxRef.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTxRef.Name = "txtTxRef"
         Me.txtTxRef.Size = New System.Drawing.Size(299, 22)
         Me.txtTxRef.TabIndex = 34
@@ -1324,7 +1324,7 @@ Partial Class frmMain
         'txtTxNotes
         '
         Me.txtTxNotes.Location = New System.Drawing.Point(339, 123)
-        Me.txtTxNotes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtTxNotes.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTxNotes.Name = "txtTxNotes"
         Me.txtTxNotes.Size = New System.Drawing.Size(299, 22)
         Me.txtTxNotes.TabIndex = 36
@@ -1338,7 +1338,7 @@ Partial Class frmMain
         Me.btnPostStock.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnPostStock.ForeColor = System.Drawing.Color.White
         Me.btnPostStock.Location = New System.Drawing.Point(19, 165)
-        Me.btnPostStock.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnPostStock.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPostStock.Name = "btnPostStock"
         Me.btnPostStock.Size = New System.Drawing.Size(213, 39)
         Me.btnPostStock.TabIndex = 37
@@ -1358,7 +1358,7 @@ Partial Class frmMain
         Me.dgvTransactions.ColumnHeadersHeight = 29
         Me.dgvTransactions.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvTransactions.Location = New System.Drawing.Point(19, 217)
-        Me.dgvTransactions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvTransactions.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvTransactions.MultiSelect = False
         Me.dgvTransactions.Name = "dgvTransactions"
         Me.dgvTransactions.ReadOnly = True
@@ -1376,7 +1376,7 @@ Partial Class frmMain
         Me.pnlProdLeft.Controls.Add(Me.dgvProducts)
         Me.pnlProdLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlProdLeft.Location = New System.Drawing.Point(8, 7)
-        Me.pnlProdLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlProdLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlProdLeft.Name = "pnlProdLeft"
         Me.pnlProdLeft.Size = New System.Drawing.Size(627, 966)
         Me.pnlProdLeft.TabIndex = 5
@@ -1386,7 +1386,7 @@ Partial Class frmMain
         Me.chkLowStock.AutoSize = True
         Me.chkLowStock.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.chkLowStock.Location = New System.Drawing.Point(411, 16)
-        Me.chkLowStock.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.chkLowStock.Margin = New System.Windows.Forms.Padding(4)
         Me.chkLowStock.Name = "chkLowStock"
         Me.chkLowStock.Size = New System.Drawing.Size(116, 20)
         Me.chkLowStock.TabIndex = 7
@@ -1405,7 +1405,7 @@ Partial Class frmMain
         Me.dgvProducts.ColumnHeadersHeight = 29
         Me.dgvProducts.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvProducts.Location = New System.Drawing.Point(11, 59)
-        Me.dgvProducts.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvProducts.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvProducts.MultiSelect = False
         Me.dgvProducts.Name = "dgvProducts"
         Me.dgvProducts.ReadOnly = True
@@ -1422,10 +1422,10 @@ Partial Class frmMain
         Me.tabSuppliers.Controls.Add(Me.pnlSupRight)
         Me.tabSuppliers.Controls.Add(Me.pnlSupLeft)
         Me.tabSuppliers.Location = New System.Drawing.Point(4, 25)
-        Me.tabSuppliers.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabSuppliers.Margin = New System.Windows.Forms.Padding(4)
         Me.tabSuppliers.Name = "tabSuppliers"
         Me.tabSuppliers.Padding = New System.Windows.Forms.Padding(8, 7, 8, 7)
-        Me.tabSuppliers.Size = New System.Drawing.Size(2232, 1207)
+        Me.tabSuppliers.Size = New System.Drawing.Size(1615, 980)
         Me.tabSuppliers.TabIndex = 3
         Me.tabSuppliers.Text = "Suppliers"
         '
@@ -1436,9 +1436,9 @@ Partial Class frmMain
         Me.pnlSupRight.Controls.Add(Me.grpSupplier)
         Me.pnlSupRight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlSupRight.Location = New System.Drawing.Point(635, 7)
-        Me.pnlSupRight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlSupRight.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlSupRight.Name = "pnlSupRight"
-        Me.pnlSupRight.Size = New System.Drawing.Size(1589, 1193)
+        Me.pnlSupRight.Size = New System.Drawing.Size(972, 966)
         Me.pnlSupRight.TabIndex = 39
         '
         'grpSupplier
@@ -1461,10 +1461,10 @@ Partial Class frmMain
         Me.grpSupplier.Controls.Add(Me.btnSaveSupplier)
         Me.grpSupplier.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpSupplier.Location = New System.Drawing.Point(11, 10)
-        Me.grpSupplier.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpSupplier.Margin = New System.Windows.Forms.Padding(4)
         Me.grpSupplier.Name = "grpSupplier"
-        Me.grpSupplier.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.grpSupplier.Size = New System.Drawing.Size(1989, 443)
+        Me.grpSupplier.Padding = New System.Windows.Forms.Padding(4)
+        Me.grpSupplier.Size = New System.Drawing.Size(1372, 443)
         Me.grpSupplier.TabIndex = 43
         Me.grpSupplier.TabStop = False
         Me.grpSupplier.Text = "Supplier"
@@ -1483,7 +1483,7 @@ Partial Class frmMain
         'txtSupName
         '
         Me.txtSupName.Location = New System.Drawing.Point(19, 54)
-        Me.txtSupName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSupName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSupName.Name = "txtSupName"
         Me.txtSupName.Size = New System.Drawing.Size(299, 22)
         Me.txtSupName.TabIndex = 45
@@ -1505,7 +1505,7 @@ Partial Class frmMain
         Me.cboSupStatus.FormattingEnabled = True
         Me.cboSupStatus.Items.AddRange(New Object() {"Active", "Inactive"})
         Me.cboSupStatus.Location = New System.Drawing.Point(339, 54)
-        Me.cboSupStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboSupStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.cboSupStatus.Name = "cboSupStatus"
         Me.cboSupStatus.Size = New System.Drawing.Size(299, 24)
         Me.cboSupStatus.TabIndex = 47
@@ -1524,7 +1524,7 @@ Partial Class frmMain
         'txtSupContact
         '
         Me.txtSupContact.Location = New System.Drawing.Point(19, 123)
-        Me.txtSupContact.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSupContact.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSupContact.Name = "txtSupContact"
         Me.txtSupContact.Size = New System.Drawing.Size(299, 22)
         Me.txtSupContact.TabIndex = 49
@@ -1543,7 +1543,7 @@ Partial Class frmMain
         'txtSupPhone
         '
         Me.txtSupPhone.Location = New System.Drawing.Point(339, 123)
-        Me.txtSupPhone.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSupPhone.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSupPhone.Name = "txtSupPhone"
         Me.txtSupPhone.Size = New System.Drawing.Size(299, 22)
         Me.txtSupPhone.TabIndex = 51
@@ -1562,7 +1562,7 @@ Partial Class frmMain
         'txtSupEmail
         '
         Me.txtSupEmail.Location = New System.Drawing.Point(19, 192)
-        Me.txtSupEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSupEmail.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSupEmail.Name = "txtSupEmail"
         Me.txtSupEmail.Size = New System.Drawing.Size(619, 22)
         Me.txtSupEmail.TabIndex = 53
@@ -1581,7 +1581,7 @@ Partial Class frmMain
         'txtSupAddress
         '
         Me.txtSupAddress.Location = New System.Drawing.Point(19, 261)
-        Me.txtSupAddress.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSupAddress.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSupAddress.Multiline = True
         Me.txtSupAddress.Name = "txtSupAddress"
         Me.txtSupAddress.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -1597,7 +1597,7 @@ Partial Class frmMain
         Me.btnNewSupplier.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewSupplier.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnNewSupplier.Location = New System.Drawing.Point(19, 369)
-        Me.btnNewSupplier.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNewSupplier.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNewSupplier.Name = "btnNewSupplier"
         Me.btnNewSupplier.Size = New System.Drawing.Size(173, 39)
         Me.btnNewSupplier.TabIndex = 56
@@ -1613,7 +1613,7 @@ Partial Class frmMain
         Me.btnSaveSupplier.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveSupplier.ForeColor = System.Drawing.Color.White
         Me.btnSaveSupplier.Location = New System.Drawing.Point(203, 369)
-        Me.btnSaveSupplier.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveSupplier.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveSupplier.Name = "btnSaveSupplier"
         Me.btnSaveSupplier.Size = New System.Drawing.Size(173, 39)
         Me.btnSaveSupplier.TabIndex = 57
@@ -1626,9 +1626,9 @@ Partial Class frmMain
         Me.pnlSupLeft.Controls.Add(Me.dgvSuppliers)
         Me.pnlSupLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSupLeft.Location = New System.Drawing.Point(8, 7)
-        Me.pnlSupLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlSupLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlSupLeft.Name = "pnlSupLeft"
-        Me.pnlSupLeft.Size = New System.Drawing.Size(627, 1193)
+        Me.pnlSupLeft.Size = New System.Drawing.Size(627, 966)
         Me.pnlSupLeft.TabIndex = 40
         '
         'dgvSuppliers
@@ -1644,7 +1644,7 @@ Partial Class frmMain
         Me.dgvSuppliers.ColumnHeadersHeight = 29
         Me.dgvSuppliers.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvSuppliers.Location = New System.Drawing.Point(11, 59)
-        Me.dgvSuppliers.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvSuppliers.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvSuppliers.MultiSelect = False
         Me.dgvSuppliers.Name = "dgvSuppliers"
         Me.dgvSuppliers.ReadOnly = True
@@ -1652,7 +1652,7 @@ Partial Class frmMain
         Me.dgvSuppliers.RowHeadersWidth = 51
         Me.dgvSuppliers.RowTemplate.Height = 26
         Me.dgvSuppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSuppliers.Size = New System.Drawing.Size(605, 1119)
+        Me.dgvSuppliers.Size = New System.Drawing.Size(605, 892)
         Me.dgvSuppliers.TabIndex = 42
         '
         'pnlAppointment
@@ -1661,7 +1661,7 @@ Partial Class frmMain
         Me.pnlAppointment.Controls.Add(Me.pnlApptLeft)
         Me.pnlAppointment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlAppointment.Location = New System.Drawing.Point(293, 69)
-        Me.pnlAppointment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlAppointment.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlAppointment.Name = "pnlAppointment"
         Me.pnlAppointment.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.pnlAppointment.Size = New System.Drawing.Size(1649, 1033)
@@ -1677,7 +1677,7 @@ Partial Class frmMain
         Me.pnlApptRight.Controls.Add(Me.btnCancelAppt)
         Me.pnlApptRight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlApptRight.Location = New System.Drawing.Point(813, 12)
-        Me.pnlApptRight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlApptRight.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlApptRight.Name = "pnlApptRight"
         Me.pnlApptRight.Size = New System.Drawing.Size(823, 1009)
         Me.pnlApptRight.TabIndex = 3
@@ -1708,9 +1708,9 @@ Partial Class frmMain
         Me.grpAppointment.Controls.Add(Me.txtNotes)
         Me.grpAppointment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpAppointment.Location = New System.Drawing.Point(11, 10)
-        Me.grpAppointment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpAppointment.Margin = New System.Windows.Forms.Padding(4)
         Me.grpAppointment.Name = "grpAppointment"
-        Me.grpAppointment.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpAppointment.Padding = New System.Windows.Forms.Padding(4)
         Me.grpAppointment.Size = New System.Drawing.Size(1322, 517)
         Me.grpAppointment.TabIndex = 9
         Me.grpAppointment.TabStop = False
@@ -1731,7 +1731,7 @@ Partial Class frmMain
         '
         Me.txtApptCode.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
         Me.txtApptCode.Location = New System.Drawing.Point(19, 54)
-        Me.txtApptCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtApptCode.Margin = New System.Windows.Forms.Padding(4)
         Me.txtApptCode.Name = "txtApptCode"
         Me.txtApptCode.ReadOnly = True
         Me.txtApptCode.Size = New System.Drawing.Size(299, 22)
@@ -1754,7 +1754,7 @@ Partial Class frmMain
         Me.cboApptStatus.FormattingEnabled = True
         Me.cboApptStatus.Items.AddRange(New Object() {"Pending", "Confirmed", "Completed", "Cancelled", "No-show"})
         Me.cboApptStatus.Location = New System.Drawing.Point(339, 54)
-        Me.cboApptStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboApptStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.cboApptStatus.Name = "cboApptStatus"
         Me.cboApptStatus.Size = New System.Drawing.Size(299, 24)
         Me.cboApptStatus.TabIndex = 13
@@ -1775,7 +1775,7 @@ Partial Class frmMain
         Me.cboApptPatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboApptPatient.FormattingEnabled = True
         Me.cboApptPatient.Location = New System.Drawing.Point(19, 123)
-        Me.cboApptPatient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboApptPatient.Margin = New System.Windows.Forms.Padding(4)
         Me.cboApptPatient.Name = "cboApptPatient"
         Me.cboApptPatient.Size = New System.Drawing.Size(299, 24)
         Me.cboApptPatient.TabIndex = 15
@@ -1796,7 +1796,7 @@ Partial Class frmMain
         Me.cboDentist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboDentist.FormattingEnabled = True
         Me.cboDentist.Location = New System.Drawing.Point(339, 123)
-        Me.cboDentist.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboDentist.Margin = New System.Windows.Forms.Padding(4)
         Me.cboDentist.Name = "cboDentist"
         Me.cboDentist.Size = New System.Drawing.Size(299, 24)
         Me.cboDentist.TabIndex = 17
@@ -1816,7 +1816,7 @@ Partial Class frmMain
         '
         Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpDate.Location = New System.Drawing.Point(19, 192)
-        Me.dtpDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpDate.Name = "dtpDate"
         Me.dtpDate.Size = New System.Drawing.Size(299, 22)
         Me.dtpDate.TabIndex = 19
@@ -1837,7 +1837,7 @@ Partial Class frmMain
         Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboType.FormattingEnabled = True
         Me.cboType.Location = New System.Drawing.Point(339, 192)
-        Me.cboType.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboType.Margin = New System.Windows.Forms.Padding(4)
         Me.cboType.Name = "cboType"
         Me.cboType.Size = New System.Drawing.Size(299, 24)
         Me.cboType.TabIndex = 21
@@ -1858,7 +1858,7 @@ Partial Class frmMain
         Me.dtpStart.CustomFormat = "hh:mm tt"
         Me.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpStart.Location = New System.Drawing.Point(19, 261)
-        Me.dtpStart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpStart.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpStart.Name = "dtpStart"
         Me.dtpStart.ShowUpDown = True
         Me.dtpStart.Size = New System.Drawing.Size(299, 22)
@@ -1880,7 +1880,7 @@ Partial Class frmMain
         Me.dtpEnd.CustomFormat = "hh:mm tt"
         Me.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpEnd.Location = New System.Drawing.Point(339, 261)
-        Me.dtpEnd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpEnd.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpEnd.Name = "dtpEnd"
         Me.dtpEnd.ShowCheckBox = True
         Me.dtpEnd.ShowUpDown = True
@@ -1901,7 +1901,7 @@ Partial Class frmMain
         'txtReason
         '
         Me.txtReason.Location = New System.Drawing.Point(19, 330)
-        Me.txtReason.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtReason.Margin = New System.Windows.Forms.Padding(4)
         Me.txtReason.Name = "txtReason"
         Me.txtReason.Size = New System.Drawing.Size(619, 22)
         Me.txtReason.TabIndex = 27
@@ -1920,7 +1920,7 @@ Partial Class frmMain
         'txtNotes
         '
         Me.txtNotes.Location = New System.Drawing.Point(19, 399)
-        Me.txtNotes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtNotes.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNotes.Multiline = True
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -1936,7 +1936,7 @@ Partial Class frmMain
         Me.btnNewAppt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewAppt.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnNewAppt.Location = New System.Drawing.Point(11, 542)
-        Me.btnNewAppt.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNewAppt.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNewAppt.Name = "btnNewAppt"
         Me.btnNewAppt.Size = New System.Drawing.Size(200, 44)
         Me.btnNewAppt.TabIndex = 30
@@ -1952,7 +1952,7 @@ Partial Class frmMain
         Me.btnSaveAppt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveAppt.ForeColor = System.Drawing.Color.White
         Me.btnSaveAppt.Location = New System.Drawing.Point(221, 542)
-        Me.btnSaveAppt.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveAppt.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveAppt.Name = "btnSaveAppt"
         Me.btnSaveAppt.Size = New System.Drawing.Size(173, 44)
         Me.btnSaveAppt.TabIndex = 31
@@ -1968,7 +1968,7 @@ Partial Class frmMain
         Me.btnCancelAppt.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnCancelAppt.ForeColor = System.Drawing.Color.White
         Me.btnCancelAppt.Location = New System.Drawing.Point(405, 542)
-        Me.btnCancelAppt.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCancelAppt.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCancelAppt.Name = "btnCancelAppt"
         Me.btnCancelAppt.Size = New System.Drawing.Size(227, 44)
         Me.btnCancelAppt.TabIndex = 32
@@ -1985,7 +1985,7 @@ Partial Class frmMain
         Me.pnlApptLeft.Controls.Add(Me.dgvAppointments)
         Me.pnlApptLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlApptLeft.Location = New System.Drawing.Point(13, 12)
-        Me.pnlApptLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlApptLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlApptLeft.Name = "pnlApptLeft"
         Me.pnlApptLeft.Size = New System.Drawing.Size(800, 1009)
         Me.pnlApptLeft.TabIndex = 4
@@ -1994,7 +1994,7 @@ Partial Class frmMain
         '
         Me.dtpFilterDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpFilterDate.Location = New System.Drawing.Point(11, 12)
-        Me.dtpFilterDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpFilterDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpFilterDate.Name = "dtpFilterDate"
         Me.dtpFilterDate.Size = New System.Drawing.Size(172, 22)
         Me.dtpFilterDate.TabIndex = 3
@@ -2004,7 +2004,7 @@ Partial Class frmMain
         Me.chkAllDates.AutoSize = True
         Me.chkAllDates.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.chkAllDates.Location = New System.Drawing.Point(197, 16)
-        Me.chkAllDates.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.chkAllDates.Margin = New System.Windows.Forms.Padding(4)
         Me.chkAllDates.Name = "chkAllDates"
         Me.chkAllDates.Size = New System.Drawing.Size(81, 20)
         Me.chkAllDates.TabIndex = 4
@@ -2016,7 +2016,7 @@ Partial Class frmMain
         Me.cboFilterStatus.FormattingEnabled = True
         Me.cboFilterStatus.Items.AddRange(New Object() {"All statuses", "Pending", "Confirmed", "Completed", "Cancelled", "No-show"})
         Me.cboFilterStatus.Location = New System.Drawing.Point(325, 12)
-        Me.cboFilterStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboFilterStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.cboFilterStatus.Name = "cboFilterStatus"
         Me.cboFilterStatus.Size = New System.Drawing.Size(199, 24)
         Me.cboFilterStatus.TabIndex = 5
@@ -2030,7 +2030,7 @@ Partial Class frmMain
         Me.btnToday.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnToday.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnToday.Location = New System.Drawing.Point(539, 11)
-        Me.btnToday.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnToday.Margin = New System.Windows.Forms.Padding(4)
         Me.btnToday.Name = "btnToday"
         Me.btnToday.Size = New System.Drawing.Size(107, 36)
         Me.btnToday.TabIndex = 6
@@ -2050,7 +2050,7 @@ Partial Class frmMain
         Me.dgvAppointments.ColumnHeadersHeight = 29
         Me.dgvAppointments.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvAppointments.Location = New System.Drawing.Point(11, 103)
-        Me.dgvAppointments.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvAppointments.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvAppointments.MultiSelect = False
         Me.dgvAppointments.Name = "dgvAppointments"
         Me.dgvAppointments.ReadOnly = True
@@ -2066,7 +2066,7 @@ Partial Class frmMain
         Me.pnlPatients.Controls.Add(Me.pnlRight)
         Me.pnlPatients.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlPatients.Location = New System.Drawing.Point(293, 69)
-        Me.pnlPatients.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlPatients.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlPatients.Name = "pnlPatients"
         Me.pnlPatients.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.pnlPatients.Size = New System.Drawing.Size(1649, 1033)
@@ -2083,7 +2083,7 @@ Partial Class frmMain
         Me.pnlRight.Controls.Add(Me.btnArchive)
         Me.pnlRight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlRight.Location = New System.Drawing.Point(13, 12)
-        Me.pnlRight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlRight.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlRight.Name = "pnlRight"
         Me.pnlRight.Size = New System.Drawing.Size(1623, 1009)
         Me.pnlRight.TabIndex = 3
@@ -2095,7 +2095,7 @@ Partial Class frmMain
         Me.pnlLeft.Controls.Add(Me.dgvPatients)
         Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlLeft.Location = New System.Drawing.Point(0, 0)
-        Me.pnlLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlLeft.Name = "pnlLeft"
         Me.pnlLeft.Size = New System.Drawing.Size(627, 1009)
         Me.pnlLeft.TabIndex = 36
@@ -2109,7 +2109,7 @@ Partial Class frmMain
         Me.btnClear.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnClear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnClear.Location = New System.Drawing.Point(491, 11)
-        Me.btnClear.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnClear.Margin = New System.Windows.Forms.Padding(4)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(120, 36)
         Me.btnClear.TabIndex = 4
@@ -2129,7 +2129,7 @@ Partial Class frmMain
         Me.dgvPatients.ColumnHeadersHeight = 29
         Me.dgvPatients.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvPatients.Location = New System.Drawing.Point(11, 59)
-        Me.dgvPatients.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvPatients.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvPatients.MultiSelect = False
         Me.dgvPatients.Name = "dgvPatients"
         Me.dgvPatients.ReadOnly = True
@@ -2172,9 +2172,9 @@ Partial Class frmMain
         Me.grpDetails.Controls.Add(Me.txtEmergNum)
         Me.grpDetails.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpDetails.Location = New System.Drawing.Point(635, 11)
-        Me.grpDetails.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpDetails.Margin = New System.Windows.Forms.Padding(4)
         Me.grpDetails.Name = "grpDetails"
-        Me.grpDetails.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpDetails.Padding = New System.Windows.Forms.Padding(4)
         Me.grpDetails.Size = New System.Drawing.Size(2023, 529)
         Me.grpDetails.TabIndex = 6
         Me.grpDetails.TabStop = False
@@ -2195,7 +2195,7 @@ Partial Class frmMain
         '
         Me.txtCode.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
         Me.txtCode.Location = New System.Drawing.Point(19, 54)
-        Me.txtCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCode.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCode.Name = "txtCode"
         Me.txtCode.ReadOnly = True
         Me.txtCode.Size = New System.Drawing.Size(299, 22)
@@ -2218,7 +2218,7 @@ Partial Class frmMain
         Me.cboStatus.FormattingEnabled = True
         Me.cboStatus.Items.AddRange(New Object() {"Active", "Inactive", "Archived"})
         Me.cboStatus.Location = New System.Drawing.Point(339, 54)
-        Me.cboStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.cboStatus.Name = "cboStatus"
         Me.cboStatus.Size = New System.Drawing.Size(299, 24)
         Me.cboStatus.TabIndex = 10
@@ -2237,7 +2237,7 @@ Partial Class frmMain
         'txtFirstName
         '
         Me.txtFirstName.Location = New System.Drawing.Point(19, 123)
-        Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.Size = New System.Drawing.Size(299, 22)
         Me.txtFirstName.TabIndex = 12
@@ -2256,7 +2256,7 @@ Partial Class frmMain
         'txtMiddleName
         '
         Me.txtMiddleName.Location = New System.Drawing.Point(339, 123)
-        Me.txtMiddleName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtMiddleName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.Size = New System.Drawing.Size(299, 22)
         Me.txtMiddleName.TabIndex = 14
@@ -2275,7 +2275,7 @@ Partial Class frmMain
         'txtLastName
         '
         Me.txtLastName.Location = New System.Drawing.Point(19, 192)
-        Me.txtLastName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtLastName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.Size = New System.Drawing.Size(299, 22)
         Me.txtLastName.TabIndex = 16
@@ -2295,7 +2295,7 @@ Partial Class frmMain
         '
         Me.dtpBirth.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpBirth.Location = New System.Drawing.Point(339, 192)
-        Me.dtpBirth.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpBirth.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpBirth.Name = "dtpBirth"
         Me.dtpBirth.ShowCheckBox = True
         Me.dtpBirth.Size = New System.Drawing.Size(299, 22)
@@ -2318,7 +2318,7 @@ Partial Class frmMain
         Me.cboGender.FormattingEnabled = True
         Me.cboGender.Items.AddRange(New Object() {"Male", "Female", "Other", "Prefer not to say"})
         Me.cboGender.Location = New System.Drawing.Point(19, 261)
-        Me.cboGender.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboGender.Margin = New System.Windows.Forms.Padding(4)
         Me.cboGender.Name = "cboGender"
         Me.cboGender.Size = New System.Drawing.Size(299, 24)
         Me.cboGender.TabIndex = 20
@@ -2337,7 +2337,7 @@ Partial Class frmMain
         'txtContact
         '
         Me.txtContact.Location = New System.Drawing.Point(339, 261)
-        Me.txtContact.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtContact.Margin = New System.Windows.Forms.Padding(4)
         Me.txtContact.Name = "txtContact"
         Me.txtContact.Size = New System.Drawing.Size(299, 22)
         Me.txtContact.TabIndex = 22
@@ -2356,7 +2356,7 @@ Partial Class frmMain
         'txtEmail
         '
         Me.txtEmail.Location = New System.Drawing.Point(19, 330)
-        Me.txtEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtEmail.Margin = New System.Windows.Forms.Padding(4)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.Size = New System.Drawing.Size(299, 22)
         Me.txtEmail.TabIndex = 24
@@ -2376,7 +2376,7 @@ Partial Class frmMain
         '
         Me.txtRegistered.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
         Me.txtRegistered.Location = New System.Drawing.Point(339, 330)
-        Me.txtRegistered.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtRegistered.Margin = New System.Windows.Forms.Padding(4)
         Me.txtRegistered.Name = "txtRegistered"
         Me.txtRegistered.ReadOnly = True
         Me.txtRegistered.Size = New System.Drawing.Size(299, 22)
@@ -2396,7 +2396,7 @@ Partial Class frmMain
         'txtAddress
         '
         Me.txtAddress.Location = New System.Drawing.Point(19, 399)
-        Me.txtAddress.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtAddress.Margin = New System.Windows.Forms.Padding(4)
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.Size = New System.Drawing.Size(619, 22)
         Me.txtAddress.TabIndex = 28
@@ -2415,7 +2415,7 @@ Partial Class frmMain
         'txtEmergName
         '
         Me.txtEmergName.Location = New System.Drawing.Point(19, 468)
-        Me.txtEmergName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtEmergName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtEmergName.Name = "txtEmergName"
         Me.txtEmergName.Size = New System.Drawing.Size(299, 22)
         Me.txtEmergName.TabIndex = 30
@@ -2434,7 +2434,7 @@ Partial Class frmMain
         'txtEmergNum
         '
         Me.txtEmergNum.Location = New System.Drawing.Point(339, 468)
-        Me.txtEmergNum.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtEmergNum.Margin = New System.Windows.Forms.Padding(4)
         Me.txtEmergNum.Name = "txtEmergNum"
         Me.txtEmergNum.Size = New System.Drawing.Size(299, 22)
         Me.txtEmergNum.TabIndex = 32
@@ -2448,7 +2448,7 @@ Partial Class frmMain
         Me.btnNew.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNew.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnNew.Location = New System.Drawing.Point(640, 553)
-        Me.btnNew.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNew.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNew.Name = "btnNew"
         Me.btnNew.Size = New System.Drawing.Size(173, 44)
         Me.btnNew.TabIndex = 33
@@ -2464,7 +2464,7 @@ Partial Class frmMain
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSave.ForeColor = System.Drawing.Color.White
         Me.btnSave.Location = New System.Drawing.Point(824, 553)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(173, 44)
         Me.btnSave.TabIndex = 34
@@ -2480,7 +2480,7 @@ Partial Class frmMain
         Me.btnArchive.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnArchive.ForeColor = System.Drawing.Color.White
         Me.btnArchive.Location = New System.Drawing.Point(1008, 553)
-        Me.btnArchive.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnArchive.Margin = New System.Windows.Forms.Padding(4)
         Me.btnArchive.Name = "btnArchive"
         Me.btnArchive.Size = New System.Drawing.Size(173, 44)
         Me.btnArchive.TabIndex = 35
@@ -2489,11 +2489,11 @@ Partial Class frmMain
         '
         'pnlClinicalRecord
         '
-        Me.pnlClinicalRecord.Controls.Add(Me.pnlTop)
         Me.pnlClinicalRecord.Controls.Add(Me.tabMain)
+        Me.pnlClinicalRecord.Controls.Add(Me.pnlTop)
         Me.pnlClinicalRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlClinicalRecord.Location = New System.Drawing.Point(293, 69)
-        Me.pnlClinicalRecord.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlClinicalRecord.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlClinicalRecord.Name = "pnlClinicalRecord"
         Me.pnlClinicalRecord.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.pnlClinicalRecord.Size = New System.Drawing.Size(1649, 1033)
@@ -2506,7 +2506,7 @@ Partial Class frmMain
         Me.pnlTop.Controls.Add(Me.cboPatient)
         Me.pnlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlTop.Location = New System.Drawing.Point(13, 12)
-        Me.pnlTop.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlTop.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlTop.Name = "pnlTop"
         Me.pnlTop.Size = New System.Drawing.Size(1623, 64)
         Me.pnlTop.TabIndex = 4
@@ -2528,7 +2528,7 @@ Partial Class frmMain
         Me.cboPatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboPatient.FormattingEnabled = True
         Me.cboPatient.Location = New System.Drawing.Point(96, 16)
-        Me.cboPatient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboPatient.Margin = New System.Windows.Forms.Padding(4)
         Me.cboPatient.Name = "cboPatient"
         Me.cboPatient.Size = New System.Drawing.Size(559, 24)
         Me.cboPatient.TabIndex = 4
@@ -2539,11 +2539,11 @@ Partial Class frmMain
         Me.tabMain.Controls.Add(Me.tabVisits)
         Me.tabMain.Controls.Add(Me.tabChart)
         Me.tabMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tabMain.Location = New System.Drawing.Point(13, 12)
-        Me.tabMain.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabMain.Location = New System.Drawing.Point(13, 76)
+        Me.tabMain.Margin = New System.Windows.Forms.Padding(4)
         Me.tabMain.Name = "tabMain"
         Me.tabMain.SelectedIndex = 0
-        Me.tabMain.Size = New System.Drawing.Size(1623, 1009)
+        Me.tabMain.Size = New System.Drawing.Size(1623, 945)
         Me.tabMain.TabIndex = 3
         '
         'tabMedical
@@ -2564,10 +2564,10 @@ Partial Class frmMain
         Me.tabMedical.Controls.Add(Me.btnSaveMedical)
         Me.tabMedical.Controls.Add(Me.lblMedicalUpdated)
         Me.tabMedical.Location = New System.Drawing.Point(4, 25)
-        Me.tabMedical.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabMedical.Margin = New System.Windows.Forms.Padding(4)
         Me.tabMedical.Name = "tabMedical"
         Me.tabMedical.Padding = New System.Windows.Forms.Padding(8, 7, 8, 7)
-        Me.tabMedical.Size = New System.Drawing.Size(1615, 980)
+        Me.tabMedical.Size = New System.Drawing.Size(1615, 916)
         Me.tabMedical.TabIndex = 5
         Me.tabMedical.Text = "Medical History"
         '
@@ -2585,7 +2585,7 @@ Partial Class frmMain
         'txtAllergies
         '
         Me.txtAllergies.Location = New System.Drawing.Point(16, 37)
-        Me.txtAllergies.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtAllergies.Margin = New System.Windows.Forms.Padding(4)
         Me.txtAllergies.Multiline = True
         Me.txtAllergies.Name = "txtAllergies"
         Me.txtAllergies.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -2606,7 +2606,7 @@ Partial Class frmMain
         'txtMedications
         '
         Me.txtMedications.Location = New System.Drawing.Point(640, 37)
-        Me.txtMedications.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtMedications.Margin = New System.Windows.Forms.Padding(4)
         Me.txtMedications.Multiline = True
         Me.txtMedications.Name = "txtMedications"
         Me.txtMedications.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -2627,7 +2627,7 @@ Partial Class frmMain
         'txtConditions
         '
         Me.txtConditions.Location = New System.Drawing.Point(16, 185)
-        Me.txtConditions.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtConditions.Margin = New System.Windows.Forms.Padding(4)
         Me.txtConditions.Multiline = True
         Me.txtConditions.Name = "txtConditions"
         Me.txtConditions.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -2648,7 +2648,7 @@ Partial Class frmMain
         'txtSurgeries
         '
         Me.txtSurgeries.Location = New System.Drawing.Point(640, 185)
-        Me.txtSurgeries.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSurgeries.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSurgeries.Multiline = True
         Me.txtSurgeries.Name = "txtSurgeries"
         Me.txtSurgeries.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -2669,7 +2669,7 @@ Partial Class frmMain
         'txtFamilyHistory
         '
         Me.txtFamilyHistory.Location = New System.Drawing.Point(16, 332)
-        Me.txtFamilyHistory.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFamilyHistory.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFamilyHistory.Multiline = True
         Me.txtFamilyHistory.Name = "txtFamilyHistory"
         Me.txtFamilyHistory.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -2690,7 +2690,7 @@ Partial Class frmMain
         'txtOtherNotes
         '
         Me.txtOtherNotes.Location = New System.Drawing.Point(640, 332)
-        Me.txtOtherNotes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtOtherNotes.Margin = New System.Windows.Forms.Padding(4)
         Me.txtOtherNotes.Multiline = True
         Me.txtOtherNotes.Name = "txtOtherNotes"
         Me.txtOtherNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -2706,7 +2706,7 @@ Partial Class frmMain
         Me.btnSaveMedical.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveMedical.ForeColor = System.Drawing.Color.White
         Me.btnSaveMedical.Location = New System.Drawing.Point(16, 463)
-        Me.btnSaveMedical.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveMedical.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveMedical.Name = "btnSaveMedical"
         Me.btnSaveMedical.Size = New System.Drawing.Size(253, 44)
         Me.btnSaveMedical.TabIndex = 20
@@ -2730,10 +2730,10 @@ Partial Class frmMain
         Me.tabVisits.Controls.Add(Me.grpVisit)
         Me.tabVisits.Controls.Add(Me.grpTreat)
         Me.tabVisits.Location = New System.Drawing.Point(4, 25)
-        Me.tabVisits.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabVisits.Margin = New System.Windows.Forms.Padding(4)
         Me.tabVisits.Name = "tabVisits"
         Me.tabVisits.Padding = New System.Windows.Forms.Padding(8, 7, 8, 7)
-        Me.tabVisits.Size = New System.Drawing.Size(2232, 1207)
+        Me.tabVisits.Size = New System.Drawing.Size(1615, 980)
         Me.tabVisits.TabIndex = 6
         Me.tabVisits.Text = "Visit Records && Treatments"
         '
@@ -2749,7 +2749,7 @@ Partial Class frmMain
         Me.dgvVisits.ColumnHeadersHeight = 29
         Me.dgvVisits.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvVisits.Location = New System.Drawing.Point(11, 10)
-        Me.dgvVisits.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvVisits.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvVisits.MultiSelect = False
         Me.dgvVisits.Name = "dgvVisits"
         Me.dgvVisits.ReadOnly = True
@@ -2782,9 +2782,9 @@ Partial Class frmMain
         Me.grpVisit.Controls.Add(Me.btnSaveVisit)
         Me.grpVisit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpVisit.Location = New System.Drawing.Point(488, 10)
-        Me.grpVisit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpVisit.Margin = New System.Windows.Forms.Padding(4)
         Me.grpVisit.Name = "grpVisit"
-        Me.grpVisit.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpVisit.Padding = New System.Windows.Forms.Padding(4)
         Me.grpVisit.Size = New System.Drawing.Size(2784, 332)
         Me.grpVisit.TabIndex = 23
         Me.grpVisit.TabStop = False
@@ -2806,7 +2806,7 @@ Partial Class frmMain
         Me.dtpVisit.CustomFormat = "yyyy-MM-dd  hh:mm tt"
         Me.dtpVisit.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpVisit.Location = New System.Drawing.Point(19, 52)
-        Me.dtpVisit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpVisit.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpVisit.Name = "dtpVisit"
         Me.dtpVisit.Size = New System.Drawing.Size(252, 22)
         Me.dtpVisit.TabIndex = 25
@@ -2827,7 +2827,7 @@ Partial Class frmMain
         Me.cboVisitDentist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboVisitDentist.FormattingEnabled = True
         Me.cboVisitDentist.Location = New System.Drawing.Point(285, 52)
-        Me.cboVisitDentist.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboVisitDentist.Margin = New System.Windows.Forms.Padding(4)
         Me.cboVisitDentist.Name = "cboVisitDentist"
         Me.cboVisitDentist.Size = New System.Drawing.Size(265, 24)
         Me.cboVisitDentist.TabIndex = 27
@@ -2847,7 +2847,7 @@ Partial Class frmMain
         '
         Me.dtpNextVisit.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpNextVisit.Location = New System.Drawing.Point(565, 52)
-        Me.dtpNextVisit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpNextVisit.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpNextVisit.Name = "dtpNextVisit"
         Me.dtpNextVisit.ShowCheckBox = True
         Me.dtpNextVisit.Size = New System.Drawing.Size(225, 22)
@@ -2867,7 +2867,7 @@ Partial Class frmMain
         'txtComplaint
         '
         Me.txtComplaint.Location = New System.Drawing.Point(19, 118)
-        Me.txtComplaint.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtComplaint.Margin = New System.Windows.Forms.Padding(4)
         Me.txtComplaint.Multiline = True
         Me.txtComplaint.Name = "txtComplaint"
         Me.txtComplaint.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -2888,7 +2888,7 @@ Partial Class frmMain
         'txtDiagnosis
         '
         Me.txtDiagnosis.Location = New System.Drawing.Point(408, 118)
-        Me.txtDiagnosis.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtDiagnosis.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDiagnosis.Multiline = True
         Me.txtDiagnosis.Name = "txtDiagnosis"
         Me.txtDiagnosis.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -2909,7 +2909,7 @@ Partial Class frmMain
         'txtClinicalNotes
         '
         Me.txtClinicalNotes.Location = New System.Drawing.Point(19, 209)
-        Me.txtClinicalNotes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtClinicalNotes.Margin = New System.Windows.Forms.Padding(4)
         Me.txtClinicalNotes.Multiline = True
         Me.txtClinicalNotes.Name = "txtClinicalNotes"
         Me.txtClinicalNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -2930,7 +2930,7 @@ Partial Class frmMain
         'txtRecommendations
         '
         Me.txtRecommendations.Location = New System.Drawing.Point(408, 209)
-        Me.txtRecommendations.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtRecommendations.Margin = New System.Windows.Forms.Padding(4)
         Me.txtRecommendations.Multiline = True
         Me.txtRecommendations.Name = "txtRecommendations"
         Me.txtRecommendations.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -2946,7 +2946,7 @@ Partial Class frmMain
         Me.btnNewVisit.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewVisit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnNewVisit.Location = New System.Drawing.Point(19, 278)
-        Me.btnNewVisit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNewVisit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNewVisit.Name = "btnNewVisit"
         Me.btnNewVisit.Size = New System.Drawing.Size(160, 39)
         Me.btnNewVisit.TabIndex = 38
@@ -2962,7 +2962,7 @@ Partial Class frmMain
         Me.btnSaveVisit.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveVisit.ForeColor = System.Drawing.Color.White
         Me.btnSaveVisit.Location = New System.Drawing.Point(189, 278)
-        Me.btnSaveVisit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveVisit.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveVisit.Name = "btnSaveVisit"
         Me.btnSaveVisit.Size = New System.Drawing.Size(160, 39)
         Me.btnSaveVisit.TabIndex = 39
@@ -2990,9 +2990,9 @@ Partial Class frmMain
         Me.grpTreat.Controls.Add(Me.dgvTreatments)
         Me.grpTreat.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpTreat.Location = New System.Drawing.Point(488, 352)
-        Me.grpTreat.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpTreat.Margin = New System.Windows.Forms.Padding(4)
         Me.grpTreat.Name = "grpTreat"
-        Me.grpTreat.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpTreat.Padding = New System.Windows.Forms.Padding(4)
         Me.grpTreat.Size = New System.Drawing.Size(2784, 322)
         Me.grpTreat.TabIndex = 40
         Me.grpTreat.TabStop = False
@@ -3014,7 +3014,7 @@ Partial Class frmMain
         Me.cboTreatProcedure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboTreatProcedure.FormattingEnabled = True
         Me.cboTreatProcedure.Location = New System.Drawing.Point(19, 52)
-        Me.cboTreatProcedure.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboTreatProcedure.Margin = New System.Windows.Forms.Padding(4)
         Me.cboTreatProcedure.Name = "cboTreatProcedure"
         Me.cboTreatProcedure.Size = New System.Drawing.Size(305, 24)
         Me.cboTreatProcedure.TabIndex = 42
@@ -3033,7 +3033,7 @@ Partial Class frmMain
         'txtTreatTooth
         '
         Me.txtTreatTooth.Location = New System.Drawing.Point(336, 52)
-        Me.txtTreatTooth.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtTreatTooth.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTreatTooth.Name = "txtTreatTooth"
         Me.txtTreatTooth.Size = New System.Drawing.Size(92, 22)
         Me.txtTreatTooth.TabIndex = 44
@@ -3052,7 +3052,7 @@ Partial Class frmMain
         'numTreatQty
         '
         Me.numTreatQty.Location = New System.Drawing.Point(440, 52)
-        Me.numTreatQty.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numTreatQty.Margin = New System.Windows.Forms.Padding(4)
         Me.numTreatQty.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numTreatQty.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numTreatQty.Name = "numTreatQty"
@@ -3076,7 +3076,7 @@ Partial Class frmMain
         '
         Me.numTreatPrice.DecimalPlaces = 2
         Me.numTreatPrice.Location = New System.Drawing.Point(531, 52)
-        Me.numTreatPrice.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numTreatPrice.Margin = New System.Windows.Forms.Padding(4)
         Me.numTreatPrice.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numTreatPrice.Name = "numTreatPrice"
         Me.numTreatPrice.Size = New System.Drawing.Size(120, 22)
@@ -3098,7 +3098,7 @@ Partial Class frmMain
         '
         Me.numTreatDiscount.DecimalPlaces = 2
         Me.numTreatDiscount.Location = New System.Drawing.Point(661, 52)
-        Me.numTreatDiscount.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numTreatDiscount.Margin = New System.Windows.Forms.Padding(4)
         Me.numTreatDiscount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numTreatDiscount.Name = "numTreatDiscount"
         Me.numTreatDiscount.Size = New System.Drawing.Size(131, 22)
@@ -3122,7 +3122,7 @@ Partial Class frmMain
         Me.cboTreatStatus.FormattingEnabled = True
         Me.cboTreatStatus.Items.AddRange(New Object() {"Planned", "In Progress", "Completed", "Cancelled"})
         Me.cboTreatStatus.Location = New System.Drawing.Point(19, 118)
-        Me.cboTreatStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboTreatStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.cboTreatStatus.Name = "cboTreatStatus"
         Me.cboTreatStatus.Size = New System.Drawing.Size(185, 24)
         Me.cboTreatStatus.TabIndex = 52
@@ -3136,7 +3136,7 @@ Partial Class frmMain
         Me.btnAddTreatment.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnAddTreatment.ForeColor = System.Drawing.Color.White
         Me.btnAddTreatment.Location = New System.Drawing.Point(227, 116)
-        Me.btnAddTreatment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAddTreatment.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddTreatment.Name = "btnAddTreatment"
         Me.btnAddTreatment.Size = New System.Drawing.Size(173, 37)
         Me.btnAddTreatment.TabIndex = 53
@@ -3152,7 +3152,7 @@ Partial Class frmMain
         Me.btnRemoveTreatment.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnRemoveTreatment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnRemoveTreatment.Location = New System.Drawing.Point(411, 116)
-        Me.btnRemoveTreatment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRemoveTreatment.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRemoveTreatment.Name = "btnRemoveTreatment"
         Me.btnRemoveTreatment.Size = New System.Drawing.Size(187, 37)
         Me.btnRemoveTreatment.TabIndex = 54
@@ -3172,7 +3172,7 @@ Partial Class frmMain
         Me.dgvTreatments.ColumnHeadersHeight = 29
         Me.dgvTreatments.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvTreatments.Location = New System.Drawing.Point(19, 165)
-        Me.dgvTreatments.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvTreatments.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvTreatments.MultiSelect = False
         Me.dgvTreatments.Name = "dgvTreatments"
         Me.dgvTreatments.ReadOnly = True
@@ -3189,10 +3189,10 @@ Partial Class frmMain
         Me.tabChart.Controls.Add(Me.dgvChart)
         Me.tabChart.Controls.Add(Me.grpChart)
         Me.tabChart.Location = New System.Drawing.Point(4, 25)
-        Me.tabChart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tabChart.Margin = New System.Windows.Forms.Padding(4)
         Me.tabChart.Name = "tabChart"
         Me.tabChart.Padding = New System.Windows.Forms.Padding(8, 7, 8, 7)
-        Me.tabChart.Size = New System.Drawing.Size(2232, 1207)
+        Me.tabChart.Size = New System.Drawing.Size(1615, 980)
         Me.tabChart.TabIndex = 7
         Me.tabChart.Text = "Dental Chart"
         '
@@ -3208,7 +3208,7 @@ Partial Class frmMain
         Me.dgvChart.ColumnHeadersHeight = 29
         Me.dgvChart.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvChart.Location = New System.Drawing.Point(11, 10)
-        Me.dgvChart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvChart.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvChart.MultiSelect = False
         Me.dgvChart.Name = "dgvChart"
         Me.dgvChart.ReadOnly = True
@@ -3236,9 +3236,9 @@ Partial Class frmMain
         Me.grpChart.Controls.Add(Me.btnDeleteChart)
         Me.grpChart.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpChart.Location = New System.Drawing.Point(773, 10)
-        Me.grpChart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpChart.Margin = New System.Windows.Forms.Padding(4)
         Me.grpChart.Name = "grpChart"
-        Me.grpChart.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpChart.Padding = New System.Windows.Forms.Padding(4)
         Me.grpChart.Size = New System.Drawing.Size(2491, 369)
         Me.grpChart.TabIndex = 57
         Me.grpChart.TabStop = False
@@ -3258,7 +3258,7 @@ Partial Class frmMain
         'txtChartTooth
         '
         Me.txtChartTooth.Location = New System.Drawing.Point(19, 52)
-        Me.txtChartTooth.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtChartTooth.Margin = New System.Windows.Forms.Padding(4)
         Me.txtChartTooth.Name = "txtChartTooth"
         Me.txtChartTooth.Size = New System.Drawing.Size(145, 22)
         Me.txtChartTooth.TabIndex = 59
@@ -3279,7 +3279,7 @@ Partial Class frmMain
         Me.cboSurface.FormattingEnabled = True
         Me.cboSurface.Items.AddRange(New Object() {"Mesial", "Distal", "Occlusal", "Buccal", "Lingual", "Incisal", "Whole tooth"})
         Me.cboSurface.Location = New System.Drawing.Point(179, 52)
-        Me.cboSurface.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboSurface.Margin = New System.Windows.Forms.Padding(4)
         Me.cboSurface.Name = "cboSurface"
         Me.cboSurface.Size = New System.Drawing.Size(239, 24)
         Me.cboSurface.TabIndex = 61
@@ -3300,7 +3300,7 @@ Partial Class frmMain
         Me.cboCondition.FormattingEnabled = True
         Me.cboCondition.Items.AddRange(New Object() {"Healthy", "Cavity", "Filled", "Crown", "Root canal", "Missing", "Extracted", "Impacted", "Fractured", "Implant"})
         Me.cboCondition.Location = New System.Drawing.Point(19, 118)
-        Me.cboCondition.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboCondition.Margin = New System.Windows.Forms.Padding(4)
         Me.cboCondition.Name = "cboCondition"
         Me.cboCondition.Size = New System.Drawing.Size(399, 24)
         Me.cboCondition.TabIndex = 63
@@ -3319,7 +3319,7 @@ Partial Class frmMain
         'txtChartNotes
         '
         Me.txtChartNotes.Location = New System.Drawing.Point(19, 185)
-        Me.txtChartNotes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtChartNotes.Margin = New System.Windows.Forms.Padding(4)
         Me.txtChartNotes.Multiline = True
         Me.txtChartNotes.Name = "txtChartNotes"
         Me.txtChartNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -3335,7 +3335,7 @@ Partial Class frmMain
         Me.btnNewChart.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewChart.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnNewChart.Location = New System.Drawing.Point(19, 300)
-        Me.btnNewChart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNewChart.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNewChart.Name = "btnNewChart"
         Me.btnNewChart.Size = New System.Drawing.Size(133, 39)
         Me.btnNewChart.TabIndex = 66
@@ -3351,7 +3351,7 @@ Partial Class frmMain
         Me.btnSaveChart.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveChart.ForeColor = System.Drawing.Color.White
         Me.btnSaveChart.Location = New System.Drawing.Point(163, 300)
-        Me.btnSaveChart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveChart.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveChart.Name = "btnSaveChart"
         Me.btnSaveChart.Size = New System.Drawing.Size(133, 39)
         Me.btnSaveChart.TabIndex = 67
@@ -3367,7 +3367,7 @@ Partial Class frmMain
         Me.btnDeleteChart.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnDeleteChart.ForeColor = System.Drawing.Color.White
         Me.btnDeleteChart.Location = New System.Drawing.Point(307, 300)
-        Me.btnDeleteChart.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDeleteChart.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDeleteChart.Name = "btnDeleteChart"
         Me.btnDeleteChart.Size = New System.Drawing.Size(133, 39)
         Me.btnDeleteChart.TabIndex = 68
@@ -3380,7 +3380,7 @@ Partial Class frmMain
         Me.pnlProcedures.Controls.Add(Me.pnlProcLeft)
         Me.pnlProcedures.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlProcedures.Location = New System.Drawing.Point(293, 69)
-        Me.pnlProcedures.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlProcedures.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlProcedures.Name = "pnlProcedures"
         Me.pnlProcedures.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.pnlProcedures.Size = New System.Drawing.Size(1649, 1033)
@@ -3395,7 +3395,7 @@ Partial Class frmMain
         Me.pnlProcRight.Controls.Add(Me.btnSaveProcedure)
         Me.pnlProcRight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlProcRight.Location = New System.Drawing.Point(640, 12)
-        Me.pnlProcRight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlProcRight.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlProcRight.Name = "pnlProcRight"
         Me.pnlProcRight.Size = New System.Drawing.Size(996, 1009)
         Me.pnlProcRight.TabIndex = 3
@@ -3418,9 +3418,9 @@ Partial Class frmMain
         Me.grpProcedure.Controls.Add(Me.numDuration)
         Me.grpProcedure.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpProcedure.Location = New System.Drawing.Point(11, 10)
-        Me.grpProcedure.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpProcedure.Margin = New System.Windows.Forms.Padding(4)
         Me.grpProcedure.Name = "grpProcedure"
-        Me.grpProcedure.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpProcedure.Padding = New System.Windows.Forms.Padding(4)
         Me.grpProcedure.Size = New System.Drawing.Size(1396, 406)
         Me.grpProcedure.TabIndex = 5
         Me.grpProcedure.TabStop = False
@@ -3440,7 +3440,7 @@ Partial Class frmMain
         'txtProcCode
         '
         Me.txtProcCode.Location = New System.Drawing.Point(19, 54)
-        Me.txtProcCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtProcCode.Margin = New System.Windows.Forms.Padding(4)
         Me.txtProcCode.Name = "txtProcCode"
         Me.txtProcCode.Size = New System.Drawing.Size(299, 22)
         Me.txtProcCode.TabIndex = 7
@@ -3462,7 +3462,7 @@ Partial Class frmMain
         Me.cboProcStatus.FormattingEnabled = True
         Me.cboProcStatus.Items.AddRange(New Object() {"Active", "Inactive"})
         Me.cboProcStatus.Location = New System.Drawing.Point(339, 54)
-        Me.cboProcStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboProcStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.cboProcStatus.Name = "cboProcStatus"
         Me.cboProcStatus.Size = New System.Drawing.Size(299, 24)
         Me.cboProcStatus.TabIndex = 9
@@ -3481,7 +3481,7 @@ Partial Class frmMain
         'txtName
         '
         Me.txtName.Location = New System.Drawing.Point(19, 123)
-        Me.txtName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(619, 22)
         Me.txtName.TabIndex = 11
@@ -3500,7 +3500,7 @@ Partial Class frmMain
         'txtDescription
         '
         Me.txtDescription.Location = New System.Drawing.Point(19, 192)
-        Me.txtDescription.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtDescription.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
@@ -3522,7 +3522,7 @@ Partial Class frmMain
         '
         Me.numPrice.DecimalPlaces = 2
         Me.numPrice.Location = New System.Drawing.Point(19, 310)
-        Me.numPrice.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numPrice.Margin = New System.Windows.Forms.Padding(4)
         Me.numPrice.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numPrice.Name = "numPrice"
         Me.numPrice.Size = New System.Drawing.Size(300, 22)
@@ -3543,7 +3543,7 @@ Partial Class frmMain
         'numDuration
         '
         Me.numDuration.Location = New System.Drawing.Point(339, 310)
-        Me.numDuration.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numDuration.Margin = New System.Windows.Forms.Padding(4)
         Me.numDuration.Maximum = New Decimal(New Integer() {1440, 0, 0, 0})
         Me.numDuration.Name = "numDuration"
         Me.numDuration.Size = New System.Drawing.Size(300, 22)
@@ -3559,7 +3559,7 @@ Partial Class frmMain
         Me.btnNewProcedure.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewProcedure.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnNewProcedure.Location = New System.Drawing.Point(11, 431)
-        Me.btnNewProcedure.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNewProcedure.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNewProcedure.Name = "btnNewProcedure"
         Me.btnNewProcedure.Size = New System.Drawing.Size(187, 44)
         Me.btnNewProcedure.TabIndex = 18
@@ -3575,7 +3575,7 @@ Partial Class frmMain
         Me.btnSaveProcedure.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveProcedure.ForeColor = System.Drawing.Color.White
         Me.btnSaveProcedure.Location = New System.Drawing.Point(208, 431)
-        Me.btnSaveProcedure.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveProcedure.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveProcedure.Name = "btnSaveProcedure"
         Me.btnSaveProcedure.Size = New System.Drawing.Size(173, 44)
         Me.btnSaveProcedure.TabIndex = 19
@@ -3588,7 +3588,7 @@ Partial Class frmMain
         Me.pnlProcLeft.Controls.Add(Me.dgvProcedures)
         Me.pnlProcLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlProcLeft.Location = New System.Drawing.Point(13, 12)
-        Me.pnlProcLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlProcLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlProcLeft.Name = "pnlProcLeft"
         Me.pnlProcLeft.Size = New System.Drawing.Size(627, 1009)
         Me.pnlProcLeft.TabIndex = 4
@@ -3606,7 +3606,7 @@ Partial Class frmMain
         Me.dgvProcedures.ColumnHeadersHeight = 29
         Me.dgvProcedures.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvProcedures.Location = New System.Drawing.Point(11, 59)
-        Me.dgvProcedures.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvProcedures.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvProcedures.MultiSelect = False
         Me.dgvProcedures.Name = "dgvProcedures"
         Me.dgvProcedures.ReadOnly = True
@@ -3628,7 +3628,7 @@ Partial Class frmMain
         Me.pnlAuditlog.Controls.Add(Me.dgvLog)
         Me.pnlAuditlog.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlAuditlog.Location = New System.Drawing.Point(293, 69)
-        Me.pnlAuditlog.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlAuditlog.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlAuditlog.Name = "pnlAuditlog"
         Me.pnlAuditlog.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.pnlAuditlog.Size = New System.Drawing.Size(1649, 1033)
@@ -3649,7 +3649,7 @@ Partial Class frmMain
         '
         Me.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpFrom.Location = New System.Drawing.Point(87, 7)
-        Me.dtpFrom.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpFrom.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpFrom.Name = "dtpFrom"
         Me.dtpFrom.Size = New System.Drawing.Size(159, 22)
         Me.dtpFrom.TabIndex = 10
@@ -3669,7 +3669,7 @@ Partial Class frmMain
         '
         Me.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpTo.Location = New System.Drawing.Point(297, 7)
-        Me.dtpTo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpTo.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpTo.Name = "dtpTo"
         Me.dtpTo.Size = New System.Drawing.Size(159, 22)
         Me.dtpTo.TabIndex = 12
@@ -3683,7 +3683,7 @@ Partial Class frmMain
         Me.btnLoad.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnLoad.ForeColor = System.Drawing.Color.White
         Me.btnLoad.Location = New System.Drawing.Point(1220, 12)
-        Me.btnLoad.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnLoad.Margin = New System.Windows.Forms.Padding(4)
         Me.btnLoad.Name = "btnLoad"
         Me.btnLoad.Size = New System.Drawing.Size(120, 37)
         Me.btnLoad.TabIndex = 13
@@ -3713,7 +3713,7 @@ Partial Class frmMain
         Me.dgvLog.ColumnHeadersHeight = 29
         Me.dgvLog.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvLog.Location = New System.Drawing.Point(28, 57)
-        Me.dgvLog.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvLog.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvLog.MultiSelect = False
         Me.dgvLog.Name = "dgvLog"
         Me.dgvLog.ReadOnly = True
@@ -3730,7 +3730,7 @@ Partial Class frmMain
         Me.pnlStaff.Controls.Add(Me.pnlStaffLeft)
         Me.pnlStaff.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlStaff.Location = New System.Drawing.Point(293, 69)
-        Me.pnlStaff.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlStaff.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlStaff.Name = "pnlStaff"
         Me.pnlStaff.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.pnlStaff.Size = New System.Drawing.Size(1649, 1033)
@@ -3744,7 +3744,7 @@ Partial Class frmMain
         Me.pnlStaffRight.Controls.Add(Me.grpUsers)
         Me.pnlStaffRight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlStaffRight.Location = New System.Drawing.Point(640, 12)
-        Me.pnlStaffRight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlStaffRight.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlStaffRight.Name = "pnlStaffRight"
         Me.pnlStaffRight.Size = New System.Drawing.Size(996, 1009)
         Me.pnlStaffRight.TabIndex = 3
@@ -3773,9 +3773,9 @@ Partial Class frmMain
         Me.grpStaff.Controls.Add(Me.btnSaveStaff)
         Me.grpStaff.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpStaff.Location = New System.Drawing.Point(11, 10)
-        Me.grpStaff.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpStaff.Margin = New System.Windows.Forms.Padding(4)
         Me.grpStaff.Name = "grpStaff"
-        Me.grpStaff.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpStaff.Padding = New System.Windows.Forms.Padding(4)
         Me.grpStaff.Size = New System.Drawing.Size(1419, 369)
         Me.grpStaff.TabIndex = 5
         Me.grpStaff.TabStop = False
@@ -3795,7 +3795,7 @@ Partial Class frmMain
         'txtStaffCode
         '
         Me.txtStaffCode.Location = New System.Drawing.Point(19, 54)
-        Me.txtStaffCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtStaffCode.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStaffCode.Name = "txtStaffCode"
         Me.txtStaffCode.Size = New System.Drawing.Size(299, 22)
         Me.txtStaffCode.TabIndex = 7
@@ -3817,7 +3817,7 @@ Partial Class frmMain
         Me.cboStaffStatus.FormattingEnabled = True
         Me.cboStaffStatus.Items.AddRange(New Object() {"Active", "Inactive", "Suspended"})
         Me.cboStaffStatus.Location = New System.Drawing.Point(339, 54)
-        Me.cboStaffStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboStaffStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.cboStaffStatus.Name = "cboStaffStatus"
         Me.cboStaffStatus.Size = New System.Drawing.Size(299, 24)
         Me.cboStaffStatus.TabIndex = 9
@@ -3836,7 +3836,7 @@ Partial Class frmMain
         'txtStaffFirstName
         '
         Me.txtStaffFirstName.Location = New System.Drawing.Point(19, 123)
-        Me.txtStaffFirstName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtStaffFirstName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStaffFirstName.Name = "txtStaffFirstName"
         Me.txtStaffFirstName.Size = New System.Drawing.Size(299, 22)
         Me.txtStaffFirstName.TabIndex = 11
@@ -3855,7 +3855,7 @@ Partial Class frmMain
         'txtStaffLastName
         '
         Me.txtStaffLastName.Location = New System.Drawing.Point(339, 123)
-        Me.txtStaffLastName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtStaffLastName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStaffLastName.Name = "txtStaffLastName"
         Me.txtStaffLastName.Size = New System.Drawing.Size(299, 22)
         Me.txtStaffLastName.TabIndex = 13
@@ -3874,7 +3874,7 @@ Partial Class frmMain
         'txtStaffContact
         '
         Me.txtStaffContact.Location = New System.Drawing.Point(19, 192)
-        Me.txtStaffContact.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtStaffContact.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStaffContact.Name = "txtStaffContact"
         Me.txtStaffContact.Size = New System.Drawing.Size(299, 22)
         Me.txtStaffContact.TabIndex = 15
@@ -3893,7 +3893,7 @@ Partial Class frmMain
         'txtStaffEmail
         '
         Me.txtStaffEmail.Location = New System.Drawing.Point(339, 192)
-        Me.txtStaffEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtStaffEmail.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStaffEmail.Name = "txtStaffEmail"
         Me.txtStaffEmail.Size = New System.Drawing.Size(299, 22)
         Me.txtStaffEmail.TabIndex = 17
@@ -3914,7 +3914,7 @@ Partial Class frmMain
         Me.cboPosition.FormattingEnabled = True
         Me.cboPosition.Items.AddRange(New Object() {"Dentist", "Dental Assistant", "Administrator", "Front Desk"})
         Me.cboPosition.Location = New System.Drawing.Point(19, 261)
-        Me.cboPosition.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboPosition.Margin = New System.Windows.Forms.Padding(4)
         Me.cboPosition.Name = "cboPosition"
         Me.cboPosition.Size = New System.Drawing.Size(299, 24)
         Me.cboPosition.TabIndex = 19
@@ -3933,7 +3933,7 @@ Partial Class frmMain
         'txtLicense
         '
         Me.txtLicense.Location = New System.Drawing.Point(339, 261)
-        Me.txtLicense.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtLicense.Margin = New System.Windows.Forms.Padding(4)
         Me.txtLicense.Name = "txtLicense"
         Me.txtLicense.Size = New System.Drawing.Size(299, 22)
         Me.txtLicense.TabIndex = 21
@@ -3947,7 +3947,7 @@ Partial Class frmMain
         Me.btnNewStaff.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewStaff.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnNewStaff.Location = New System.Drawing.Point(19, 308)
-        Me.btnNewStaff.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNewStaff.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNewStaff.Name = "btnNewStaff"
         Me.btnNewStaff.Size = New System.Drawing.Size(160, 39)
         Me.btnNewStaff.TabIndex = 22
@@ -3963,7 +3963,7 @@ Partial Class frmMain
         Me.btnSaveStaff.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveStaff.ForeColor = System.Drawing.Color.White
         Me.btnSaveStaff.Location = New System.Drawing.Point(189, 308)
-        Me.btnSaveStaff.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveStaff.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveStaff.Name = "btnSaveStaff"
         Me.btnSaveStaff.Size = New System.Drawing.Size(160, 39)
         Me.btnSaveStaff.TabIndex = 23
@@ -3979,9 +3979,9 @@ Partial Class frmMain
         Me.grpUsers.Controls.Add(Me.btnToggleActive)
         Me.grpUsers.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpUsers.Location = New System.Drawing.Point(11, 391)
-        Me.grpUsers.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpUsers.Margin = New System.Windows.Forms.Padding(4)
         Me.grpUsers.Name = "grpUsers"
-        Me.grpUsers.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpUsers.Padding = New System.Windows.Forms.Padding(4)
         Me.grpUsers.Size = New System.Drawing.Size(1419, 271)
         Me.grpUsers.TabIndex = 24
         Me.grpUsers.TabStop = False
@@ -4000,7 +4000,7 @@ Partial Class frmMain
         Me.dgvUsers.ColumnHeadersHeight = 29
         Me.dgvUsers.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvUsers.Location = New System.Drawing.Point(19, 32)
-        Me.dgvUsers.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvUsers.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvUsers.MultiSelect = False
         Me.dgvUsers.Name = "dgvUsers"
         Me.dgvUsers.ReadOnly = True
@@ -4020,7 +4020,7 @@ Partial Class frmMain
         Me.btnResetPassword.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnResetPassword.ForeColor = System.Drawing.Color.White
         Me.btnResetPassword.Location = New System.Drawing.Point(19, 197)
-        Me.btnResetPassword.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnResetPassword.Margin = New System.Windows.Forms.Padding(4)
         Me.btnResetPassword.Name = "btnResetPassword"
         Me.btnResetPassword.Size = New System.Drawing.Size(227, 39)
         Me.btnResetPassword.TabIndex = 26
@@ -4036,7 +4036,7 @@ Partial Class frmMain
         Me.btnToggleActive.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnToggleActive.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnToggleActive.Location = New System.Drawing.Point(256, 197)
-        Me.btnToggleActive.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnToggleActive.Margin = New System.Windows.Forms.Padding(4)
         Me.btnToggleActive.Name = "btnToggleActive"
         Me.btnToggleActive.Size = New System.Drawing.Size(200, 39)
         Me.btnToggleActive.TabIndex = 27
@@ -4049,7 +4049,7 @@ Partial Class frmMain
         Me.pnlStaffLeft.Controls.Add(Me.dgvStaff)
         Me.pnlStaffLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlStaffLeft.Location = New System.Drawing.Point(13, 12)
-        Me.pnlStaffLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlStaffLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlStaffLeft.Name = "pnlStaffLeft"
         Me.pnlStaffLeft.Size = New System.Drawing.Size(627, 1009)
         Me.pnlStaffLeft.TabIndex = 4
@@ -4067,7 +4067,7 @@ Partial Class frmMain
         Me.dgvStaff.ColumnHeadersHeight = 29
         Me.dgvStaff.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvStaff.Location = New System.Drawing.Point(11, 59)
-        Me.dgvStaff.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvStaff.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvStaff.MultiSelect = False
         Me.dgvStaff.Name = "dgvStaff"
         Me.dgvStaff.ReadOnly = True
@@ -4084,7 +4084,7 @@ Partial Class frmMain
         Me.pnlBillingpayments.Controls.Add(Me.pnlInvoiceLeft)
         Me.pnlBillingpayments.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlBillingpayments.Location = New System.Drawing.Point(293, 69)
-        Me.pnlBillingpayments.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlBillingpayments.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlBillingpayments.Name = "pnlBillingpayments"
         Me.pnlBillingpayments.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
         Me.pnlBillingpayments.Size = New System.Drawing.Size(1649, 1033)
@@ -4099,7 +4099,7 @@ Partial Class frmMain
         Me.pnlInvoiceRight.Controls.Add(Me.grpPayments)
         Me.pnlInvoiceRight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlInvoiceRight.Location = New System.Drawing.Point(640, 12)
-        Me.pnlInvoiceRight.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlInvoiceRight.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlInvoiceRight.Name = "pnlInvoiceRight"
         Me.pnlInvoiceRight.Size = New System.Drawing.Size(996, 1009)
         Me.pnlInvoiceRight.TabIndex = 3
@@ -4125,9 +4125,9 @@ Partial Class frmMain
         Me.grpInvoice.Controls.Add(Me.btnVoid)
         Me.grpInvoice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpInvoice.Location = New System.Drawing.Point(11, 10)
-        Me.grpInvoice.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpInvoice.Margin = New System.Windows.Forms.Padding(4)
         Me.grpInvoice.Name = "grpInvoice"
-        Me.grpInvoice.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpInvoice.Padding = New System.Windows.Forms.Padding(4)
         Me.grpInvoice.Size = New System.Drawing.Size(1396, 222)
         Me.grpInvoice.TabIndex = 6
         Me.grpInvoice.TabStop = False
@@ -4148,7 +4148,7 @@ Partial Class frmMain
         '
         Me.txtInvoiceNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
         Me.txtInvoiceNo.Location = New System.Drawing.Point(19, 52)
-        Me.txtInvoiceNo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtInvoiceNo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtInvoiceNo.Name = "txtInvoiceNo"
         Me.txtInvoiceNo.ReadOnly = True
         Me.txtInvoiceNo.Size = New System.Drawing.Size(172, 22)
@@ -4169,7 +4169,7 @@ Partial Class frmMain
         '
         Me.txtStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
         Me.txtStatus.Location = New System.Drawing.Point(205, 52)
-        Me.txtStatus.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStatus.Name = "txtStatus"
         Me.txtStatus.ReadOnly = True
         Me.txtStatus.Size = New System.Drawing.Size(145, 22)
@@ -4190,7 +4190,7 @@ Partial Class frmMain
         '
         Me.numDiscount.DecimalPlaces = 2
         Me.numDiscount.Location = New System.Drawing.Point(365, 52)
-        Me.numDiscount.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numDiscount.Margin = New System.Windows.Forms.Padding(4)
         Me.numDiscount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numDiscount.Name = "numDiscount"
         Me.numDiscount.Size = New System.Drawing.Size(160, 22)
@@ -4213,7 +4213,7 @@ Partial Class frmMain
         Me.cboInvoicePatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboInvoicePatient.FormattingEnabled = True
         Me.cboInvoicePatient.Location = New System.Drawing.Point(19, 118)
-        Me.cboInvoicePatient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboInvoicePatient.Margin = New System.Windows.Forms.Padding(4)
         Me.cboInvoicePatient.Name = "cboInvoicePatient"
         Me.cboInvoicePatient.Size = New System.Drawing.Size(505, 24)
         Me.cboInvoicePatient.TabIndex = 14
@@ -4272,7 +4272,7 @@ Partial Class frmMain
         Me.btnNewInvoice.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewInvoice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnNewInvoice.Location = New System.Drawing.Point(539, 49)
-        Me.btnNewInvoice.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNewInvoice.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNewInvoice.Name = "btnNewInvoice"
         Me.btnNewInvoice.Size = New System.Drawing.Size(112, 34)
         Me.btnNewInvoice.TabIndex = 19
@@ -4288,7 +4288,7 @@ Partial Class frmMain
         Me.btnSaveInvoice.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveInvoice.ForeColor = System.Drawing.Color.White
         Me.btnSaveInvoice.Location = New System.Drawing.Point(539, 91)
-        Me.btnSaveInvoice.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveInvoice.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveInvoice.Name = "btnSaveInvoice"
         Me.btnSaveInvoice.Size = New System.Drawing.Size(112, 34)
         Me.btnSaveInvoice.TabIndex = 20
@@ -4304,7 +4304,7 @@ Partial Class frmMain
         Me.btnVoid.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnVoid.ForeColor = System.Drawing.Color.White
         Me.btnVoid.Location = New System.Drawing.Point(539, 133)
-        Me.btnVoid.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnVoid.Margin = New System.Windows.Forms.Padding(4)
         Me.btnVoid.Name = "btnVoid"
         Me.btnVoid.Size = New System.Drawing.Size(112, 34)
         Me.btnVoid.TabIndex = 21
@@ -4330,9 +4330,9 @@ Partial Class frmMain
         Me.grpItems.Controls.Add(Me.dgvItems)
         Me.grpItems.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpItems.Location = New System.Drawing.Point(11, 241)
-        Me.grpItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpItems.Margin = New System.Windows.Forms.Padding(4)
         Me.grpItems.Name = "grpItems"
-        Me.grpItems.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpItems.Padding = New System.Windows.Forms.Padding(4)
         Me.grpItems.Size = New System.Drawing.Size(1396, 357)
         Me.grpItems.TabIndex = 22
         Me.grpItems.TabStop = False
@@ -4354,7 +4354,7 @@ Partial Class frmMain
         Me.cboProcedure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboProcedure.FormattingEnabled = True
         Me.cboProcedure.Location = New System.Drawing.Point(19, 52)
-        Me.cboProcedure.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboProcedure.Margin = New System.Windows.Forms.Padding(4)
         Me.cboProcedure.Name = "cboProcedure"
         Me.cboProcedure.Size = New System.Drawing.Size(625, 24)
         Me.cboProcedure.TabIndex = 24
@@ -4373,7 +4373,7 @@ Partial Class frmMain
         'txtItemDesc
         '
         Me.txtItemDesc.Location = New System.Drawing.Point(19, 118)
-        Me.txtItemDesc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtItemDesc.Margin = New System.Windows.Forms.Padding(4)
         Me.txtItemDesc.Name = "txtItemDesc"
         Me.txtItemDesc.Size = New System.Drawing.Size(292, 22)
         Me.txtItemDesc.TabIndex = 26
@@ -4392,7 +4392,7 @@ Partial Class frmMain
         'numQty
         '
         Me.numQty.Location = New System.Drawing.Point(323, 118)
-        Me.numQty.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numQty.Margin = New System.Windows.Forms.Padding(4)
         Me.numQty.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.numQty.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numQty.Name = "numQty"
@@ -4416,7 +4416,7 @@ Partial Class frmMain
         '
         Me.numUnitPrice.DecimalPlaces = 2
         Me.numUnitPrice.Location = New System.Drawing.Point(400, 118)
-        Me.numUnitPrice.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numUnitPrice.Margin = New System.Windows.Forms.Padding(4)
         Me.numUnitPrice.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numUnitPrice.Name = "numUnitPrice"
         Me.numUnitPrice.Size = New System.Drawing.Size(120, 22)
@@ -4438,7 +4438,7 @@ Partial Class frmMain
         '
         Me.numItemDiscount.DecimalPlaces = 2
         Me.numItemDiscount.Location = New System.Drawing.Point(531, 118)
-        Me.numItemDiscount.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numItemDiscount.Margin = New System.Windows.Forms.Padding(4)
         Me.numItemDiscount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numItemDiscount.Name = "numItemDiscount"
         Me.numItemDiscount.Size = New System.Drawing.Size(115, 22)
@@ -4454,7 +4454,7 @@ Partial Class frmMain
         Me.btnAddItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnAddItem.ForeColor = System.Drawing.Color.White
         Me.btnAddItem.Location = New System.Drawing.Point(19, 158)
-        Me.btnAddItem.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAddItem.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddItem.Name = "btnAddItem"
         Me.btnAddItem.Size = New System.Drawing.Size(147, 37)
         Me.btnAddItem.TabIndex = 33
@@ -4470,7 +4470,7 @@ Partial Class frmMain
         Me.btnRemoveItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnRemoveItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnRemoveItem.Location = New System.Drawing.Point(176, 158)
-        Me.btnRemoveItem.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRemoveItem.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRemoveItem.Name = "btnRemoveItem"
         Me.btnRemoveItem.Size = New System.Drawing.Size(173, 37)
         Me.btnRemoveItem.TabIndex = 34
@@ -4490,7 +4490,7 @@ Partial Class frmMain
         Me.dgvItems.ColumnHeadersHeight = 29
         Me.dgvItems.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvItems.Location = New System.Drawing.Point(19, 204)
-        Me.dgvItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvItems.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvItems.MultiSelect = False
         Me.dgvItems.Name = "dgvItems"
         Me.dgvItems.ReadOnly = True
@@ -4515,9 +4515,9 @@ Partial Class frmMain
         Me.grpPayments.Controls.Add(Me.dgvPayments)
         Me.grpPayments.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpPayments.Location = New System.Drawing.Point(11, 608)
-        Me.grpPayments.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpPayments.Margin = New System.Windows.Forms.Padding(4)
         Me.grpPayments.Name = "grpPayments"
-        Me.grpPayments.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.grpPayments.Padding = New System.Windows.Forms.Padding(4)
         Me.grpPayments.Size = New System.Drawing.Size(1396, 265)
         Me.grpPayments.TabIndex = 36
         Me.grpPayments.TabStop = False
@@ -4539,7 +4539,7 @@ Partial Class frmMain
         Me.cboMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboMethod.FormattingEnabled = True
         Me.cboMethod.Location = New System.Drawing.Point(19, 52)
-        Me.cboMethod.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboMethod.Margin = New System.Windows.Forms.Padding(4)
         Me.cboMethod.Name = "cboMethod"
         Me.cboMethod.Size = New System.Drawing.Size(199, 24)
         Me.cboMethod.TabIndex = 38
@@ -4559,7 +4559,7 @@ Partial Class frmMain
         '
         Me.numPayAmount.DecimalPlaces = 2
         Me.numPayAmount.Location = New System.Drawing.Point(232, 52)
-        Me.numPayAmount.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.numPayAmount.Margin = New System.Windows.Forms.Padding(4)
         Me.numPayAmount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numPayAmount.Name = "numPayAmount"
         Me.numPayAmount.Size = New System.Drawing.Size(147, 22)
@@ -4580,7 +4580,7 @@ Partial Class frmMain
         'txtPayNotes
         '
         Me.txtPayNotes.Location = New System.Drawing.Point(392, 52)
-        Me.txtPayNotes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPayNotes.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPayNotes.Name = "txtPayNotes"
         Me.txtPayNotes.Size = New System.Drawing.Size(252, 22)
         Me.txtPayNotes.TabIndex = 42
@@ -4594,7 +4594,7 @@ Partial Class frmMain
         Me.btnReceive.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnReceive.ForeColor = System.Drawing.Color.White
         Me.btnReceive.Location = New System.Drawing.Point(19, 91)
-        Me.btnReceive.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnReceive.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReceive.Name = "btnReceive"
         Me.btnReceive.Size = New System.Drawing.Size(200, 37)
         Me.btnReceive.TabIndex = 43
@@ -4614,7 +4614,7 @@ Partial Class frmMain
         Me.dgvPayments.ColumnHeadersHeight = 29
         Me.dgvPayments.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvPayments.Location = New System.Drawing.Point(19, 138)
-        Me.dgvPayments.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvPayments.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvPayments.MultiSelect = False
         Me.dgvPayments.Name = "dgvPayments"
         Me.dgvPayments.ReadOnly = True
@@ -4632,7 +4632,7 @@ Partial Class frmMain
         Me.pnlInvoiceLeft.Controls.Add(Me.dgvInvoices)
         Me.pnlInvoiceLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlInvoiceLeft.Location = New System.Drawing.Point(13, 12)
-        Me.pnlInvoiceLeft.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlInvoiceLeft.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlInvoiceLeft.Name = "pnlInvoiceLeft"
         Me.pnlInvoiceLeft.Size = New System.Drawing.Size(627, 1009)
         Me.pnlInvoiceLeft.TabIndex = 4
@@ -4643,7 +4643,7 @@ Partial Class frmMain
         Me.cboStatusFilter.FormattingEnabled = True
         Me.cboStatusFilter.Items.AddRange(New Object() {"All statuses", "Unpaid", "Partially Paid", "Paid", "Void"})
         Me.cboStatusFilter.Location = New System.Drawing.Point(408, 12)
-        Me.cboStatusFilter.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cboStatusFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.cboStatusFilter.Name = "cboStatusFilter"
         Me.cboStatusFilter.Size = New System.Drawing.Size(201, 24)
         Me.cboStatusFilter.TabIndex = 4
@@ -4661,7 +4661,7 @@ Partial Class frmMain
         Me.dgvInvoices.ColumnHeadersHeight = 29
         Me.dgvInvoices.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
         Me.dgvInvoices.Location = New System.Drawing.Point(11, 59)
-        Me.dgvInvoices.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dgvInvoices.Margin = New System.Windows.Forms.Padding(4)
         Me.dgvInvoices.MultiSelect = False
         Me.dgvInvoices.Name = "dgvInvoices"
         Me.dgvInvoices.ReadOnly = True
@@ -4689,7 +4689,7 @@ Partial Class frmMain
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.pnlSidebar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "frmMain"
         Me.Text = "frmMain"
         Me.pnlSidebar.ResumeLayout(False)
