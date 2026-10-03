@@ -176,5 +176,14 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blog_img_3-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\275598907_108216355160810_3692065727390731471_n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DentalScape.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

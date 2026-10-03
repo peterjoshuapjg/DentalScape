@@ -30,7 +30,7 @@ Public Class frmMain
     Public Property LoggedOut As Boolean
 
     Private Shared ReadOnly NavNormal As Color = Color.FromArgb(13, 49, 127)
-    Private Shared ReadOnly NavActive As Color = Color.FromArgb(14, 124, 134)
+    Private Shared ReadOnly NavActive As Color = Color.FromArgb(36, 73, 163)
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.StartPosition = FormStartPosition.CenterScreen

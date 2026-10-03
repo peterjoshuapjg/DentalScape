@@ -85,4 +85,13 @@ Public Class frmLogin
         txtPassword.Focus()
     End Sub
 
+    Private Sub cbShowPassword_CheckedChanged(sender As Object, e As EventArgs) Handles cbShowPassword.CheckedChanged
+        If cbShowPassword.Checked Then
+            txtPassword.UseSystemPasswordChar = False
+        Else
+            txtPassword.UseSystemPasswordChar = True
+        End If
+    End Sub
+
+
 End Class
