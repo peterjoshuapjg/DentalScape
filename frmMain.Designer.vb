@@ -22,15 +22,15 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.lblBrand = New System.Windows.Forms.Label()
         Me.lblBrandSub = New System.Windows.Forms.Label()
@@ -379,6 +379,7 @@ Partial Class frmMain
         Me.lblLoginCounter = New System.Windows.Forms.Label()
         Me.lblChangesCounter = New System.Windows.Forms.Label()
         Me.lblLogoutCounter = New System.Windows.Forms.Label()
+        Me.ctlDentalChart = New DentalScape.DentalChartControl()
         Me.pnlSidebar.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.pnlDashboard.SuspendLayout()
@@ -640,32 +641,32 @@ Partial Class frmMain
         '
         'chtTopProcedure
         '
-        ChartArea3.Name = "ChartArea1"
-        Me.chtTopProcedure.ChartAreas.Add(ChartArea3)
-        Legend3.Name = "Legend1"
-        Me.chtTopProcedure.Legends.Add(Legend3)
+        ChartArea1.Name = "ChartArea1"
+        Me.chtTopProcedure.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.chtTopProcedure.Legends.Add(Legend1)
         Me.chtTopProcedure.Location = New System.Drawing.Point(1077, 616)
         Me.chtTopProcedure.Name = "chtTopProcedure"
-        Series3.ChartArea = "ChartArea1"
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series1"
-        Me.chtTopProcedure.Series.Add(Series3)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.chtTopProcedure.Series.Add(Series1)
         Me.chtTopProcedure.Size = New System.Drawing.Size(600, 376)
         Me.chtTopProcedure.TabIndex = 26
         Me.chtTopProcedure.Text = "Chart2"
         '
         'chtMonthlyRevenue
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.chtMonthlyRevenue.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.chtMonthlyRevenue.Legends.Add(Legend4)
+        ChartArea2.Name = "ChartArea1"
+        Me.chtMonthlyRevenue.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.chtMonthlyRevenue.Legends.Add(Legend2)
         Me.chtMonthlyRevenue.Location = New System.Drawing.Point(1080, 179)
         Me.chtMonthlyRevenue.Name = "chtMonthlyRevenue"
-        Series4.ChartArea = "ChartArea1"
-        Series4.Legend = "Legend1"
-        Series4.Name = "Series1"
-        Me.chtMonthlyRevenue.Series.Add(Series4)
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.chtMonthlyRevenue.Series.Add(Series2)
         Me.chtMonthlyRevenue.Size = New System.Drawing.Size(600, 376)
         Me.chtMonthlyRevenue.TabIndex = 25
         Me.chtMonthlyRevenue.Text = "Chart1"
@@ -856,31 +857,31 @@ Partial Class frmMain
         Me.dgvToday.AllowUserToAddRows = False
         Me.dgvToday.AllowUserToDeleteRows = False
         Me.dgvToday.AllowUserToResizeRows = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(252, Byte), Integer))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        Me.dgvToday.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(252, Byte), Integer))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
+        Me.dgvToday.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvToday.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvToday.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvToday.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(36, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(163, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvToday.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(36, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(163, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvToday.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvToday.ColumnHeadersHeight = 29
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(217, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(250, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(130, Byte), Integer))
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvToday.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(217, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(250, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(130, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvToday.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvToday.EnableHeadersVisualStyles = False
         Me.dgvToday.GridColor = System.Drawing.Color.FromArgb(CType(CType(214, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(236, Byte), Integer))
         Me.dgvToday.Location = New System.Drawing.Point(34, 178)
@@ -3017,6 +3018,7 @@ Partial Class frmMain
         'tabChart
         '
         Me.tabChart.BackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.tabChart.Controls.Add(Me.ctlDentalChart)
         Me.tabChart.Controls.Add(Me.dgvChart)
         Me.tabChart.Controls.Add(Me.grpChart)
         Me.tabChart.Location = New System.Drawing.Point(4, 26)
@@ -3031,13 +3033,14 @@ Partial Class frmMain
         Me.dgvChart.AllowUserToAddRows = False
         Me.dgvChart.AllowUserToDeleteRows = False
         Me.dgvChart.AllowUserToResizeRows = False
-        Me.dgvChart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.dgvChart.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvChart.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvChart.BackgroundColor = System.Drawing.Color.White
         Me.dgvChart.ColumnHeadersHeight = 29
         Me.dgvChart.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
-        Me.dgvChart.Location = New System.Drawing.Point(8, 8)
+        Me.dgvChart.Location = New System.Drawing.Point(416, 356)
         Me.dgvChart.MultiSelect = False
         Me.dgvChart.Name = "dgvChart"
         Me.dgvChart.ReadOnly = True
@@ -3045,13 +3048,11 @@ Partial Class frmMain
         Me.dgvChart.RowHeadersWidth = 51
         Me.dgvChart.RowTemplate.Height = 26
         Me.dgvChart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvChart.Size = New System.Drawing.Size(560, 906)
+        Me.dgvChart.Size = New System.Drawing.Size(1248, 558)
         Me.dgvChart.TabIndex = 56
         '
         'grpChart
         '
-        Me.grpChart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpChart.Controls.Add(Me.lblChartTooth)
         Me.grpChart.Controls.Add(Me.txtChartTooth)
         Me.grpChart.Controls.Add(Me.lblSurface)
@@ -3064,9 +3065,9 @@ Partial Class frmMain
         Me.grpChart.Controls.Add(Me.btnSaveChart)
         Me.grpChart.Controls.Add(Me.btnDeleteChart)
         Me.grpChart.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.grpChart.Location = New System.Drawing.Point(580, 8)
+        Me.grpChart.Location = New System.Drawing.Point(8, 356)
         Me.grpChart.Name = "grpChart"
-        Me.grpChart.Size = New System.Drawing.Size(1084, 300)
+        Me.grpChart.Size = New System.Drawing.Size(400, 300)
         Me.grpChart.TabIndex = 57
         Me.grpChart.TabStop = False
         Me.grpChart.Text = "Tooth entry"
@@ -4868,6 +4869,20 @@ Partial Class frmMain
         Me.lblLogoutCounter.TabIndex = 4
         Me.lblLogoutCounter.Text = "0"
         '
+        'ctlDentalChart
+        '
+        Me.ctlDentalChart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ctlDentalChart.BackColor = System.Drawing.Color.White
+        Me.ctlDentalChart.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ctlDentalChart.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.ctlDentalChart.Location = New System.Drawing.Point(8, 8)
+        Me.ctlDentalChart.Name = "ctlDentalChart"
+        Me.ctlDentalChart.SelectedTooth = 0
+        Me.ctlDentalChart.Size = New System.Drawing.Size(1656, 340)
+        Me.ctlDentalChart.TabIndex = 58
+        Me.ctlDentalChart.Text = "DentalChartControl1"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5360,4 +5375,5 @@ Partial Class frmMain
     Friend WithEvents lblLoginCounter As Label
     Friend WithEvents lblTotalLogsCounter As Label
     Friend WithEvents lblLogoutCounter As Label
+    Friend WithEvents ctlDentalChart As DentalChartControl
 End Class
