@@ -22,12 +22,20 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
+        Me.picLogo = New System.Windows.Forms.PictureBox()
         Me.lblBrand = New System.Windows.Forms.Label()
         Me.lblBrandSub = New System.Windows.Forms.Label()
+        Me.btnNavDashboard = New System.Windows.Forms.Button()
         Me.btnNavPatients = New System.Windows.Forms.Button()
         Me.btnNavAppointments = New System.Windows.Forms.Button()
         Me.btnNavBilling = New System.Windows.Forms.Button()
@@ -42,6 +50,12 @@ Partial Class frmMain
         Me.lblPageTitle = New System.Windows.Forms.Label()
         Me.lblUser = New System.Windows.Forms.Label()
         Me.pnlDashboard = New System.Windows.Forms.Panel()
+        Me.dgvLowStockProducts = New System.Windows.Forms.DataGridView()
+        Me.lblLowStocks = New System.Windows.Forms.Label()
+        Me.lblTopProcedures = New System.Windows.Forms.Label()
+        Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.lblMonthlyRevenue = New System.Windows.Forms.Label()
         Me.pnlCardToday = New System.Windows.Forms.Panel()
         Me.lblCardTodayCaption = New System.Windows.Forms.Label()
         Me.lblTodayCount = New System.Windows.Forms.Label()
@@ -50,8 +64,8 @@ Partial Class frmMain
         Me.lblPendingCount = New System.Windows.Forms.Label()
         Me.pnlCardUnpaid = New System.Windows.Forms.Panel()
         Me.lblCardUnpaidCaption = New System.Windows.Forms.Label()
-        Me.lblUnpaidCount = New System.Windows.Forms.Label()
         Me.lblUnpaidAmount = New System.Windows.Forms.Label()
+        Me.lblUnpaidCount = New System.Windows.Forms.Label()
         Me.pnlCardLow = New System.Windows.Forms.Panel()
         Me.lblCardLowCaption = New System.Windows.Forms.Label()
         Me.lblLowStockCount = New System.Windows.Forms.Label()
@@ -348,11 +362,13 @@ Partial Class frmMain
         Me.pnlInvoiceLeft = New System.Windows.Forms.Panel()
         Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
         Me.dgvInvoices = New System.Windows.Forms.DataGridView()
-        Me.picLogo = New System.Windows.Forms.PictureBox()
-        Me.btnNavDashboard = New System.Windows.Forms.Button()
         Me.pnlSidebar.SuspendLayout()
+        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeader.SuspendLayout()
         Me.pnlDashboard.SuspendLayout()
+        CType(Me.dgvLowStockProducts, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlCardToday.SuspendLayout()
         Me.pnlCardPending.SuspendLayout()
         Me.pnlCardUnpaid.SuspendLayout()
@@ -430,7 +446,6 @@ Partial Class frmMain
         CType(Me.dgvPayments, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlInvoiceLeft.SuspendLayout()
         CType(Me.dgvInvoices, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlSidebar
@@ -453,8 +468,19 @@ Partial Class frmMain
         Me.pnlSidebar.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSidebar.Location = New System.Drawing.Point(0, 0)
         Me.pnlSidebar.Name = "pnlSidebar"
-        Me.pnlSidebar.Size = New System.Drawing.Size(220, 894)
+        Me.pnlSidebar.Size = New System.Drawing.Size(220, 1080)
         Me.pnlSidebar.TabIndex = 6
+        '
+        'picLogo
+        '
+        Me.picLogo.BackColor = System.Drawing.Color.Transparent
+        Me.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.picLogo.Location = New System.Drawing.Point(35, 15)
+        Me.picLogo.Name = "picLogo"
+        Me.picLogo.Size = New System.Drawing.Size(129, 133)
+        Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.picLogo.TabIndex = 19
+        Me.picLogo.TabStop = False
         '
         'lblBrand
         '
@@ -476,6 +502,26 @@ Partial Class frmMain
         Me.lblBrandSub.Size = New System.Drawing.Size(97, 13)
         Me.lblBrandSub.TabIndex = 7
         Me.lblBrandSub.Text = "Clinic Management"
+        '
+        'btnNavDashboard
+        '
+        Me.btnNavDashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnNavDashboard.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnNavDashboard.FlatAppearance.BorderSize = 0
+        Me.btnNavDashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
+        Me.btnNavDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNavDashboard.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnNavDashboard.ForeColor = System.Drawing.Color.White
+        Me.btnNavDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavDashboard.Location = New System.Drawing.Point(10, 235)
+        Me.btnNavDashboard.Name = "btnNavDashboard"
+        Me.btnNavDashboard.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
+        Me.btnNavDashboard.Size = New System.Drawing.Size(200, 40)
+        Me.btnNavDashboard.TabIndex = 8
+        Me.btnNavDashboard.Text = "Dashboard"
+        Me.btnNavDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavDashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnNavDashboard.UseVisualStyleBackColor = False
         '
         'btnNavPatients
         '
@@ -630,7 +676,7 @@ Partial Class frmMain
         Me.btnChangePassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnChangePassword.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.btnChangePassword.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnChangePassword.Location = New System.Drawing.Point(10, 785)
+        Me.btnChangePassword.Location = New System.Drawing.Point(10, 971)
         Me.btnChangePassword.Name = "btnChangePassword"
         Me.btnChangePassword.Size = New System.Drawing.Size(200, 38)
         Me.btnChangePassword.TabIndex = 17
@@ -646,7 +692,7 @@ Partial Class frmMain
         Me.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnLogout.ForeColor = System.Drawing.Color.White
-        Me.btnLogout.Location = New System.Drawing.Point(10, 833)
+        Me.btnLogout.Location = New System.Drawing.Point(10, 1019)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(200, 38)
         Me.btnLogout.TabIndex = 18
@@ -661,7 +707,7 @@ Partial Class frmMain
         Me.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlHeader.Location = New System.Drawing.Point(220, 0)
         Me.pnlHeader.Name = "pnlHeader"
-        Me.pnlHeader.Size = New System.Drawing.Size(1235, 56)
+        Me.pnlHeader.Size = New System.Drawing.Size(1700, 56)
         Me.pnlHeader.TabIndex = 20
         '
         'lblPageTitle
@@ -679,7 +725,7 @@ Partial Class frmMain
         '
         Me.lblUser.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblUser.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblUser.Location = New System.Drawing.Point(824, 12)
+        Me.lblUser.Location = New System.Drawing.Point(1289, 12)
         Me.lblUser.Name = "lblUser"
         Me.lblUser.Size = New System.Drawing.Size(396, 32)
         Me.lblUser.TabIndex = 4
@@ -687,6 +733,12 @@ Partial Class frmMain
         '
         'pnlDashboard
         '
+        Me.pnlDashboard.Controls.Add(Me.dgvLowStockProducts)
+        Me.pnlDashboard.Controls.Add(Me.lblLowStocks)
+        Me.pnlDashboard.Controls.Add(Me.lblTopProcedures)
+        Me.pnlDashboard.Controls.Add(Me.Chart2)
+        Me.pnlDashboard.Controls.Add(Me.Chart1)
+        Me.pnlDashboard.Controls.Add(Me.lblMonthlyRevenue)
         Me.pnlDashboard.Controls.Add(Me.pnlCardToday)
         Me.pnlDashboard.Controls.Add(Me.pnlCardPending)
         Me.pnlDashboard.Controls.Add(Me.pnlCardUnpaid)
@@ -697,9 +749,87 @@ Partial Class frmMain
         Me.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlDashboard.Location = New System.Drawing.Point(220, 56)
         Me.pnlDashboard.Name = "pnlDashboard"
-        Me.pnlDashboard.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
-        Me.pnlDashboard.Size = New System.Drawing.Size(1235, 838)
+        Me.pnlDashboard.Padding = New System.Windows.Forms.Padding(10)
+        Me.pnlDashboard.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlDashboard.TabIndex = 21
+        '
+        'dgvLowStockProducts
+        '
+        Me.dgvLowStockProducts.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvLowStockProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvLowStockProducts.BackgroundColor = System.Drawing.Color.White
+        Me.dgvLowStockProducts.ColumnHeadersHeight = 29
+        Me.dgvLowStockProducts.Location = New System.Drawing.Point(34, 738)
+        Me.dgvLowStockProducts.Name = "dgvLowStockProducts"
+        Me.dgvLowStockProducts.Size = New System.Drawing.Size(1001, 254)
+        Me.dgvLowStockProducts.TabIndex = 29
+        '
+        'lblLowStocks
+        '
+        Me.lblLowStocks.AutoSize = True
+        Me.lblLowStocks.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.lblLowStocks.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.lblLowStocks.Location = New System.Drawing.Point(35, 698)
+        Me.lblLowStocks.Name = "lblLowStocks"
+        Me.lblLowStocks.Size = New System.Drawing.Size(147, 20)
+        Me.lblLowStocks.TabIndex = 28
+        Me.lblLowStocks.Text = "Low-stock products"
+        '
+        'lblTopProcedures
+        '
+        Me.lblTopProcedures.AutoSize = True
+        Me.lblTopProcedures.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.lblTopProcedures.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.lblTopProcedures.Location = New System.Drawing.Point(1083, 581)
+        Me.lblTopProcedures.Name = "lblTopProcedures"
+        Me.lblTopProcedures.Size = New System.Drawing.Size(198, 20)
+        Me.lblTopProcedures.TabIndex = 27
+        Me.lblTopProcedures.Text = "Top Procedures this Month"
+        '
+        'Chart2
+        '
+        ChartArea5.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea5)
+        Legend5.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend5)
+        Me.Chart2.Location = New System.Drawing.Point(1077, 616)
+        Me.Chart2.Name = "Chart2"
+        Series5.ChartArea = "ChartArea1"
+        Series5.Legend = "Legend1"
+        Series5.Name = "Series1"
+        Me.Chart2.Series.Add(Series5)
+        Me.Chart2.Size = New System.Drawing.Size(600, 376)
+        Me.Chart2.TabIndex = 26
+        Me.Chart2.Text = "Chart2"
+        '
+        'Chart1
+        '
+        ChartArea6.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea6)
+        Legend6.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend6)
+        Me.Chart1.Location = New System.Drawing.Point(1080, 179)
+        Me.Chart1.Name = "Chart1"
+        Series6.ChartArea = "ChartArea1"
+        Series6.Legend = "Legend1"
+        Series6.Name = "Series1"
+        Me.Chart1.Series.Add(Series6)
+        Me.Chart1.Size = New System.Drawing.Size(600, 376)
+        Me.Chart1.TabIndex = 25
+        Me.Chart1.Text = "Chart1"
+        '
+        'lblMonthlyRevenue
+        '
+        Me.lblMonthlyRevenue.AutoSize = True
+        Me.lblMonthlyRevenue.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Bold)
+        Me.lblMonthlyRevenue.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.lblMonthlyRevenue.Location = New System.Drawing.Point(1083, 146)
+        Me.lblMonthlyRevenue.Name = "lblMonthlyRevenue"
+        Me.lblMonthlyRevenue.Size = New System.Drawing.Size(150, 20)
+        Me.lblMonthlyRevenue.TabIndex = 24
+        Me.lblMonthlyRevenue.Text = "Revenue this Month"
         '
         'pnlCardToday
         '
@@ -784,6 +914,16 @@ Partial Class frmMain
         Me.lblCardUnpaidCaption.TabIndex = 8
         Me.lblCardUnpaidCaption.Text = "Unpaid invoices"
         '
+        'lblUnpaidAmount
+        '
+        Me.lblUnpaidAmount.AutoSize = True
+        Me.lblUnpaidAmount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.lblUnpaidAmount.Location = New System.Drawing.Point(14, 76)
+        Me.lblUnpaidAmount.Name = "lblUnpaidAmount"
+        Me.lblUnpaidAmount.Size = New System.Drawing.Size(93, 13)
+        Me.lblUnpaidAmount.TabIndex = 13
+        Me.lblUnpaidAmount.Text = "₱0.00 outstanding"
+        '
         'lblUnpaidCount
         '
         Me.lblUnpaidCount.AutoSize = True
@@ -794,16 +934,6 @@ Partial Class frmMain
         Me.lblUnpaidCount.Size = New System.Drawing.Size(38, 45)
         Me.lblUnpaidCount.TabIndex = 9
         Me.lblUnpaidCount.Text = "0"
-        '
-        'lblUnpaidAmount
-        '
-        Me.lblUnpaidAmount.AutoSize = True
-        Me.lblUnpaidAmount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblUnpaidAmount.Location = New System.Drawing.Point(14, 76)
-        Me.lblUnpaidAmount.Name = "lblUnpaidAmount"
-        Me.lblUnpaidAmount.Size = New System.Drawing.Size(93, 13)
-        Me.lblUnpaidAmount.TabIndex = 13
-        Me.lblUnpaidAmount.Text = "₱0.00 outstanding"
         '
         'pnlCardLow
         '
@@ -856,7 +986,7 @@ Partial Class frmMain
         Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRefresh.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnRefresh.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnRefresh.Location = New System.Drawing.Point(470, 140)
+        Me.btnRefresh.Location = New System.Drawing.Point(935, 140)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(100, 30)
         Me.btnRefresh.TabIndex = 22
@@ -868,31 +998,31 @@ Partial Class frmMain
         Me.dgvToday.AllowUserToAddRows = False
         Me.dgvToday.AllowUserToDeleteRows = False
         Me.dgvToday.AllowUserToResizeRows = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(252, Byte), Integer))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        Me.dgvToday.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(252, Byte), Integer))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
+        Me.dgvToday.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
         Me.dgvToday.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvToday.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvToday.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(36, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(163, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvToday.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(36, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(163, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvToday.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.dgvToday.ColumnHeadersHeight = 29
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(217, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(250, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(130, Byte), Integer))
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvToday.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(217, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(250, Byte), Integer))
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(130, Byte), Integer))
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvToday.DefaultCellStyle = DataGridViewCellStyle9
         Me.dgvToday.EnableHeadersVisualStyles = False
         Me.dgvToday.GridColor = System.Drawing.Color.FromArgb(CType(CType(214, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(236, Byte), Integer))
         Me.dgvToday.Location = New System.Drawing.Point(34, 178)
@@ -903,7 +1033,7 @@ Partial Class frmMain
         Me.dgvToday.RowHeadersWidth = 51
         Me.dgvToday.RowTemplate.Height = 26
         Me.dgvToday.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvToday.Size = New System.Drawing.Size(536, 312)
+        Me.dgvToday.Size = New System.Drawing.Size(1001, 498)
         Me.dgvToday.TabIndex = 23
         '
         'pnlInventory
@@ -912,8 +1042,8 @@ Partial Class frmMain
         Me.pnlInventory.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlInventory.Location = New System.Drawing.Point(220, 56)
         Me.pnlInventory.Name = "pnlInventory"
-        Me.pnlInventory.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
-        Me.pnlInventory.Size = New System.Drawing.Size(1235, 838)
+        Me.pnlInventory.Padding = New System.Windows.Forms.Padding(10)
+        Me.pnlInventory.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlInventory.TabIndex = 22
         '
         'tabInventory
@@ -921,10 +1051,11 @@ Partial Class frmMain
         Me.tabInventory.Controls.Add(Me.tabProducts)
         Me.tabInventory.Controls.Add(Me.tabSuppliers)
         Me.tabInventory.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tabInventory.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabInventory.Location = New System.Drawing.Point(10, 10)
         Me.tabInventory.Name = "tabInventory"
         Me.tabInventory.SelectedIndex = 0
-        Me.tabInventory.Size = New System.Drawing.Size(1215, 818)
+        Me.tabInventory.Size = New System.Drawing.Size(1680, 1004)
         Me.tabInventory.TabIndex = 2
         '
         'tabProducts
@@ -932,10 +1063,10 @@ Partial Class frmMain
         Me.tabProducts.BackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.tabProducts.Controls.Add(Me.pnlProdRight)
         Me.tabProducts.Controls.Add(Me.pnlProdLeft)
-        Me.tabProducts.Location = New System.Drawing.Point(4, 22)
+        Me.tabProducts.Location = New System.Drawing.Point(4, 29)
         Me.tabProducts.Name = "tabProducts"
-        Me.tabProducts.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.tabProducts.Size = New System.Drawing.Size(1207, 792)
+        Me.tabProducts.Padding = New System.Windows.Forms.Padding(6)
+        Me.tabProducts.Size = New System.Drawing.Size(1672, 971)
         Me.tabProducts.TabIndex = 2
         Me.tabProducts.Text = "Products && Stock"
         '
@@ -946,9 +1077,9 @@ Partial Class frmMain
         Me.pnlProdRight.Controls.Add(Me.grpProduct)
         Me.pnlProdRight.Controls.Add(Me.grpStock)
         Me.pnlProdRight.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlProdRight.Location = New System.Drawing.Point(476, 6)
+        Me.pnlProdRight.Location = New System.Drawing.Point(842, 6)
         Me.pnlProdRight.Name = "pnlProdRight"
-        Me.pnlProdRight.Size = New System.Drawing.Size(725, 780)
+        Me.pnlProdRight.Size = New System.Drawing.Size(824, 959)
         Me.pnlProdRight.TabIndex = 4
         '
         'grpProduct
@@ -976,7 +1107,7 @@ Partial Class frmMain
         Me.grpProduct.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpProduct.Location = New System.Drawing.Point(8, 8)
         Me.grpProduct.Name = "grpProduct"
-        Me.grpProduct.Size = New System.Drawing.Size(1025, 290)
+        Me.grpProduct.Size = New System.Drawing.Size(1124, 330)
         Me.grpProduct.TabIndex = 9
         Me.grpProduct.TabStop = False
         Me.grpProduct.Text = "Product"
@@ -984,151 +1115,166 @@ Partial Class frmMain
         'lblProdCode
         '
         Me.lblProdCode.AutoSize = True
+        Me.lblProdCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProdCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblProdCode.Location = New System.Drawing.Point(14, 24)
         Me.lblProdCode.Name = "lblProdCode"
-        Me.lblProdCode.Size = New System.Drawing.Size(139, 13)
+        Me.lblProdCode.Size = New System.Drawing.Size(172, 17)
         Me.lblProdCode.TabIndex = 10
         Me.lblProdCode.Text = "Product code (blank = auto)"
         '
         'txtProdCode
         '
+        Me.txtProdCode.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtProdCode.Location = New System.Drawing.Point(14, 44)
         Me.txtProdCode.Name = "txtProdCode"
-        Me.txtProdCode.Size = New System.Drawing.Size(225, 20)
+        Me.txtProdCode.Size = New System.Drawing.Size(355, 27)
         Me.txtProdCode.TabIndex = 11
         '
         'lblProdName
         '
         Me.lblProdName.AutoSize = True
+        Me.lblProdName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProdName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblProdName.Location = New System.Drawing.Point(254, 24)
+        Me.lblProdName.Location = New System.Drawing.Point(428, 25)
         Me.lblProdName.Name = "lblProdName"
-        Me.lblProdName.Size = New System.Drawing.Size(80, 13)
+        Me.lblProdName.Size = New System.Drawing.Size(98, 17)
         Me.lblProdName.TabIndex = 12
         Me.lblProdName.Text = "Product name *"
         '
         'txtProdName
         '
-        Me.txtProdName.Location = New System.Drawing.Point(254, 44)
+        Me.txtProdName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtProdName.Location = New System.Drawing.Point(428, 45)
         Me.txtProdName.MaxLength = 100
         Me.txtProdName.Name = "txtProdName"
-        Me.txtProdName.Size = New System.Drawing.Size(225, 20)
+        Me.txtProdName.Size = New System.Drawing.Size(367, 27)
         Me.txtProdName.TabIndex = 13
         '
         'lblCategory
         '
         Me.lblCategory.AutoSize = True
+        Me.lblCategory.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCategory.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblCategory.Location = New System.Drawing.Point(14, 80)
         Me.lblCategory.Name = "lblCategory"
-        Me.lblCategory.Size = New System.Drawing.Size(56, 13)
+        Me.lblCategory.Size = New System.Drawing.Size(70, 17)
         Me.lblCategory.TabIndex = 14
         Me.lblCategory.Text = "Category *"
         '
         'cboCategory
         '
         Me.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboCategory.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboCategory.FormattingEnabled = True
         Me.cboCategory.Location = New System.Drawing.Point(14, 100)
         Me.cboCategory.Name = "cboCategory"
-        Me.cboCategory.Size = New System.Drawing.Size(225, 21)
+        Me.cboCategory.Size = New System.Drawing.Size(355, 28)
         Me.cboCategory.TabIndex = 15
         '
         'lblUnit
         '
         Me.lblUnit.AutoSize = True
+        Me.lblUnit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUnit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblUnit.Location = New System.Drawing.Point(254, 80)
+        Me.lblUnit.Location = New System.Drawing.Point(428, 81)
         Me.lblUnit.Name = "lblUnit"
-        Me.lblUnit.Size = New System.Drawing.Size(118, 13)
+        Me.lblUnit.Size = New System.Drawing.Size(145, 17)
         Me.lblUnit.TabIndex = 16
         Me.lblUnit.Text = "Unit * (pc, box, bottle...)"
         '
         'txtUnit
         '
-        Me.txtUnit.Location = New System.Drawing.Point(254, 100)
+        Me.txtUnit.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUnit.Location = New System.Drawing.Point(428, 101)
         Me.txtUnit.MaxLength = 30
         Me.txtUnit.Name = "txtUnit"
-        Me.txtUnit.Size = New System.Drawing.Size(225, 20)
+        Me.txtUnit.Size = New System.Drawing.Size(367, 27)
         Me.txtUnit.TabIndex = 17
         '
         'lblReorder
         '
         Me.lblReorder.AutoSize = True
+        Me.lblReorder.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblReorder.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblReorder.Location = New System.Drawing.Point(14, 136)
         Me.lblReorder.Name = "lblReorder"
-        Me.lblReorder.Size = New System.Drawing.Size(70, 13)
+        Me.lblReorder.Size = New System.Drawing.Size(86, 17)
         Me.lblReorder.TabIndex = 18
         Me.lblReorder.Text = "Reorder level"
         '
         'numReorder
         '
+        Me.numReorder.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.numReorder.Location = New System.Drawing.Point(14, 156)
         Me.numReorder.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
         Me.numReorder.Name = "numReorder"
-        Me.numReorder.Size = New System.Drawing.Size(225, 20)
+        Me.numReorder.Size = New System.Drawing.Size(355, 27)
         Me.numReorder.TabIndex = 19
         Me.numReorder.ThousandsSeparator = True
         '
         'lblCost
         '
         Me.lblCost.AutoSize = True
+        Me.lblCost.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCost.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblCost.Location = New System.Drawing.Point(254, 136)
+        Me.lblCost.Location = New System.Drawing.Point(428, 137)
         Me.lblCost.Name = "lblCost"
-        Me.lblCost.Size = New System.Drawing.Size(65, 13)
+        Me.lblCost.Size = New System.Drawing.Size(79, 17)
         Me.lblCost.TabIndex = 20
         Me.lblCost.Text = "Unit cost (₱)"
         '
         'numCost
         '
         Me.numCost.DecimalPlaces = 2
-        Me.numCost.Location = New System.Drawing.Point(254, 156)
+        Me.numCost.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numCost.Location = New System.Drawing.Point(428, 157)
         Me.numCost.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numCost.Name = "numCost"
-        Me.numCost.Size = New System.Drawing.Size(225, 20)
+        Me.numCost.Size = New System.Drawing.Size(367, 27)
         Me.numCost.TabIndex = 21
         Me.numCost.ThousandsSeparator = True
         '
         'lblStock
         '
         Me.lblStock.AutoSize = True
+        Me.lblStock.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStock.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblStock.Location = New System.Drawing.Point(14, 192)
         Me.lblStock.Name = "lblStock"
-        Me.lblStock.Size = New System.Drawing.Size(197, 13)
+        Me.lblStock.Size = New System.Drawing.Size(239, 17)
         Me.lblStock.TabIndex = 22
         Me.lblStock.Text = "Current stock (changes via transactions)"
         '
         'txtStock
         '
         Me.txtStock.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.txtStock.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStock.Location = New System.Drawing.Point(14, 212)
         Me.txtStock.Name = "txtStock"
         Me.txtStock.ReadOnly = True
-        Me.txtStock.Size = New System.Drawing.Size(225, 20)
+        Me.txtStock.Size = New System.Drawing.Size(355, 27)
         Me.txtStock.TabIndex = 23
         '
         'lblProdStatus
         '
         Me.lblProdStatus.AutoSize = True
         Me.lblProdStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblProdStatus.Location = New System.Drawing.Point(254, 192)
+        Me.lblProdStatus.Location = New System.Drawing.Point(428, 193)
         Me.lblProdStatus.Name = "lblProdStatus"
-        Me.lblProdStatus.Size = New System.Drawing.Size(37, 13)
+        Me.lblProdStatus.Size = New System.Drawing.Size(49, 20)
         Me.lblProdStatus.TabIndex = 24
         Me.lblProdStatus.Text = "Status"
         '
         'cboProdStatus
         '
         Me.cboProdStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboProdStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboProdStatus.FormattingEnabled = True
         Me.cboProdStatus.Items.AddRange(New Object() {"Active", "Inactive"})
-        Me.cboProdStatus.Location = New System.Drawing.Point(254, 212)
+        Me.cboProdStatus.Location = New System.Drawing.Point(428, 213)
         Me.cboProdStatus.Name = "cboProdStatus"
-        Me.cboProdStatus.Size = New System.Drawing.Size(225, 21)
+        Me.cboProdStatus.Size = New System.Drawing.Size(367, 28)
         Me.cboProdStatus.TabIndex = 25
         '
         'btnNewProduct
@@ -1139,9 +1285,9 @@ Partial Class frmMain
         Me.btnNewProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNewProduct.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewProduct.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnNewProduct.Location = New System.Drawing.Point(14, 244)
+        Me.btnNewProduct.Location = New System.Drawing.Point(17, 264)
         Me.btnNewProduct.Name = "btnNewProduct"
-        Me.btnNewProduct.Size = New System.Drawing.Size(130, 32)
+        Me.btnNewProduct.Size = New System.Drawing.Size(146, 32)
         Me.btnNewProduct.TabIndex = 26
         Me.btnNewProduct.Text = "New Product"
         Me.btnNewProduct.UseVisualStyleBackColor = False
@@ -1154,9 +1300,9 @@ Partial Class frmMain
         Me.btnSaveProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveProduct.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveProduct.ForeColor = System.Drawing.Color.White
-        Me.btnSaveProduct.Location = New System.Drawing.Point(152, 244)
+        Me.btnSaveProduct.Location = New System.Drawing.Point(193, 264)
         Me.btnSaveProduct.Name = "btnSaveProduct"
-        Me.btnSaveProduct.Size = New System.Drawing.Size(130, 32)
+        Me.btnSaveProduct.Size = New System.Drawing.Size(146, 32)
         Me.btnSaveProduct.TabIndex = 27
         Me.btnSaveProduct.Text = "Save Product"
         Me.btnSaveProduct.UseVisualStyleBackColor = False
@@ -1176,9 +1322,9 @@ Partial Class frmMain
         Me.grpStock.Controls.Add(Me.btnPostStock)
         Me.grpStock.Controls.Add(Me.dgvTransactions)
         Me.grpStock.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.grpStock.Location = New System.Drawing.Point(8, 306)
+        Me.grpStock.Location = New System.Drawing.Point(9, 354)
         Me.grpStock.Name = "grpStock"
-        Me.grpStock.Size = New System.Drawing.Size(1025, 340)
+        Me.grpStock.Size = New System.Drawing.Size(1124, 385)
         Me.grpStock.TabIndex = 28
         Me.grpStock.TabStop = False
         Me.grpStock.Text = "Stock transaction"
@@ -1186,40 +1332,44 @@ Partial Class frmMain
         'lblTxType
         '
         Me.lblTxType.AutoSize = True
+        Me.lblTxType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTxType.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblTxType.Location = New System.Drawing.Point(14, 24)
         Me.lblTxType.Name = "lblTxType"
-        Me.lblTxType.Size = New System.Drawing.Size(31, 13)
+        Me.lblTxType.Size = New System.Drawing.Size(35, 17)
         Me.lblTxType.TabIndex = 29
         Me.lblTxType.Text = "Type"
         '
         'cboTxType
         '
         Me.cboTxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboTxType.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboTxType.FormattingEnabled = True
         Me.cboTxType.Items.AddRange(New Object() {"Stock In", "Stock Out", "Adjustment In", "Adjustment Out", "Expired", "Damaged"})
         Me.cboTxType.Location = New System.Drawing.Point(14, 44)
         Me.cboTxType.Name = "cboTxType"
-        Me.cboTxType.Size = New System.Drawing.Size(225, 21)
+        Me.cboTxType.Size = New System.Drawing.Size(354, 28)
         Me.cboTxType.TabIndex = 30
         '
         'lblTxQty
         '
         Me.lblTxQty.AutoSize = True
+        Me.lblTxQty.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTxQty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblTxQty.Location = New System.Drawing.Point(254, 24)
+        Me.lblTxQty.Location = New System.Drawing.Point(427, 24)
         Me.lblTxQty.Name = "lblTxQty"
-        Me.lblTxQty.Size = New System.Drawing.Size(46, 13)
+        Me.lblTxQty.Size = New System.Drawing.Size(56, 17)
         Me.lblTxQty.TabIndex = 31
         Me.lblTxQty.Text = "Quantity"
         '
         'numTxQty
         '
-        Me.numTxQty.Location = New System.Drawing.Point(254, 44)
+        Me.numTxQty.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numTxQty.Location = New System.Drawing.Point(427, 44)
         Me.numTxQty.Maximum = New Decimal(New Integer() {999999, 0, 0, 0})
         Me.numTxQty.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numTxQty.Name = "numTxQty"
-        Me.numTxQty.Size = New System.Drawing.Size(225, 20)
+        Me.numTxQty.Size = New System.Drawing.Size(367, 27)
         Me.numTxQty.TabIndex = 32
         Me.numTxQty.ThousandsSeparator = True
         Me.numTxQty.Value = New Decimal(New Integer() {1, 0, 0, 0})
@@ -1227,35 +1377,39 @@ Partial Class frmMain
         'lblTxRef
         '
         Me.lblTxRef.AutoSize = True
+        Me.lblTxRef.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTxRef.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblTxRef.Location = New System.Drawing.Point(14, 80)
         Me.lblTxRef.Name = "lblTxRef"
-        Me.lblTxRef.Size = New System.Drawing.Size(144, 13)
+        Me.lblTxRef.Size = New System.Drawing.Size(170, 17)
         Me.lblTxRef.TabIndex = 33
         Me.lblTxRef.Text = "Reference (PO / invoice no.)"
         '
         'txtTxRef
         '
+        Me.txtTxRef.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTxRef.Location = New System.Drawing.Point(14, 100)
         Me.txtTxRef.Name = "txtTxRef"
-        Me.txtTxRef.Size = New System.Drawing.Size(225, 20)
+        Me.txtTxRef.Size = New System.Drawing.Size(354, 27)
         Me.txtTxRef.TabIndex = 34
         '
         'lblTxNotes
         '
         Me.lblTxNotes.AutoSize = True
+        Me.lblTxNotes.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTxNotes.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblTxNotes.Location = New System.Drawing.Point(254, 80)
+        Me.lblTxNotes.Location = New System.Drawing.Point(427, 80)
         Me.lblTxNotes.Name = "lblTxNotes"
-        Me.lblTxNotes.Size = New System.Drawing.Size(35, 13)
+        Me.lblTxNotes.Size = New System.Drawing.Size(43, 17)
         Me.lblTxNotes.TabIndex = 35
         Me.lblTxNotes.Text = "Notes"
         '
         'txtTxNotes
         '
-        Me.txtTxNotes.Location = New System.Drawing.Point(254, 100)
+        Me.txtTxNotes.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTxNotes.Location = New System.Drawing.Point(427, 100)
         Me.txtTxNotes.Name = "txtTxNotes"
-        Me.txtTxNotes.Size = New System.Drawing.Size(225, 20)
+        Me.txtTxNotes.Size = New System.Drawing.Size(367, 27)
         Me.txtTxNotes.TabIndex = 36
         '
         'btnPostStock
@@ -1266,7 +1420,7 @@ Partial Class frmMain
         Me.btnPostStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPostStock.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnPostStock.ForeColor = System.Drawing.Color.White
-        Me.btnPostStock.Location = New System.Drawing.Point(14, 134)
+        Me.btnPostStock.Location = New System.Drawing.Point(17, 154)
         Me.btnPostStock.Name = "btnPostStock"
         Me.btnPostStock.Size = New System.Drawing.Size(160, 32)
         Me.btnPostStock.TabIndex = 37
@@ -1285,7 +1439,7 @@ Partial Class frmMain
         Me.dgvTransactions.BackgroundColor = System.Drawing.Color.White
         Me.dgvTransactions.ColumnHeadersHeight = 29
         Me.dgvTransactions.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
-        Me.dgvTransactions.Location = New System.Drawing.Point(14, 176)
+        Me.dgvTransactions.Location = New System.Drawing.Point(17, 202)
         Me.dgvTransactions.MultiSelect = False
         Me.dgvTransactions.Name = "dgvTransactions"
         Me.dgvTransactions.ReadOnly = True
@@ -1293,7 +1447,7 @@ Partial Class frmMain
         Me.dgvTransactions.RowHeadersWidth = 51
         Me.dgvTransactions.RowTemplate.Height = 26
         Me.dgvTransactions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvTransactions.Size = New System.Drawing.Size(995, 156)
+        Me.dgvTransactions.Size = New System.Drawing.Size(784, 165)
         Me.dgvTransactions.TabIndex = 38
         '
         'pnlProdLeft
@@ -1304,16 +1458,17 @@ Partial Class frmMain
         Me.pnlProdLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlProdLeft.Location = New System.Drawing.Point(6, 6)
         Me.pnlProdLeft.Name = "pnlProdLeft"
-        Me.pnlProdLeft.Size = New System.Drawing.Size(470, 780)
+        Me.pnlProdLeft.Size = New System.Drawing.Size(836, 959)
         Me.pnlProdLeft.TabIndex = 5
         '
         'chkLowStock
         '
         Me.chkLowStock.AutoSize = True
+        Me.chkLowStock.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkLowStock.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.chkLowStock.Location = New System.Drawing.Point(308, 13)
+        Me.chkLowStock.Location = New System.Drawing.Point(716, 18)
         Me.chkLowStock.Name = "chkLowStock"
-        Me.chkLowStock.Size = New System.Drawing.Size(97, 17)
+        Me.chkLowStock.Size = New System.Drawing.Size(112, 21)
         Me.chkLowStock.TabIndex = 7
         Me.chkLowStock.Text = "Low stock only"
         '
@@ -1337,7 +1492,7 @@ Partial Class frmMain
         Me.dgvProducts.RowHeadersWidth = 51
         Me.dgvProducts.RowTemplate.Height = 26
         Me.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvProducts.Size = New System.Drawing.Size(454, 720)
+        Me.dgvProducts.Size = New System.Drawing.Size(820, 899)
         Me.dgvProducts.TabIndex = 8
         '
         'tabSuppliers
@@ -1345,10 +1500,10 @@ Partial Class frmMain
         Me.tabSuppliers.BackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.tabSuppliers.Controls.Add(Me.pnlSupRight)
         Me.tabSuppliers.Controls.Add(Me.pnlSupLeft)
-        Me.tabSuppliers.Location = New System.Drawing.Point(4, 22)
+        Me.tabSuppliers.Location = New System.Drawing.Point(4, 29)
         Me.tabSuppliers.Name = "tabSuppliers"
-        Me.tabSuppliers.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.tabSuppliers.Size = New System.Drawing.Size(1207, 792)
+        Me.tabSuppliers.Padding = New System.Windows.Forms.Padding(6)
+        Me.tabSuppliers.Size = New System.Drawing.Size(1672, 971)
         Me.tabSuppliers.TabIndex = 3
         Me.tabSuppliers.Text = "Suppliers"
         '
@@ -1358,9 +1513,9 @@ Partial Class frmMain
         Me.pnlSupRight.BackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.pnlSupRight.Controls.Add(Me.grpSupplier)
         Me.pnlSupRight.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlSupRight.Location = New System.Drawing.Point(476, 6)
+        Me.pnlSupRight.Location = New System.Drawing.Point(842, 6)
         Me.pnlSupRight.Name = "pnlSupRight"
-        Me.pnlSupRight.Size = New System.Drawing.Size(725, 780)
+        Me.pnlSupRight.Size = New System.Drawing.Size(824, 959)
         Me.pnlSupRight.TabIndex = 39
         '
         'grpSupplier
@@ -1384,7 +1539,7 @@ Partial Class frmMain
         Me.grpSupplier.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpSupplier.Location = New System.Drawing.Point(8, 8)
         Me.grpSupplier.Name = "grpSupplier"
-        Me.grpSupplier.Size = New System.Drawing.Size(1025, 360)
+        Me.grpSupplier.Size = New System.Drawing.Size(1124, 360)
         Me.grpSupplier.TabIndex = 43
         Me.grpSupplier.TabStop = False
         Me.grpSupplier.Text = "Supplier"
@@ -1392,10 +1547,11 @@ Partial Class frmMain
         'lblSupName
         '
         Me.lblSupName.AutoSize = True
+        Me.lblSupName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSupName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblSupName.Location = New System.Drawing.Point(14, 24)
         Me.lblSupName.Name = "lblSupName"
-        Me.lblSupName.Size = New System.Drawing.Size(81, 13)
+        Me.lblSupName.Size = New System.Drawing.Size(101, 17)
         Me.lblSupName.TabIndex = 44
         Me.lblSupName.Text = "Supplier name *"
         '
@@ -1404,16 +1560,17 @@ Partial Class frmMain
         Me.txtSupName.Location = New System.Drawing.Point(14, 44)
         Me.txtSupName.MaxLength = 100
         Me.txtSupName.Name = "txtSupName"
-        Me.txtSupName.Size = New System.Drawing.Size(225, 20)
+        Me.txtSupName.Size = New System.Drawing.Size(391, 27)
         Me.txtSupName.TabIndex = 45
         '
         'lblSupStatus
         '
         Me.lblSupStatus.AutoSize = True
+        Me.lblSupStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSupStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblSupStatus.Location = New System.Drawing.Point(254, 24)
+        Me.lblSupStatus.Location = New System.Drawing.Point(428, 23)
         Me.lblSupStatus.Name = "lblSupStatus"
-        Me.lblSupStatus.Size = New System.Drawing.Size(37, 13)
+        Me.lblSupStatus.Size = New System.Drawing.Size(43, 17)
         Me.lblSupStatus.TabIndex = 46
         Me.lblSupStatus.Text = "Status"
         '
@@ -1422,18 +1579,19 @@ Partial Class frmMain
         Me.cboSupStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboSupStatus.FormattingEnabled = True
         Me.cboSupStatus.Items.AddRange(New Object() {"Active", "Inactive"})
-        Me.cboSupStatus.Location = New System.Drawing.Point(254, 44)
+        Me.cboSupStatus.Location = New System.Drawing.Point(428, 43)
         Me.cboSupStatus.Name = "cboSupStatus"
-        Me.cboSupStatus.Size = New System.Drawing.Size(225, 21)
+        Me.cboSupStatus.Size = New System.Drawing.Size(369, 28)
         Me.cboSupStatus.TabIndex = 47
         '
         'lblSupContact
         '
         Me.lblSupContact.AutoSize = True
+        Me.lblSupContact.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSupContact.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblSupContact.Location = New System.Drawing.Point(14, 80)
         Me.lblSupContact.Name = "lblSupContact"
-        Me.lblSupContact.Size = New System.Drawing.Size(79, 13)
+        Me.lblSupContact.Size = New System.Drawing.Size(97, 17)
         Me.lblSupContact.TabIndex = 48
         Me.lblSupContact.Text = "Contact person"
         '
@@ -1442,34 +1600,36 @@ Partial Class frmMain
         Me.txtSupContact.Location = New System.Drawing.Point(14, 100)
         Me.txtSupContact.MaxLength = 100
         Me.txtSupContact.Name = "txtSupContact"
-        Me.txtSupContact.Size = New System.Drawing.Size(225, 20)
+        Me.txtSupContact.Size = New System.Drawing.Size(391, 27)
         Me.txtSupContact.TabIndex = 49
         '
         'lblSupPhone
         '
         Me.lblSupPhone.AutoSize = True
+        Me.lblSupPhone.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSupPhone.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblSupPhone.Location = New System.Drawing.Point(254, 80)
+        Me.lblSupPhone.Location = New System.Drawing.Point(428, 79)
         Me.lblSupPhone.Name = "lblSupPhone"
-        Me.lblSupPhone.Size = New System.Drawing.Size(82, 13)
+        Me.lblSupPhone.Size = New System.Drawing.Size(101, 17)
         Me.lblSupPhone.TabIndex = 50
         Me.lblSupPhone.Text = "Contact number"
         '
         'txtSupPhone
         '
-        Me.txtSupPhone.Location = New System.Drawing.Point(254, 100)
+        Me.txtSupPhone.Location = New System.Drawing.Point(428, 99)
         Me.txtSupPhone.MaxLength = 30
         Me.txtSupPhone.Name = "txtSupPhone"
-        Me.txtSupPhone.Size = New System.Drawing.Size(225, 20)
+        Me.txtSupPhone.Size = New System.Drawing.Size(369, 27)
         Me.txtSupPhone.TabIndex = 51
         '
         'lblSupEmail
         '
         Me.lblSupEmail.AutoSize = True
+        Me.lblSupEmail.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSupEmail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblSupEmail.Location = New System.Drawing.Point(14, 136)
         Me.lblSupEmail.Name = "lblSupEmail"
-        Me.lblSupEmail.Size = New System.Drawing.Size(32, 13)
+        Me.lblSupEmail.Size = New System.Drawing.Size(39, 17)
         Me.lblSupEmail.TabIndex = 52
         Me.lblSupEmail.Text = "Email"
         '
@@ -1478,27 +1638,28 @@ Partial Class frmMain
         Me.txtSupEmail.Location = New System.Drawing.Point(14, 156)
         Me.txtSupEmail.MaxLength = 100
         Me.txtSupEmail.Name = "txtSupEmail"
-        Me.txtSupEmail.Size = New System.Drawing.Size(465, 20)
+        Me.txtSupEmail.Size = New System.Drawing.Size(783, 27)
         Me.txtSupEmail.TabIndex = 53
         '
         'lblSupAddress
         '
         Me.lblSupAddress.AutoSize = True
+        Me.lblSupAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSupAddress.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblSupAddress.Location = New System.Drawing.Point(14, 192)
         Me.lblSupAddress.Name = "lblSupAddress"
-        Me.lblSupAddress.Size = New System.Drawing.Size(45, 13)
+        Me.lblSupAddress.Size = New System.Drawing.Size(56, 17)
         Me.lblSupAddress.TabIndex = 54
         Me.lblSupAddress.Text = "Address"
         '
         'txtSupAddress
         '
         Me.txtSupAddress.Location = New System.Drawing.Point(14, 212)
-        Me.txtSupAddress.Multiline = True
         Me.txtSupAddress.MaxLength = 255
+        Me.txtSupAddress.Multiline = True
         Me.txtSupAddress.Name = "txtSupAddress"
         Me.txtSupAddress.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtSupAddress.Size = New System.Drawing.Size(465, 70)
+        Me.txtSupAddress.Size = New System.Drawing.Size(783, 70)
         Me.txtSupAddress.TabIndex = 55
         '
         'btnNewSupplier
@@ -1524,7 +1685,7 @@ Partial Class frmMain
         Me.btnSaveSupplier.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveSupplier.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveSupplier.ForeColor = System.Drawing.Color.White
-        Me.btnSaveSupplier.Location = New System.Drawing.Point(152, 300)
+        Me.btnSaveSupplier.Location = New System.Drawing.Point(167, 300)
         Me.btnSaveSupplier.Name = "btnSaveSupplier"
         Me.btnSaveSupplier.Size = New System.Drawing.Size(130, 32)
         Me.btnSaveSupplier.TabIndex = 57
@@ -1538,7 +1699,7 @@ Partial Class frmMain
         Me.pnlSupLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSupLeft.Location = New System.Drawing.Point(6, 6)
         Me.pnlSupLeft.Name = "pnlSupLeft"
-        Me.pnlSupLeft.Size = New System.Drawing.Size(470, 780)
+        Me.pnlSupLeft.Size = New System.Drawing.Size(836, 959)
         Me.pnlSupLeft.TabIndex = 40
         '
         'dgvSuppliers
@@ -1561,7 +1722,7 @@ Partial Class frmMain
         Me.dgvSuppliers.RowHeadersWidth = 51
         Me.dgvSuppliers.RowTemplate.Height = 26
         Me.dgvSuppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSuppliers.Size = New System.Drawing.Size(454, 720)
+        Me.dgvSuppliers.Size = New System.Drawing.Size(820, 899)
         Me.dgvSuppliers.TabIndex = 42
         '
         'pnlAppointment
@@ -1571,8 +1732,8 @@ Partial Class frmMain
         Me.pnlAppointment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlAppointment.Location = New System.Drawing.Point(220, 56)
         Me.pnlAppointment.Name = "pnlAppointment"
-        Me.pnlAppointment.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
-        Me.pnlAppointment.Size = New System.Drawing.Size(1235, 838)
+        Me.pnlAppointment.Padding = New System.Windows.Forms.Padding(10)
+        Me.pnlAppointment.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlAppointment.TabIndex = 23
         '
         'pnlApptRight
@@ -1584,9 +1745,9 @@ Partial Class frmMain
         Me.pnlApptRight.Controls.Add(Me.btnSaveAppt)
         Me.pnlApptRight.Controls.Add(Me.btnCancelAppt)
         Me.pnlApptRight.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlApptRight.Location = New System.Drawing.Point(610, 10)
+        Me.pnlApptRight.Location = New System.Drawing.Point(846, 10)
         Me.pnlApptRight.Name = "pnlApptRight"
-        Me.pnlApptRight.Size = New System.Drawing.Size(615, 818)
+        Me.pnlApptRight.Size = New System.Drawing.Size(844, 1004)
         Me.pnlApptRight.TabIndex = 3
         '
         'grpAppointment
@@ -1616,7 +1777,7 @@ Partial Class frmMain
         Me.grpAppointment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpAppointment.Location = New System.Drawing.Point(8, 8)
         Me.grpAppointment.Name = "grpAppointment"
-        Me.grpAppointment.Size = New System.Drawing.Size(990, 420)
+        Me.grpAppointment.Size = New System.Drawing.Size(1219, 420)
         Me.grpAppointment.TabIndex = 9
         Me.grpAppointment.TabStop = False
         Me.grpAppointment.Text = "Appointment details"
@@ -1624,49 +1785,54 @@ Partial Class frmMain
         'lblApptCode
         '
         Me.lblApptCode.AutoSize = True
+        Me.lblApptCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblApptCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblApptCode.Location = New System.Drawing.Point(14, 24)
         Me.lblApptCode.Name = "lblApptCode"
-        Me.lblApptCode.Size = New System.Drawing.Size(93, 13)
+        Me.lblApptCode.Size = New System.Drawing.Size(116, 17)
         Me.lblApptCode.TabIndex = 10
         Me.lblApptCode.Text = "Appointment code"
         '
         'txtApptCode
         '
         Me.txtApptCode.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.txtApptCode.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtApptCode.Location = New System.Drawing.Point(14, 44)
         Me.txtApptCode.Name = "txtApptCode"
         Me.txtApptCode.ReadOnly = True
-        Me.txtApptCode.Size = New System.Drawing.Size(225, 20)
+        Me.txtApptCode.Size = New System.Drawing.Size(377, 27)
         Me.txtApptCode.TabIndex = 11
         '
         'lblApptStatus
         '
         Me.lblApptStatus.AutoSize = True
+        Me.lblApptStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblApptStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblApptStatus.Location = New System.Drawing.Point(254, 24)
+        Me.lblApptStatus.Location = New System.Drawing.Point(438, 25)
         Me.lblApptStatus.Name = "lblApptStatus"
-        Me.lblApptStatus.Size = New System.Drawing.Size(37, 13)
+        Me.lblApptStatus.Size = New System.Drawing.Size(43, 17)
         Me.lblApptStatus.TabIndex = 12
         Me.lblApptStatus.Text = "Status"
         '
         'cboApptStatus
         '
         Me.cboApptStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboApptStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboApptStatus.FormattingEnabled = True
         Me.cboApptStatus.Items.AddRange(New Object() {"Pending", "Confirmed", "Completed", "Cancelled", "No-show"})
-        Me.cboApptStatus.Location = New System.Drawing.Point(254, 44)
+        Me.cboApptStatus.Location = New System.Drawing.Point(438, 45)
         Me.cboApptStatus.Name = "cboApptStatus"
-        Me.cboApptStatus.Size = New System.Drawing.Size(225, 21)
+        Me.cboApptStatus.Size = New System.Drawing.Size(374, 28)
         Me.cboApptStatus.TabIndex = 13
         '
         'lblApptPatient
         '
         Me.lblApptPatient.AutoSize = True
+        Me.lblApptPatient.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblApptPatient.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblApptPatient.Location = New System.Drawing.Point(14, 80)
         Me.lblApptPatient.Name = "lblApptPatient"
-        Me.lblApptPatient.Size = New System.Drawing.Size(47, 13)
+        Me.lblApptPatient.Size = New System.Drawing.Size(133, 17)
         Me.lblApptPatient.TabIndex = 14
         Me.lblApptPatient.Text = "Patient * (name or ID)"
         '
@@ -1674,145 +1840,159 @@ Partial Class frmMain
         '
         Me.cboApptPatient.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cboApptPatient.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
-        Me.cboApptPatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
+        Me.cboApptPatient.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboApptPatient.FormattingEnabled = True
         Me.cboApptPatient.Location = New System.Drawing.Point(14, 100)
         Me.cboApptPatient.Name = "cboApptPatient"
-        Me.cboApptPatient.Size = New System.Drawing.Size(225, 21)
+        Me.cboApptPatient.Size = New System.Drawing.Size(377, 28)
         Me.cboApptPatient.TabIndex = 15
         '
         'lblDentist
         '
         Me.lblDentist.AutoSize = True
+        Me.lblDentist.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDentist.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblDentist.Location = New System.Drawing.Point(254, 80)
+        Me.lblDentist.Location = New System.Drawing.Point(438, 81)
         Me.lblDentist.Name = "lblDentist"
-        Me.lblDentist.Size = New System.Drawing.Size(47, 13)
+        Me.lblDentist.Size = New System.Drawing.Size(57, 17)
         Me.lblDentist.TabIndex = 16
         Me.lblDentist.Text = "Dentist *"
         '
         'cboDentist
         '
         Me.cboDentist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboDentist.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboDentist.FormattingEnabled = True
-        Me.cboDentist.Location = New System.Drawing.Point(254, 100)
+        Me.cboDentist.Location = New System.Drawing.Point(438, 101)
         Me.cboDentist.Name = "cboDentist"
-        Me.cboDentist.Size = New System.Drawing.Size(225, 21)
+        Me.cboDentist.Size = New System.Drawing.Size(374, 28)
         Me.cboDentist.TabIndex = 17
         '
         'lblDate
         '
         Me.lblDate.AutoSize = True
+        Me.lblDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDate.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblDate.Location = New System.Drawing.Point(14, 136)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(37, 13)
+        Me.lblDate.Size = New System.Drawing.Size(44, 17)
         Me.lblDate.TabIndex = 18
         Me.lblDate.Text = "Date *"
         '
         'dtpDate
         '
+        Me.dtpDate.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpDate.Location = New System.Drawing.Point(14, 156)
         Me.dtpDate.Name = "dtpDate"
-        Me.dtpDate.Size = New System.Drawing.Size(225, 20)
+        Me.dtpDate.Size = New System.Drawing.Size(377, 27)
         Me.dtpDate.TabIndex = 19
         '
         'lblType
         '
         Me.lblType.AutoSize = True
+        Me.lblType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblType.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblType.Location = New System.Drawing.Point(254, 136)
+        Me.lblType.Location = New System.Drawing.Point(438, 137)
         Me.lblType.Name = "lblType"
-        Me.lblType.Size = New System.Drawing.Size(96, 13)
+        Me.lblType.Size = New System.Drawing.Size(121, 17)
         Me.lblType.TabIndex = 20
         Me.lblType.Text = "Appointment type *"
         '
         'cboType
         '
         Me.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboType.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboType.FormattingEnabled = True
-        Me.cboType.Location = New System.Drawing.Point(254, 156)
+        Me.cboType.Location = New System.Drawing.Point(438, 157)
         Me.cboType.Name = "cboType"
-        Me.cboType.Size = New System.Drawing.Size(225, 21)
+        Me.cboType.Size = New System.Drawing.Size(374, 28)
         Me.cboType.TabIndex = 21
         '
         'lblStart
         '
         Me.lblStart.AutoSize = True
+        Me.lblStart.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStart.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblStart.Location = New System.Drawing.Point(14, 192)
         Me.lblStart.Name = "lblStart"
-        Me.lblStart.Size = New System.Drawing.Size(58, 13)
+        Me.lblStart.Size = New System.Drawing.Size(73, 17)
         Me.lblStart.TabIndex = 22
         Me.lblStart.Text = "Start time *"
         '
         'dtpStart
         '
         Me.dtpStart.CustomFormat = "hh:mm tt"
+        Me.dtpStart.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpStart.Location = New System.Drawing.Point(14, 212)
         Me.dtpStart.Name = "dtpStart"
         Me.dtpStart.ShowUpDown = True
-        Me.dtpStart.Size = New System.Drawing.Size(225, 20)
+        Me.dtpStart.Size = New System.Drawing.Size(377, 27)
         Me.dtpStart.TabIndex = 23
         '
         'lblEnd
         '
         Me.lblEnd.AutoSize = True
+        Me.lblEnd.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEnd.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblEnd.Location = New System.Drawing.Point(254, 192)
+        Me.lblEnd.Location = New System.Drawing.Point(438, 193)
         Me.lblEnd.Name = "lblEnd"
-        Me.lblEnd.Size = New System.Drawing.Size(48, 13)
+        Me.lblEnd.Size = New System.Drawing.Size(59, 17)
         Me.lblEnd.TabIndex = 24
         Me.lblEnd.Text = "End time"
         '
         'dtpEnd
         '
         Me.dtpEnd.CustomFormat = "hh:mm tt"
+        Me.dtpEnd.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpEnd.Location = New System.Drawing.Point(254, 212)
+        Me.dtpEnd.Location = New System.Drawing.Point(438, 213)
         Me.dtpEnd.Name = "dtpEnd"
         Me.dtpEnd.ShowCheckBox = True
         Me.dtpEnd.ShowUpDown = True
-        Me.dtpEnd.Size = New System.Drawing.Size(225, 20)
+        Me.dtpEnd.Size = New System.Drawing.Size(374, 27)
         Me.dtpEnd.TabIndex = 25
         '
         'lblReason
         '
         Me.lblReason.AutoSize = True
+        Me.lblReason.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblReason.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblReason.Location = New System.Drawing.Point(14, 248)
         Me.lblReason.Name = "lblReason"
-        Me.lblReason.Size = New System.Drawing.Size(44, 13)
+        Me.lblReason.Size = New System.Drawing.Size(51, 17)
         Me.lblReason.TabIndex = 26
         Me.lblReason.Text = "Reason"
         '
         'txtReason
         '
+        Me.txtReason.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtReason.Location = New System.Drawing.Point(14, 268)
         Me.txtReason.MaxLength = 255
         Me.txtReason.Name = "txtReason"
-        Me.txtReason.Size = New System.Drawing.Size(465, 20)
+        Me.txtReason.Size = New System.Drawing.Size(798, 27)
         Me.txtReason.TabIndex = 27
         '
         'lblNotes
         '
         Me.lblNotes.AutoSize = True
+        Me.lblNotes.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNotes.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblNotes.Location = New System.Drawing.Point(14, 304)
         Me.lblNotes.Name = "lblNotes"
-        Me.lblNotes.Size = New System.Drawing.Size(35, 13)
+        Me.lblNotes.Size = New System.Drawing.Size(43, 17)
         Me.lblNotes.TabIndex = 28
         Me.lblNotes.Text = "Notes"
         '
         'txtNotes
         '
+        Me.txtNotes.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNotes.Location = New System.Drawing.Point(14, 324)
         Me.txtNotes.Multiline = True
         Me.txtNotes.Name = "txtNotes"
         Me.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtNotes.Size = New System.Drawing.Size(465, 90)
+        Me.txtNotes.Size = New System.Drawing.Size(798, 90)
         Me.txtNotes.TabIndex = 29
         '
         'btnNewAppt
@@ -1871,35 +2051,38 @@ Partial Class frmMain
         Me.pnlApptLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlApptLeft.Location = New System.Drawing.Point(10, 10)
         Me.pnlApptLeft.Name = "pnlApptLeft"
-        Me.pnlApptLeft.Size = New System.Drawing.Size(600, 818)
+        Me.pnlApptLeft.Size = New System.Drawing.Size(836, 1004)
         Me.pnlApptLeft.TabIndex = 4
         '
         'dtpFilterDate
         '
+        Me.dtpFilterDate.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpFilterDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpFilterDate.Location = New System.Drawing.Point(8, 10)
         Me.dtpFilterDate.Name = "dtpFilterDate"
-        Me.dtpFilterDate.Size = New System.Drawing.Size(130, 20)
+        Me.dtpFilterDate.Size = New System.Drawing.Size(130, 27)
         Me.dtpFilterDate.TabIndex = 3
         '
         'chkAllDates
         '
         Me.chkAllDates.AutoSize = True
+        Me.chkAllDates.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkAllDates.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.chkAllDates.Location = New System.Drawing.Point(148, 13)
         Me.chkAllDates.Name = "chkAllDates"
-        Me.chkAllDates.Size = New System.Drawing.Size(66, 17)
+        Me.chkAllDates.Size = New System.Drawing.Size(86, 24)
         Me.chkAllDates.TabIndex = 4
         Me.chkAllDates.Text = "All dates"
         '
         'cboFilterStatus
         '
         Me.cboFilterStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboFilterStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboFilterStatus.FormattingEnabled = True
         Me.cboFilterStatus.Items.AddRange(New Object() {"All statuses", "Pending", "Confirmed", "Completed", "Cancelled", "No-show"})
-        Me.cboFilterStatus.Location = New System.Drawing.Point(244, 10)
+        Me.cboFilterStatus.Location = New System.Drawing.Point(250, 9)
         Me.cboFilterStatus.Name = "cboFilterStatus"
-        Me.cboFilterStatus.Size = New System.Drawing.Size(150, 21)
+        Me.cboFilterStatus.Size = New System.Drawing.Size(192, 28)
         Me.cboFilterStatus.TabIndex = 5
         '
         'btnToday
@@ -1908,11 +2091,11 @@ Partial Class frmMain
         Me.btnToday.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnToday.FlatAppearance.BorderSize = 0
         Me.btnToday.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnToday.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnToday.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnToday.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnToday.Location = New System.Drawing.Point(404, 9)
+        Me.btnToday.Location = New System.Drawing.Point(480, 11)
         Me.btnToday.Name = "btnToday"
-        Me.btnToday.Size = New System.Drawing.Size(80, 29)
+        Me.btnToday.Size = New System.Drawing.Size(109, 29)
         Me.btnToday.TabIndex = 6
         Me.btnToday.Text = "Today"
         Me.btnToday.UseVisualStyleBackColor = False
@@ -1937,32 +2120,32 @@ Partial Class frmMain
         Me.dgvAppointments.RowHeadersWidth = 51
         Me.dgvAppointments.RowTemplate.Height = 26
         Me.dgvAppointments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvAppointments.Size = New System.Drawing.Size(584, 725)
+        Me.dgvAppointments.Size = New System.Drawing.Size(820, 911)
         Me.dgvAppointments.TabIndex = 8
         '
         'pnlPatients
         '
         Me.pnlPatients.Controls.Add(Me.pnlRight)
+        Me.pnlPatients.Controls.Add(Me.pnlLeft)
         Me.pnlPatients.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlPatients.Location = New System.Drawing.Point(220, 56)
         Me.pnlPatients.Name = "pnlPatients"
-        Me.pnlPatients.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
-        Me.pnlPatients.Size = New System.Drawing.Size(1235, 838)
+        Me.pnlPatients.Padding = New System.Windows.Forms.Padding(10)
+        Me.pnlPatients.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlPatients.TabIndex = 24
         '
         'pnlRight
         '
         Me.pnlRight.AutoScroll = True
         Me.pnlRight.BackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(248, Byte), Integer))
-        Me.pnlRight.Controls.Add(Me.pnlLeft)
         Me.pnlRight.Controls.Add(Me.grpDetails)
         Me.pnlRight.Controls.Add(Me.btnNew)
         Me.pnlRight.Controls.Add(Me.btnSave)
         Me.pnlRight.Controls.Add(Me.btnArchive)
         Me.pnlRight.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlRight.Location = New System.Drawing.Point(10, 10)
+        Me.pnlRight.Location = New System.Drawing.Point(846, 10)
         Me.pnlRight.Name = "pnlRight"
-        Me.pnlRight.Size = New System.Drawing.Size(1215, 818)
+        Me.pnlRight.Size = New System.Drawing.Size(844, 1004)
         Me.pnlRight.TabIndex = 3
         '
         'pnlLeft
@@ -1971,9 +2154,9 @@ Partial Class frmMain
         Me.pnlLeft.Controls.Add(Me.btnClear)
         Me.pnlLeft.Controls.Add(Me.dgvPatients)
         Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pnlLeft.Location = New System.Drawing.Point(0, 0)
+        Me.pnlLeft.Location = New System.Drawing.Point(10, 10)
         Me.pnlLeft.Name = "pnlLeft"
-        Me.pnlLeft.Size = New System.Drawing.Size(470, 818)
+        Me.pnlLeft.Size = New System.Drawing.Size(836, 1004)
         Me.pnlLeft.TabIndex = 36
         '
         'btnClear
@@ -1984,7 +2167,7 @@ Partial Class frmMain
         Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClear.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnClear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnClear.Location = New System.Drawing.Point(368, 9)
+        Me.btnClear.Location = New System.Drawing.Point(732, 9)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(90, 29)
         Me.btnClear.TabIndex = 4
@@ -2011,7 +2194,7 @@ Partial Class frmMain
         Me.dgvPatients.RowHeadersWidth = 51
         Me.dgvPatients.RowTemplate.Height = 26
         Me.dgvPatients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvPatients.Size = New System.Drawing.Size(454, 762)
+        Me.dgvPatients.Size = New System.Drawing.Size(820, 948)
         Me.dgvPatients.TabIndex = 5
         '
         'grpDetails
@@ -2045,9 +2228,9 @@ Partial Class frmMain
         Me.grpDetails.Controls.Add(Me.lblEmergNum)
         Me.grpDetails.Controls.Add(Me.txtEmergNum)
         Me.grpDetails.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.grpDetails.Location = New System.Drawing.Point(476, 9)
+        Me.grpDetails.Location = New System.Drawing.Point(16, 13)
         Me.grpDetails.Name = "grpDetails"
-        Me.grpDetails.Size = New System.Drawing.Size(1515, 430)
+        Me.grpDetails.Size = New System.Drawing.Size(1144, 430)
         Me.grpDetails.TabIndex = 6
         Me.grpDetails.TabStop = False
         Me.grpDetails.Text = "Patient details"
@@ -2055,242 +2238,268 @@ Partial Class frmMain
         'lblCode
         '
         Me.lblCode.AutoSize = True
+        Me.lblCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblCode.Location = New System.Drawing.Point(14, 24)
         Me.lblCode.Name = "lblCode"
-        Me.lblCode.Size = New System.Drawing.Size(67, 13)
+        Me.lblCode.Size = New System.Drawing.Size(80, 17)
         Me.lblCode.TabIndex = 7
         Me.lblCode.Text = "Patient code"
         '
         'txtCode
         '
         Me.txtCode.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.txtCode.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCode.Location = New System.Drawing.Point(14, 44)
         Me.txtCode.Name = "txtCode"
         Me.txtCode.ReadOnly = True
-        Me.txtCode.Size = New System.Drawing.Size(225, 20)
+        Me.txtCode.Size = New System.Drawing.Size(369, 27)
         Me.txtCode.TabIndex = 8
         '
         'lblStatus
         '
         Me.lblStatus.AutoSize = True
+        Me.lblStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblStatus.Location = New System.Drawing.Point(254, 24)
+        Me.lblStatus.Location = New System.Drawing.Point(430, 24)
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(37, 13)
+        Me.lblStatus.Size = New System.Drawing.Size(43, 17)
         Me.lblStatus.TabIndex = 9
         Me.lblStatus.Text = "Status"
         '
         'cboStatus
         '
         Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboStatus.FormattingEnabled = True
         Me.cboStatus.Items.AddRange(New Object() {"Active", "Inactive", "Archived"})
-        Me.cboStatus.Location = New System.Drawing.Point(254, 44)
+        Me.cboStatus.Location = New System.Drawing.Point(430, 44)
         Me.cboStatus.Name = "cboStatus"
-        Me.cboStatus.Size = New System.Drawing.Size(225, 21)
+        Me.cboStatus.Size = New System.Drawing.Size(374, 28)
         Me.cboStatus.TabIndex = 10
         '
         'lblFirstName
         '
         Me.lblFirstName.AutoSize = True
+        Me.lblFirstName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFirstName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblFirstName.Location = New System.Drawing.Point(14, 80)
         Me.lblFirstName.Name = "lblFirstName"
-        Me.lblFirstName.Size = New System.Drawing.Size(62, 13)
+        Me.lblFirstName.Size = New System.Drawing.Size(77, 17)
         Me.lblFirstName.TabIndex = 11
         Me.lblFirstName.Text = "First name *"
         '
         'txtFirstName
         '
+        Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFirstName.Location = New System.Drawing.Point(14, 100)
         Me.txtFirstName.MaxLength = 50
         Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(225, 20)
+        Me.txtFirstName.Size = New System.Drawing.Size(369, 27)
         Me.txtFirstName.TabIndex = 12
         '
         'lblMiddleName
         '
         Me.lblMiddleName.AutoSize = True
+        Me.lblMiddleName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMiddleName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblMiddleName.Location = New System.Drawing.Point(254, 80)
+        Me.lblMiddleName.Location = New System.Drawing.Point(430, 80)
         Me.lblMiddleName.Name = "lblMiddleName"
-        Me.lblMiddleName.Size = New System.Drawing.Size(67, 13)
+        Me.lblMiddleName.Size = New System.Drawing.Size(85, 17)
         Me.lblMiddleName.TabIndex = 13
         Me.lblMiddleName.Text = "Middle name"
         '
         'txtMiddleName
         '
-        Me.txtMiddleName.Location = New System.Drawing.Point(254, 100)
+        Me.txtMiddleName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMiddleName.Location = New System.Drawing.Point(430, 100)
         Me.txtMiddleName.MaxLength = 50
         Me.txtMiddleName.Name = "txtMiddleName"
-        Me.txtMiddleName.Size = New System.Drawing.Size(225, 20)
+        Me.txtMiddleName.Size = New System.Drawing.Size(374, 27)
         Me.txtMiddleName.TabIndex = 14
         '
         'lblLastName
         '
         Me.lblLastName.AutoSize = True
+        Me.lblLastName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLastName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblLastName.Location = New System.Drawing.Point(14, 136)
         Me.lblLastName.Name = "lblLastName"
-        Me.lblLastName.Size = New System.Drawing.Size(63, 13)
+        Me.lblLastName.Size = New System.Drawing.Size(76, 17)
         Me.lblLastName.TabIndex = 15
         Me.lblLastName.Text = "Last name *"
         '
         'txtLastName
         '
+        Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtLastName.Location = New System.Drawing.Point(14, 156)
         Me.txtLastName.MaxLength = 50
         Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(225, 20)
+        Me.txtLastName.Size = New System.Drawing.Size(369, 27)
         Me.txtLastName.TabIndex = 16
         '
         'lblBirth
         '
         Me.lblBirth.AutoSize = True
+        Me.lblBirth.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBirth.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblBirth.Location = New System.Drawing.Point(254, 136)
+        Me.lblBirth.Location = New System.Drawing.Point(430, 136)
         Me.lblBirth.Name = "lblBirth"
-        Me.lblBirth.Size = New System.Drawing.Size(52, 13)
+        Me.lblBirth.Size = New System.Drawing.Size(64, 17)
         Me.lblBirth.TabIndex = 17
         Me.lblBirth.Text = "Birth date"
         '
         'dtpBirth
         '
+        Me.dtpBirth.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpBirth.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpBirth.Location = New System.Drawing.Point(254, 156)
+        Me.dtpBirth.Location = New System.Drawing.Point(430, 156)
         Me.dtpBirth.Name = "dtpBirth"
         Me.dtpBirth.ShowCheckBox = True
-        Me.dtpBirth.Size = New System.Drawing.Size(225, 20)
+        Me.dtpBirth.Size = New System.Drawing.Size(374, 27)
         Me.dtpBirth.TabIndex = 18
         '
         'lblGender
         '
         Me.lblGender.AutoSize = True
+        Me.lblGender.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblGender.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblGender.Location = New System.Drawing.Point(14, 192)
         Me.lblGender.Name = "lblGender"
-        Me.lblGender.Size = New System.Drawing.Size(42, 13)
+        Me.lblGender.Size = New System.Drawing.Size(51, 17)
         Me.lblGender.TabIndex = 19
         Me.lblGender.Text = "Gender"
         '
         'cboGender
         '
         Me.cboGender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboGender.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboGender.FormattingEnabled = True
         Me.cboGender.Items.AddRange(New Object() {"Male", "Female", "Other", "Prefer not to say"})
         Me.cboGender.Location = New System.Drawing.Point(14, 212)
         Me.cboGender.Name = "cboGender"
-        Me.cboGender.Size = New System.Drawing.Size(225, 21)
+        Me.cboGender.Size = New System.Drawing.Size(369, 28)
         Me.cboGender.TabIndex = 20
         '
         'lblContact
         '
         Me.lblContact.AutoSize = True
+        Me.lblContact.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblContact.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblContact.Location = New System.Drawing.Point(254, 192)
+        Me.lblContact.Location = New System.Drawing.Point(430, 192)
         Me.lblContact.Name = "lblContact"
-        Me.lblContact.Size = New System.Drawing.Size(82, 13)
+        Me.lblContact.Size = New System.Drawing.Size(101, 17)
         Me.lblContact.TabIndex = 21
         Me.lblContact.Text = "Contact number"
         '
         'txtContact
         '
-        Me.txtContact.Location = New System.Drawing.Point(254, 212)
+        Me.txtContact.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtContact.Location = New System.Drawing.Point(430, 212)
         Me.txtContact.MaxLength = 20
         Me.txtContact.Name = "txtContact"
-        Me.txtContact.Size = New System.Drawing.Size(225, 20)
+        Me.txtContact.Size = New System.Drawing.Size(374, 27)
         Me.txtContact.TabIndex = 22
         '
         'lblEmail
         '
         Me.lblEmail.AutoSize = True
+        Me.lblEmail.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblEmail.Location = New System.Drawing.Point(14, 248)
         Me.lblEmail.Name = "lblEmail"
-        Me.lblEmail.Size = New System.Drawing.Size(32, 13)
+        Me.lblEmail.Size = New System.Drawing.Size(39, 17)
         Me.lblEmail.TabIndex = 23
         Me.lblEmail.Text = "Email"
         '
         'txtEmail
         '
+        Me.txtEmail.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtEmail.Location = New System.Drawing.Point(14, 268)
         Me.txtEmail.MaxLength = 100
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(225, 20)
+        Me.txtEmail.Size = New System.Drawing.Size(369, 27)
         Me.txtEmail.TabIndex = 24
         '
         'lblRegistered
         '
         Me.lblRegistered.AutoSize = True
+        Me.lblRegistered.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblRegistered.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblRegistered.Location = New System.Drawing.Point(254, 248)
+        Me.lblRegistered.Location = New System.Drawing.Point(430, 248)
         Me.lblRegistered.Name = "lblRegistered"
-        Me.lblRegistered.Size = New System.Drawing.Size(73, 13)
+        Me.lblRegistered.Size = New System.Drawing.Size(90, 17)
         Me.lblRegistered.TabIndex = 25
         Me.lblRegistered.Text = "Registered on"
         '
         'txtRegistered
         '
         Me.txtRegistered.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
-        Me.txtRegistered.Location = New System.Drawing.Point(254, 268)
+        Me.txtRegistered.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRegistered.Location = New System.Drawing.Point(430, 268)
         Me.txtRegistered.Name = "txtRegistered"
         Me.txtRegistered.ReadOnly = True
-        Me.txtRegistered.Size = New System.Drawing.Size(225, 20)
+        Me.txtRegistered.Size = New System.Drawing.Size(374, 27)
         Me.txtRegistered.TabIndex = 26
         '
         'lblAddress
         '
         Me.lblAddress.AutoSize = True
+        Me.lblAddress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAddress.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblAddress.Location = New System.Drawing.Point(14, 304)
         Me.lblAddress.Name = "lblAddress"
-        Me.lblAddress.Size = New System.Drawing.Size(45, 13)
+        Me.lblAddress.Size = New System.Drawing.Size(56, 17)
         Me.lblAddress.TabIndex = 27
         Me.lblAddress.Text = "Address"
         '
         'txtAddress
         '
+        Me.txtAddress.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAddress.Location = New System.Drawing.Point(14, 324)
         Me.txtAddress.MaxLength = 255
         Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.Size = New System.Drawing.Size(465, 20)
+        Me.txtAddress.Size = New System.Drawing.Size(790, 27)
         Me.txtAddress.TabIndex = 28
         '
         'lblEmergName
         '
         Me.lblEmergName.AutoSize = True
+        Me.lblEmergName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmergName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblEmergName.Location = New System.Drawing.Point(14, 360)
         Me.lblEmergName.Name = "lblEmergName"
-        Me.lblEmergName.Size = New System.Drawing.Size(128, 13)
+        Me.lblEmergName.Size = New System.Drawing.Size(154, 17)
         Me.lblEmergName.TabIndex = 29
         Me.lblEmergName.Text = "Emergency contact name"
         '
         'txtEmergName
         '
+        Me.txtEmergName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtEmergName.Location = New System.Drawing.Point(14, 380)
         Me.txtEmergName.MaxLength = 100
         Me.txtEmergName.Name = "txtEmergName"
-        Me.txtEmergName.Size = New System.Drawing.Size(225, 20)
+        Me.txtEmergName.Size = New System.Drawing.Size(369, 27)
         Me.txtEmergName.TabIndex = 30
         '
         'lblEmergNum
         '
         Me.lblEmergNum.AutoSize = True
+        Me.lblEmergNum.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmergNum.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblEmergNum.Location = New System.Drawing.Point(254, 360)
+        Me.lblEmergNum.Location = New System.Drawing.Point(430, 360)
         Me.lblEmergNum.Name = "lblEmergNum"
-        Me.lblEmergNum.Size = New System.Drawing.Size(137, 13)
+        Me.lblEmergNum.Size = New System.Drawing.Size(167, 17)
         Me.lblEmergNum.TabIndex = 31
         Me.lblEmergNum.Text = "Emergency contact number"
         '
         'txtEmergNum
         '
-        Me.txtEmergNum.Location = New System.Drawing.Point(254, 380)
+        Me.txtEmergNum.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmergNum.Location = New System.Drawing.Point(430, 380)
         Me.txtEmergNum.MaxLength = 20
         Me.txtEmergNum.Name = "txtEmergNum"
-        Me.txtEmergNum.Size = New System.Drawing.Size(225, 20)
+        Me.txtEmergNum.Size = New System.Drawing.Size(374, 27)
         Me.txtEmergNum.TabIndex = 32
         '
         'btnNew
@@ -2301,7 +2510,7 @@ Partial Class frmMain
         Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNew.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNew.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnNew.Location = New System.Drawing.Point(480, 449)
+        Me.btnNew.Location = New System.Drawing.Point(19, 460)
         Me.btnNew.Name = "btnNew"
         Me.btnNew.Size = New System.Drawing.Size(130, 36)
         Me.btnNew.TabIndex = 33
@@ -2316,7 +2525,7 @@ Partial Class frmMain
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSave.ForeColor = System.Drawing.Color.White
-        Me.btnSave.Location = New System.Drawing.Point(618, 449)
+        Me.btnSave.Location = New System.Drawing.Point(170, 460)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(130, 36)
         Me.btnSave.TabIndex = 34
@@ -2331,7 +2540,7 @@ Partial Class frmMain
         Me.btnArchive.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnArchive.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnArchive.ForeColor = System.Drawing.Color.White
-        Me.btnArchive.Location = New System.Drawing.Point(756, 449)
+        Me.btnArchive.Location = New System.Drawing.Point(321, 460)
         Me.btnArchive.Name = "btnArchive"
         Me.btnArchive.Size = New System.Drawing.Size(130, 36)
         Me.btnArchive.TabIndex = 35
@@ -2345,8 +2554,8 @@ Partial Class frmMain
         Me.pnlClinicalRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlClinicalRecord.Location = New System.Drawing.Point(220, 56)
         Me.pnlClinicalRecord.Name = "pnlClinicalRecord"
-        Me.pnlClinicalRecord.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
-        Me.pnlClinicalRecord.Size = New System.Drawing.Size(1235, 838)
+        Me.pnlClinicalRecord.Padding = New System.Windows.Forms.Padding(10)
+        Me.pnlClinicalRecord.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlClinicalRecord.TabIndex = 25
         '
         'tabMain
@@ -2355,10 +2564,11 @@ Partial Class frmMain
         Me.tabMain.Controls.Add(Me.tabVisits)
         Me.tabMain.Controls.Add(Me.tabChart)
         Me.tabMain.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tabMain.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabMain.Location = New System.Drawing.Point(10, 62)
         Me.tabMain.Name = "tabMain"
         Me.tabMain.SelectedIndex = 0
-        Me.tabMain.Size = New System.Drawing.Size(1215, 766)
+        Me.tabMain.Size = New System.Drawing.Size(1680, 952)
         Me.tabMain.TabIndex = 3
         '
         'tabMedical
@@ -2378,10 +2588,10 @@ Partial Class frmMain
         Me.tabMedical.Controls.Add(Me.txtOtherNotes)
         Me.tabMedical.Controls.Add(Me.btnSaveMedical)
         Me.tabMedical.Controls.Add(Me.lblMedicalUpdated)
-        Me.tabMedical.Location = New System.Drawing.Point(4, 22)
+        Me.tabMedical.Location = New System.Drawing.Point(4, 26)
         Me.tabMedical.Name = "tabMedical"
-        Me.tabMedical.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.tabMedical.Size = New System.Drawing.Size(1207, 740)
+        Me.tabMedical.Padding = New System.Windows.Forms.Padding(6)
+        Me.tabMedical.Size = New System.Drawing.Size(1672, 922)
         Me.tabMedical.TabIndex = 5
         Me.tabMedical.Text = "Medical History"
         '
@@ -2391,7 +2601,7 @@ Partial Class frmMain
         Me.lblAllergies.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblAllergies.Location = New System.Drawing.Point(12, 10)
         Me.lblAllergies.Name = "lblAllergies"
-        Me.lblAllergies.Size = New System.Drawing.Size(46, 13)
+        Me.lblAllergies.Size = New System.Drawing.Size(59, 17)
         Me.lblAllergies.TabIndex = 8
         Me.lblAllergies.Text = "Allergies"
         '
@@ -2410,7 +2620,7 @@ Partial Class frmMain
         Me.lblMedications.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblMedications.Location = New System.Drawing.Point(480, 10)
         Me.lblMedications.Name = "lblMedications"
-        Me.lblMedications.Size = New System.Drawing.Size(100, 13)
+        Me.lblMedications.Size = New System.Drawing.Size(131, 17)
         Me.lblMedications.TabIndex = 10
         Me.lblMedications.Text = "Current medications"
         '
@@ -2429,7 +2639,7 @@ Partial Class frmMain
         Me.lblConditions.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblConditions.Location = New System.Drawing.Point(12, 130)
         Me.lblConditions.Name = "lblConditions"
-        Me.lblConditions.Size = New System.Drawing.Size(95, 13)
+        Me.lblConditions.Size = New System.Drawing.Size(121, 17)
         Me.lblConditions.TabIndex = 12
         Me.lblConditions.Text = "Medical conditions"
         '
@@ -2448,7 +2658,7 @@ Partial Class frmMain
         Me.lblSurgeries.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblSurgeries.Location = New System.Drawing.Point(480, 130)
         Me.lblSurgeries.Name = "lblSurgeries"
-        Me.lblSurgeries.Size = New System.Drawing.Size(93, 13)
+        Me.lblSurgeries.Size = New System.Drawing.Size(119, 17)
         Me.lblSurgeries.TabIndex = 14
         Me.lblSurgeries.Text = "Previous surgeries"
         '
@@ -2467,7 +2677,7 @@ Partial Class frmMain
         Me.lblFamilyHistory.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblFamilyHistory.Location = New System.Drawing.Point(12, 250)
         Me.lblFamilyHistory.Name = "lblFamilyHistory"
-        Me.lblFamilyHistory.Size = New System.Drawing.Size(108, 13)
+        Me.lblFamilyHistory.Size = New System.Drawing.Size(144, 17)
         Me.lblFamilyHistory.TabIndex = 16
         Me.lblFamilyHistory.Text = "Family medical history"
         '
@@ -2486,7 +2696,7 @@ Partial Class frmMain
         Me.lblOtherNotes.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblOtherNotes.Location = New System.Drawing.Point(480, 250)
         Me.lblOtherNotes.Name = "lblOtherNotes"
-        Me.lblOtherNotes.Size = New System.Drawing.Size(62, 13)
+        Me.lblOtherNotes.Size = New System.Drawing.Size(81, 17)
         Me.lblOtherNotes.TabIndex = 18
         Me.lblOtherNotes.Text = "Other notes"
         '
@@ -2520,7 +2730,7 @@ Partial Class frmMain
         Me.lblMedicalUpdated.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblMedicalUpdated.Location = New System.Drawing.Point(214, 386)
         Me.lblMedicalUpdated.Name = "lblMedicalUpdated"
-        Me.lblMedicalUpdated.Size = New System.Drawing.Size(0, 13)
+        Me.lblMedicalUpdated.Size = New System.Drawing.Size(0, 17)
         Me.lblMedicalUpdated.TabIndex = 21
         '
         'tabVisits
@@ -2529,10 +2739,10 @@ Partial Class frmMain
         Me.tabVisits.Controls.Add(Me.dgvVisits)
         Me.tabVisits.Controls.Add(Me.grpVisit)
         Me.tabVisits.Controls.Add(Me.grpTreat)
-        Me.tabVisits.Location = New System.Drawing.Point(4, 22)
+        Me.tabVisits.Location = New System.Drawing.Point(4, 26)
         Me.tabVisits.Name = "tabVisits"
-        Me.tabVisits.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.tabVisits.Size = New System.Drawing.Size(1207, 740)
+        Me.tabVisits.Padding = New System.Windows.Forms.Padding(6)
+        Me.tabVisits.Size = New System.Drawing.Size(1672, 922)
         Me.tabVisits.TabIndex = 6
         Me.tabVisits.Text = "Visit Records && Treatments"
         '
@@ -2555,7 +2765,7 @@ Partial Class frmMain
         Me.dgvVisits.RowHeadersWidth = 51
         Me.dgvVisits.RowTemplate.Height = 26
         Me.dgvVisits.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvVisits.Size = New System.Drawing.Size(350, 1422)
+        Me.dgvVisits.Size = New System.Drawing.Size(730, 1604)
         Me.dgvVisits.TabIndex = 22
         '
         'grpVisit
@@ -2579,9 +2789,9 @@ Partial Class frmMain
         Me.grpVisit.Controls.Add(Me.btnNewVisit)
         Me.grpVisit.Controls.Add(Me.btnSaveVisit)
         Me.grpVisit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.grpVisit.Location = New System.Drawing.Point(366, 8)
+        Me.grpVisit.Location = New System.Drawing.Point(758, 8)
         Me.grpVisit.Name = "grpVisit"
-        Me.grpVisit.Size = New System.Drawing.Size(2086, 270)
+        Me.grpVisit.Size = New System.Drawing.Size(2159, 280)
         Me.grpVisit.TabIndex = 23
         Me.grpVisit.TabStop = False
         Me.grpVisit.Text = "Visit record"
@@ -2592,7 +2802,7 @@ Partial Class frmMain
         Me.lblVisit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblVisit.Location = New System.Drawing.Point(14, 22)
         Me.lblVisit.Name = "lblVisit"
-        Me.lblVisit.Size = New System.Drawing.Size(75, 13)
+        Me.lblVisit.Size = New System.Drawing.Size(99, 17)
         Me.lblVisit.TabIndex = 24
         Me.lblVisit.Text = "Visit date & time"
         '
@@ -2602,16 +2812,16 @@ Partial Class frmMain
         Me.dtpVisit.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpVisit.Location = New System.Drawing.Point(14, 42)
         Me.dtpVisit.Name = "dtpVisit"
-        Me.dtpVisit.Size = New System.Drawing.Size(190, 20)
+        Me.dtpVisit.Size = New System.Drawing.Size(298, 25)
         Me.dtpVisit.TabIndex = 25
         '
         'lblVisitDentist
         '
         Me.lblVisitDentist.AutoSize = True
         Me.lblVisitDentist.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblVisitDentist.Location = New System.Drawing.Point(214, 22)
+        Me.lblVisitDentist.Location = New System.Drawing.Point(341, 23)
         Me.lblVisitDentist.Name = "lblVisitDentist"
-        Me.lblVisitDentist.Size = New System.Drawing.Size(47, 13)
+        Me.lblVisitDentist.Size = New System.Drawing.Size(61, 17)
         Me.lblVisitDentist.TabIndex = 26
         Me.lblVisitDentist.Text = "Dentist *"
         '
@@ -2619,28 +2829,28 @@ Partial Class frmMain
         '
         Me.cboVisitDentist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboVisitDentist.FormattingEnabled = True
-        Me.cboVisitDentist.Location = New System.Drawing.Point(214, 42)
+        Me.cboVisitDentist.Location = New System.Drawing.Point(344, 42)
         Me.cboVisitDentist.Name = "cboVisitDentist"
-        Me.cboVisitDentist.Size = New System.Drawing.Size(200, 21)
+        Me.cboVisitDentist.Size = New System.Drawing.Size(264, 25)
         Me.cboVisitDentist.TabIndex = 27
         '
         'lblNextVisit
         '
         Me.lblNextVisit.AutoSize = True
         Me.lblNextVisit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblNextVisit.Location = New System.Drawing.Point(424, 22)
+        Me.lblNextVisit.Location = New System.Drawing.Point(640, 23)
         Me.lblNextVisit.Name = "lblNextVisit"
-        Me.lblNextVisit.Size = New System.Drawing.Size(50, 13)
+        Me.lblNextVisit.Size = New System.Drawing.Size(65, 17)
         Me.lblNextVisit.TabIndex = 28
         Me.lblNextVisit.Text = "Next visit"
         '
         'dtpNextVisit
         '
         Me.dtpNextVisit.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpNextVisit.Location = New System.Drawing.Point(424, 42)
+        Me.dtpNextVisit.Location = New System.Drawing.Point(639, 44)
         Me.dtpNextVisit.Name = "dtpNextVisit"
         Me.dtpNextVisit.ShowCheckBox = True
-        Me.dtpNextVisit.Size = New System.Drawing.Size(170, 20)
+        Me.dtpNextVisit.Size = New System.Drawing.Size(248, 25)
         Me.dtpNextVisit.TabIndex = 29
         '
         'lblComplaint
@@ -2649,7 +2859,7 @@ Partial Class frmMain
         Me.lblComplaint.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblComplaint.Location = New System.Drawing.Point(14, 76)
         Me.lblComplaint.Name = "lblComplaint"
-        Me.lblComplaint.Size = New System.Drawing.Size(79, 13)
+        Me.lblComplaint.Size = New System.Drawing.Size(102, 17)
         Me.lblComplaint.TabIndex = 30
         Me.lblComplaint.Text = "Chief complaint"
         '
@@ -2659,26 +2869,26 @@ Partial Class frmMain
         Me.txtComplaint.Multiline = True
         Me.txtComplaint.Name = "txtComplaint"
         Me.txtComplaint.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtComplaint.Size = New System.Drawing.Size(284, 52)
+        Me.txtComplaint.Size = New System.Drawing.Size(417, 52)
         Me.txtComplaint.TabIndex = 31
         '
         'lblDiagnosis
         '
         Me.lblDiagnosis.AutoSize = True
         Me.lblDiagnosis.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblDiagnosis.Location = New System.Drawing.Point(306, 76)
+        Me.lblDiagnosis.Location = New System.Drawing.Point(467, 76)
         Me.lblDiagnosis.Name = "lblDiagnosis"
-        Me.lblDiagnosis.Size = New System.Drawing.Size(53, 13)
+        Me.lblDiagnosis.Size = New System.Drawing.Size(66, 17)
         Me.lblDiagnosis.TabIndex = 32
         Me.lblDiagnosis.Text = "Diagnosis"
         '
         'txtDiagnosis
         '
-        Me.txtDiagnosis.Location = New System.Drawing.Point(306, 96)
+        Me.txtDiagnosis.Location = New System.Drawing.Point(467, 96)
         Me.txtDiagnosis.Multiline = True
         Me.txtDiagnosis.Name = "txtDiagnosis"
         Me.txtDiagnosis.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDiagnosis.Size = New System.Drawing.Size(288, 52)
+        Me.txtDiagnosis.Size = New System.Drawing.Size(420, 52)
         Me.txtDiagnosis.TabIndex = 33
         '
         'lblClinicalNotes
@@ -2687,7 +2897,7 @@ Partial Class frmMain
         Me.lblClinicalNotes.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblClinicalNotes.Location = New System.Drawing.Point(14, 150)
         Me.lblClinicalNotes.Name = "lblClinicalNotes"
-        Me.lblClinicalNotes.Size = New System.Drawing.Size(69, 13)
+        Me.lblClinicalNotes.Size = New System.Drawing.Size(87, 17)
         Me.lblClinicalNotes.TabIndex = 34
         Me.lblClinicalNotes.Text = "Clinical notes"
         '
@@ -2697,26 +2907,26 @@ Partial Class frmMain
         Me.txtClinicalNotes.Multiline = True
         Me.txtClinicalNotes.Name = "txtClinicalNotes"
         Me.txtClinicalNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtClinicalNotes.Size = New System.Drawing.Size(284, 52)
+        Me.txtClinicalNotes.Size = New System.Drawing.Size(417, 52)
         Me.txtClinicalNotes.TabIndex = 35
         '
         'lblRecommendations
         '
         Me.lblRecommendations.AutoSize = True
         Me.lblRecommendations.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblRecommendations.Location = New System.Drawing.Point(306, 150)
+        Me.lblRecommendations.Location = New System.Drawing.Point(467, 150)
         Me.lblRecommendations.Name = "lblRecommendations"
-        Me.lblRecommendations.Size = New System.Drawing.Size(95, 13)
+        Me.lblRecommendations.Size = New System.Drawing.Size(121, 17)
         Me.lblRecommendations.TabIndex = 36
         Me.lblRecommendations.Text = "Recommendations"
         '
         'txtRecommendations
         '
-        Me.txtRecommendations.Location = New System.Drawing.Point(306, 170)
+        Me.txtRecommendations.Location = New System.Drawing.Point(467, 170)
         Me.txtRecommendations.Multiline = True
         Me.txtRecommendations.Name = "txtRecommendations"
         Me.txtRecommendations.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtRecommendations.Size = New System.Drawing.Size(288, 52)
+        Me.txtRecommendations.Size = New System.Drawing.Size(420, 52)
         Me.txtRecommendations.TabIndex = 37
         '
         'btnNewVisit
@@ -2727,7 +2937,7 @@ Partial Class frmMain
         Me.btnNewVisit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNewVisit.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewVisit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnNewVisit.Location = New System.Drawing.Point(14, 226)
+        Me.btnNewVisit.Location = New System.Drawing.Point(16, 235)
         Me.btnNewVisit.Name = "btnNewVisit"
         Me.btnNewVisit.Size = New System.Drawing.Size(120, 32)
         Me.btnNewVisit.TabIndex = 38
@@ -2742,7 +2952,7 @@ Partial Class frmMain
         Me.btnSaveVisit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveVisit.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveVisit.ForeColor = System.Drawing.Color.White
-        Me.btnSaveVisit.Location = New System.Drawing.Point(142, 226)
+        Me.btnSaveVisit.Location = New System.Drawing.Point(159, 235)
         Me.btnSaveVisit.Name = "btnSaveVisit"
         Me.btnSaveVisit.Size = New System.Drawing.Size(120, 32)
         Me.btnSaveVisit.TabIndex = 39
@@ -2769,9 +2979,9 @@ Partial Class frmMain
         Me.grpTreat.Controls.Add(Me.btnRemoveTreatment)
         Me.grpTreat.Controls.Add(Me.dgvTreatments)
         Me.grpTreat.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.grpTreat.Location = New System.Drawing.Point(366, 286)
+        Me.grpTreat.Location = New System.Drawing.Point(760, 307)
         Me.grpTreat.Name = "grpTreat"
-        Me.grpTreat.Size = New System.Drawing.Size(2086, 262)
+        Me.grpTreat.Size = New System.Drawing.Size(2159, 262)
         Me.grpTreat.TabIndex = 40
         Me.grpTreat.TabStop = False
         Me.grpTreat.Text = "Treatments performed in this visit"
@@ -2782,7 +2992,7 @@ Partial Class frmMain
         Me.lblTreatProcedure.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblTreatProcedure.Location = New System.Drawing.Point(14, 22)
         Me.lblTreatProcedure.Name = "lblTreatProcedure"
-        Me.lblTreatProcedure.Size = New System.Drawing.Size(63, 13)
+        Me.lblTreatProcedure.Size = New System.Drawing.Size(80, 17)
         Me.lblTreatProcedure.TabIndex = 41
         Me.lblTreatProcedure.Text = "Procedure *"
         '
@@ -2792,7 +3002,7 @@ Partial Class frmMain
         Me.cboTreatProcedure.FormattingEnabled = True
         Me.cboTreatProcedure.Location = New System.Drawing.Point(14, 42)
         Me.cboTreatProcedure.Name = "cboTreatProcedure"
-        Me.cboTreatProcedure.Size = New System.Drawing.Size(230, 21)
+        Me.cboTreatProcedure.Size = New System.Drawing.Size(230, 25)
         Me.cboTreatProcedure.TabIndex = 42
         '
         'lblTreatTooth
@@ -2801,7 +3011,7 @@ Partial Class frmMain
         Me.lblTreatTooth.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblTreatTooth.Location = New System.Drawing.Point(252, 22)
         Me.lblTreatTooth.Name = "lblTreatTooth"
-        Me.lblTreatTooth.Size = New System.Drawing.Size(35, 13)
+        Me.lblTreatTooth.Size = New System.Drawing.Size(43, 17)
         Me.lblTreatTooth.TabIndex = 43
         Me.lblTreatTooth.Text = "Tooth"
         '
@@ -2809,7 +3019,7 @@ Partial Class frmMain
         '
         Me.txtTreatTooth.Location = New System.Drawing.Point(252, 42)
         Me.txtTreatTooth.Name = "txtTreatTooth"
-        Me.txtTreatTooth.Size = New System.Drawing.Size(70, 20)
+        Me.txtTreatTooth.Size = New System.Drawing.Size(70, 25)
         Me.txtTreatTooth.TabIndex = 44
         '
         'lblTreatQty
@@ -2818,7 +3028,7 @@ Partial Class frmMain
         Me.lblTreatQty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblTreatQty.Location = New System.Drawing.Point(330, 22)
         Me.lblTreatQty.Name = "lblTreatQty"
-        Me.lblTreatQty.Size = New System.Drawing.Size(23, 13)
+        Me.lblTreatQty.Size = New System.Drawing.Size(30, 17)
         Me.lblTreatQty.TabIndex = 45
         Me.lblTreatQty.Text = "Qty"
         '
@@ -2828,7 +3038,7 @@ Partial Class frmMain
         Me.numTreatQty.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numTreatQty.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numTreatQty.Name = "numTreatQty"
-        Me.numTreatQty.Size = New System.Drawing.Size(60, 20)
+        Me.numTreatQty.Size = New System.Drawing.Size(60, 25)
         Me.numTreatQty.TabIndex = 46
         Me.numTreatQty.ThousandsSeparator = True
         Me.numTreatQty.Value = New Decimal(New Integer() {1, 0, 0, 0})
@@ -2839,7 +3049,7 @@ Partial Class frmMain
         Me.lblTreatPrice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblTreatPrice.Location = New System.Drawing.Point(398, 22)
         Me.lblTreatPrice.Name = "lblTreatPrice"
-        Me.lblTreatPrice.Size = New System.Drawing.Size(52, 13)
+        Me.lblTreatPrice.Size = New System.Drawing.Size(66, 17)
         Me.lblTreatPrice.TabIndex = 47
         Me.lblTreatPrice.Text = "Unit price"
         '
@@ -2849,7 +3059,7 @@ Partial Class frmMain
         Me.numTreatPrice.Location = New System.Drawing.Point(398, 42)
         Me.numTreatPrice.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numTreatPrice.Name = "numTreatPrice"
-        Me.numTreatPrice.Size = New System.Drawing.Size(90, 20)
+        Me.numTreatPrice.Size = New System.Drawing.Size(90, 25)
         Me.numTreatPrice.TabIndex = 48
         Me.numTreatPrice.ThousandsSeparator = True
         '
@@ -2859,7 +3069,7 @@ Partial Class frmMain
         Me.lblTreatDiscount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblTreatDiscount.Location = New System.Drawing.Point(496, 22)
         Me.lblTreatDiscount.Name = "lblTreatDiscount"
-        Me.lblTreatDiscount.Size = New System.Drawing.Size(49, 13)
+        Me.lblTreatDiscount.Size = New System.Drawing.Size(61, 17)
         Me.lblTreatDiscount.TabIndex = 49
         Me.lblTreatDiscount.Text = "Discount"
         '
@@ -2869,7 +3079,7 @@ Partial Class frmMain
         Me.numTreatDiscount.Location = New System.Drawing.Point(496, 42)
         Me.numTreatDiscount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numTreatDiscount.Name = "numTreatDiscount"
-        Me.numTreatDiscount.Size = New System.Drawing.Size(98, 20)
+        Me.numTreatDiscount.Size = New System.Drawing.Size(98, 25)
         Me.numTreatDiscount.TabIndex = 50
         Me.numTreatDiscount.ThousandsSeparator = True
         '
@@ -2879,7 +3089,7 @@ Partial Class frmMain
         Me.lblTreatStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblTreatStatus.Location = New System.Drawing.Point(14, 76)
         Me.lblTreatStatus.Name = "lblTreatStatus"
-        Me.lblTreatStatus.Size = New System.Drawing.Size(37, 13)
+        Me.lblTreatStatus.Size = New System.Drawing.Size(46, 17)
         Me.lblTreatStatus.TabIndex = 51
         Me.lblTreatStatus.Text = "Status"
         '
@@ -2890,7 +3100,7 @@ Partial Class frmMain
         Me.cboTreatStatus.Items.AddRange(New Object() {"Planned", "In Progress", "Completed", "Cancelled"})
         Me.cboTreatStatus.Location = New System.Drawing.Point(14, 96)
         Me.cboTreatStatus.Name = "cboTreatStatus"
-        Me.cboTreatStatus.Size = New System.Drawing.Size(140, 21)
+        Me.cboTreatStatus.Size = New System.Drawing.Size(140, 25)
         Me.cboTreatStatus.TabIndex = 52
         '
         'btnAddTreatment
@@ -2916,7 +3126,7 @@ Partial Class frmMain
         Me.btnRemoveTreatment.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRemoveTreatment.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnRemoveTreatment.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnRemoveTreatment.Location = New System.Drawing.Point(308, 94)
+        Me.btnRemoveTreatment.Location = New System.Drawing.Point(317, 95)
         Me.btnRemoveTreatment.Name = "btnRemoveTreatment"
         Me.btnRemoveTreatment.Size = New System.Drawing.Size(140, 30)
         Me.btnRemoveTreatment.TabIndex = 54
@@ -2935,7 +3145,7 @@ Partial Class frmMain
         Me.dgvTreatments.BackgroundColor = System.Drawing.Color.White
         Me.dgvTreatments.ColumnHeadersHeight = 29
         Me.dgvTreatments.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
-        Me.dgvTreatments.Location = New System.Drawing.Point(14, 134)
+        Me.dgvTreatments.Location = New System.Drawing.Point(13, 136)
         Me.dgvTreatments.MultiSelect = False
         Me.dgvTreatments.Name = "dgvTreatments"
         Me.dgvTreatments.ReadOnly = True
@@ -2943,7 +3153,7 @@ Partial Class frmMain
         Me.dgvTreatments.RowHeadersWidth = 51
         Me.dgvTreatments.RowTemplate.Height = 26
         Me.dgvTreatments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvTreatments.Size = New System.Drawing.Size(2056, 118)
+        Me.dgvTreatments.Size = New System.Drawing.Size(892, 118)
         Me.dgvTreatments.TabIndex = 55
         '
         'tabChart
@@ -2951,10 +3161,10 @@ Partial Class frmMain
         Me.tabChart.BackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.tabChart.Controls.Add(Me.dgvChart)
         Me.tabChart.Controls.Add(Me.grpChart)
-        Me.tabChart.Location = New System.Drawing.Point(4, 22)
+        Me.tabChart.Location = New System.Drawing.Point(4, 26)
         Me.tabChart.Name = "tabChart"
-        Me.tabChart.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.tabChart.Size = New System.Drawing.Size(1207, 740)
+        Me.tabChart.Padding = New System.Windows.Forms.Padding(6)
+        Me.tabChart.Size = New System.Drawing.Size(1672, 922)
         Me.tabChart.TabIndex = 7
         Me.tabChart.Text = "Dental Chart"
         '
@@ -2977,7 +3187,7 @@ Partial Class frmMain
         Me.dgvChart.RowHeadersWidth = 51
         Me.dgvChart.RowTemplate.Height = 26
         Me.dgvChart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvChart.Size = New System.Drawing.Size(560, 724)
+        Me.dgvChart.Size = New System.Drawing.Size(560, 906)
         Me.dgvChart.TabIndex = 56
         '
         'grpChart
@@ -2998,7 +3208,7 @@ Partial Class frmMain
         Me.grpChart.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpChart.Location = New System.Drawing.Point(580, 8)
         Me.grpChart.Name = "grpChart"
-        Me.grpChart.Size = New System.Drawing.Size(619, 300)
+        Me.grpChart.Size = New System.Drawing.Size(1084, 300)
         Me.grpChart.TabIndex = 57
         Me.grpChart.TabStop = False
         Me.grpChart.Text = "Tooth entry"
@@ -3009,7 +3219,7 @@ Partial Class frmMain
         Me.lblChartTooth.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblChartTooth.Location = New System.Drawing.Point(14, 22)
         Me.lblChartTooth.Name = "lblChartTooth"
-        Me.lblChartTooth.Size = New System.Drawing.Size(80, 13)
+        Me.lblChartTooth.Size = New System.Drawing.Size(105, 17)
         Me.lblChartTooth.TabIndex = 58
         Me.lblChartTooth.Text = "Tooth number *"
         '
@@ -3018,7 +3228,7 @@ Partial Class frmMain
         Me.txtChartTooth.Location = New System.Drawing.Point(14, 42)
         Me.txtChartTooth.MaxLength = 10
         Me.txtChartTooth.Name = "txtChartTooth"
-        Me.txtChartTooth.Size = New System.Drawing.Size(110, 20)
+        Me.txtChartTooth.Size = New System.Drawing.Size(110, 25)
         Me.txtChartTooth.TabIndex = 59
         '
         'lblSurface
@@ -3027,7 +3237,7 @@ Partial Class frmMain
         Me.lblSurface.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblSurface.Location = New System.Drawing.Point(134, 22)
         Me.lblSurface.Name = "lblSurface"
-        Me.lblSurface.Size = New System.Drawing.Size(44, 13)
+        Me.lblSurface.Size = New System.Drawing.Size(52, 17)
         Me.lblSurface.TabIndex = 60
         Me.lblSurface.Text = "Surface"
         '
@@ -3037,7 +3247,7 @@ Partial Class frmMain
         Me.cboSurface.Items.AddRange(New Object() {"Mesial", "Distal", "Occlusal", "Buccal", "Lingual", "Incisal", "Whole tooth"})
         Me.cboSurface.Location = New System.Drawing.Point(134, 42)
         Me.cboSurface.Name = "cboSurface"
-        Me.cboSurface.Size = New System.Drawing.Size(180, 21)
+        Me.cboSurface.Size = New System.Drawing.Size(180, 25)
         Me.cboSurface.TabIndex = 61
         '
         'lblCondition
@@ -3046,7 +3256,7 @@ Partial Class frmMain
         Me.lblCondition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblCondition.Location = New System.Drawing.Point(14, 76)
         Me.lblCondition.Name = "lblCondition"
-        Me.lblCondition.Size = New System.Drawing.Size(51, 13)
+        Me.lblCondition.Size = New System.Drawing.Size(67, 17)
         Me.lblCondition.TabIndex = 62
         Me.lblCondition.Text = "Condition"
         '
@@ -3056,7 +3266,7 @@ Partial Class frmMain
         Me.cboCondition.Items.AddRange(New Object() {"Healthy", "Cavity", "Filled", "Crown", "Root canal", "Missing", "Extracted", "Impacted", "Fractured", "Implant"})
         Me.cboCondition.Location = New System.Drawing.Point(14, 96)
         Me.cboCondition.Name = "cboCondition"
-        Me.cboCondition.Size = New System.Drawing.Size(300, 21)
+        Me.cboCondition.Size = New System.Drawing.Size(300, 25)
         Me.cboCondition.TabIndex = 63
         '
         'lblChartNotes
@@ -3065,7 +3275,7 @@ Partial Class frmMain
         Me.lblChartNotes.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblChartNotes.Location = New System.Drawing.Point(14, 130)
         Me.lblChartNotes.Name = "lblChartNotes"
-        Me.lblChartNotes.Size = New System.Drawing.Size(35, 13)
+        Me.lblChartNotes.Size = New System.Drawing.Size(44, 17)
         Me.lblChartNotes.TabIndex = 64
         Me.lblChartNotes.Text = "Notes"
         '
@@ -3131,7 +3341,7 @@ Partial Class frmMain
         Me.pnlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlTop.Location = New System.Drawing.Point(10, 10)
         Me.pnlTop.Name = "pnlTop"
-        Me.pnlTop.Size = New System.Drawing.Size(1215, 52)
+        Me.pnlTop.Size = New System.Drawing.Size(1680, 52)
         Me.pnlTop.TabIndex = 4
         '
         'lblPatient
@@ -3148,10 +3358,11 @@ Partial Class frmMain
         'cboPatient
         '
         Me.cboPatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboPatient.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboPatient.FormattingEnabled = True
         Me.cboPatient.Location = New System.Drawing.Point(72, 13)
         Me.cboPatient.Name = "cboPatient"
-        Me.cboPatient.Size = New System.Drawing.Size(420, 21)
+        Me.cboPatient.Size = New System.Drawing.Size(420, 25)
         Me.cboPatient.TabIndex = 4
         '
         'pnlProcedures
@@ -3161,8 +3372,8 @@ Partial Class frmMain
         Me.pnlProcedures.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlProcedures.Location = New System.Drawing.Point(220, 56)
         Me.pnlProcedures.Name = "pnlProcedures"
-        Me.pnlProcedures.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
-        Me.pnlProcedures.Size = New System.Drawing.Size(1235, 838)
+        Me.pnlProcedures.Padding = New System.Windows.Forms.Padding(10)
+        Me.pnlProcedures.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlProcedures.TabIndex = 26
         '
         'pnlProcRight
@@ -3173,9 +3384,9 @@ Partial Class frmMain
         Me.pnlProcRight.Controls.Add(Me.btnNewProcedure)
         Me.pnlProcRight.Controls.Add(Me.btnSaveProcedure)
         Me.pnlProcRight.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlProcRight.Location = New System.Drawing.Point(480, 10)
+        Me.pnlProcRight.Location = New System.Drawing.Point(810, 10)
         Me.pnlProcRight.Name = "pnlProcRight"
-        Me.pnlProcRight.Size = New System.Drawing.Size(745, 818)
+        Me.pnlProcRight.Size = New System.Drawing.Size(880, 1004)
         Me.pnlProcRight.TabIndex = 3
         '
         'grpProcedure
@@ -3197,7 +3408,7 @@ Partial Class frmMain
         Me.grpProcedure.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpProcedure.Location = New System.Drawing.Point(8, 8)
         Me.grpProcedure.Name = "grpProcedure"
-        Me.grpProcedure.Size = New System.Drawing.Size(1045, 330)
+        Me.grpProcedure.Size = New System.Drawing.Size(1180, 330)
         Me.grpProcedure.TabIndex = 5
         Me.grpProcedure.TabStop = False
         Me.grpProcedure.Text = "Procedure details"
@@ -3205,114 +3416,126 @@ Partial Class frmMain
         'lblProcCode
         '
         Me.lblProcCode.AutoSize = True
+        Me.lblProcCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProcCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblProcCode.Location = New System.Drawing.Point(14, 24)
         Me.lblProcCode.Name = "lblProcCode"
-        Me.lblProcCode.Size = New System.Drawing.Size(90, 13)
+        Me.lblProcCode.Size = New System.Drawing.Size(110, 17)
         Me.lblProcCode.TabIndex = 6
         Me.lblProcCode.Text = "Procedure code *"
         '
         'txtProcCode
         '
+        Me.txtProcCode.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtProcCode.Location = New System.Drawing.Point(14, 44)
         Me.txtProcCode.MaxLength = 20
         Me.txtProcCode.Name = "txtProcCode"
-        Me.txtProcCode.Size = New System.Drawing.Size(225, 20)
+        Me.txtProcCode.Size = New System.Drawing.Size(314, 27)
         Me.txtProcCode.TabIndex = 7
         '
         'lblProcStatus
         '
         Me.lblProcStatus.AutoSize = True
+        Me.lblProcStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProcStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblProcStatus.Location = New System.Drawing.Point(254, 24)
+        Me.lblProcStatus.Location = New System.Drawing.Point(350, 24)
         Me.lblProcStatus.Name = "lblProcStatus"
-        Me.lblProcStatus.Size = New System.Drawing.Size(37, 13)
+        Me.lblProcStatus.Size = New System.Drawing.Size(43, 17)
         Me.lblProcStatus.TabIndex = 8
         Me.lblProcStatus.Text = "Status"
         '
         'cboProcStatus
         '
         Me.cboProcStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboProcStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboProcStatus.FormattingEnabled = True
         Me.cboProcStatus.Items.AddRange(New Object() {"Active", "Inactive"})
-        Me.cboProcStatus.Location = New System.Drawing.Point(254, 44)
+        Me.cboProcStatus.Location = New System.Drawing.Point(350, 44)
         Me.cboProcStatus.Name = "cboProcStatus"
-        Me.cboProcStatus.Size = New System.Drawing.Size(225, 21)
+        Me.cboProcStatus.Size = New System.Drawing.Size(349, 28)
         Me.cboProcStatus.TabIndex = 9
         '
         'lblName
         '
         Me.lblName.AutoSize = True
+        Me.lblName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblName.Location = New System.Drawing.Point(14, 80)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(92, 13)
+        Me.lblName.Size = New System.Drawing.Size(113, 17)
         Me.lblName.TabIndex = 10
         Me.lblName.Text = "Procedure name *"
         '
         'txtName
         '
+        Me.txtName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtName.Location = New System.Drawing.Point(14, 100)
         Me.txtName.MaxLength = 100
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(465, 20)
+        Me.txtName.Size = New System.Drawing.Size(685, 27)
         Me.txtName.TabIndex = 11
         '
         'lblDescription
         '
         Me.lblDescription.AutoSize = True
+        Me.lblDescription.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDescription.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblDescription.Location = New System.Drawing.Point(14, 136)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(60, 13)
+        Me.lblDescription.Size = New System.Drawing.Size(74, 17)
         Me.lblDescription.TabIndex = 12
         Me.lblDescription.Text = "Description"
         '
         'txtDescription
         '
+        Me.txtDescription.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDescription.Location = New System.Drawing.Point(14, 156)
         Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.txtDescription.Size = New System.Drawing.Size(465, 70)
+        Me.txtDescription.Size = New System.Drawing.Size(685, 70)
         Me.txtDescription.TabIndex = 13
         '
         'lblPrice
         '
         Me.lblPrice.AutoSize = True
+        Me.lblPrice.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPrice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblPrice.Location = New System.Drawing.Point(14, 232)
         Me.lblPrice.Name = "lblPrice"
-        Me.lblPrice.Size = New System.Drawing.Size(99, 13)
+        Me.lblPrice.Size = New System.Drawing.Size(123, 17)
         Me.lblPrice.TabIndex = 14
         Me.lblPrice.Text = "Standard price (₱) *"
         '
         'numPrice
         '
         Me.numPrice.DecimalPlaces = 2
+        Me.numPrice.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.numPrice.Location = New System.Drawing.Point(14, 252)
         Me.numPrice.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numPrice.Name = "numPrice"
-        Me.numPrice.Size = New System.Drawing.Size(225, 20)
+        Me.numPrice.Size = New System.Drawing.Size(302, 27)
         Me.numPrice.TabIndex = 15
         Me.numPrice.ThousandsSeparator = True
         '
         'lblDuration
         '
         Me.lblDuration.AutoSize = True
+        Me.lblDuration.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDuration.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblDuration.Location = New System.Drawing.Point(254, 232)
+        Me.lblDuration.Location = New System.Drawing.Point(350, 232)
         Me.lblDuration.Name = "lblDuration"
-        Me.lblDuration.Size = New System.Drawing.Size(187, 13)
+        Me.lblDuration.Size = New System.Drawing.Size(235, 17)
         Me.lblDuration.TabIndex = 16
         Me.lblDuration.Text = "Estimated duration (minutes, 0 = none)"
         '
         'numDuration
         '
-        Me.numDuration.Location = New System.Drawing.Point(254, 252)
+        Me.numDuration.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numDuration.Location = New System.Drawing.Point(350, 252)
         Me.numDuration.Maximum = New Decimal(New Integer() {1440, 0, 0, 0})
         Me.numDuration.Name = "numDuration"
-        Me.numDuration.Size = New System.Drawing.Size(225, 20)
+        Me.numDuration.Size = New System.Drawing.Size(339, 27)
         Me.numDuration.TabIndex = 17
         Me.numDuration.ThousandsSeparator = True
         '
@@ -3324,7 +3547,7 @@ Partial Class frmMain
         Me.btnNewProcedure.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNewProcedure.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewProcedure.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnNewProcedure.Location = New System.Drawing.Point(8, 350)
+        Me.btnNewProcedure.Location = New System.Drawing.Point(8, 351)
         Me.btnNewProcedure.Name = "btnNewProcedure"
         Me.btnNewProcedure.Size = New System.Drawing.Size(140, 36)
         Me.btnNewProcedure.TabIndex = 18
@@ -3339,7 +3562,7 @@ Partial Class frmMain
         Me.btnSaveProcedure.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveProcedure.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveProcedure.ForeColor = System.Drawing.Color.White
-        Me.btnSaveProcedure.Location = New System.Drawing.Point(156, 350)
+        Me.btnSaveProcedure.Location = New System.Drawing.Point(171, 351)
         Me.btnSaveProcedure.Name = "btnSaveProcedure"
         Me.btnSaveProcedure.Size = New System.Drawing.Size(130, 36)
         Me.btnSaveProcedure.TabIndex = 19
@@ -3353,7 +3576,7 @@ Partial Class frmMain
         Me.pnlProcLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlProcLeft.Location = New System.Drawing.Point(10, 10)
         Me.pnlProcLeft.Name = "pnlProcLeft"
-        Me.pnlProcLeft.Size = New System.Drawing.Size(470, 818)
+        Me.pnlProcLeft.Size = New System.Drawing.Size(800, 1004)
         Me.pnlProcLeft.TabIndex = 4
         '
         'dgvProcedures
@@ -3376,7 +3599,7 @@ Partial Class frmMain
         Me.dgvProcedures.RowHeadersWidth = 51
         Me.dgvProcedures.RowTemplate.Height = 26
         Me.dgvProcedures.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvProcedures.Size = New System.Drawing.Size(454, 762)
+        Me.dgvProcedures.Size = New System.Drawing.Size(784, 948)
         Me.dgvProcedures.TabIndex = 4
         '
         'pnlAuditlog
@@ -3391,8 +3614,8 @@ Partial Class frmMain
         Me.pnlAuditlog.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlAuditlog.Location = New System.Drawing.Point(220, 56)
         Me.pnlAuditlog.Name = "pnlAuditlog"
-        Me.pnlAuditlog.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
-        Me.pnlAuditlog.Size = New System.Drawing.Size(1235, 838)
+        Me.pnlAuditlog.Padding = New System.Windows.Forms.Padding(10)
+        Me.pnlAuditlog.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlAuditlog.TabIndex = 27
         '
         'lblFrom
@@ -3475,7 +3698,7 @@ Partial Class frmMain
         Me.dgvLog.RowHeadersWidth = 51
         Me.dgvLog.RowTemplate.Height = 26
         Me.dgvLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvLog.Size = New System.Drawing.Size(521, 396)
+        Me.dgvLog.Size = New System.Drawing.Size(986, 582)
         Me.dgvLog.TabIndex = 15
         '
         'pnlStaff
@@ -3485,8 +3708,8 @@ Partial Class frmMain
         Me.pnlStaff.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlStaff.Location = New System.Drawing.Point(220, 56)
         Me.pnlStaff.Name = "pnlStaff"
-        Me.pnlStaff.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
-        Me.pnlStaff.Size = New System.Drawing.Size(1235, 838)
+        Me.pnlStaff.Padding = New System.Windows.Forms.Padding(10)
+        Me.pnlStaff.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlStaff.TabIndex = 28
         '
         'pnlStaffRight
@@ -3496,9 +3719,9 @@ Partial Class frmMain
         Me.pnlStaffRight.Controls.Add(Me.grpStaff)
         Me.pnlStaffRight.Controls.Add(Me.grpUsers)
         Me.pnlStaffRight.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlStaffRight.Location = New System.Drawing.Point(480, 10)
+        Me.pnlStaffRight.Location = New System.Drawing.Point(810, 10)
         Me.pnlStaffRight.Name = "pnlStaffRight"
-        Me.pnlStaffRight.Size = New System.Drawing.Size(745, 818)
+        Me.pnlStaffRight.Size = New System.Drawing.Size(880, 1004)
         Me.pnlStaffRight.TabIndex = 3
         '
         'grpStaff
@@ -3526,7 +3749,7 @@ Partial Class frmMain
         Me.grpStaff.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpStaff.Location = New System.Drawing.Point(8, 8)
         Me.grpStaff.Name = "grpStaff"
-        Me.grpStaff.Size = New System.Drawing.Size(1062, 300)
+        Me.grpStaff.Size = New System.Drawing.Size(1197, 320)
         Me.grpStaff.TabIndex = 5
         Me.grpStaff.TabStop = False
         Me.grpStaff.Text = "Staff member"
@@ -3534,147 +3757,163 @@ Partial Class frmMain
         'lblStaffCode
         '
         Me.lblStaffCode.AutoSize = True
+        Me.lblStaffCode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStaffCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblStaffCode.Location = New System.Drawing.Point(14, 24)
         Me.lblStaffCode.Name = "lblStaffCode"
-        Me.lblStaffCode.Size = New System.Drawing.Size(124, 13)
+        Me.lblStaffCode.Size = New System.Drawing.Size(153, 17)
         Me.lblStaffCode.TabIndex = 6
         Me.lblStaffCode.Text = "Staff code (blank = auto)"
         '
         'txtStaffCode
         '
+        Me.txtStaffCode.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStaffCode.Location = New System.Drawing.Point(14, 44)
         Me.txtStaffCode.Name = "txtStaffCode"
-        Me.txtStaffCode.Size = New System.Drawing.Size(225, 20)
+        Me.txtStaffCode.Size = New System.Drawing.Size(413, 27)
         Me.txtStaffCode.TabIndex = 7
         '
         'lblStaffStatus
         '
         Me.lblStaffStatus.AutoSize = True
+        Me.lblStaffStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStaffStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblStaffStatus.Location = New System.Drawing.Point(254, 24)
+        Me.lblStaffStatus.Location = New System.Drawing.Point(474, 22)
         Me.lblStaffStatus.Name = "lblStaffStatus"
-        Me.lblStaffStatus.Size = New System.Drawing.Size(37, 13)
+        Me.lblStaffStatus.Size = New System.Drawing.Size(43, 17)
         Me.lblStaffStatus.TabIndex = 8
         Me.lblStaffStatus.Text = "Status"
         '
         'cboStaffStatus
         '
         Me.cboStaffStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStaffStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboStaffStatus.FormattingEnabled = True
         Me.cboStaffStatus.Items.AddRange(New Object() {"Active", "Inactive", "Suspended"})
-        Me.cboStaffStatus.Location = New System.Drawing.Point(254, 44)
+        Me.cboStaffStatus.Location = New System.Drawing.Point(474, 42)
         Me.cboStaffStatus.Name = "cboStaffStatus"
-        Me.cboStaffStatus.Size = New System.Drawing.Size(225, 21)
+        Me.cboStaffStatus.Size = New System.Drawing.Size(367, 28)
         Me.cboStaffStatus.TabIndex = 9
         '
         'lblStaffFirstName
         '
         Me.lblStaffFirstName.AutoSize = True
+        Me.lblStaffFirstName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStaffFirstName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblStaffFirstName.Location = New System.Drawing.Point(14, 80)
         Me.lblStaffFirstName.Name = "lblStaffFirstName"
-        Me.lblStaffFirstName.Size = New System.Drawing.Size(62, 13)
+        Me.lblStaffFirstName.Size = New System.Drawing.Size(77, 17)
         Me.lblStaffFirstName.TabIndex = 10
         Me.lblStaffFirstName.Text = "First name *"
         '
         'txtStaffFirstName
         '
+        Me.txtStaffFirstName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStaffFirstName.Location = New System.Drawing.Point(14, 100)
         Me.txtStaffFirstName.MaxLength = 50
         Me.txtStaffFirstName.Name = "txtStaffFirstName"
-        Me.txtStaffFirstName.Size = New System.Drawing.Size(225, 20)
+        Me.txtStaffFirstName.Size = New System.Drawing.Size(413, 27)
         Me.txtStaffFirstName.TabIndex = 11
         '
         'lblStaffLastName
         '
         Me.lblStaffLastName.AutoSize = True
+        Me.lblStaffLastName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStaffLastName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblStaffLastName.Location = New System.Drawing.Point(254, 80)
+        Me.lblStaffLastName.Location = New System.Drawing.Point(474, 78)
         Me.lblStaffLastName.Name = "lblStaffLastName"
-        Me.lblStaffLastName.Size = New System.Drawing.Size(63, 13)
+        Me.lblStaffLastName.Size = New System.Drawing.Size(76, 17)
         Me.lblStaffLastName.TabIndex = 12
         Me.lblStaffLastName.Text = "Last name *"
         '
         'txtStaffLastName
         '
-        Me.txtStaffLastName.Location = New System.Drawing.Point(254, 100)
+        Me.txtStaffLastName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStaffLastName.Location = New System.Drawing.Point(474, 98)
         Me.txtStaffLastName.MaxLength = 50
         Me.txtStaffLastName.Name = "txtStaffLastName"
-        Me.txtStaffLastName.Size = New System.Drawing.Size(225, 20)
+        Me.txtStaffLastName.Size = New System.Drawing.Size(367, 27)
         Me.txtStaffLastName.TabIndex = 13
         '
         'lblStaffContact
         '
         Me.lblStaffContact.AutoSize = True
+        Me.lblStaffContact.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStaffContact.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblStaffContact.Location = New System.Drawing.Point(14, 136)
         Me.lblStaffContact.Name = "lblStaffContact"
-        Me.lblStaffContact.Size = New System.Drawing.Size(82, 13)
+        Me.lblStaffContact.Size = New System.Drawing.Size(101, 17)
         Me.lblStaffContact.TabIndex = 14
         Me.lblStaffContact.Text = "Contact number"
         '
         'txtStaffContact
         '
+        Me.txtStaffContact.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStaffContact.Location = New System.Drawing.Point(14, 156)
         Me.txtStaffContact.MaxLength = 20
         Me.txtStaffContact.Name = "txtStaffContact"
-        Me.txtStaffContact.Size = New System.Drawing.Size(225, 20)
+        Me.txtStaffContact.Size = New System.Drawing.Size(413, 27)
         Me.txtStaffContact.TabIndex = 15
         '
         'lblStaffEmail
         '
         Me.lblStaffEmail.AutoSize = True
+        Me.lblStaffEmail.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblStaffEmail.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblStaffEmail.Location = New System.Drawing.Point(254, 136)
+        Me.lblStaffEmail.Location = New System.Drawing.Point(474, 134)
         Me.lblStaffEmail.Name = "lblStaffEmail"
-        Me.lblStaffEmail.Size = New System.Drawing.Size(32, 13)
+        Me.lblStaffEmail.Size = New System.Drawing.Size(39, 17)
         Me.lblStaffEmail.TabIndex = 16
         Me.lblStaffEmail.Text = "Email"
         '
         'txtStaffEmail
         '
-        Me.txtStaffEmail.Location = New System.Drawing.Point(254, 156)
+        Me.txtStaffEmail.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStaffEmail.Location = New System.Drawing.Point(474, 154)
         Me.txtStaffEmail.MaxLength = 100
         Me.txtStaffEmail.Name = "txtStaffEmail"
-        Me.txtStaffEmail.Size = New System.Drawing.Size(225, 20)
+        Me.txtStaffEmail.Size = New System.Drawing.Size(367, 27)
         Me.txtStaffEmail.TabIndex = 17
         '
         'lblPosition
         '
         Me.lblPosition.AutoSize = True
+        Me.lblPosition.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPosition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblPosition.Location = New System.Drawing.Point(14, 192)
         Me.lblPosition.Name = "lblPosition"
-        Me.lblPosition.Size = New System.Drawing.Size(51, 13)
+        Me.lblPosition.Size = New System.Drawing.Size(63, 17)
         Me.lblPosition.TabIndex = 18
         Me.lblPosition.Text = "Position *"
         '
         'cboPosition
         '
+        Me.cboPosition.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboPosition.FormattingEnabled = True
         Me.cboPosition.Items.AddRange(New Object() {"Dentist", "Dental Assistant", "Administrator", "Front Desk"})
         Me.cboPosition.Location = New System.Drawing.Point(14, 212)
         Me.cboPosition.Name = "cboPosition"
-        Me.cboPosition.Size = New System.Drawing.Size(225, 21)
+        Me.cboPosition.Size = New System.Drawing.Size(413, 28)
         Me.cboPosition.TabIndex = 19
         '
         'lblLicense
         '
         Me.lblLicense.AutoSize = True
+        Me.lblLicense.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblLicense.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblLicense.Location = New System.Drawing.Point(254, 192)
+        Me.lblLicense.Location = New System.Drawing.Point(474, 190)
         Me.lblLicense.Name = "lblLicense"
-        Me.lblLicense.Size = New System.Drawing.Size(82, 13)
+        Me.lblLicense.Size = New System.Drawing.Size(99, 17)
         Me.lblLicense.TabIndex = 20
         Me.lblLicense.Text = "License number"
         '
         'txtLicense
         '
-        Me.txtLicense.Location = New System.Drawing.Point(254, 212)
+        Me.txtLicense.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtLicense.Location = New System.Drawing.Point(474, 210)
         Me.txtLicense.MaxLength = 50
         Me.txtLicense.Name = "txtLicense"
-        Me.txtLicense.Size = New System.Drawing.Size(225, 20)
+        Me.txtLicense.Size = New System.Drawing.Size(367, 27)
         Me.txtLicense.TabIndex = 21
         '
         'btnNewStaff
@@ -3685,7 +3924,7 @@ Partial Class frmMain
         Me.btnNewStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNewStaff.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnNewStaff.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnNewStaff.Location = New System.Drawing.Point(14, 250)
+        Me.btnNewStaff.Location = New System.Drawing.Point(14, 252)
         Me.btnNewStaff.Name = "btnNewStaff"
         Me.btnNewStaff.Size = New System.Drawing.Size(120, 32)
         Me.btnNewStaff.TabIndex = 22
@@ -3700,7 +3939,7 @@ Partial Class frmMain
         Me.btnSaveStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveStaff.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnSaveStaff.ForeColor = System.Drawing.Color.White
-        Me.btnSaveStaff.Location = New System.Drawing.Point(142, 250)
+        Me.btnSaveStaff.Location = New System.Drawing.Point(155, 252)
         Me.btnSaveStaff.Name = "btnSaveStaff"
         Me.btnSaveStaff.Size = New System.Drawing.Size(120, 32)
         Me.btnSaveStaff.TabIndex = 23
@@ -3715,9 +3954,9 @@ Partial Class frmMain
         Me.grpUsers.Controls.Add(Me.btnResetPassword)
         Me.grpUsers.Controls.Add(Me.btnToggleActive)
         Me.grpUsers.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.grpUsers.Location = New System.Drawing.Point(8, 318)
+        Me.grpUsers.Location = New System.Drawing.Point(8, 348)
         Me.grpUsers.Name = "grpUsers"
-        Me.grpUsers.Size = New System.Drawing.Size(1062, 220)
+        Me.grpUsers.Size = New System.Drawing.Size(1197, 220)
         Me.grpUsers.TabIndex = 24
         Me.grpUsers.TabStop = False
         Me.grpUsers.Text = "Login accounts (Administrator and Front Desk)"
@@ -3734,7 +3973,7 @@ Partial Class frmMain
         Me.dgvUsers.BackgroundColor = System.Drawing.Color.White
         Me.dgvUsers.ColumnHeadersHeight = 29
         Me.dgvUsers.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
-        Me.dgvUsers.Location = New System.Drawing.Point(14, 26)
+        Me.dgvUsers.Location = New System.Drawing.Point(14, 28)
         Me.dgvUsers.MultiSelect = False
         Me.dgvUsers.Name = "dgvUsers"
         Me.dgvUsers.ReadOnly = True
@@ -3742,7 +3981,7 @@ Partial Class frmMain
         Me.dgvUsers.RowHeadersWidth = 51
         Me.dgvUsers.RowTemplate.Height = 26
         Me.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvUsers.Size = New System.Drawing.Size(1032, 120)
+        Me.dgvUsers.Size = New System.Drawing.Size(845, 120)
         Me.dgvUsers.TabIndex = 25
         '
         'btnResetPassword
@@ -3782,7 +4021,7 @@ Partial Class frmMain
         Me.pnlStaffLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlStaffLeft.Location = New System.Drawing.Point(10, 10)
         Me.pnlStaffLeft.Name = "pnlStaffLeft"
-        Me.pnlStaffLeft.Size = New System.Drawing.Size(470, 818)
+        Me.pnlStaffLeft.Size = New System.Drawing.Size(800, 1004)
         Me.pnlStaffLeft.TabIndex = 4
         '
         'dgvStaff
@@ -3805,7 +4044,7 @@ Partial Class frmMain
         Me.dgvStaff.RowHeadersWidth = 51
         Me.dgvStaff.RowTemplate.Height = 26
         Me.dgvStaff.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvStaff.Size = New System.Drawing.Size(454, 762)
+        Me.dgvStaff.Size = New System.Drawing.Size(784, 948)
         Me.dgvStaff.TabIndex = 4
         '
         'pnlBillingpayments
@@ -3815,8 +4054,8 @@ Partial Class frmMain
         Me.pnlBillingpayments.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlBillingpayments.Location = New System.Drawing.Point(220, 56)
         Me.pnlBillingpayments.Name = "pnlBillingpayments"
-        Me.pnlBillingpayments.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
-        Me.pnlBillingpayments.Size = New System.Drawing.Size(1235, 838)
+        Me.pnlBillingpayments.Padding = New System.Windows.Forms.Padding(10)
+        Me.pnlBillingpayments.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlBillingpayments.TabIndex = 29
         '
         'pnlInvoiceRight
@@ -3827,9 +4066,9 @@ Partial Class frmMain
         Me.pnlInvoiceRight.Controls.Add(Me.grpItems)
         Me.pnlInvoiceRight.Controls.Add(Me.grpPayments)
         Me.pnlInvoiceRight.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlInvoiceRight.Location = New System.Drawing.Point(480, 10)
+        Me.pnlInvoiceRight.Location = New System.Drawing.Point(846, 10)
         Me.pnlInvoiceRight.Name = "pnlInvoiceRight"
-        Me.pnlInvoiceRight.Size = New System.Drawing.Size(745, 818)
+        Me.pnlInvoiceRight.Size = New System.Drawing.Size(844, 1004)
         Me.pnlInvoiceRight.TabIndex = 3
         '
         'grpInvoice
@@ -3854,7 +4093,7 @@ Partial Class frmMain
         Me.grpInvoice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpInvoice.Location = New System.Drawing.Point(8, 8)
         Me.grpInvoice.Name = "grpInvoice"
-        Me.grpInvoice.Size = New System.Drawing.Size(1045, 180)
+        Me.grpInvoice.Size = New System.Drawing.Size(1144, 180)
         Me.grpInvoice.TabIndex = 6
         Me.grpInvoice.TabStop = False
         Me.grpInvoice.Text = "Invoice"
@@ -3862,118 +4101,129 @@ Partial Class frmMain
         'lblInvoiceNo
         '
         Me.lblInvoiceNo.AutoSize = True
+        Me.lblInvoiceNo.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInvoiceNo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblInvoiceNo.Location = New System.Drawing.Point(14, 22)
         Me.lblInvoiceNo.Name = "lblInvoiceNo"
-        Me.lblInvoiceNo.Size = New System.Drawing.Size(60, 13)
+        Me.lblInvoiceNo.Size = New System.Drawing.Size(70, 17)
         Me.lblInvoiceNo.TabIndex = 7
         Me.lblInvoiceNo.Text = "Invoice no."
         '
         'txtInvoiceNo
         '
         Me.txtInvoiceNo.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.txtInvoiceNo.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtInvoiceNo.Location = New System.Drawing.Point(14, 42)
         Me.txtInvoiceNo.Name = "txtInvoiceNo"
         Me.txtInvoiceNo.ReadOnly = True
-        Me.txtInvoiceNo.Size = New System.Drawing.Size(130, 20)
+        Me.txtInvoiceNo.Size = New System.Drawing.Size(174, 27)
         Me.txtInvoiceNo.TabIndex = 8
         '
         'lblInvoiceStatus
         '
         Me.lblInvoiceStatus.AutoSize = True
+        Me.lblInvoiceStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInvoiceStatus.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblInvoiceStatus.Location = New System.Drawing.Point(154, 22)
+        Me.lblInvoiceStatus.Location = New System.Drawing.Point(214, 21)
         Me.lblInvoiceStatus.Name = "lblInvoiceStatus"
-        Me.lblInvoiceStatus.Size = New System.Drawing.Size(37, 13)
+        Me.lblInvoiceStatus.Size = New System.Drawing.Size(43, 17)
         Me.lblInvoiceStatus.TabIndex = 9
         Me.lblInvoiceStatus.Text = "Status"
         '
         'txtStatus
         '
         Me.txtStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(235, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(241, Byte), Integer))
-        Me.txtStatus.Location = New System.Drawing.Point(154, 42)
+        Me.txtStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStatus.Location = New System.Drawing.Point(217, 42)
         Me.txtStatus.Name = "txtStatus"
         Me.txtStatus.ReadOnly = True
-        Me.txtStatus.Size = New System.Drawing.Size(110, 20)
+        Me.txtStatus.Size = New System.Drawing.Size(174, 27)
         Me.txtStatus.TabIndex = 10
         '
         'lblDiscount
         '
         Me.lblDiscount.AutoSize = True
+        Me.lblDiscount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblDiscount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblDiscount.Location = New System.Drawing.Point(274, 22)
+        Me.lblDiscount.Location = New System.Drawing.Point(417, 23)
         Me.lblDiscount.Name = "lblDiscount"
-        Me.lblDiscount.Size = New System.Drawing.Size(65, 13)
+        Me.lblDiscount.Size = New System.Drawing.Size(78, 17)
         Me.lblDiscount.TabIndex = 11
         Me.lblDiscount.Text = "Discount (₱)"
         '
         'numDiscount
         '
         Me.numDiscount.DecimalPlaces = 2
-        Me.numDiscount.Location = New System.Drawing.Point(274, 42)
+        Me.numDiscount.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numDiscount.Location = New System.Drawing.Point(417, 43)
         Me.numDiscount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numDiscount.Name = "numDiscount"
-        Me.numDiscount.Size = New System.Drawing.Size(120, 20)
+        Me.numDiscount.Size = New System.Drawing.Size(197, 27)
         Me.numDiscount.TabIndex = 12
         Me.numDiscount.ThousandsSeparator = True
         '
         'lblInvoicePatient
         '
         Me.lblInvoicePatient.AutoSize = True
+        Me.lblInvoicePatient.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblInvoicePatient.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblInvoicePatient.Location = New System.Drawing.Point(14, 76)
         Me.lblInvoicePatient.Name = "lblInvoicePatient"
-        Me.lblInvoicePatient.Size = New System.Drawing.Size(47, 13)
+        Me.lblInvoicePatient.Size = New System.Drawing.Size(56, 17)
         Me.lblInvoicePatient.TabIndex = 13
         Me.lblInvoicePatient.Text = "Patient *"
         '
         'cboInvoicePatient
         '
         Me.cboInvoicePatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboInvoicePatient.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboInvoicePatient.FormattingEnabled = True
         Me.cboInvoicePatient.Location = New System.Drawing.Point(14, 96)
         Me.cboInvoicePatient.Name = "cboInvoicePatient"
-        Me.cboInvoicePatient.Size = New System.Drawing.Size(380, 21)
+        Me.cboInvoicePatient.Size = New System.Drawing.Size(600, 28)
         Me.cboInvoicePatient.TabIndex = 14
         '
         'lblSubTotal
         '
         Me.lblSubTotal.AutoSize = True
+        Me.lblSubTotal.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblSubTotal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.lblSubTotal.Location = New System.Drawing.Point(14, 140)
         Me.lblSubTotal.Name = "lblSubTotal"
-        Me.lblSubTotal.Size = New System.Drawing.Size(35, 13)
+        Me.lblSubTotal.Size = New System.Drawing.Size(40, 17)
         Me.lblSubTotal.TabIndex = 15
         Me.lblSubTotal.Text = "₱0.00"
         '
         'lblTotal
         '
         Me.lblTotal.AutoSize = True
+        Me.lblTotal.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.lblTotal.Location = New System.Drawing.Point(134, 140)
         Me.lblTotal.Name = "lblTotal"
-        Me.lblTotal.Size = New System.Drawing.Size(35, 13)
+        Me.lblTotal.Size = New System.Drawing.Size(40, 17)
         Me.lblTotal.TabIndex = 16
         Me.lblTotal.Text = "₱0.00"
         '
         'lblPaid
         '
         Me.lblPaid.AutoSize = True
+        Me.lblPaid.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPaid.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.lblPaid.Location = New System.Drawing.Point(254, 140)
         Me.lblPaid.Name = "lblPaid"
-        Me.lblPaid.Size = New System.Drawing.Size(35, 13)
+        Me.lblPaid.Size = New System.Drawing.Size(40, 17)
         Me.lblPaid.TabIndex = 17
         Me.lblPaid.Text = "₱0.00"
         '
         'lblBalance
         '
         Me.lblBalance.AutoSize = True
-        Me.lblBalance.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.lblBalance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblBalance.ForeColor = System.Drawing.Color.FromArgb(CType(CType(14, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(134, Byte), Integer))
         Me.lblBalance.Location = New System.Drawing.Point(374, 140)
         Me.lblBalance.Name = "lblBalance"
-        Me.lblBalance.Size = New System.Drawing.Size(39, 15)
+        Me.lblBalance.Size = New System.Drawing.Size(41, 17)
         Me.lblBalance.TabIndex = 18
         Me.lblBalance.Text = "₱0.00"
         '
@@ -3983,11 +4233,11 @@ Partial Class frmMain
         Me.btnNewInvoice.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnNewInvoice.FlatAppearance.BorderSize = 0
         Me.btnNewInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNewInvoice.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnNewInvoice.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewInvoice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnNewInvoice.Location = New System.Drawing.Point(404, 40)
+        Me.btnNewInvoice.Location = New System.Drawing.Point(729, 16)
         Me.btnNewInvoice.Name = "btnNewInvoice"
-        Me.btnNewInvoice.Size = New System.Drawing.Size(84, 28)
+        Me.btnNewInvoice.Size = New System.Drawing.Size(100, 40)
         Me.btnNewInvoice.TabIndex = 19
         Me.btnNewInvoice.Text = "New"
         Me.btnNewInvoice.UseVisualStyleBackColor = False
@@ -3998,11 +4248,11 @@ Partial Class frmMain
         Me.btnSaveInvoice.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnSaveInvoice.FlatAppearance.BorderSize = 0
         Me.btnSaveInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveInvoice.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSaveInvoice.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSaveInvoice.ForeColor = System.Drawing.Color.White
-        Me.btnSaveInvoice.Location = New System.Drawing.Point(404, 74)
+        Me.btnSaveInvoice.Location = New System.Drawing.Point(729, 70)
         Me.btnSaveInvoice.Name = "btnSaveInvoice"
-        Me.btnSaveInvoice.Size = New System.Drawing.Size(84, 28)
+        Me.btnSaveInvoice.Size = New System.Drawing.Size(100, 40)
         Me.btnSaveInvoice.TabIndex = 20
         Me.btnSaveInvoice.Text = "Save"
         Me.btnSaveInvoice.UseVisualStyleBackColor = False
@@ -4013,11 +4263,11 @@ Partial Class frmMain
         Me.btnVoid.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnVoid.FlatAppearance.BorderSize = 0
         Me.btnVoid.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnVoid.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnVoid.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnVoid.ForeColor = System.Drawing.Color.White
-        Me.btnVoid.Location = New System.Drawing.Point(404, 108)
+        Me.btnVoid.Location = New System.Drawing.Point(729, 124)
         Me.btnVoid.Name = "btnVoid"
-        Me.btnVoid.Size = New System.Drawing.Size(84, 28)
+        Me.btnVoid.Size = New System.Drawing.Size(100, 40)
         Me.btnVoid.TabIndex = 21
         Me.btnVoid.Text = "Void"
         Me.btnVoid.UseVisualStyleBackColor = False
@@ -4040,9 +4290,9 @@ Partial Class frmMain
         Me.grpItems.Controls.Add(Me.btnRemoveItem)
         Me.grpItems.Controls.Add(Me.dgvItems)
         Me.grpItems.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.grpItems.Location = New System.Drawing.Point(8, 196)
+        Me.grpItems.Location = New System.Drawing.Point(9, 214)
         Me.grpItems.Name = "grpItems"
-        Me.grpItems.Size = New System.Drawing.Size(1045, 290)
+        Me.grpItems.Size = New System.Drawing.Size(1144, 354)
         Me.grpItems.TabIndex = 22
         Me.grpItems.TabStop = False
         Me.grpItems.Text = "Invoice items"
@@ -4050,56 +4300,62 @@ Partial Class frmMain
         'lblProcedure
         '
         Me.lblProcedure.AutoSize = True
+        Me.lblProcedure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblProcedure.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblProcedure.Location = New System.Drawing.Point(14, 22)
         Me.lblProcedure.Name = "lblProcedure"
-        Me.lblProcedure.Size = New System.Drawing.Size(226, 13)
+        Me.lblProcedure.Size = New System.Drawing.Size(288, 17)
         Me.lblProcedure.TabIndex = 23
         Me.lblProcedure.Text = "Procedure (optional - fills description and price)"
         '
         'cboProcedure
         '
         Me.cboProcedure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboProcedure.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboProcedure.FormattingEnabled = True
         Me.cboProcedure.Location = New System.Drawing.Point(14, 42)
         Me.cboProcedure.Name = "cboProcedure"
-        Me.cboProcedure.Size = New System.Drawing.Size(470, 21)
+        Me.cboProcedure.Size = New System.Drawing.Size(522, 28)
         Me.cboProcedure.TabIndex = 24
         '
         'lblItemDesc
         '
         Me.lblItemDesc.AutoSize = True
+        Me.lblItemDesc.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblItemDesc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblItemDesc.Location = New System.Drawing.Point(14, 76)
         Me.lblItemDesc.Name = "lblItemDesc"
-        Me.lblItemDesc.Size = New System.Drawing.Size(67, 13)
+        Me.lblItemDesc.Size = New System.Drawing.Size(83, 17)
         Me.lblItemDesc.TabIndex = 25
         Me.lblItemDesc.Text = "Description *"
         '
         'txtItemDesc
         '
+        Me.txtItemDesc.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtItemDesc.Location = New System.Drawing.Point(14, 96)
         Me.txtItemDesc.Name = "txtItemDesc"
-        Me.txtItemDesc.Size = New System.Drawing.Size(220, 20)
+        Me.txtItemDesc.Size = New System.Drawing.Size(220, 27)
         Me.txtItemDesc.TabIndex = 26
         '
         'lblQty
         '
         Me.lblQty.AutoSize = True
+        Me.lblQty.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblQty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblQty.Location = New System.Drawing.Point(242, 76)
+        Me.lblQty.Location = New System.Drawing.Point(257, 76)
         Me.lblQty.Name = "lblQty"
-        Me.lblQty.Size = New System.Drawing.Size(23, 13)
+        Me.lblQty.Size = New System.Drawing.Size(28, 17)
         Me.lblQty.TabIndex = 27
         Me.lblQty.Text = "Qty"
         '
         'numQty
         '
-        Me.numQty.Location = New System.Drawing.Point(242, 96)
+        Me.numQty.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numQty.Location = New System.Drawing.Point(257, 96)
         Me.numQty.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.numQty.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numQty.Name = "numQty"
-        Me.numQty.Size = New System.Drawing.Size(50, 20)
+        Me.numQty.Size = New System.Drawing.Size(50, 27)
         Me.numQty.TabIndex = 28
         Me.numQty.ThousandsSeparator = True
         Me.numQty.Value = New Decimal(New Integer() {1, 0, 0, 0})
@@ -4107,40 +4363,44 @@ Partial Class frmMain
         'lblUnitPrice
         '
         Me.lblUnitPrice.AutoSize = True
+        Me.lblUnitPrice.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUnitPrice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblUnitPrice.Location = New System.Drawing.Point(300, 76)
+        Me.lblUnitPrice.Location = New System.Drawing.Point(333, 76)
         Me.lblUnitPrice.Name = "lblUnitPrice"
-        Me.lblUnitPrice.Size = New System.Drawing.Size(52, 13)
+        Me.lblUnitPrice.Size = New System.Drawing.Size(64, 17)
         Me.lblUnitPrice.TabIndex = 29
         Me.lblUnitPrice.Text = "Unit price"
         '
         'numUnitPrice
         '
         Me.numUnitPrice.DecimalPlaces = 2
-        Me.numUnitPrice.Location = New System.Drawing.Point(300, 96)
+        Me.numUnitPrice.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numUnitPrice.Location = New System.Drawing.Point(333, 96)
         Me.numUnitPrice.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numUnitPrice.Name = "numUnitPrice"
-        Me.numUnitPrice.Size = New System.Drawing.Size(90, 20)
+        Me.numUnitPrice.Size = New System.Drawing.Size(90, 27)
         Me.numUnitPrice.TabIndex = 30
         Me.numUnitPrice.ThousandsSeparator = True
         '
         'lblItemDiscount
         '
         Me.lblItemDiscount.AutoSize = True
+        Me.lblItemDiscount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblItemDiscount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblItemDiscount.Location = New System.Drawing.Point(398, 76)
+        Me.lblItemDiscount.Location = New System.Drawing.Point(449, 76)
         Me.lblItemDiscount.Name = "lblItemDiscount"
-        Me.lblItemDiscount.Size = New System.Drawing.Size(49, 13)
+        Me.lblItemDiscount.Size = New System.Drawing.Size(58, 17)
         Me.lblItemDiscount.TabIndex = 31
         Me.lblItemDiscount.Text = "Discount"
         '
         'numItemDiscount
         '
         Me.numItemDiscount.DecimalPlaces = 2
-        Me.numItemDiscount.Location = New System.Drawing.Point(398, 96)
+        Me.numItemDiscount.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numItemDiscount.Location = New System.Drawing.Point(449, 96)
         Me.numItemDiscount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numItemDiscount.Name = "numItemDiscount"
-        Me.numItemDiscount.Size = New System.Drawing.Size(86, 20)
+        Me.numItemDiscount.Size = New System.Drawing.Size(86, 27)
         Me.numItemDiscount.TabIndex = 32
         Me.numItemDiscount.ThousandsSeparator = True
         '
@@ -4152,7 +4412,7 @@ Partial Class frmMain
         Me.btnAddItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnAddItem.ForeColor = System.Drawing.Color.White
-        Me.btnAddItem.Location = New System.Drawing.Point(14, 128)
+        Me.btnAddItem.Location = New System.Drawing.Point(15, 147)
         Me.btnAddItem.Name = "btnAddItem"
         Me.btnAddItem.Size = New System.Drawing.Size(110, 30)
         Me.btnAddItem.TabIndex = 33
@@ -4167,7 +4427,7 @@ Partial Class frmMain
         Me.btnRemoveItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRemoveItem.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnRemoveItem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnRemoveItem.Location = New System.Drawing.Point(132, 128)
+        Me.btnRemoveItem.Location = New System.Drawing.Point(158, 147)
         Me.btnRemoveItem.Name = "btnRemoveItem"
         Me.btnRemoveItem.Size = New System.Drawing.Size(130, 30)
         Me.btnRemoveItem.TabIndex = 34
@@ -4186,7 +4446,7 @@ Partial Class frmMain
         Me.dgvItems.BackgroundColor = System.Drawing.Color.White
         Me.dgvItems.ColumnHeadersHeight = 29
         Me.dgvItems.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
-        Me.dgvItems.Location = New System.Drawing.Point(14, 166)
+        Me.dgvItems.Location = New System.Drawing.Point(14, 195)
         Me.dgvItems.MultiSelect = False
         Me.dgvItems.Name = "dgvItems"
         Me.dgvItems.ReadOnly = True
@@ -4194,7 +4454,7 @@ Partial Class frmMain
         Me.dgvItems.RowHeadersWidth = 51
         Me.dgvItems.RowTemplate.Height = 26
         Me.dgvItems.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvItems.Size = New System.Drawing.Size(1017, 116)
+        Me.dgvItems.Size = New System.Drawing.Size(816, 153)
         Me.dgvItems.TabIndex = 35
         '
         'grpPayments
@@ -4210,9 +4470,9 @@ Partial Class frmMain
         Me.grpPayments.Controls.Add(Me.btnReceive)
         Me.grpPayments.Controls.Add(Me.dgvPayments)
         Me.grpPayments.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.grpPayments.Location = New System.Drawing.Point(8, 494)
+        Me.grpPayments.Location = New System.Drawing.Point(13, 591)
         Me.grpPayments.Name = "grpPayments"
-        Me.grpPayments.Size = New System.Drawing.Size(1045, 215)
+        Me.grpPayments.Size = New System.Drawing.Size(1144, 241)
         Me.grpPayments.TabIndex = 36
         Me.grpPayments.TabStop = False
         Me.grpPayments.Text = "Payments"
@@ -4220,57 +4480,63 @@ Partial Class frmMain
         'lblMethod
         '
         Me.lblMethod.AutoSize = True
+        Me.lblMethod.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMethod.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblMethod.Location = New System.Drawing.Point(14, 22)
         Me.lblMethod.Name = "lblMethod"
-        Me.lblMethod.Size = New System.Drawing.Size(50, 13)
+        Me.lblMethod.Size = New System.Drawing.Size(63, 17)
         Me.lblMethod.TabIndex = 37
         Me.lblMethod.Text = "Method *"
         '
         'cboMethod
         '
         Me.cboMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboMethod.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboMethod.FormattingEnabled = True
         Me.cboMethod.Location = New System.Drawing.Point(14, 42)
         Me.cboMethod.Name = "cboMethod"
-        Me.cboMethod.Size = New System.Drawing.Size(150, 21)
+        Me.cboMethod.Size = New System.Drawing.Size(162, 28)
         Me.cboMethod.TabIndex = 38
         '
         'lblPayAmount
         '
         Me.lblPayAmount.AutoSize = True
+        Me.lblPayAmount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPayAmount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblPayAmount.Location = New System.Drawing.Point(174, 22)
+        Me.lblPayAmount.Location = New System.Drawing.Point(193, 22)
         Me.lblPayAmount.Name = "lblPayAmount"
-        Me.lblPayAmount.Size = New System.Drawing.Size(66, 13)
+        Me.lblPayAmount.Size = New System.Drawing.Size(82, 17)
         Me.lblPayAmount.TabIndex = 39
         Me.lblPayAmount.Text = "Amount (₱) *"
         '
         'numPayAmount
         '
         Me.numPayAmount.DecimalPlaces = 2
-        Me.numPayAmount.Location = New System.Drawing.Point(174, 42)
+        Me.numPayAmount.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.numPayAmount.Location = New System.Drawing.Point(193, 42)
         Me.numPayAmount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
         Me.numPayAmount.Name = "numPayAmount"
-        Me.numPayAmount.Size = New System.Drawing.Size(110, 20)
+        Me.numPayAmount.Size = New System.Drawing.Size(110, 27)
         Me.numPayAmount.TabIndex = 40
         Me.numPayAmount.ThousandsSeparator = True
         '
         'lblPayNotes
         '
         Me.lblPayNotes.AutoSize = True
+        Me.lblPayNotes.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPayNotes.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblPayNotes.Location = New System.Drawing.Point(294, 22)
+        Me.lblPayNotes.Location = New System.Drawing.Point(332, 21)
         Me.lblPayNotes.Name = "lblPayNotes"
-        Me.lblPayNotes.Size = New System.Drawing.Size(35, 13)
+        Me.lblPayNotes.Size = New System.Drawing.Size(43, 17)
         Me.lblPayNotes.TabIndex = 41
         Me.lblPayNotes.Text = "Notes"
         '
         'txtPayNotes
         '
-        Me.txtPayNotes.Location = New System.Drawing.Point(294, 42)
+        Me.txtPayNotes.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPayNotes.Location = New System.Drawing.Point(332, 41)
         Me.txtPayNotes.Name = "txtPayNotes"
-        Me.txtPayNotes.Size = New System.Drawing.Size(190, 20)
+        Me.txtPayNotes.Size = New System.Drawing.Size(190, 27)
         Me.txtPayNotes.TabIndex = 42
         '
         'btnReceive
@@ -4281,7 +4547,7 @@ Partial Class frmMain
         Me.btnReceive.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnReceive.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnReceive.ForeColor = System.Drawing.Color.White
-        Me.btnReceive.Location = New System.Drawing.Point(14, 74)
+        Me.btnReceive.Location = New System.Drawing.Point(13, 93)
         Me.btnReceive.Name = "btnReceive"
         Me.btnReceive.Size = New System.Drawing.Size(150, 30)
         Me.btnReceive.TabIndex = 43
@@ -4300,7 +4566,7 @@ Partial Class frmMain
         Me.dgvPayments.BackgroundColor = System.Drawing.Color.White
         Me.dgvPayments.ColumnHeadersHeight = 29
         Me.dgvPayments.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
-        Me.dgvPayments.Location = New System.Drawing.Point(14, 112)
+        Me.dgvPayments.Location = New System.Drawing.Point(12, 137)
         Me.dgvPayments.MultiSelect = False
         Me.dgvPayments.Name = "dgvPayments"
         Me.dgvPayments.ReadOnly = True
@@ -4308,7 +4574,7 @@ Partial Class frmMain
         Me.dgvPayments.RowHeadersWidth = 51
         Me.dgvPayments.RowTemplate.Height = 26
         Me.dgvPayments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvPayments.Size = New System.Drawing.Size(1017, 95)
+        Me.dgvPayments.Size = New System.Drawing.Size(809, 96)
         Me.dgvPayments.TabIndex = 44
         '
         'pnlInvoiceLeft
@@ -4319,17 +4585,18 @@ Partial Class frmMain
         Me.pnlInvoiceLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlInvoiceLeft.Location = New System.Drawing.Point(10, 10)
         Me.pnlInvoiceLeft.Name = "pnlInvoiceLeft"
-        Me.pnlInvoiceLeft.Size = New System.Drawing.Size(470, 818)
+        Me.pnlInvoiceLeft.Size = New System.Drawing.Size(836, 1004)
         Me.pnlInvoiceLeft.TabIndex = 4
         '
         'cboStatusFilter
         '
         Me.cboStatusFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboStatusFilter.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboStatusFilter.FormattingEnabled = True
         Me.cboStatusFilter.Items.AddRange(New Object() {"All statuses", "Unpaid", "Partially Paid", "Paid", "Void"})
-        Me.cboStatusFilter.Location = New System.Drawing.Point(306, 10)
+        Me.cboStatusFilter.Location = New System.Drawing.Point(601, 10)
         Me.cboStatusFilter.Name = "cboStatusFilter"
-        Me.cboStatusFilter.Size = New System.Drawing.Size(152, 21)
+        Me.cboStatusFilter.Size = New System.Drawing.Size(211, 25)
         Me.cboStatusFilter.TabIndex = 4
         '
         'dgvInvoices
@@ -4352,54 +4619,23 @@ Partial Class frmMain
         Me.dgvInvoices.RowHeadersWidth = 51
         Me.dgvInvoices.RowTemplate.Height = 26
         Me.dgvInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvInvoices.Size = New System.Drawing.Size(454, 762)
+        Me.dgvInvoices.Size = New System.Drawing.Size(820, 948)
         Me.dgvInvoices.TabIndex = 5
-        '
-        'picLogo
-        '
-        Me.picLogo.BackColor = System.Drawing.Color.Transparent
-        Me.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picLogo.Location = New System.Drawing.Point(35, 15)
-        Me.picLogo.Name = "picLogo"
-        Me.picLogo.Size = New System.Drawing.Size(129, 133)
-        Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.picLogo.TabIndex = 19
-        Me.picLogo.TabStop = False
-        '
-        'btnNavDashboard
-        '
-        Me.btnNavDashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnNavDashboard.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnNavDashboard.FlatAppearance.BorderSize = 0
-        Me.btnNavDashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
-        Me.btnNavDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNavDashboard.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.btnNavDashboard.ForeColor = System.Drawing.Color.White
-        Me.btnNavDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavDashboard.Location = New System.Drawing.Point(10, 235)
-        Me.btnNavDashboard.Name = "btnNavDashboard"
-        Me.btnNavDashboard.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
-        Me.btnNavDashboard.Size = New System.Drawing.Size(200, 40)
-        Me.btnNavDashboard.TabIndex = 8
-        Me.btnNavDashboard.Text = "Dashboard"
-        Me.btnNavDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavDashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnNavDashboard.UseVisualStyleBackColor = False
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1455, 894)
+        Me.ClientSize = New System.Drawing.Size(1920, 1080)
         Me.Controls.Add(Me.pnlDashboard)
-        Me.Controls.Add(Me.pnlInventory)
-        Me.Controls.Add(Me.pnlClinicalRecord)
-        Me.Controls.Add(Me.pnlAppointment)
-        Me.Controls.Add(Me.pnlBillingpayments)
-        Me.Controls.Add(Me.pnlPatients)
         Me.Controls.Add(Me.pnlProcedures)
-        Me.Controls.Add(Me.pnlAuditlog)
         Me.Controls.Add(Me.pnlStaff)
+        Me.Controls.Add(Me.pnlAuditlog)
+        Me.Controls.Add(Me.pnlInventory)
+        Me.Controls.Add(Me.pnlPatients)
+        Me.Controls.Add(Me.pnlBillingpayments)
+        Me.Controls.Add(Me.pnlAppointment)
+        Me.Controls.Add(Me.pnlClinicalRecord)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.pnlSidebar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -4407,10 +4643,14 @@ Partial Class frmMain
         Me.Text = "frmMain"
         Me.pnlSidebar.ResumeLayout(False)
         Me.pnlSidebar.PerformLayout()
+        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
         Me.pnlDashboard.ResumeLayout(False)
         Me.pnlDashboard.PerformLayout()
+        CType(Me.dgvLowStockProducts, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlCardToday.ResumeLayout(False)
         Me.pnlCardToday.PerformLayout()
         Me.pnlCardPending.ResumeLayout(False)
@@ -4510,7 +4750,6 @@ Partial Class frmMain
         CType(Me.dgvPayments, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlInvoiceLeft.ResumeLayout(False)
         CType(Me.dgvInvoices, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -4840,4 +5079,10 @@ Partial Class frmMain
     Friend WithEvents pnlInvoiceLeft As Panel
     Friend WithEvents cboStatusFilter As ComboBox
     Friend WithEvents dgvInvoices As DataGridView
+    Friend WithEvents Chart2 As DataVisualization.Charting.Chart
+    Friend WithEvents Chart1 As DataVisualization.Charting.Chart
+    Friend WithEvents lblMonthlyRevenue As Label
+    Friend WithEvents dgvLowStockProducts As DataGridView
+    Friend WithEvents lblLowStocks As Label
+    Friend WithEvents lblTopProcedures As Label
 End Class
