@@ -22,17 +22,16 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
-        Me.picLogo = New System.Windows.Forms.PictureBox()
         Me.lblBrand = New System.Windows.Forms.Label()
         Me.lblBrandSub = New System.Windows.Forms.Label()
         Me.btnNavDashboard = New System.Windows.Forms.Button()
@@ -162,9 +161,6 @@ Partial Class frmMain
         Me.dgvAppointments = New System.Windows.Forms.DataGridView()
         Me.pnlPatients = New System.Windows.Forms.Panel()
         Me.pnlRight = New System.Windows.Forms.Panel()
-        Me.pnlLeft = New System.Windows.Forms.Panel()
-        Me.btnClear = New System.Windows.Forms.Button()
-        Me.dgvPatients = New System.Windows.Forms.DataGridView()
         Me.grpDetails = New System.Windows.Forms.GroupBox()
         Me.lblCode = New System.Windows.Forms.Label()
         Me.txtCode = New System.Windows.Forms.TextBox()
@@ -195,6 +191,9 @@ Partial Class frmMain
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnArchive = New System.Windows.Forms.Button()
+        Me.pnlLeft = New System.Windows.Forms.Panel()
+        Me.btnClear = New System.Windows.Forms.Button()
+        Me.dgvPatients = New System.Windows.Forms.DataGridView()
         Me.pnlClinicalRecord = New System.Windows.Forms.Panel()
         Me.tabMain = New System.Windows.Forms.TabControl()
         Me.tabMedical = New System.Windows.Forms.TabPage()
@@ -362,8 +361,16 @@ Partial Class frmMain
         Me.pnlInvoiceLeft = New System.Windows.Forms.Panel()
         Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
         Me.dgvInvoices = New System.Windows.Forms.DataGridView()
+        Me.picLogo = New System.Windows.Forms.PictureBox()
+        Me.pnlLogs = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lblLogs = New System.Windows.Forms.Label()
+        Me.lblLogin = New System.Windows.Forms.Label()
+        Me.lblChanges = New System.Windows.Forms.Label()
+        Me.lblLogouts = New System.Windows.Forms.Label()
         Me.pnlSidebar.SuspendLayout()
-        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeader.SuspendLayout()
         Me.pnlDashboard.SuspendLayout()
         CType(Me.dgvLowStockProducts, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -398,9 +405,9 @@ Partial Class frmMain
         CType(Me.dgvAppointments, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlPatients.SuspendLayout()
         Me.pnlRight.SuspendLayout()
+        Me.grpDetails.SuspendLayout()
         Me.pnlLeft.SuspendLayout()
         CType(Me.dgvPatients, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpDetails.SuspendLayout()
         Me.pnlClinicalRecord.SuspendLayout()
         Me.tabMain.SuspendLayout()
         Me.tabMedical.SuspendLayout()
@@ -446,6 +453,11 @@ Partial Class frmMain
         CType(Me.dgvPayments, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlInvoiceLeft.SuspendLayout()
         CType(Me.dgvInvoices, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlLogs.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlSidebar
@@ -470,17 +482,6 @@ Partial Class frmMain
         Me.pnlSidebar.Name = "pnlSidebar"
         Me.pnlSidebar.Size = New System.Drawing.Size(220, 1080)
         Me.pnlSidebar.TabIndex = 6
-        '
-        'picLogo
-        '
-        Me.picLogo.BackColor = System.Drawing.Color.Transparent
-        Me.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picLogo.Location = New System.Drawing.Point(35, 15)
-        Me.picLogo.Name = "picLogo"
-        Me.picLogo.Size = New System.Drawing.Size(129, 133)
-        Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.picLogo.TabIndex = 19
-        Me.picLogo.TabStop = False
         '
         'lblBrand
         '
@@ -790,32 +791,32 @@ Partial Class frmMain
         '
         'Chart2
         '
-        ChartArea5.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea5)
-        Legend5.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend5)
+        ChartArea3.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea3)
+        Legend3.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend3)
         Me.Chart2.Location = New System.Drawing.Point(1077, 616)
         Me.Chart2.Name = "Chart2"
-        Series5.ChartArea = "ChartArea1"
-        Series5.Legend = "Legend1"
-        Series5.Name = "Series1"
-        Me.Chart2.Series.Add(Series5)
+        Series3.ChartArea = "ChartArea1"
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.Chart2.Series.Add(Series3)
         Me.Chart2.Size = New System.Drawing.Size(600, 376)
         Me.Chart2.TabIndex = 26
         Me.Chart2.Text = "Chart2"
         '
         'Chart1
         '
-        ChartArea6.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea6)
-        Legend6.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend6)
+        ChartArea4.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend4)
         Me.Chart1.Location = New System.Drawing.Point(1080, 179)
         Me.Chart1.Name = "Chart1"
-        Series6.ChartArea = "ChartArea1"
-        Series6.Legend = "Legend1"
-        Series6.Name = "Series1"
-        Me.Chart1.Series.Add(Series6)
+        Series4.ChartArea = "ChartArea1"
+        Series4.Legend = "Legend1"
+        Series4.Name = "Series1"
+        Me.Chart1.Series.Add(Series4)
         Me.Chart1.Size = New System.Drawing.Size(600, 376)
         Me.Chart1.TabIndex = 25
         Me.Chart1.Text = "Chart1"
@@ -844,10 +845,11 @@ Partial Class frmMain
         'lblCardTodayCaption
         '
         Me.lblCardTodayCaption.AutoSize = True
+        Me.lblCardTodayCaption.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCardTodayCaption.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblCardTodayCaption.Location = New System.Drawing.Point(14, 12)
         Me.lblCardTodayCaption.Name = "lblCardTodayCaption"
-        Me.lblCardTodayCaption.Size = New System.Drawing.Size(100, 13)
+        Me.lblCardTodayCaption.Size = New System.Drawing.Size(112, 13)
         Me.lblCardTodayCaption.TabIndex = 2
         Me.lblCardTodayCaption.Text = "Appointments today"
         '
@@ -875,10 +877,11 @@ Partial Class frmMain
         'lblCardPendingCaption
         '
         Me.lblCardPendingCaption.AutoSize = True
+        Me.lblCardPendingCaption.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCardPendingCaption.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblCardPendingCaption.Location = New System.Drawing.Point(14, 12)
         Me.lblCardPendingCaption.Name = "lblCardPendingCaption"
-        Me.lblCardPendingCaption.Size = New System.Drawing.Size(106, 13)
+        Me.lblCardPendingCaption.Size = New System.Drawing.Size(119, 13)
         Me.lblCardPendingCaption.TabIndex = 5
         Me.lblCardPendingCaption.Text = "Pending confirmation"
         '
@@ -907,10 +910,11 @@ Partial Class frmMain
         'lblCardUnpaidCaption
         '
         Me.lblCardUnpaidCaption.AutoSize = True
+        Me.lblCardUnpaidCaption.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCardUnpaidCaption.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblCardUnpaidCaption.Location = New System.Drawing.Point(14, 12)
         Me.lblCardUnpaidCaption.Name = "lblCardUnpaidCaption"
-        Me.lblCardUnpaidCaption.Size = New System.Drawing.Size(83, 13)
+        Me.lblCardUnpaidCaption.Size = New System.Drawing.Size(89, 13)
         Me.lblCardUnpaidCaption.TabIndex = 8
         Me.lblCardUnpaidCaption.Text = "Unpaid invoices"
         '
@@ -948,10 +952,11 @@ Partial Class frmMain
         'lblCardLowCaption
         '
         Me.lblCardLowCaption.AutoSize = True
+        Me.lblCardLowCaption.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblCardLowCaption.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.lblCardLowCaption.Location = New System.Drawing.Point(14, 12)
         Me.lblCardLowCaption.Name = "lblCardLowCaption"
-        Me.lblCardLowCaption.Size = New System.Drawing.Size(100, 13)
+        Me.lblCardLowCaption.Size = New System.Drawing.Size(108, 13)
         Me.lblCardLowCaption.TabIndex = 11
         Me.lblCardLowCaption.Text = "Low-stock products"
         '
@@ -998,31 +1003,31 @@ Partial Class frmMain
         Me.dgvToday.AllowUserToAddRows = False
         Me.dgvToday.AllowUserToDeleteRows = False
         Me.dgvToday.AllowUserToResizeRows = False
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(252, Byte), Integer))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        Me.dgvToday.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(252, Byte), Integer))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
+        Me.dgvToday.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
         Me.dgvToday.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvToday.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvToday.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(36, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(163, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvToday.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(36, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(163, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvToday.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvToday.ColumnHeadersHeight = 29
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(217, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(250, Byte), Integer))
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(130, Byte), Integer))
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvToday.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(217, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(250, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(130, Byte), Integer))
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvToday.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvToday.EnableHeadersVisualStyles = False
         Me.dgvToday.GridColor = System.Drawing.Color.FromArgb(CType(CType(214, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(236, Byte), Integer))
         Me.dgvToday.Location = New System.Drawing.Point(34, 178)
@@ -2148,55 +2153,6 @@ Partial Class frmMain
         Me.pnlRight.Size = New System.Drawing.Size(844, 1004)
         Me.pnlRight.TabIndex = 3
         '
-        'pnlLeft
-        '
-        Me.pnlLeft.BackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(248, Byte), Integer))
-        Me.pnlLeft.Controls.Add(Me.btnClear)
-        Me.pnlLeft.Controls.Add(Me.dgvPatients)
-        Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
-        Me.pnlLeft.Location = New System.Drawing.Point(10, 10)
-        Me.pnlLeft.Name = "pnlLeft"
-        Me.pnlLeft.Size = New System.Drawing.Size(836, 1004)
-        Me.pnlLeft.TabIndex = 36
-        '
-        'btnClear
-        '
-        Me.btnClear.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(232, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.btnClear.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnClear.FlatAppearance.BorderSize = 0
-        Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnClear.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.btnClear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnClear.Location = New System.Drawing.Point(732, 9)
-        Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(90, 29)
-        Me.btnClear.TabIndex = 4
-        Me.btnClear.Text = "Clear"
-        Me.btnClear.UseVisualStyleBackColor = False
-        '
-        'dgvPatients
-        '
-        Me.dgvPatients.AllowUserToAddRows = False
-        Me.dgvPatients.AllowUserToDeleteRows = False
-        Me.dgvPatients.AllowUserToResizeRows = False
-        Me.dgvPatients.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvPatients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.dgvPatients.BackgroundColor = System.Drawing.Color.White
-        Me.dgvPatients.ColumnHeadersHeight = 29
-        Me.dgvPatients.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
-        Me.dgvPatients.Location = New System.Drawing.Point(8, 48)
-        Me.dgvPatients.MultiSelect = False
-        Me.dgvPatients.Name = "dgvPatients"
-        Me.dgvPatients.ReadOnly = True
-        Me.dgvPatients.RowHeadersVisible = False
-        Me.dgvPatients.RowHeadersWidth = 51
-        Me.dgvPatients.RowTemplate.Height = 26
-        Me.dgvPatients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvPatients.Size = New System.Drawing.Size(820, 948)
-        Me.dgvPatients.TabIndex = 5
-        '
         'grpDetails
         '
         Me.grpDetails.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -2546,6 +2502,55 @@ Partial Class frmMain
         Me.btnArchive.TabIndex = 35
         Me.btnArchive.Text = "Archive"
         Me.btnArchive.UseVisualStyleBackColor = False
+        '
+        'pnlLeft
+        '
+        Me.pnlLeft.BackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.pnlLeft.Controls.Add(Me.btnClear)
+        Me.pnlLeft.Controls.Add(Me.dgvPatients)
+        Me.pnlLeft.Dock = System.Windows.Forms.DockStyle.Left
+        Me.pnlLeft.Location = New System.Drawing.Point(10, 10)
+        Me.pnlLeft.Name = "pnlLeft"
+        Me.pnlLeft.Size = New System.Drawing.Size(836, 1004)
+        Me.pnlLeft.TabIndex = 36
+        '
+        'btnClear
+        '
+        Me.btnClear.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(232, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.btnClear.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnClear.FlatAppearance.BorderSize = 0
+        Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClear.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnClear.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.btnClear.Location = New System.Drawing.Point(732, 9)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(90, 29)
+        Me.btnClear.TabIndex = 4
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = False
+        '
+        'dgvPatients
+        '
+        Me.dgvPatients.AllowUserToAddRows = False
+        Me.dgvPatients.AllowUserToDeleteRows = False
+        Me.dgvPatients.AllowUserToResizeRows = False
+        Me.dgvPatients.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgvPatients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvPatients.BackgroundColor = System.Drawing.Color.White
+        Me.dgvPatients.ColumnHeadersHeight = 29
+        Me.dgvPatients.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
+        Me.dgvPatients.Location = New System.Drawing.Point(8, 48)
+        Me.dgvPatients.MultiSelect = False
+        Me.dgvPatients.Name = "dgvPatients"
+        Me.dgvPatients.ReadOnly = True
+        Me.dgvPatients.RowHeadersVisible = False
+        Me.dgvPatients.RowHeadersWidth = 51
+        Me.dgvPatients.RowTemplate.Height = 26
+        Me.dgvPatients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvPatients.Size = New System.Drawing.Size(820, 948)
+        Me.dgvPatients.TabIndex = 5
         '
         'pnlClinicalRecord
         '
@@ -3604,12 +3609,16 @@ Partial Class frmMain
         '
         'pnlAuditlog
         '
+        Me.pnlAuditlog.Controls.Add(Me.Panel4)
+        Me.pnlAuditlog.Controls.Add(Me.Panel3)
+        Me.pnlAuditlog.Controls.Add(Me.Panel2)
+        Me.pnlAuditlog.Controls.Add(Me.pnlLogs)
+        Me.pnlAuditlog.Controls.Add(Me.lblCount)
         Me.pnlAuditlog.Controls.Add(Me.lblFrom)
         Me.pnlAuditlog.Controls.Add(Me.dtpFrom)
         Me.pnlAuditlog.Controls.Add(Me.lblTo)
         Me.pnlAuditlog.Controls.Add(Me.dtpTo)
         Me.pnlAuditlog.Controls.Add(Me.btnLoad)
-        Me.pnlAuditlog.Controls.Add(Me.lblCount)
         Me.pnlAuditlog.Controls.Add(Me.dgvLog)
         Me.pnlAuditlog.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlAuditlog.Location = New System.Drawing.Point(220, 56)
@@ -3621,37 +3630,41 @@ Partial Class frmMain
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
+        Me.lblFrom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFrom.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.lblFrom.Location = New System.Drawing.Point(23, 10)
+        Me.lblFrom.Location = New System.Drawing.Point(23, 443)
         Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(30, 13)
+        Me.lblFrom.Size = New System.Drawing.Size(38, 17)
         Me.lblFrom.TabIndex = 9
         Me.lblFrom.Text = "From"
         '
         'dtpFrom
         '
+        Me.dtpFrom.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpFrom.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpFrom.Location = New System.Drawing.Point(65, 6)
+        Me.dtpFrom.Location = New System.Drawing.Point(65, 439)
         Me.dtpFrom.Name = "dtpFrom"
-        Me.dtpFrom.Size = New System.Drawing.Size(120, 20)
+        Me.dtpFrom.Size = New System.Drawing.Size(120, 25)
         Me.dtpFrom.TabIndex = 10
         '
         'lblTo
         '
         Me.lblTo.AutoSize = True
+        Me.lblTo.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.lblTo.Location = New System.Drawing.Point(197, 10)
+        Me.lblTo.Location = New System.Drawing.Point(197, 443)
         Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(20, 13)
+        Me.lblTo.Size = New System.Drawing.Size(22, 17)
         Me.lblTo.TabIndex = 11
         Me.lblTo.Text = "To"
         '
         'dtpTo
         '
+        Me.dtpTo.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpTo.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpTo.Location = New System.Drawing.Point(223, 6)
+        Me.dtpTo.Location = New System.Drawing.Point(223, 439)
         Me.dtpTo.Name = "dtpTo"
-        Me.dtpTo.Size = New System.Drawing.Size(120, 20)
+        Me.dtpTo.Size = New System.Drawing.Size(120, 25)
         Me.dtpTo.TabIndex = 12
         '
         'btnLoad
@@ -3662,7 +3675,7 @@ Partial Class frmMain
         Me.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLoad.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnLoad.ForeColor = System.Drawing.Color.White
-        Me.btnLoad.Location = New System.Drawing.Point(915, 10)
+        Me.btnLoad.Location = New System.Drawing.Point(1569, 442)
         Me.btnLoad.Name = "btnLoad"
         Me.btnLoad.Size = New System.Drawing.Size(90, 30)
         Me.btnLoad.TabIndex = 13
@@ -3673,7 +3686,7 @@ Partial Class frmMain
         '
         Me.lblCount.AutoSize = True
         Me.lblCount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblCount.Location = New System.Drawing.Point(717, 11)
+        Me.lblCount.Location = New System.Drawing.Point(0, 0)
         Me.lblCount.Name = "lblCount"
         Me.lblCount.Size = New System.Drawing.Size(0, 13)
         Me.lblCount.TabIndex = 14
@@ -3690,7 +3703,7 @@ Partial Class frmMain
         Me.dgvLog.BackgroundColor = System.Drawing.Color.White
         Me.dgvLog.ColumnHeadersHeight = 29
         Me.dgvLog.GridColor = System.Drawing.Color.FromArgb(CType(CType(225, Byte), Integer), CType(CType(231, Byte), Integer), CType(CType(234, Byte), Integer))
-        Me.dgvLog.Location = New System.Drawing.Point(21, 46)
+        Me.dgvLog.Location = New System.Drawing.Point(26, 501)
         Me.dgvLog.MultiSelect = False
         Me.dgvLog.Name = "dgvLog"
         Me.dgvLog.ReadOnly = True
@@ -3698,7 +3711,7 @@ Partial Class frmMain
         Me.dgvLog.RowHeadersWidth = 51
         Me.dgvLog.RowTemplate.Height = 26
         Me.dgvLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvLog.Size = New System.Drawing.Size(986, 582)
+        Me.dgvLog.Size = New System.Drawing.Size(1638, 492)
         Me.dgvLog.TabIndex = 15
         '
         'pnlStaff
@@ -4622,15 +4635,103 @@ Partial Class frmMain
         Me.dgvInvoices.Size = New System.Drawing.Size(820, 948)
         Me.dgvInvoices.TabIndex = 5
         '
+        'picLogo
+        '
+        Me.picLogo.BackColor = System.Drawing.Color.Transparent
+        Me.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.picLogo.Image = Global.DentalScape.My.Resources.Resources.DentalScape_Logo
+        Me.picLogo.Location = New System.Drawing.Point(35, 15)
+        Me.picLogo.Name = "picLogo"
+        Me.picLogo.Size = New System.Drawing.Size(129, 133)
+        Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picLogo.TabIndex = 19
+        Me.picLogo.TabStop = False
+        '
+        'pnlLogs
+        '
+        Me.pnlLogs.BackColor = System.Drawing.Color.White
+        Me.pnlLogs.Controls.Add(Me.lblLogs)
+        Me.pnlLogs.Location = New System.Drawing.Point(34, 22)
+        Me.pnlLogs.Name = "pnlLogs"
+        Me.pnlLogs.Size = New System.Drawing.Size(395, 150)
+        Me.pnlLogs.TabIndex = 20
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.Controls.Add(Me.lblLogin)
+        Me.Panel2.Location = New System.Drawing.Point(444, 22)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(395, 150)
+        Me.Panel2.TabIndex = 21
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.White
+        Me.Panel3.Controls.Add(Me.lblChanges)
+        Me.Panel3.Location = New System.Drawing.Point(854, 22)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(395, 150)
+        Me.Panel3.TabIndex = 22
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.White
+        Me.Panel4.Controls.Add(Me.lblLogouts)
+        Me.Panel4.Location = New System.Drawing.Point(1264, 22)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(395, 150)
+        Me.Panel4.TabIndex = 23
+        '
+        'lblLogs
+        '
+        Me.lblLogs.AutoSize = True
+        Me.lblLogs.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLogs.Location = New System.Drawing.Point(14, 18)
+        Me.lblLogs.Name = "lblLogs"
+        Me.lblLogs.Size = New System.Drawing.Size(69, 17)
+        Me.lblLogs.TabIndex = 0
+        Me.lblLogs.Text = "Total Logs"
+        '
+        'lblLogin
+        '
+        Me.lblLogin.AutoSize = True
+        Me.lblLogin.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLogin.Location = New System.Drawing.Point(17, 16)
+        Me.lblLogin.Name = "lblLogin"
+        Me.lblLogin.Size = New System.Drawing.Size(41, 17)
+        Me.lblLogin.TabIndex = 1
+        Me.lblLogin.Text = "Login"
+        '
+        'lblChanges
+        '
+        Me.lblChanges.AutoSize = True
+        Me.lblChanges.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblChanges.Location = New System.Drawing.Point(21, 16)
+        Me.lblChanges.Name = "lblChanges"
+        Me.lblChanges.Size = New System.Drawing.Size(60, 17)
+        Me.lblChanges.TabIndex = 2
+        Me.lblChanges.Text = "Changes"
+        '
+        'lblLogouts
+        '
+        Me.lblLogouts.AutoSize = True
+        Me.lblLogouts.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLogouts.Location = New System.Drawing.Point(30, 16)
+        Me.lblLogouts.Name = "lblLogouts"
+        Me.lblLogouts.Size = New System.Drawing.Size(57, 17)
+        Me.lblLogouts.TabIndex = 3
+        Me.lblLogouts.Text = "Logouts"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1920, 1080)
+        Me.Controls.Add(Me.pnlAuditlog)
         Me.Controls.Add(Me.pnlDashboard)
         Me.Controls.Add(Me.pnlProcedures)
         Me.Controls.Add(Me.pnlStaff)
-        Me.Controls.Add(Me.pnlAuditlog)
         Me.Controls.Add(Me.pnlInventory)
         Me.Controls.Add(Me.pnlPatients)
         Me.Controls.Add(Me.pnlBillingpayments)
@@ -4643,7 +4744,6 @@ Partial Class frmMain
         Me.Text = "frmMain"
         Me.pnlSidebar.ResumeLayout(False)
         Me.pnlSidebar.PerformLayout()
-        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlHeader.ResumeLayout(False)
         Me.pnlHeader.PerformLayout()
         Me.pnlDashboard.ResumeLayout(False)
@@ -4690,10 +4790,10 @@ Partial Class frmMain
         CType(Me.dgvAppointments, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlPatients.ResumeLayout(False)
         Me.pnlRight.ResumeLayout(False)
-        Me.pnlLeft.ResumeLayout(False)
-        CType(Me.dgvPatients, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpDetails.ResumeLayout(False)
         Me.grpDetails.PerformLayout()
+        Me.pnlLeft.ResumeLayout(False)
+        CType(Me.dgvPatients, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlClinicalRecord.ResumeLayout(False)
         Me.tabMain.ResumeLayout(False)
         Me.tabMedical.ResumeLayout(False)
@@ -4750,6 +4850,15 @@ Partial Class frmMain
         CType(Me.dgvPayments, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlInvoiceLeft.ResumeLayout(False)
         CType(Me.dgvInvoices, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlLogs.ResumeLayout(False)
+        Me.pnlLogs.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -5085,4 +5194,12 @@ Partial Class frmMain
     Friend WithEvents dgvLowStockProducts As DataGridView
     Friend WithEvents lblLowStocks As Label
     Friend WithEvents lblTopProcedures As Label
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents pnlLogs As Panel
+    Friend WithEvents lblLogin As Label
+    Friend WithEvents lblLogs As Label
+    Friend WithEvents lblLogouts As Label
+    Friend WithEvents lblChanges As Label
 End Class
