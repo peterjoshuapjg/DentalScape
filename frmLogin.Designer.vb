@@ -38,39 +38,39 @@ Partial Class frmLogin
         'label1
         '
         Me.label1.AutoSize = True
-        Me.label1.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.label1.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.label1.Location = New System.Drawing.Point(96, 175)
         Me.label1.Name = "label1"
-        Me.label1.Size = New System.Drawing.Size(105, 24)
+        Me.label1.Size = New System.Drawing.Size(97, 25)
         Me.label1.TabIndex = 10
         Me.label1.Text = "Username"
         '
         'txtUsername
         '
-        Me.txtUsername.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtUsername.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUsername.Location = New System.Drawing.Point(96, 202)
         Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(340, 32)
+        Me.txtUsername.Size = New System.Drawing.Size(340, 35)
         Me.txtUsername.TabIndex = 11
         '
         'label2
         '
         Me.label2.AutoSize = True
-        Me.label2.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.label2.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
         Me.label2.Location = New System.Drawing.Point(96, 254)
         Me.label2.Name = "label2"
-        Me.label2.Size = New System.Drawing.Size(103, 24)
+        Me.label2.Size = New System.Drawing.Size(91, 25)
         Me.label2.TabIndex = 12
         Me.label2.Text = "Password"
         '
         'txtPassword
         '
-        Me.txtPassword.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword.Location = New System.Drawing.Point(96, 281)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(340, 32)
+        Me.txtPassword.Size = New System.Drawing.Size(340, 35)
         Me.txtPassword.TabIndex = 13
         Me.txtPassword.UseSystemPasswordChar = True
         '
@@ -80,7 +80,7 @@ Partial Class frmLogin
         Me.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnLogin.FlatAppearance.BorderSize = 0
         Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLogin.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLogin.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.ForeColor = System.Drawing.Color.White
         Me.btnLogin.Location = New System.Drawing.Point(100, 353)
         Me.btnLogin.Name = "btnLogin"
@@ -96,7 +96,7 @@ Partial Class frmLogin
         Me.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnExit.FlatAppearance.BorderSize = 0
         Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExit.Font = New System.Drawing.Font("Arial", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExit.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.btnExit.Location = New System.Drawing.Point(100, 424)
         Me.btnExit.Name = "btnExit"
@@ -131,9 +131,10 @@ Partial Class frmLogin
         'cbShowPassword
         '
         Me.cbShowPassword.AutoSize = True
+        Me.cbShowPassword.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cbShowPassword.Location = New System.Drawing.Point(334, 261)
         Me.cbShowPassword.Name = "cbShowPassword"
-        Me.cbShowPassword.Size = New System.Drawing.Size(102, 17)
+        Me.cbShowPassword.Size = New System.Drawing.Size(107, 17)
         Me.cbShowPassword.TabIndex = 18
         Me.cbShowPassword.Text = "Show Password"
         Me.cbShowPassword.UseVisualStyleBackColor = True
