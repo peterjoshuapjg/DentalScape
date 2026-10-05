@@ -22,15 +22,15 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea7 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend7 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea8 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend8 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.lblBrand = New System.Windows.Forms.Label()
         Me.lblBrandSub = New System.Windows.Forms.Label()
@@ -43,8 +43,8 @@ Partial Class frmMain
         Me.dgvLowStockProducts = New System.Windows.Forms.DataGridView()
         Me.lblLowStocks = New System.Windows.Forms.Label()
         Me.lblTopProcedures = New System.Windows.Forms.Label()
-        Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
-        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.chtTopProcedure = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.chtMonthlyRevenue = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.lblMonthlyRevenue = New System.Windows.Forms.Label()
         Me.pnlCardToday = New System.Windows.Forms.Panel()
         Me.lblCardTodayCaption = New System.Windows.Forms.Label()
@@ -383,8 +383,8 @@ Partial Class frmMain
         Me.pnlHeader.SuspendLayout()
         Me.pnlDashboard.SuspendLayout()
         CType(Me.dgvLowStockProducts, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chtTopProcedure, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.chtMonthlyRevenue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlCardToday.SuspendLayout()
         Me.pnlCardPending.SuspendLayout()
         Me.pnlCardUnpaid.SuspendLayout()
@@ -586,8 +586,8 @@ Partial Class frmMain
         Me.pnlDashboard.Controls.Add(Me.dgvLowStockProducts)
         Me.pnlDashboard.Controls.Add(Me.lblLowStocks)
         Me.pnlDashboard.Controls.Add(Me.lblTopProcedures)
-        Me.pnlDashboard.Controls.Add(Me.Chart2)
-        Me.pnlDashboard.Controls.Add(Me.Chart1)
+        Me.pnlDashboard.Controls.Add(Me.chtTopProcedure)
+        Me.pnlDashboard.Controls.Add(Me.chtMonthlyRevenue)
         Me.pnlDashboard.Controls.Add(Me.lblMonthlyRevenue)
         Me.pnlDashboard.Controls.Add(Me.pnlCardToday)
         Me.pnlDashboard.Controls.Add(Me.pnlCardPending)
@@ -638,37 +638,37 @@ Partial Class frmMain
         Me.lblTopProcedures.TabIndex = 27
         Me.lblTopProcedures.Text = "Top Procedures this Month"
         '
-        'Chart2
+        'chtTopProcedure
         '
-        ChartArea7.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea7)
-        Legend7.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend7)
-        Me.Chart2.Location = New System.Drawing.Point(1077, 616)
-        Me.Chart2.Name = "Chart2"
-        Series7.ChartArea = "ChartArea1"
-        Series7.Legend = "Legend1"
-        Series7.Name = "Series1"
-        Me.Chart2.Series.Add(Series7)
-        Me.Chart2.Size = New System.Drawing.Size(600, 376)
-        Me.Chart2.TabIndex = 26
-        Me.Chart2.Text = "Chart2"
+        ChartArea3.Name = "ChartArea1"
+        Me.chtTopProcedure.ChartAreas.Add(ChartArea3)
+        Legend3.Name = "Legend1"
+        Me.chtTopProcedure.Legends.Add(Legend3)
+        Me.chtTopProcedure.Location = New System.Drawing.Point(1077, 616)
+        Me.chtTopProcedure.Name = "chtTopProcedure"
+        Series3.ChartArea = "ChartArea1"
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.chtTopProcedure.Series.Add(Series3)
+        Me.chtTopProcedure.Size = New System.Drawing.Size(600, 376)
+        Me.chtTopProcedure.TabIndex = 26
+        Me.chtTopProcedure.Text = "Chart2"
         '
-        'Chart1
+        'chtMonthlyRevenue
         '
-        ChartArea8.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea8)
-        Legend8.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend8)
-        Me.Chart1.Location = New System.Drawing.Point(1080, 179)
-        Me.Chart1.Name = "Chart1"
-        Series8.ChartArea = "ChartArea1"
-        Series8.Legend = "Legend1"
-        Series8.Name = "Series1"
-        Me.Chart1.Series.Add(Series8)
-        Me.Chart1.Size = New System.Drawing.Size(600, 376)
-        Me.Chart1.TabIndex = 25
-        Me.Chart1.Text = "Chart1"
+        ChartArea4.Name = "ChartArea1"
+        Me.chtMonthlyRevenue.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.chtMonthlyRevenue.Legends.Add(Legend4)
+        Me.chtMonthlyRevenue.Location = New System.Drawing.Point(1080, 179)
+        Me.chtMonthlyRevenue.Name = "chtMonthlyRevenue"
+        Series4.ChartArea = "ChartArea1"
+        Series4.Legend = "Legend1"
+        Series4.Name = "Series1"
+        Me.chtMonthlyRevenue.Series.Add(Series4)
+        Me.chtMonthlyRevenue.Size = New System.Drawing.Size(600, 376)
+        Me.chtMonthlyRevenue.TabIndex = 25
+        Me.chtMonthlyRevenue.Text = "Chart1"
         '
         'lblMonthlyRevenue
         '
@@ -856,31 +856,31 @@ Partial Class frmMain
         Me.dgvToday.AllowUserToAddRows = False
         Me.dgvToday.AllowUserToDeleteRows = False
         Me.dgvToday.AllowUserToResizeRows = False
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(252, Byte), Integer))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        Me.dgvToday.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(252, Byte), Integer))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
+        Me.dgvToday.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
         Me.dgvToday.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvToday.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvToday.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(36, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(163, Byte), Integer))
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvToday.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(36, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(163, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvToday.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvToday.ColumnHeadersHeight = 29
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(217, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(250, Byte), Integer))
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(130, Byte), Integer))
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvToday.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(217, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(250, Byte), Integer))
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(130, Byte), Integer))
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvToday.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvToday.EnableHeadersVisualStyles = False
         Me.dgvToday.GridColor = System.Drawing.Color.FromArgb(CType(CType(214, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(236, Byte), Integer))
         Me.dgvToday.Location = New System.Drawing.Point(34, 178)
@@ -4873,15 +4873,15 @@ Partial Class frmMain
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1920, 1080)
-        Me.Controls.Add(Me.pnlAuditlog)
+        Me.Controls.Add(Me.pnlClinicalRecord)
         Me.Controls.Add(Me.pnlDashboard)
+        Me.Controls.Add(Me.pnlAuditlog)
         Me.Controls.Add(Me.pnlProcedures)
         Me.Controls.Add(Me.pnlStaff)
         Me.Controls.Add(Me.pnlInventory)
         Me.Controls.Add(Me.pnlPatients)
         Me.Controls.Add(Me.pnlBillingpayments)
         Me.Controls.Add(Me.pnlAppointment)
-        Me.Controls.Add(Me.pnlClinicalRecord)
         Me.Controls.Add(Me.pnlHeader)
         Me.Controls.Add(Me.pnlSidebar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -4894,8 +4894,8 @@ Partial Class frmMain
         Me.pnlDashboard.ResumeLayout(False)
         Me.pnlDashboard.PerformLayout()
         CType(Me.dgvLowStockProducts, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chtTopProcedure, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.chtMonthlyRevenue, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlCardToday.ResumeLayout(False)
         Me.pnlCardToday.PerformLayout()
         Me.pnlCardPending.ResumeLayout(False)
@@ -5337,8 +5337,8 @@ Partial Class frmMain
     Friend WithEvents pnlInvoiceLeft As Panel
     Friend WithEvents cboStatusFilter As ComboBox
     Friend WithEvents dgvInvoices As DataGridView
-    Friend WithEvents Chart2 As DataVisualization.Charting.Chart
-    Friend WithEvents Chart1 As DataVisualization.Charting.Chart
+    Friend WithEvents chtTopProcedure As DataVisualization.Charting.Chart
+    Friend WithEvents chtMonthlyRevenue As DataVisualization.Charting.Chart
     Friend WithEvents lblMonthlyRevenue As Label
     Friend WithEvents dgvLowStockProducts As DataGridView
     Friend WithEvents lblLowStocks As Label
