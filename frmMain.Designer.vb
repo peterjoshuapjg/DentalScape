@@ -1661,11 +1661,13 @@ Partial Class frmMain
         Me.lblApptPatient.Name = "lblApptPatient"
         Me.lblApptPatient.Size = New System.Drawing.Size(47, 13)
         Me.lblApptPatient.TabIndex = 14
-        Me.lblApptPatient.Text = "Patient *"
+        Me.lblApptPatient.Text = "Patient * (name or ID)"
         '
         'cboApptPatient
         '
-        Me.cboApptPatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboApptPatient.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cboApptPatient.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
+        Me.cboApptPatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
         Me.cboApptPatient.FormattingEnabled = True
         Me.cboApptPatient.Location = New System.Drawing.Point(14, 100)
         Me.cboApptPatient.Name = "cboApptPatient"

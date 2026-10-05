@@ -160,8 +160,7 @@ Public Class frmMain
         Dim table As DataTable = Db.Query("
             SELECT DATE_FORMAT(a.Timestamp, '%Y-%m-%d %H:%i:%s') AS `Time`,
                    IFNULL(u.Username, '(none)') AS `User`,
-                   a.Action, IFNULL(a.EntityName, '') AS Entity, IFNULL(a.RecordID, '') AS Record,
-                   IFNULL(a.OldValue, '') AS `Old`, IFNULL(a.NewValue, '') AS `New`
+                   a.Action, IFNULL(a.NewValue, '') AS `New`
             FROM tblAuditLogs a
             LEFT JOIN tblUsers u ON u.UserID = a.UserID
             WHERE a.Timestamp >= @from AND a.Timestamp < @to
@@ -317,6 +316,7 @@ Public Class frmMain
                        Audit.Log("Update Patient", "tblPatients", _patId, Nothing, $"{txtCode.Text} {last}, {first}")
                        LoadPatientGrid(_patId)
                    End If
+                   NewPatient()            ' auto-clear the form for the next entry
                    Ui.Info("Patient saved.")
                End Sub)
     End Sub
@@ -352,9 +352,21 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadApptLookups()
-        Ui.Fill(cboApptPatient, Db.Query("
-            SELECT PatientID AS ID, CONCAT(PatientCode, ' - ', LastName, ', ', FirstName) AS Name
-            FROM tblPatients WHERE Status <> 'Archived' ORDER BY LastName, FirstName"), "Name", "ID")
+        Dim pats As DataTable = Db.Query("
+            SELECT PatientID AS ID, CONCAT(PatientCode, ' - ', LastName, ', ', FirstName) AS Name,
+                   PatientCode AS Code, FirstName, LastName
+            FROM tblPatients WHERE Status <> 'Archived' ORDER BY LastName, FirstName")
+        Ui.Fill(cboApptPatient, pats, "Name", "ID")
+
+        ' type-ahead suggestions: the patient ID, "Last, First", "First Last" and the full list text
+        Dim hints As New AutoCompleteStringCollection()
+        For Each pr As DataRow In pats.Rows
+            hints.Add(pr("Code").ToString())
+            hints.Add(pr("LastName").ToString() & ", " & pr("FirstName").ToString())
+            hints.Add(pr("FirstName").ToString() & " " & pr("LastName").ToString())
+            hints.Add(pr("Name").ToString())
+        Next
+        cboApptPatient.AutoCompleteCustomSource = hints
         Ui.Fill(cboDentist, Db.Query("
             SELECT StaffID AS ID, CONCAT(FirstName, ' ', LastName) AS Name
             FROM tblStaff WHERE Position = 'Dentist' AND Status = 'Active' ORDER BY LastName"), "Name", "ID")
@@ -428,6 +440,7 @@ Public Class frmMain
         _apptId = id
         txtApptCode.Text = Ui.Txt(r("AppointmentCode"))
         Ui.SetText(cboApptStatus, Ui.Txt(r("Status")))
+        cboApptPatient.Text = ""
         Ui.SelectValue(cboApptPatient, r("PatientID"))
         Ui.SelectValue(cboDentist, r("DentistID"))
         Ui.SelectValue(cboType, r("AppointmentTypeID"))
@@ -446,6 +459,7 @@ Public Class frmMain
         txtApptCode.Text = "(assigned on save)"
         cboApptStatus.SelectedIndex = 0
         cboApptPatient.SelectedIndex = -1
+        cboApptPatient.Text = ""
         cboDentist.SelectedIndex = If(cboDentist.Items.Count = 1, 0, -1)
         cboType.SelectedIndex = -1
         dtpDate.Value = If(chkAllDates.Checked, DateTime.Today, dtpFilterDate.Value.Date)
@@ -458,6 +472,107 @@ Public Class frmMain
         _apptLoading = False
         cboApptPatient.Focus()
     End Sub
+
+    ' ------------------------------------------------------------ patient box: type a name or an ID
+    ''' <summary>
+    ''' Works out which patient the Patient box means: an item picked from the list, a patient ID
+    ''' (PAT-00001, 00001 or just 1) or part of a name ("Santos", "Maria Santos", "Santos, Maria").
+    ''' Returns Nothing when there is no single match (and explains why when showMessages is True).
+    ''' </summary>
+    Private Function ResolveApptPatient(showMessages As Boolean) As Integer?
+        Dim typed As String = cboApptPatient.Text.Trim()
+        If typed.Length = 0 Then Return Nothing
+
+        ' an item picked from the list and left unchanged
+        Dim picked As Integer? = Ui.SelId(cboApptPatient)
+        If picked.HasValue AndAlso String.Equals(cboApptPatient.GetItemText(cboApptPatient.SelectedItem), typed, StringComparison.OrdinalIgnoreCase) Then
+            Return picked
+        End If
+
+        ' "PAT-00001 - Santos, Maria" typed or pasted in full: keep only the ID part
+        Dim key As String = typed
+        Dim dash As Integer = key.IndexOf(" - ", StringComparison.Ordinal)
+        If dash > 0 Then key = key.Substring(0, dash).Trim()
+
+        Const pick As String = "SELECT PatientID AS ID, CONCAT(PatientCode, ' - ', LastName, ', ', FirstName) AS Name, FirstName, LastName " &
+                               "FROM tblPatients WHERE Status <> 'Archived' AND "
+        Dim table As DataTable
+        Dim idNum As Integer
+        Dim m As System.Text.RegularExpressions.Match = System.Text.RegularExpressions.Regex.Match(
+            key, "^(?:PAT-?)?0*(\d+)$", System.Text.RegularExpressions.RegexOptions.IgnoreCase)
+
+        If m.Success AndAlso Integer.TryParse(m.Groups(1).Value, idNum) Then
+            ' patient ID
+            table = Db.Query(pick & "(PatientID = @id OR PatientCode = @code)", ("@id", idNum), ("@code", $"PAT-{idNum:D5}"))
+        Else
+            ' name: every word typed must appear somewhere in the patient's name or ID
+            Dim words As String() = key.Split(New Char() {" "c, ","c}, StringSplitOptions.RemoveEmptyEntries)
+            If words.Length = 0 Then Return Nothing
+            Dim sql As New System.Text.StringBuilder(pick & "1 = 1")
+            Dim args As New List(Of (Name As String, Value As Object))()
+            For i As Integer = 0 To words.Length - 1
+                sql.Append($" AND CONCAT_WS(' ', PatientCode, FirstName, MiddleName, LastName) LIKE @w{i}")
+                args.Add(($"@w{i}", "%" & words(i).Replace("\", "\\").Replace("%", "\%").Replace("_", "\_") & "%"))
+            Next
+            sql.Append(" ORDER BY LastName, FirstName")
+            table = Db.Query(sql.ToString(), args.ToArray())
+        End If
+
+        If table.Rows.Count = 1 Then Return Convert.ToInt32(table.Rows(0)("ID"))
+
+        ' several partial matches: an exact full-name match wins
+        Dim exactId As Integer = 0
+        Dim exactCount As Integer = 0
+        For Each r As DataRow In table.Rows
+            Dim fn As String = r("FirstName").ToString()
+            Dim ln As String = r("LastName").ToString()
+            If String.Equals(key, fn & " " & ln, StringComparison.OrdinalIgnoreCase) OrElse
+               String.Equals(key, ln & ", " & fn, StringComparison.OrdinalIgnoreCase) OrElse
+               String.Equals(key, ln & " " & fn, StringComparison.OrdinalIgnoreCase) Then
+                exactId = Convert.ToInt32(r("ID"))
+                exactCount += 1
+            End If
+        Next
+        If exactCount = 1 Then Return exactId
+
+        If showMessages Then
+            If table.Rows.Count = 0 Then
+                Ui.Warn($"No active patient matches ""{typed}"". Type the patient ID (for example PAT-00001) or the patient's name.")
+            Else
+                Dim list As New System.Text.StringBuilder()
+                For i As Integer = 0 To Math.Min(table.Rows.Count, 8) - 1
+                    list.AppendLine(table.Rows(i)("Name").ToString())
+                Next
+                If table.Rows.Count > 8 Then list.AppendLine("...")
+                Ui.Warn($"More than one patient matches ""{typed}"". Type more of the name or the patient ID:" & vbCrLf & vbCrLf & list.ToString())
+            End If
+        End If
+        Return Nothing
+    End Function
+
+    ' leaving the box turns what was typed into the full patient entry (when it is a single match)
+    Private Sub cboApptPatient_Leave(sender As Object, e As EventArgs) Handles cboApptPatient.Leave
+        Try
+            Dim id As Integer? = ResolveApptPatient(False)
+            If Not id.HasValue Then Return
+            Dim cur As Integer? = Ui.SelId(cboApptPatient)
+            If Not cur.HasValue OrElse cur.Value <> id.Value Then Ui.SelectValue(cboApptPatient, id.Value)
+        Catch
+        End Try
+    End Sub
+
+    Private Sub cboApptPatient_KeyDown(sender As Object, e As KeyEventArgs) Handles cboApptPatient.KeyDown
+        If e.KeyCode <> Keys.Enter Then Return
+        e.SuppressKeyPress = True
+        Ui.Try(Sub()
+                   Dim id As Integer? = ResolveApptPatient(True)
+                   If id.HasValue Then
+                       Ui.SelectValue(cboApptPatient, id.Value)
+                       Me.SelectNextControl(cboApptPatient, True, True, True, True)
+                   End If
+               End Sub)
+    End Sub
+
 
     Private Sub btnNewAppt_Click(sender As Object, e As EventArgs) Handles btnNewAppt.Click
         NewAppointment()
@@ -483,13 +598,14 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSaveAppt_Click(sender As Object, e As EventArgs) Handles btnSaveAppt.Click
-        Dim patient As Integer? = Ui.SelId(cboApptPatient)
-        Dim dentist As Integer? = Ui.SelId(cboDentist)
-        Dim apptType As Integer? = Ui.SelId(cboType)
+        Dim patient As Integer? = ResolveApptPatient(True)
         If Not patient.HasValue Then
-            Ui.Warn("Select a patient.")
+            If cboApptPatient.Text.Trim().Length = 0 Then Ui.Warn("Enter the patient's name or patient ID.")
             Return
         End If
+        Ui.SelectValue(cboApptPatient, patient.Value)       ' show the full matched patient
+        Dim dentist As Integer? = Ui.SelId(cboDentist)
+        Dim apptType As Integer? = Ui.SelId(cboType)
         If Not dentist.HasValue Then
             Ui.Warn(If(cboDentist.Items.Count = 0,
                        "There is no active dentist yet. The administrator must add a staff member with the position ""Dentist"" first.",
@@ -553,6 +669,7 @@ Public Class frmMain
                        Audit.Log("Update Appointment", "tblAppointments", _apptId, Nothing, $"{txtApptCode.Text} {status}")
                        LoadApptGrid(_apptId)
                    End If
+                   NewAppointment()            ' auto-clear the form for the next entry
                    Ui.Info("Appointment saved.")
                End Sub)
     End Sub
@@ -1280,6 +1397,7 @@ Public Class frmMain
                        Audit.Log("Update Chart Entry", "tblDentalChart", _chartId, Nothing, "tooth " & tooth)
                        LoadChart(_chartId)
                    End If
+                   NewChart()            ' auto-clear the form for the next entry
                End Sub)
     End Sub
 
@@ -1397,6 +1515,7 @@ Public Class frmMain
                        Audit.Log("Update Procedure", "tblProcedures", _procId, "price " & oldPrice, $"{code} {name} price {numPrice.Value:N2}")
                        LoadProcGrid(_procId)
                    End If
+                   NewProcedure()            ' auto-clear the form for the next entry
                    Ui.Info("Procedure saved.")
                End Sub)
     End Sub
@@ -1547,6 +1666,7 @@ Public Class frmMain
                        Audit.Log("Update Product", "tblProducts", _prodId, Nothing, name)
                        LoadProducts(_prodId)
                    End If
+                   NewProduct()            ' auto-clear the form for the next entry
                    Ui.Info("Product saved.")
                End Sub)
     End Sub
@@ -1697,6 +1817,7 @@ Public Class frmMain
                        Audit.Log("Update Supplier", "tblSuppliers", _supId, Nothing, name)
                        LoadSuppliers(_supId)
                    End If
+                   NewSupplier()            ' auto-clear the form for the next entry
                    Ui.Info("Supplier saved.")
                End Sub)
     End Sub
@@ -1820,6 +1941,7 @@ Public Class frmMain
                        LoadStaffGrid(_staffId)
                    End If
                    LoadUsers()
+                   NewStaff()            ' auto-clear the form for the next entry
                    Ui.Info("Staff member saved.")
                End Sub)
     End Sub
