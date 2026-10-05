@@ -294,11 +294,37 @@ Public NotInheritable Class Ui
         End Try
     End Sub
 
+    ' ------------------------------------------------------------ password rules
+    Public Shared ReadOnly PasswordRuleText As String() = {
+        "At least 8 characters",
+        "One uppercase letter (A-Z)",
+        "One lowercase letter (a-z)",
+        "One number (0-9)",
+        "One special character (@, !, #, etc.)"}
+
+    ''' <summary>True/False for each line of PasswordRuleText, in the same order.</summary>
+    Public Shared Function PasswordRuleResults(pw As String) As Boolean()
+        If pw Is Nothing Then pw = ""
+        Return {pw.Length >= 8,
+                pw.Any(Function(c) c >= "A"c AndAlso c <= "Z"c),
+                pw.Any(Function(c) c >= "a"c AndAlso c <= "z"c),
+                pw.Any(Function(c) c >= "0"c AndAlso c <= "9"c),
+                pw.Any(Function(c) Not Char.IsLetterOrDigit(c) AndAlso Not Char.IsWhiteSpace(c))}
+    End Function
+
+    Public Shared Function PasswordIsStrong(pw As String) As Boolean
+        Return PasswordRuleResults(pw).All(Function(ok) ok)
+    End Function
+
     ''' <summary>
-    ''' Asks for a new password twice (masked). Returns Nothing when cancelled.
-    ''' Built in code so no extra form file is needed - it behaves like a MessageBox.
+    ''' Asks for a new password twice (masked) with a live checklist: each requirement turns from red
+    ''' to teal (and the mark from X to a check) as soon as the typed password meets it.
+    ''' Returns Nothing when cancelled. Built in code so no extra form file is needed.
     ''' </summary>
     Public Shared Function AskPassword(prompt As String) As String
+        Dim unmet As Color = Color.FromArgb(185, 56, 56)
+        Dim met As Color = Color.FromArgb(14, 124, 134)
+
         Using f As New Form()
             f.Text = Title
             f.FormBorderStyle = FormBorderStyle.FixedDialog
@@ -306,30 +332,67 @@ Public NotInheritable Class Ui
             f.MaximizeBox = False
             f.MinimizeBox = False
             f.ShowInTaskbar = False
-            f.ClientSize = New Size(380, 215)
+            f.ClientSize = New Size(380, 372)
 
             Dim lbl As New Label() With {.Left = 16, .Top = 14, .Width = 348, .Height = 44, .Text = prompt}
-            Dim lblNew As New Label() With {.Left = 16, .Top = 66, .Width = 348, .Text = "New password (at least 6 characters)"}
+            Dim lblNew As New Label() With {.Left = 16, .Top = 66, .Width = 348, .Text = "New password"}
             Dim txtNew As New TextBox() With {.Left = 16, .Top = 84, .Width = 348, .UseSystemPasswordChar = True}
-            Dim lblConfirm As New Label() With {.Left = 16, .Top = 116, .Width = 348, .Text = "Confirm password"}
-            Dim txtConfirm As New TextBox() With {.Left = 16, .Top = 134, .Width = 348, .UseSystemPasswordChar = True}
-            Dim ok As New Button() With {.Left = 190, .Top = 172, .Width = 84, .Height = 28, .Text = "OK"}
-            Dim cancel As New Button() With {.Left = 280, .Top = 172, .Width = 84, .Height = 28, .Text = "Cancel", .DialogResult = DialogResult.Cancel}
+
+            ' one row per requirement: a mark (X / check) and its text
+            Dim marks(PasswordRuleText.Length - 1) As Label
+            Dim texts(PasswordRuleText.Length - 1) As Label
+            For i As Integer = 0 To PasswordRuleText.Length - 1
+                marks(i) = New Label() With {.Left = 20, .Top = 118 + i * 24, .Width = 22, .Height = 20,
+                                             .Font = New Font("Segoe UI Symbol", 10.0F, FontStyle.Bold),
+                                             .TextAlign = ContentAlignment.MiddleCenter}
+                texts(i) = New Label() With {.Left = 46, .Top = 118 + i * 24, .Width = 318, .Height = 20,
+                                             .TextAlign = ContentAlignment.MiddleLeft, .Text = PasswordRuleText(i)}
+            Next
+
+            Dim lblConfirm As New Label() With {.Left = 16, .Top = 248, .Width = 348, .Text = "Confirm password"}
+            Dim txtConfirm As New TextBox() With {.Left = 16, .Top = 266, .Width = 348, .UseSystemPasswordChar = True}
+            Dim chkShow As New CheckBox() With {.Left = 16, .Top = 296, .Width = 200, .Text = "Show password"}
+            Dim ok As New Button() With {.Left = 190, .Top = 330, .Width = 84, .Height = 28, .Text = "OK"}
+            Dim cancel As New Button() With {.Left = 280, .Top = 330, .Width = 84, .Height = 28, .Text = "Cancel", .DialogResult = DialogResult.Cancel}
+
+            ' re-colour the checklist on every keystroke; OK only works once every requirement is met
+            Dim refreshRules As Action =
+                Sub()
+                    Dim results As Boolean() = PasswordRuleResults(txtNew.Text)
+                    For i As Integer = 0 To results.Length - 1
+                        Dim c As Color = If(results(i), met, unmet)
+                        marks(i).Text = If(results(i), ChrW(&H2713), ChrW(&H2717))
+                        marks(i).ForeColor = c
+                        texts(i).ForeColor = c
+                    Next
+                    ok.Enabled = results.All(Function(r) r)
+                End Sub
+            AddHandler txtNew.TextChanged, Sub(s As Object, e As EventArgs) refreshRules()
+            refreshRules()
+
+            AddHandler chkShow.CheckedChanged,
+                Sub(s As Object, e As EventArgs)
+                    txtNew.UseSystemPasswordChar = Not chkShow.Checked
+                    txtConfirm.UseSystemPasswordChar = Not chkShow.Checked
+                End Sub
 
             AddHandler ok.Click,
                 Sub(s As Object, e As EventArgs)
-                    If txtNew.Text.Length < 6 Then
-                        Warn("The password must be at least 6 characters long.")
+                    If Not PasswordIsStrong(txtNew.Text) Then
+                        Warn("The password does not meet all the requirements.")
                         Return
                     End If
                     If txtNew.Text <> txtConfirm.Text Then
                         Warn("The two passwords do not match.")
+                        txtConfirm.Focus()
                         Return
                     End If
                     f.DialogResult = DialogResult.OK
                 End Sub
 
-            f.Controls.AddRange(New Control() {lbl, lblNew, txtNew, lblConfirm, txtConfirm, ok, cancel})
+            f.Controls.AddRange(New Control() {lbl, lblNew, txtNew, lblConfirm, txtConfirm, chkShow, ok, cancel})
+            f.Controls.AddRange(marks)
+            f.Controls.AddRange(texts)
             f.AcceptButton = ok
             f.CancelButton = cancel
 
