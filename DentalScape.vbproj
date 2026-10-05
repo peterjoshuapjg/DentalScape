@@ -218,5 +218,17 @@
   <ItemGroup>
     <None Include="Resources\audit.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\appointment %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checklist.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\danger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\out-of-stock.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

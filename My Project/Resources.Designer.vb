@@ -93,6 +93,16 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property appointment__1_() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("appointment (1)", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property audit() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("audit", resourceCulture)
@@ -106,6 +116,26 @@ Namespace My.Resources
         Friend ReadOnly Property blog_img_3_1() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("blog_img_3-1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property checklist() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("checklist", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property danger() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("danger", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -176,6 +206,16 @@ Namespace My.Resources
         Friend ReadOnly Property medical_records() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("medical-records", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property out_of_stock() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("out-of-stock", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
