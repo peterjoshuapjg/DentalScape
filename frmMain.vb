@@ -270,17 +270,13 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If Not Ui.Require((txtFirstName, "First name"), (txtLastName, "Last name")) Then Return
+        If Not Ui.CheckPhone(txtContact, "Contact number") Then Return
+        If Not Ui.CheckEmail(txtEmail) Then Return
+        If Not Ui.CheckPhone(txtEmergNum, "Emergency contact number") Then Return
         Dim first As String = txtFirstName.Text.Trim()
         Dim last As String = txtLastName.Text.Trim()
-        If first.Length = 0 OrElse last.Length = 0 Then
-            Ui.Warn("First name and last name are required.")
-            Return
-        End If
         Dim email As String = Ui.Nz(txtEmail)
-        If email IsNot Nothing AndAlso Not Ui.ValidEmail(email) Then
-            Ui.Warn("Please enter a valid email address.")
-            Return
-        End If
         Dim birth As Object = Ui.GetDate(dtpBirth)
         If birth IsNot Nothing AndAlso CDate(birth) > DateTime.Today Then
             Ui.Warn("The birth date cannot be in the future.")
@@ -913,11 +909,8 @@ Public Class frmMain
             Ui.Warn("Save the invoice first.")
             Return
         End If
+        If Not Ui.Require((txtItemDesc, "Description")) Then Return
         Dim desc As String = txtItemDesc.Text.Trim()
-        If desc.Length = 0 Then
-            Ui.Warn("Enter a description for the item.")
-            Return
-        End If
         Dim qty As Integer = CInt(numQty.Value)
         Dim price As Decimal = numUnitPrice.Value
         Dim disc As Decimal = numItemDiscount.Value
@@ -1373,11 +1366,8 @@ Public Class frmMain
 
     Private Sub btnSaveChart_Click(sender As Object, e As EventArgs) Handles btnSaveChart.Click
         If _recPatientId = 0 Then Return
+        If Not Ui.Require((txtChartTooth, "Tooth number")) Then Return
         Dim tooth As String = txtChartTooth.Text.Trim()
-        If tooth.Length = 0 Then
-            Ui.Warn("Enter the tooth number.")
-            Return
-        End If
         Ui.Try(Sub()
                    If _chartId = 0 Then
                        Dim newId As Long = Db.Insert("
@@ -1486,12 +1476,9 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSaveProcedure_Click(sender As Object, e As EventArgs) Handles btnSaveProcedure.Click
+        If Not Ui.Require((txtProcCode, "Procedure code"), (txtName, "Procedure name")) Then Return
         Dim code As String = txtProcCode.Text.Trim()
         Dim name As String = txtName.Text.Trim()
-        If code.Length = 0 OrElse name.Length = 0 Then
-            Ui.Warn("Procedure code and name are required.")
-            Return
-        End If
         Dim duration As Object = If(numDuration.Value > 0, CObj(CInt(numDuration.Value)), Nothing)
         Dim status As String = If(cboProcStatus.SelectedIndex >= 0, cboProcStatus.Text, "Active")
 
@@ -1632,13 +1619,10 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSaveProduct_Click(sender As Object, e As EventArgs) Handles btnSaveProduct.Click
+        If Not Ui.Require((txtProdName, "Product name"), (cboCategory, "Category"), (txtUnit, "Unit")) Then Return
         Dim name As String = txtProdName.Text.Trim()
         Dim unit As String = txtUnit.Text.Trim()
         Dim category As Integer? = Ui.SelId(cboCategory)
-        If name.Length = 0 OrElse unit.Length = 0 OrElse Not category.HasValue Then
-            Ui.Warn("Product name, category and unit are required.")
-            Return
-        End If
         Dim categoryId As Integer = category.Value
         Dim status As String = If(cboProdStatus.SelectedIndex >= 0, cboProdStatus.Text, "Active")
 
@@ -1787,16 +1771,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSaveSupplier_Click(sender As Object, e As EventArgs) Handles btnSaveSupplier.Click
+        If Not Ui.Require((txtSupName, "Supplier name")) Then Return
+        If Not Ui.CheckPhone(txtSupPhone, "Phone number") Then Return
+        If Not Ui.CheckEmail(txtSupEmail) Then Return
         Dim name As String = txtSupName.Text.Trim()
-        If name.Length = 0 Then
-            Ui.Warn("The supplier name is required.")
-            Return
-        End If
         Dim email As String = Ui.Nz(txtSupEmail)
-        If email IsNot Nothing AndAlso Not Ui.ValidEmail(email) Then
-            Ui.Warn("Please enter a valid email address.")
-            Return
-        End If
         Dim status As String = If(cboSupStatus.SelectedIndex >= 0, cboSupStatus.Text, "Active")
 
         Ui.Try(Sub()
@@ -1902,18 +1881,13 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSaveStaff_Click(sender As Object, e As EventArgs) Handles btnSaveStaff.Click
+        If Not Ui.Require((txtStaffFirstName, "First name"), (txtStaffLastName, "Last name"), (cboPosition, "Position")) Then Return
+        If Not Ui.CheckPhone(txtStaffContact, "Contact number") Then Return
+        If Not Ui.CheckEmail(txtStaffEmail) Then Return
         Dim first As String = txtStaffFirstName.Text.Trim()
         Dim last As String = txtStaffLastName.Text.Trim()
         Dim position As String = Ui.GetText(cboPosition)
-        If first.Length = 0 OrElse last.Length = 0 OrElse position Is Nothing Then
-            Ui.Warn("First name, last name and position are required.")
-            Return
-        End If
         Dim email As String = Ui.Nz(txtStaffEmail)
-        If email IsNot Nothing AndAlso Not Ui.ValidEmail(email) Then
-            Ui.Warn("Please enter a valid email address.")
-            Return
-        End If
         Dim status As String = If(cboStaffStatus.SelectedIndex >= 0, cboStaffStatus.Text, "Active")
 
         Ui.Try(Sub()
@@ -2002,7 +1976,14 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub pnlCardToday_Paint(sender As Object, e As PaintEventArgs) Handles pnlCardToday.Paint
+    ' ============================================================ INPUT RULES
+    ' Phone boxes accept only digits and + - ( ) . space while typing (the full check is on Save).
+    Private Sub PhoneBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContact.KeyPress, txtEmergNum.KeyPress, txtStaffContact.KeyPress, txtSupPhone.KeyPress
+        Ui.PhoneKey(e)
+    End Sub
 
+    ' Email boxes do not accept spaces.
+    Private Sub EmailBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEmail.KeyPress, txtStaffEmail.KeyPress, txtSupEmail.KeyPress
+        If e.KeyChar = " "c Then e.Handled = True
     End Sub
 End Class

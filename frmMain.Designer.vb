@@ -1011,6 +1011,7 @@ Partial Class frmMain
         'txtProdName
         '
         Me.txtProdName.Location = New System.Drawing.Point(254, 44)
+        Me.txtProdName.MaxLength = 100
         Me.txtProdName.Name = "txtProdName"
         Me.txtProdName.Size = New System.Drawing.Size(225, 20)
         Me.txtProdName.TabIndex = 13
@@ -1047,6 +1048,7 @@ Partial Class frmMain
         'txtUnit
         '
         Me.txtUnit.Location = New System.Drawing.Point(254, 100)
+        Me.txtUnit.MaxLength = 30
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.Size = New System.Drawing.Size(225, 20)
         Me.txtUnit.TabIndex = 17
@@ -1400,6 +1402,7 @@ Partial Class frmMain
         'txtSupName
         '
         Me.txtSupName.Location = New System.Drawing.Point(14, 44)
+        Me.txtSupName.MaxLength = 100
         Me.txtSupName.Name = "txtSupName"
         Me.txtSupName.Size = New System.Drawing.Size(225, 20)
         Me.txtSupName.TabIndex = 45
@@ -1437,6 +1440,7 @@ Partial Class frmMain
         'txtSupContact
         '
         Me.txtSupContact.Location = New System.Drawing.Point(14, 100)
+        Me.txtSupContact.MaxLength = 100
         Me.txtSupContact.Name = "txtSupContact"
         Me.txtSupContact.Size = New System.Drawing.Size(225, 20)
         Me.txtSupContact.TabIndex = 49
@@ -1454,6 +1458,7 @@ Partial Class frmMain
         'txtSupPhone
         '
         Me.txtSupPhone.Location = New System.Drawing.Point(254, 100)
+        Me.txtSupPhone.MaxLength = 30
         Me.txtSupPhone.Name = "txtSupPhone"
         Me.txtSupPhone.Size = New System.Drawing.Size(225, 20)
         Me.txtSupPhone.TabIndex = 51
@@ -1471,6 +1476,7 @@ Partial Class frmMain
         'txtSupEmail
         '
         Me.txtSupEmail.Location = New System.Drawing.Point(14, 156)
+        Me.txtSupEmail.MaxLength = 100
         Me.txtSupEmail.Name = "txtSupEmail"
         Me.txtSupEmail.Size = New System.Drawing.Size(465, 20)
         Me.txtSupEmail.TabIndex = 53
@@ -1489,6 +1495,7 @@ Partial Class frmMain
         '
         Me.txtSupAddress.Location = New System.Drawing.Point(14, 212)
         Me.txtSupAddress.Multiline = True
+        Me.txtSupAddress.MaxLength = 255
         Me.txtSupAddress.Name = "txtSupAddress"
         Me.txtSupAddress.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtSupAddress.Size = New System.Drawing.Size(465, 70)
@@ -1784,6 +1791,7 @@ Partial Class frmMain
         'txtReason
         '
         Me.txtReason.Location = New System.Drawing.Point(14, 268)
+        Me.txtReason.MaxLength = 255
         Me.txtReason.Name = "txtReason"
         Me.txtReason.Size = New System.Drawing.Size(465, 20)
         Me.txtReason.TabIndex = 27
@@ -2096,6 +2104,7 @@ Partial Class frmMain
         'txtFirstName
         '
         Me.txtFirstName.Location = New System.Drawing.Point(14, 100)
+        Me.txtFirstName.MaxLength = 50
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.Size = New System.Drawing.Size(225, 20)
         Me.txtFirstName.TabIndex = 12
@@ -2113,6 +2122,7 @@ Partial Class frmMain
         'txtMiddleName
         '
         Me.txtMiddleName.Location = New System.Drawing.Point(254, 100)
+        Me.txtMiddleName.MaxLength = 50
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.Size = New System.Drawing.Size(225, 20)
         Me.txtMiddleName.TabIndex = 14
@@ -2130,6 +2140,7 @@ Partial Class frmMain
         'txtLastName
         '
         Me.txtLastName.Location = New System.Drawing.Point(14, 156)
+        Me.txtLastName.MaxLength = 50
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.Size = New System.Drawing.Size(225, 20)
         Me.txtLastName.TabIndex = 16
@@ -2186,6 +2197,7 @@ Partial Class frmMain
         'txtContact
         '
         Me.txtContact.Location = New System.Drawing.Point(254, 212)
+        Me.txtContact.MaxLength = 20
         Me.txtContact.Name = "txtContact"
         Me.txtContact.Size = New System.Drawing.Size(225, 20)
         Me.txtContact.TabIndex = 22
@@ -2203,6 +2215,7 @@ Partial Class frmMain
         'txtEmail
         '
         Me.txtEmail.Location = New System.Drawing.Point(14, 268)
+        Me.txtEmail.MaxLength = 100
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.Size = New System.Drawing.Size(225, 20)
         Me.txtEmail.TabIndex = 24
@@ -2239,6 +2252,7 @@ Partial Class frmMain
         'txtAddress
         '
         Me.txtAddress.Location = New System.Drawing.Point(14, 324)
+        Me.txtAddress.MaxLength = 255
         Me.txtAddress.Name = "txtAddress"
         Me.txtAddress.Size = New System.Drawing.Size(465, 20)
         Me.txtAddress.TabIndex = 28
@@ -2256,6 +2270,7 @@ Partial Class frmMain
         'txtEmergName
         '
         Me.txtEmergName.Location = New System.Drawing.Point(14, 380)
+        Me.txtEmergName.MaxLength = 100
         Me.txtEmergName.Name = "txtEmergName"
         Me.txtEmergName.Size = New System.Drawing.Size(225, 20)
         Me.txtEmergName.TabIndex = 30
@@ -2273,6 +2288,7 @@ Partial Class frmMain
         'txtEmergNum
         '
         Me.txtEmergNum.Location = New System.Drawing.Point(254, 380)
+        Me.txtEmergNum.MaxLength = 20
         Me.txtEmergNum.Name = "txtEmergNum"
         Me.txtEmergNum.Size = New System.Drawing.Size(225, 20)
         Me.txtEmergNum.TabIndex = 32
@@ -3000,6 +3016,7 @@ Partial Class frmMain
         'txtChartTooth
         '
         Me.txtChartTooth.Location = New System.Drawing.Point(14, 42)
+        Me.txtChartTooth.MaxLength = 10
         Me.txtChartTooth.Name = "txtChartTooth"
         Me.txtChartTooth.Size = New System.Drawing.Size(110, 20)
         Me.txtChartTooth.TabIndex = 59
@@ -3198,6 +3215,7 @@ Partial Class frmMain
         'txtProcCode
         '
         Me.txtProcCode.Location = New System.Drawing.Point(14, 44)
+        Me.txtProcCode.MaxLength = 20
         Me.txtProcCode.Name = "txtProcCode"
         Me.txtProcCode.Size = New System.Drawing.Size(225, 20)
         Me.txtProcCode.TabIndex = 7
@@ -3235,6 +3253,7 @@ Partial Class frmMain
         'txtName
         '
         Me.txtName.Location = New System.Drawing.Point(14, 100)
+        Me.txtName.MaxLength = 100
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(465, 20)
         Me.txtName.TabIndex = 11
@@ -3562,6 +3581,7 @@ Partial Class frmMain
         'txtStaffFirstName
         '
         Me.txtStaffFirstName.Location = New System.Drawing.Point(14, 100)
+        Me.txtStaffFirstName.MaxLength = 50
         Me.txtStaffFirstName.Name = "txtStaffFirstName"
         Me.txtStaffFirstName.Size = New System.Drawing.Size(225, 20)
         Me.txtStaffFirstName.TabIndex = 11
@@ -3579,6 +3599,7 @@ Partial Class frmMain
         'txtStaffLastName
         '
         Me.txtStaffLastName.Location = New System.Drawing.Point(254, 100)
+        Me.txtStaffLastName.MaxLength = 50
         Me.txtStaffLastName.Name = "txtStaffLastName"
         Me.txtStaffLastName.Size = New System.Drawing.Size(225, 20)
         Me.txtStaffLastName.TabIndex = 13
@@ -3596,6 +3617,7 @@ Partial Class frmMain
         'txtStaffContact
         '
         Me.txtStaffContact.Location = New System.Drawing.Point(14, 156)
+        Me.txtStaffContact.MaxLength = 20
         Me.txtStaffContact.Name = "txtStaffContact"
         Me.txtStaffContact.Size = New System.Drawing.Size(225, 20)
         Me.txtStaffContact.TabIndex = 15
@@ -3613,6 +3635,7 @@ Partial Class frmMain
         'txtStaffEmail
         '
         Me.txtStaffEmail.Location = New System.Drawing.Point(254, 156)
+        Me.txtStaffEmail.MaxLength = 100
         Me.txtStaffEmail.Name = "txtStaffEmail"
         Me.txtStaffEmail.Size = New System.Drawing.Size(225, 20)
         Me.txtStaffEmail.TabIndex = 17
@@ -3649,6 +3672,7 @@ Partial Class frmMain
         'txtLicense
         '
         Me.txtLicense.Location = New System.Drawing.Point(254, 212)
+        Me.txtLicense.MaxLength = 50
         Me.txtLicense.Name = "txtLicense"
         Me.txtLicense.Size = New System.Drawing.Size(225, 20)
         Me.txtLicense.TabIndex = 21

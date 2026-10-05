@@ -353,13 +353,85 @@ Public NotInheritable Class Ui
         Return If(s.Length = 0, Nothing, s)
     End Function
 
+    ' ------------------------------------------------------------ validation
+    ' Email: name@domain.tld - letters/digits with single . _ % + - inside the name, a real domain and a
+    ' top-level part of 2+ letters ("juan@clinic" and "juan..cruz@x.com" are rejected).
+    Private Shared ReadOnly EmailPattern As New System.Text.RegularExpressions.Regex(
+        "^[A-Za-z0-9]+([._%+\-][A-Za-z0-9]+)*@[A-Za-z0-9]+(-[A-Za-z0-9]+)*(\.[A-Za-z0-9]+(-[A-Za-z0-9]+)*)*\.[A-Za-z]{2,}$")
+
+    ' Philippine numbers, after removing spaces - ( ) . :
+    '   mobile   09171234567  /  +639171234567  /  639171234567
+    '   landline (02) 8123 4567  /  032 123 4567  /  +63 2 8123 4567  /  8123 4567 (no area code)
+    Private Shared ReadOnly PhonePattern As New System.Text.RegularExpressions.Regex(
+        "^((\+63|63|0)9\d{9}|0[2-8]\d{8,9}|(\+63|63)[2-8]\d{8,9}|[2-8]\d{6,7})$")
+
     Public Shared Function ValidEmail(email As String) As Boolean
-        Try
-            Return New MailAddress(email).Address = email
-        Catch
-            Return False
-        End Try
+        If String.IsNullOrWhiteSpace(email) Then Return False
+        email = email.Trim()
+        Return email.Length <= 100 AndAlso EmailPattern.IsMatch(email)
     End Function
+
+    Public Shared Function ValidPhone(phone As String) As Boolean
+        If String.IsNullOrWhiteSpace(phone) Then Return False
+        Dim digits As String = System.Text.RegularExpressions.Regex.Replace(phone.Trim(), "[\s\-().]", "")
+        Return PhonePattern.IsMatch(digits)
+    End Function
+
+    ''' <summary>Optional phone box: empty is fine, anything typed must be a valid number. Warns and focuses the box.</summary>
+    Public Shared Function CheckPhone(box As TextBox, label As String) As Boolean
+        Dim s As String = box.Text.Trim()
+        If s.Length = 0 OrElse ValidPhone(s) Then Return True
+        Warn($"{label} is not valid." & vbCrLf & vbCrLf &
+             "Use a mobile number like 0917 123 4567 or +63 917 123 4567," & vbCrLf &
+             "or a landline like (02) 8123 4567.")
+        box.Focus()
+        box.SelectAll()
+        Return False
+    End Function
+
+    ''' <summary>Optional email box: empty is fine, anything typed must be a valid address. Warns and focuses the box.</summary>
+    Public Shared Function CheckEmail(box As TextBox) As Boolean
+        Dim s As String = box.Text.Trim()
+        If s.Length = 0 OrElse ValidEmail(s) Then Return True
+        Warn("The email address is not valid." & vbCrLf & vbCrLf & "Use the form name@example.com")
+        box.Focus()
+        box.SelectAll()
+        Return False
+    End Function
+
+    ''' <summary>
+    ''' Required boxes: every text box (or combo box) in the list must have something in it (spaces only count as empty).
+    ''' Shows ONE message naming all the empty fields and puts the cursor in the first one.
+    ''' </summary>
+    Public Shared Function Require(ParamArray fields As (Box As Control, Name As String)()) As Boolean
+        Dim missing As New List(Of String)()
+        Dim firstEmpty As Control = Nothing
+        For Each f In fields
+            Dim isEmpty As Boolean
+            Dim cbo As ComboBox = TryCast(f.Box, ComboBox)
+            If cbo IsNot Nothing AndAlso cbo.DropDownStyle = ComboBoxStyle.DropDownList Then
+                isEmpty = cbo.SelectedIndex < 0
+            Else
+                isEmpty = f.Box.Text.Trim().Length = 0
+            End If
+            If isEmpty Then
+                missing.Add(f.Name)
+                If firstEmpty Is Nothing Then firstEmpty = f.Box
+            End If
+        Next
+        If missing.Count = 0 Then Return True
+
+        Warn("Please fill in the required field" & If(missing.Count > 1, "s", "") & ":" & vbCrLf & vbCrLf &
+             String.Join(vbCrLf, missing.Select(Function(n) "   " & ChrW(&H2022) & " " & n)))
+        firstEmpty.Focus()
+        Return False
+    End Function
+
+    ''' <summary>KeyPress filter for phone boxes: digits, + - ( ) . and space only.</summary>
+    Public Shared Sub PhoneKey(e As KeyPressEventArgs)
+        If Char.IsControl(e.KeyChar) OrElse Char.IsDigit(e.KeyChar) OrElse "+-(). ".IndexOf(e.KeyChar) >= 0 Then Return
+        e.Handled = True
+    End Sub
 
     ' ------------------------------------------------------------ grids
     Public Shared Sub Bind(g As DataGridView, table As DataTable)
