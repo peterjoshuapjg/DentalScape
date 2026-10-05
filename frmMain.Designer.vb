@@ -22,27 +22,18 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlSidebar = New System.Windows.Forms.Panel()
         Me.lblBrand = New System.Windows.Forms.Label()
         Me.lblBrandSub = New System.Windows.Forms.Label()
-        Me.btnNavDashboard = New System.Windows.Forms.Button()
-        Me.btnNavPatients = New System.Windows.Forms.Button()
-        Me.btnNavAppointments = New System.Windows.Forms.Button()
-        Me.btnNavBilling = New System.Windows.Forms.Button()
-        Me.btnNavClinical = New System.Windows.Forms.Button()
-        Me.btnNavProcedures = New System.Windows.Forms.Button()
-        Me.btnNavInventory = New System.Windows.Forms.Button()
-        Me.btnNavStaff = New System.Windows.Forms.Button()
-        Me.btnNavAudit = New System.Windows.Forms.Button()
         Me.btnChangePassword = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.pnlHeader = New System.Windows.Forms.Panel()
@@ -361,7 +352,6 @@ Partial Class frmMain
         Me.pnlInvoiceLeft = New System.Windows.Forms.Panel()
         Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
         Me.dgvInvoices = New System.Windows.Forms.DataGridView()
-        Me.picLogo = New System.Windows.Forms.PictureBox()
         Me.pnlLogs = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -370,6 +360,16 @@ Partial Class frmMain
         Me.lblLogin = New System.Windows.Forms.Label()
         Me.lblChanges = New System.Windows.Forms.Label()
         Me.lblLogouts = New System.Windows.Forms.Label()
+        Me.picLogo = New System.Windows.Forms.PictureBox()
+        Me.btnNavDashboard = New System.Windows.Forms.Button()
+        Me.btnNavPatients = New System.Windows.Forms.Button()
+        Me.btnNavAppointments = New System.Windows.Forms.Button()
+        Me.btnNavBilling = New System.Windows.Forms.Button()
+        Me.btnNavClinical = New System.Windows.Forms.Button()
+        Me.btnNavProcedures = New System.Windows.Forms.Button()
+        Me.btnNavInventory = New System.Windows.Forms.Button()
+        Me.btnNavStaff = New System.Windows.Forms.Button()
+        Me.btnNavAudit = New System.Windows.Forms.Button()
         Me.pnlSidebar.SuspendLayout()
         Me.pnlHeader.SuspendLayout()
         Me.pnlDashboard.SuspendLayout()
@@ -453,11 +453,11 @@ Partial Class frmMain
         CType(Me.dgvPayments, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlInvoiceLeft.SuspendLayout()
         CType(Me.dgvInvoices, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlLogs.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlSidebar
@@ -503,170 +503,6 @@ Partial Class frmMain
         Me.lblBrandSub.Size = New System.Drawing.Size(97, 13)
         Me.lblBrandSub.TabIndex = 7
         Me.lblBrandSub.Text = "Clinic Management"
-        '
-        'btnNavDashboard
-        '
-        Me.btnNavDashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnNavDashboard.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnNavDashboard.FlatAppearance.BorderSize = 0
-        Me.btnNavDashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
-        Me.btnNavDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNavDashboard.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.btnNavDashboard.ForeColor = System.Drawing.Color.White
-        Me.btnNavDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavDashboard.Location = New System.Drawing.Point(10, 235)
-        Me.btnNavDashboard.Name = "btnNavDashboard"
-        Me.btnNavDashboard.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
-        Me.btnNavDashboard.Size = New System.Drawing.Size(200, 40)
-        Me.btnNavDashboard.TabIndex = 8
-        Me.btnNavDashboard.Text = "Dashboard"
-        Me.btnNavDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavDashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnNavDashboard.UseVisualStyleBackColor = False
-        '
-        'btnNavPatients
-        '
-        Me.btnNavPatients.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnNavPatients.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnNavPatients.FlatAppearance.BorderSize = 0
-        Me.btnNavPatients.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
-        Me.btnNavPatients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNavPatients.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.btnNavPatients.ForeColor = System.Drawing.Color.White
-        Me.btnNavPatients.Location = New System.Drawing.Point(10, 281)
-        Me.btnNavPatients.Name = "btnNavPatients"
-        Me.btnNavPatients.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
-        Me.btnNavPatients.Size = New System.Drawing.Size(200, 40)
-        Me.btnNavPatients.TabIndex = 9
-        Me.btnNavPatients.Text = "Patients"
-        Me.btnNavPatients.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavPatients.UseVisualStyleBackColor = False
-        '
-        'btnNavAppointments
-        '
-        Me.btnNavAppointments.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnNavAppointments.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnNavAppointments.FlatAppearance.BorderSize = 0
-        Me.btnNavAppointments.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
-        Me.btnNavAppointments.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNavAppointments.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.btnNavAppointments.ForeColor = System.Drawing.Color.White
-        Me.btnNavAppointments.Location = New System.Drawing.Point(10, 327)
-        Me.btnNavAppointments.Name = "btnNavAppointments"
-        Me.btnNavAppointments.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
-        Me.btnNavAppointments.Size = New System.Drawing.Size(200, 40)
-        Me.btnNavAppointments.TabIndex = 10
-        Me.btnNavAppointments.Text = "Appointments"
-        Me.btnNavAppointments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavAppointments.UseVisualStyleBackColor = False
-        '
-        'btnNavBilling
-        '
-        Me.btnNavBilling.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnNavBilling.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnNavBilling.FlatAppearance.BorderSize = 0
-        Me.btnNavBilling.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
-        Me.btnNavBilling.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNavBilling.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.btnNavBilling.ForeColor = System.Drawing.Color.White
-        Me.btnNavBilling.Location = New System.Drawing.Point(10, 373)
-        Me.btnNavBilling.Name = "btnNavBilling"
-        Me.btnNavBilling.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
-        Me.btnNavBilling.Size = New System.Drawing.Size(200, 40)
-        Me.btnNavBilling.TabIndex = 11
-        Me.btnNavBilling.Text = "Billing && Payments"
-        Me.btnNavBilling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavBilling.UseVisualStyleBackColor = False
-        '
-        'btnNavClinical
-        '
-        Me.btnNavClinical.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnNavClinical.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnNavClinical.FlatAppearance.BorderSize = 0
-        Me.btnNavClinical.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
-        Me.btnNavClinical.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNavClinical.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.btnNavClinical.ForeColor = System.Drawing.Color.White
-        Me.btnNavClinical.Location = New System.Drawing.Point(10, 419)
-        Me.btnNavClinical.Name = "btnNavClinical"
-        Me.btnNavClinical.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
-        Me.btnNavClinical.Size = New System.Drawing.Size(200, 40)
-        Me.btnNavClinical.TabIndex = 12
-        Me.btnNavClinical.Text = "Clinical Records"
-        Me.btnNavClinical.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavClinical.UseVisualStyleBackColor = False
-        '
-        'btnNavProcedures
-        '
-        Me.btnNavProcedures.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnNavProcedures.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnNavProcedures.FlatAppearance.BorderSize = 0
-        Me.btnNavProcedures.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
-        Me.btnNavProcedures.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNavProcedures.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.btnNavProcedures.ForeColor = System.Drawing.Color.White
-        Me.btnNavProcedures.Location = New System.Drawing.Point(10, 465)
-        Me.btnNavProcedures.Name = "btnNavProcedures"
-        Me.btnNavProcedures.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
-        Me.btnNavProcedures.Size = New System.Drawing.Size(200, 40)
-        Me.btnNavProcedures.TabIndex = 13
-        Me.btnNavProcedures.Text = "Procedures && Prices"
-        Me.btnNavProcedures.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavProcedures.UseVisualStyleBackColor = False
-        '
-        'btnNavInventory
-        '
-        Me.btnNavInventory.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnNavInventory.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnNavInventory.FlatAppearance.BorderSize = 0
-        Me.btnNavInventory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
-        Me.btnNavInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNavInventory.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.btnNavInventory.ForeColor = System.Drawing.Color.White
-        Me.btnNavInventory.Location = New System.Drawing.Point(10, 511)
-        Me.btnNavInventory.Name = "btnNavInventory"
-        Me.btnNavInventory.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
-        Me.btnNavInventory.Size = New System.Drawing.Size(200, 40)
-        Me.btnNavInventory.TabIndex = 14
-        Me.btnNavInventory.Text = "Inventory"
-        Me.btnNavInventory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavInventory.UseVisualStyleBackColor = False
-        '
-        'btnNavStaff
-        '
-        Me.btnNavStaff.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnNavStaff.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnNavStaff.FlatAppearance.BorderSize = 0
-        Me.btnNavStaff.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
-        Me.btnNavStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNavStaff.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.btnNavStaff.ForeColor = System.Drawing.Color.White
-        Me.btnNavStaff.Location = New System.Drawing.Point(10, 557)
-        Me.btnNavStaff.Name = "btnNavStaff"
-        Me.btnNavStaff.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
-        Me.btnNavStaff.Size = New System.Drawing.Size(200, 40)
-        Me.btnNavStaff.TabIndex = 15
-        Me.btnNavStaff.Text = "Staff && Accounts"
-        Me.btnNavStaff.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavStaff.UseVisualStyleBackColor = False
-        '
-        'btnNavAudit
-        '
-        Me.btnNavAudit.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
-        Me.btnNavAudit.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnNavAudit.FlatAppearance.BorderSize = 0
-        Me.btnNavAudit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
-        Me.btnNavAudit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNavAudit.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        Me.btnNavAudit.ForeColor = System.Drawing.Color.White
-        Me.btnNavAudit.Location = New System.Drawing.Point(10, 603)
-        Me.btnNavAudit.Name = "btnNavAudit"
-        Me.btnNavAudit.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
-        Me.btnNavAudit.Size = New System.Drawing.Size(200, 40)
-        Me.btnNavAudit.TabIndex = 16
-        Me.btnNavAudit.Text = "Audit Log"
-        Me.btnNavAudit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNavAudit.UseVisualStyleBackColor = False
         '
         'btnChangePassword
         '
@@ -791,32 +627,32 @@ Partial Class frmMain
         '
         'Chart2
         '
-        ChartArea3.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea3)
-        Legend3.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend3)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend1)
         Me.Chart2.Location = New System.Drawing.Point(1077, 616)
         Me.Chart2.Name = "Chart2"
-        Series3.ChartArea = "ChartArea1"
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series1"
-        Me.Chart2.Series.Add(Series3)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart2.Series.Add(Series1)
         Me.Chart2.Size = New System.Drawing.Size(600, 376)
         Me.Chart2.TabIndex = 26
         Me.Chart2.Text = "Chart2"
         '
         'Chart1
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend4)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend2)
         Me.Chart1.Location = New System.Drawing.Point(1080, 179)
         Me.Chart1.Name = "Chart1"
-        Series4.ChartArea = "ChartArea1"
-        Series4.Legend = "Legend1"
-        Series4.Name = "Series1"
-        Me.Chart1.Series.Add(Series4)
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.Chart1.Series.Add(Series2)
         Me.Chart1.Size = New System.Drawing.Size(600, 376)
         Me.Chart1.TabIndex = 25
         Me.Chart1.Text = "Chart1"
@@ -1003,31 +839,31 @@ Partial Class frmMain
         Me.dgvToday.AllowUserToAddRows = False
         Me.dgvToday.AllowUserToDeleteRows = False
         Me.dgvToday.AllowUserToResizeRows = False
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(252, Byte), Integer))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        Me.dgvToday.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(246, Byte), Integer), CType(CType(252, Byte), Integer))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
+        Me.dgvToday.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvToday.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgvToday.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvToday.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(36, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(163, Byte), Integer))
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvToday.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(36, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(163, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvToday.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgvToday.ColumnHeadersHeight = 29
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(217, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(250, Byte), Integer))
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(130, Byte), Integer))
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvToday.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer), CType(CType(51, Byte), Integer))
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(217, Byte), Integer), CType(CType(227, Byte), Integer), CType(CType(250, Byte), Integer))
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(18, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(130, Byte), Integer))
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvToday.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgvToday.EnableHeadersVisualStyles = False
         Me.dgvToday.GridColor = System.Drawing.Color.FromArgb(CType(CType(214, Byte), Integer), CType(CType(222, Byte), Integer), CType(CType(236, Byte), Integer))
         Me.dgvToday.Location = New System.Drawing.Point(34, 178)
@@ -4635,18 +4471,6 @@ Partial Class frmMain
         Me.dgvInvoices.Size = New System.Drawing.Size(820, 948)
         Me.dgvInvoices.TabIndex = 5
         '
-        'picLogo
-        '
-        Me.picLogo.BackColor = System.Drawing.Color.Transparent
-        Me.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.picLogo.Image = Global.DentalScape.My.Resources.Resources.DentalScape_Logo
-        Me.picLogo.Location = New System.Drawing.Point(35, 15)
-        Me.picLogo.Name = "picLogo"
-        Me.picLogo.Size = New System.Drawing.Size(129, 133)
-        Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.picLogo.TabIndex = 19
-        Me.picLogo.TabStop = False
-        '
         'pnlLogs
         '
         Me.pnlLogs.BackColor = System.Drawing.Color.White
@@ -4723,13 +4547,214 @@ Partial Class frmMain
         Me.lblLogouts.TabIndex = 3
         Me.lblLogouts.Text = "Logouts"
         '
+        'picLogo
+        '
+        Me.picLogo.BackColor = System.Drawing.Color.Transparent
+        Me.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.picLogo.Image = Global.DentalScape.My.Resources.Resources.DentalScape_Logo
+        Me.picLogo.Location = New System.Drawing.Point(35, 15)
+        Me.picLogo.Name = "picLogo"
+        Me.picLogo.Size = New System.Drawing.Size(129, 133)
+        Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picLogo.TabIndex = 19
+        Me.picLogo.TabStop = False
+        '
+        'btnNavDashboard
+        '
+        Me.btnNavDashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnNavDashboard.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnNavDashboard.FlatAppearance.BorderSize = 0
+        Me.btnNavDashboard.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
+        Me.btnNavDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNavDashboard.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnNavDashboard.ForeColor = System.Drawing.Color.White
+        Me.btnNavDashboard.Image = Global.DentalScape.My.Resources.Resources.dashboard
+        Me.btnNavDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavDashboard.Location = New System.Drawing.Point(10, 235)
+        Me.btnNavDashboard.Name = "btnNavDashboard"
+        Me.btnNavDashboard.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
+        Me.btnNavDashboard.Size = New System.Drawing.Size(200, 40)
+        Me.btnNavDashboard.TabIndex = 8
+        Me.btnNavDashboard.Text = "     Dashboard"
+        Me.btnNavDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavDashboard.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnNavDashboard.UseVisualStyleBackColor = False
+        '
+        'btnNavPatients
+        '
+        Me.btnNavPatients.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnNavPatients.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnNavPatients.FlatAppearance.BorderSize = 0
+        Me.btnNavPatients.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
+        Me.btnNavPatients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNavPatients.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnNavPatients.ForeColor = System.Drawing.Color.White
+        Me.btnNavPatients.Image = Global.DentalScape.My.Resources.Resources.patient
+        Me.btnNavPatients.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavPatients.Location = New System.Drawing.Point(10, 281)
+        Me.btnNavPatients.Name = "btnNavPatients"
+        Me.btnNavPatients.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
+        Me.btnNavPatients.Size = New System.Drawing.Size(200, 40)
+        Me.btnNavPatients.TabIndex = 9
+        Me.btnNavPatients.Text = "     Patients"
+        Me.btnNavPatients.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavPatients.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnNavPatients.UseVisualStyleBackColor = False
+        '
+        'btnNavAppointments
+        '
+        Me.btnNavAppointments.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnNavAppointments.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnNavAppointments.FlatAppearance.BorderSize = 0
+        Me.btnNavAppointments.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
+        Me.btnNavAppointments.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNavAppointments.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnNavAppointments.ForeColor = System.Drawing.Color.White
+        Me.btnNavAppointments.Image = Global.DentalScape.My.Resources.Resources.appointment
+        Me.btnNavAppointments.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavAppointments.Location = New System.Drawing.Point(10, 327)
+        Me.btnNavAppointments.Name = "btnNavAppointments"
+        Me.btnNavAppointments.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
+        Me.btnNavAppointments.Size = New System.Drawing.Size(200, 40)
+        Me.btnNavAppointments.TabIndex = 10
+        Me.btnNavAppointments.Text = "     Appointments"
+        Me.btnNavAppointments.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavAppointments.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnNavAppointments.UseVisualStyleBackColor = False
+        '
+        'btnNavBilling
+        '
+        Me.btnNavBilling.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnNavBilling.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnNavBilling.FlatAppearance.BorderSize = 0
+        Me.btnNavBilling.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
+        Me.btnNavBilling.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNavBilling.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnNavBilling.ForeColor = System.Drawing.Color.White
+        Me.btnNavBilling.Image = Global.DentalScape.My.Resources.Resources.medical
+        Me.btnNavBilling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavBilling.Location = New System.Drawing.Point(10, 373)
+        Me.btnNavBilling.Name = "btnNavBilling"
+        Me.btnNavBilling.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
+        Me.btnNavBilling.Size = New System.Drawing.Size(200, 40)
+        Me.btnNavBilling.TabIndex = 11
+        Me.btnNavBilling.Text = "     Billing && Payments"
+        Me.btnNavBilling.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavBilling.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnNavBilling.UseVisualStyleBackColor = False
+        '
+        'btnNavClinical
+        '
+        Me.btnNavClinical.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnNavClinical.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnNavClinical.FlatAppearance.BorderSize = 0
+        Me.btnNavClinical.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
+        Me.btnNavClinical.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNavClinical.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnNavClinical.ForeColor = System.Drawing.Color.White
+        Me.btnNavClinical.Image = Global.DentalScape.My.Resources.Resources.medical_records
+        Me.btnNavClinical.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavClinical.Location = New System.Drawing.Point(10, 419)
+        Me.btnNavClinical.Name = "btnNavClinical"
+        Me.btnNavClinical.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
+        Me.btnNavClinical.Size = New System.Drawing.Size(200, 40)
+        Me.btnNavClinical.TabIndex = 12
+        Me.btnNavClinical.Text = "     Clinical Records"
+        Me.btnNavClinical.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavClinical.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnNavClinical.UseVisualStyleBackColor = False
+        '
+        'btnNavProcedures
+        '
+        Me.btnNavProcedures.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnNavProcedures.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnNavProcedures.FlatAppearance.BorderSize = 0
+        Me.btnNavProcedures.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
+        Me.btnNavProcedures.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNavProcedures.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnNavProcedures.ForeColor = System.Drawing.Color.White
+        Me.btnNavProcedures.Image = Global.DentalScape.My.Resources.Resources.tooth
+        Me.btnNavProcedures.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavProcedures.Location = New System.Drawing.Point(10, 465)
+        Me.btnNavProcedures.Name = "btnNavProcedures"
+        Me.btnNavProcedures.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
+        Me.btnNavProcedures.Size = New System.Drawing.Size(200, 40)
+        Me.btnNavProcedures.TabIndex = 13
+        Me.btnNavProcedures.Text = "     Procedures && Prices"
+        Me.btnNavProcedures.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavProcedures.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnNavProcedures.UseVisualStyleBackColor = False
+        '
+        'btnNavInventory
+        '
+        Me.btnNavInventory.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnNavInventory.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnNavInventory.FlatAppearance.BorderSize = 0
+        Me.btnNavInventory.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
+        Me.btnNavInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNavInventory.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnNavInventory.ForeColor = System.Drawing.Color.White
+        Me.btnNavInventory.Image = Global.DentalScape.My.Resources.Resources.inventory__1_
+        Me.btnNavInventory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavInventory.Location = New System.Drawing.Point(10, 511)
+        Me.btnNavInventory.Name = "btnNavInventory"
+        Me.btnNavInventory.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
+        Me.btnNavInventory.Size = New System.Drawing.Size(200, 40)
+        Me.btnNavInventory.TabIndex = 14
+        Me.btnNavInventory.Text = "     Inventory"
+        Me.btnNavInventory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavInventory.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnNavInventory.UseVisualStyleBackColor = False
+        '
+        'btnNavStaff
+        '
+        Me.btnNavStaff.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnNavStaff.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnNavStaff.FlatAppearance.BorderSize = 0
+        Me.btnNavStaff.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
+        Me.btnNavStaff.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNavStaff.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnNavStaff.ForeColor = System.Drawing.Color.White
+        Me.btnNavStaff.Image = Global.DentalScape.My.Resources.Resources.group
+        Me.btnNavStaff.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavStaff.Location = New System.Drawing.Point(10, 557)
+        Me.btnNavStaff.Name = "btnNavStaff"
+        Me.btnNavStaff.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
+        Me.btnNavStaff.Size = New System.Drawing.Size(200, 40)
+        Me.btnNavStaff.TabIndex = 15
+        Me.btnNavStaff.Text = "     Staff && Accounts"
+        Me.btnNavStaff.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavStaff.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnNavStaff.UseVisualStyleBackColor = False
+        '
+        'btnNavAudit
+        '
+        Me.btnNavAudit.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnNavAudit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnNavAudit.FlatAppearance.BorderSize = 0
+        Me.btnNavAudit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(29, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(155, Byte), Integer))
+        Me.btnNavAudit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNavAudit.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.btnNavAudit.ForeColor = System.Drawing.Color.White
+        Me.btnNavAudit.Image = Global.DentalScape.My.Resources.Resources.audit
+        Me.btnNavAudit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavAudit.Location = New System.Drawing.Point(10, 603)
+        Me.btnNavAudit.Name = "btnNavAudit"
+        Me.btnNavAudit.Padding = New System.Windows.Forms.Padding(14, 0, 0, 0)
+        Me.btnNavAudit.Size = New System.Drawing.Size(200, 40)
+        Me.btnNavAudit.TabIndex = 16
+        Me.btnNavAudit.Text = "     Audit Log"
+        Me.btnNavAudit.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNavAudit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnNavAudit.UseVisualStyleBackColor = False
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1920, 1080)
-        Me.Controls.Add(Me.pnlAuditlog)
         Me.Controls.Add(Me.pnlDashboard)
+        Me.Controls.Add(Me.pnlAuditlog)
         Me.Controls.Add(Me.pnlProcedures)
         Me.Controls.Add(Me.pnlStaff)
         Me.Controls.Add(Me.pnlInventory)
@@ -4850,7 +4875,6 @@ Partial Class frmMain
         CType(Me.dgvPayments, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlInvoiceLeft.ResumeLayout(False)
         CType(Me.dgvInvoices, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlLogs.ResumeLayout(False)
         Me.pnlLogs.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -4859,6 +4883,7 @@ Partial Class frmMain
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
