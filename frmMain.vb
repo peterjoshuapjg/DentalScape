@@ -2001,4 +2001,8 @@ Public Class frmMain
     Private Sub dgvStaff_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStaff.CellContentClick
 
     End Sub
+
+    Private Sub pnlCardToday_Paint(sender As Object, e As PaintEventArgs) Handles pnlCardToday.Paint
+
+    End Sub
 End Class

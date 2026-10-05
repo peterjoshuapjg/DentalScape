@@ -2961,7 +2961,7 @@ Partial Class frmMain
         Me.dgvChart.RowHeadersWidth = 51
         Me.dgvChart.RowTemplate.Height = 26
         Me.dgvChart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvChart.Size = New System.Drawing.Size(560, 1422)
+        Me.dgvChart.Size = New System.Drawing.Size(560, 724)
         Me.dgvChart.TabIndex = 56
         '
         'grpChart
@@ -2982,7 +2982,7 @@ Partial Class frmMain
         Me.grpChart.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpChart.Location = New System.Drawing.Point(580, 8)
         Me.grpChart.Name = "grpChart"
-        Me.grpChart.Size = New System.Drawing.Size(1866, 300)
+        Me.grpChart.Size = New System.Drawing.Size(619, 300)
         Me.grpChart.TabIndex = 57
         Me.grpChart.TabStop = False
         Me.grpChart.Text = "Tooth entry"
