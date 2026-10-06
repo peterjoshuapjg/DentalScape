@@ -1010,6 +1010,9 @@ Public Class frmMain
     Private _chartId As Integer         ' 0 = new chart entry
     Private _recLoading As Boolean
     Private _recInit As Boolean
+    Private _medLoading As Boolean      ' true while the Medical History tab is being filled from the database
+    Private _medDirty As Boolean        ' true when the Medical History tab has edits that are not saved
+    Private _prevPatientIndex As Integer = -1
 
     Private Sub OpenClinical()
         _recInit = True
@@ -1038,6 +1041,10 @@ Public Class frmMain
         txtSurgeries.Clear()
         txtFamilyHistory.Clear()
         txtOtherNotes.Clear()
+        ClearMedicalFlags()
+        ClearPatientHeader()
+        SetMedicalDirty(False)
+        _prevPatientIndex = -1
         lblMedicalUpdated.Text = ""
         dgvVisits.DataSource = Nothing
         dgvTreatments.DataSource = Nothing
@@ -1051,11 +1058,22 @@ Public Class frmMain
     ' ------------------------------------------------------------ patient picker
     Private Sub cboPatient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPatient.SelectedIndexChanged
         If _recInit Then Return
+        If _medDirty AndAlso Not Ui.Confirm("You have unsaved changes to this patient's medical history." & vbCrLf & "Discard them and switch patient?") Then
+            _recInit = True                     ' put the picker back without re-running this handler
+            cboPatient.SelectedIndex = _prevPatientIndex
+            _recInit = False
+            Return
+        End If
+        _prevPatientIndex = cboPatient.SelectedIndex
         Dim id As Integer? = Ui.SelId(cboPatient)
         _recPatientId = If(id.HasValue, id.Value, 0)
         tabMain.Enabled = _recPatientId > 0
-        If _recPatientId = 0 Then Return
+        If _recPatientId = 0 Then
+            ClearPatientHeader()
+            Return
+        End If
         Ui.Try(Sub()
+                   LoadPatientHeader()
                    LoadMedical()
                    LoadVisits()
                    LoadChart()
@@ -1064,25 +1082,100 @@ Public Class frmMain
 
     ' ------------------------------------------------------------ medical history
     Private Sub LoadMedical()
-        Dim table As DataTable = Db.Query("SELECT * FROM tblMedicalHistory WHERE PatientID = @p", ("@p", _recPatientId))
-        If table.Rows.Count = 0 Then
-            txtAllergies.Clear()
-            txtMedications.Clear()
-            txtConditions.Clear()
-            txtSurgeries.Clear()
-            txtFamilyHistory.Clear()
-            txtOtherNotes.Clear()
-            lblMedicalUpdated.Text = "No medical history recorded yet."
+        _medLoading = True
+        Try
+            Dim table As DataTable = Db.Query("SELECT * FROM tblMedicalHistory WHERE PatientID = @p", ("@p", _recPatientId))
+            If table.Rows.Count = 0 Then
+                txtAllergies.Clear()
+                txtMedications.Clear()
+                txtConditions.Clear()
+                txtSurgeries.Clear()
+                txtFamilyHistory.Clear()
+                txtOtherNotes.Clear()
+                ClearMedicalFlags()
+                lblMedicalUpdated.Text = "No medical history recorded yet."
+            Else
+                Dim r As DataRow = table.Rows(0)
+                txtAllergies.Text = Ui.Txt(r("Allergies"))
+                txtMedications.Text = Ui.Txt(r("CurrentMedications"))
+                txtConditions.Text = Ui.Txt(r("MedicalConditions"))
+                txtSurgeries.Text = Ui.Txt(r("PreviousSurgeries"))
+                txtFamilyHistory.Text = Ui.Txt(r("FamilyMedicalHistory"))
+                txtOtherNotes.Text = Ui.Txt(r("OtherNotes"))
+                chkDiabetes.Checked = FlagOf(r, "HasDiabetes")
+                chkHypertension.Checked = FlagOf(r, "HasHypertension")
+                chkHeartDisease.Checked = FlagOf(r, "HasHeartDisease")
+                chkAsthma.Checked = FlagOf(r, "HasAsthma")
+                chkPregnant.Checked = FlagOf(r, "HasPregnant")
+                chkSmoker.Checked = FlagOf(r, "HasSmoker")
+                chkBleedingDisorder.Checked = FlagOf(r, "HasBleedingDisorder")
+                lblMedicalUpdated.Text = "Last updated " & Convert.ToDateTime(r("UpdatedAt")).ToString("yyyy-MM-dd HH:mm")
+            End If
+        Finally
+            _medLoading = False
+        End Try
+        SetMedicalDirty(False)
+    End Sub
+
+    Private Shared Function FlagOf(r As DataRow, column As String) As Boolean
+        Return r(column) IsNot DBNull.Value AndAlso Convert.ToInt32(r(column)) <> 0
+    End Function
+
+    Private Sub ClearMedicalFlags()
+        Dim wasLoading As Boolean = _medLoading
+        _medLoading = True
+        chkDiabetes.Checked = False
+        chkHypertension.Checked = False
+        chkHeartDisease.Checked = False
+        chkAsthma.Checked = False
+        chkPregnant.Checked = False
+        chkSmoker.Checked = False
+        chkBleedingDisorder.Checked = False
+        _medLoading = wasLoading
+    End Sub
+
+    ' ---- unsaved-changes tracking: any edit on the Medical History tab shows the red link
+    Private Sub MedicalField_Changed(sender As Object, e As EventArgs) Handles txtAllergies.TextChanged, txtMedications.TextChanged, txtConditions.TextChanged, txtSurgeries.TextChanged, txtFamilyHistory.TextChanged, txtOtherNotes.TextChanged, chkDiabetes.CheckedChanged, chkHypertension.CheckedChanged, chkHeartDisease.CheckedChanged, chkAsthma.CheckedChanged, chkPregnant.CheckedChanged, chkSmoker.CheckedChanged, chkBleedingDisorder.CheckedChanged
+        If _medLoading OrElse _recInit OrElse _recPatientId = 0 Then Return
+        SetMedicalDirty(True)
+    End Sub
+
+    Private Sub SetMedicalDirty(dirty As Boolean)
+        _medDirty = dirty
+        lnkUnsavedChanges.Visible = dirty
+    End Sub
+
+    Private Sub lnkUnsavedChanges_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkUnsavedChanges.LinkClicked
+        btnSaveMedical.PerformClick()
+    End Sub
+
+    ' ---- patient strip above the tabs: age / sex, contact number, last visit
+    Private Sub ClearPatientHeader()
+        lblAgeSexValue.Text = ""
+        lblContactVal.Text = ""
+        lblLastVisitVal.Text = ""
+    End Sub
+
+    Private Sub LoadPatientHeader()
+        Dim t As DataTable = Db.Query("SELECT BirthDate, Gender, ContactNumber FROM tblPatients WHERE PatientID = @p", ("@p", _recPatientId))
+        If t.Rows.Count = 0 Then
+            ClearPatientHeader()
             Return
         End If
-        Dim r As DataRow = table.Rows(0)
-        txtAllergies.Text = Ui.Txt(r("Allergies"))
-        txtMedications.Text = Ui.Txt(r("CurrentMedications"))
-        txtConditions.Text = Ui.Txt(r("MedicalConditions"))
-        txtSurgeries.Text = Ui.Txt(r("PreviousSurgeries"))
-        txtFamilyHistory.Text = Ui.Txt(r("FamilyMedicalHistory"))
-        txtOtherNotes.Text = Ui.Txt(r("OtherNotes"))
-        lblMedicalUpdated.Text = "Last updated " & Convert.ToDateTime(r("UpdatedAt")).ToString("yyyy-MM-dd HH:mm")
+        Dim r As DataRow = t.Rows(0)
+        Dim age As String = "Age n/a"
+        If r("BirthDate") IsNot DBNull.Value Then
+            Dim bd As Date = Convert.ToDateTime(r("BirthDate"))
+            Dim years As Integer = Date.Today.Year - bd.Year
+            If bd.Date > Date.Today.AddYears(-years) Then years -= 1
+            age = years.ToString() & " yrs"
+        End If
+        Dim sex As String = Ui.Txt(r("Gender"))
+        lblAgeSexValue.Text = age & If(sex.Length > 0, " / " & sex, "")
+        Dim contact As String = Ui.Txt(r("ContactNumber"))
+        lblContactVal.Text = "Contact: " & If(contact.Length > 0, contact, "n/a")
+        Dim last As Object = Db.Scalar("SELECT MAX(VisitDate) FROM tblDentalRecords WHERE PatientID = @p", ("@p", _recPatientId))
+        lblLastVisitVal.Text = "Last visit: " & If(last Is Nothing OrElse last Is DBNull.Value, "none yet", Convert.ToDateTime(last).ToString("yyyy-MM-dd"))
     End Sub
 
     Private Sub btnSaveMedical_Click(sender As Object, e As EventArgs) Handles btnSaveMedical.Click
@@ -1091,16 +1184,24 @@ Public Class frmMain
                    Db.Exec("
                 INSERT INTO tblMedicalHistory
                     (PatientID, Allergies, CurrentMedications, MedicalConditions, PreviousSurgeries,
-                     FamilyMedicalHistory, OtherNotes)
-                VALUES (@p, @a, @m, @c, @s, @f, @o)
+                     FamilyMedicalHistory, OtherNotes,
+                     HasDiabetes, HasHypertension, HasHeartDisease, HasAsthma, HasPregnant, HasSmoker, HasBleedingDisorder)
+                VALUES (@p, @a, @m, @c, @s, @f, @o, @d, @h, @hd, @asth, @pr, @sm, @bd)
                 ON DUPLICATE KEY UPDATE
                     Allergies = VALUES(Allergies), CurrentMedications = VALUES(CurrentMedications),
                     MedicalConditions = VALUES(MedicalConditions), PreviousSurgeries = VALUES(PreviousSurgeries),
                     FamilyMedicalHistory = VALUES(FamilyMedicalHistory), OtherNotes = VALUES(OtherNotes),
+                    HasDiabetes = VALUES(HasDiabetes), HasHypertension = VALUES(HasHypertension),
+                    HasHeartDisease = VALUES(HasHeartDisease), HasAsthma = VALUES(HasAsthma),
+                    HasPregnant = VALUES(HasPregnant), HasSmoker = VALUES(HasSmoker),
+                    HasBleedingDisorder = VALUES(HasBleedingDisorder),
                     UpdatedAt = NOW()",
                        ("@p", _recPatientId), ("@a", Ui.Nz(txtAllergies)), ("@m", Ui.Nz(txtMedications)),
                        ("@c", Ui.Nz(txtConditions)), ("@s", Ui.Nz(txtSurgeries)),
-                       ("@f", Ui.Nz(txtFamilyHistory)), ("@o", Ui.Nz(txtOtherNotes)))
+                       ("@f", Ui.Nz(txtFamilyHistory)), ("@o", Ui.Nz(txtOtherNotes)),
+                       ("@d", chkDiabetes.Checked), ("@h", chkHypertension.Checked), ("@hd", chkHeartDisease.Checked),
+                       ("@asth", chkAsthma.Checked), ("@pr", chkPregnant.Checked), ("@sm", chkSmoker.Checked),
+                       ("@bd", chkBleedingDisorder.Checked))
                    Audit.Log("Save Medical History", "tblMedicalHistory", _recPatientId)
                    LoadMedical()
                    Ui.Info("Medical history saved.")

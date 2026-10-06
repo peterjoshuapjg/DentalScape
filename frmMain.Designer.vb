@@ -202,6 +202,18 @@ Partial Class frmMain
         Me.txtOtherNotes = New System.Windows.Forms.TextBox()
         Me.btnSaveMedical = New System.Windows.Forms.Button()
         Me.lblMedicalUpdated = New System.Windows.Forms.Label()
+        Me.lblMedAlerts = New System.Windows.Forms.Label()
+        Me.chkDiabetes = New System.Windows.Forms.CheckBox()
+        Me.chkHypertension = New System.Windows.Forms.CheckBox()
+        Me.chkHeartDisease = New System.Windows.Forms.CheckBox()
+        Me.chkAsthma = New System.Windows.Forms.CheckBox()
+        Me.chkPregnant = New System.Windows.Forms.CheckBox()
+        Me.chkSmoker = New System.Windows.Forms.CheckBox()
+        Me.chkBleedingDisorder = New System.Windows.Forms.CheckBox()
+        Me.lnkUnsavedChanges = New System.Windows.Forms.LinkLabel()
+        Me.lblAgeSexValue = New System.Windows.Forms.Label()
+        Me.lblContactVal = New System.Windows.Forms.Label()
+        Me.lblLastVisitVal = New System.Windows.Forms.Label()
         Me.tabVisits = New System.Windows.Forms.TabPage()
         Me.dgvVisits = New System.Windows.Forms.DataGridView()
         Me.grpVisit = New System.Windows.Forms.GroupBox()
@@ -2446,6 +2458,15 @@ Partial Class frmMain
         Me.tabMedical.Controls.Add(Me.txtOtherNotes)
         Me.tabMedical.Controls.Add(Me.btnSaveMedical)
         Me.tabMedical.Controls.Add(Me.lblMedicalUpdated)
+        Me.tabMedical.Controls.Add(Me.lblMedAlerts)
+        Me.tabMedical.Controls.Add(Me.chkDiabetes)
+        Me.tabMedical.Controls.Add(Me.chkHypertension)
+        Me.tabMedical.Controls.Add(Me.chkHeartDisease)
+        Me.tabMedical.Controls.Add(Me.chkAsthma)
+        Me.tabMedical.Controls.Add(Me.chkPregnant)
+        Me.tabMedical.Controls.Add(Me.chkSmoker)
+        Me.tabMedical.Controls.Add(Me.chkBleedingDisorder)
+        Me.tabMedical.Controls.Add(Me.lnkUnsavedChanges)
         Me.tabMedical.Location = New System.Drawing.Point(4, 26)
         Me.tabMedical.Name = "tabMedical"
         Me.tabMedical.Padding = New System.Windows.Forms.Padding(6)
@@ -2590,6 +2611,105 @@ Partial Class frmMain
         Me.lblMedicalUpdated.Name = "lblMedicalUpdated"
         Me.lblMedicalUpdated.Size = New System.Drawing.Size(0, 17)
         Me.lblMedicalUpdated.TabIndex = 21
+        '
+        'lblMedAlerts
+        '
+        Me.lblMedAlerts.AutoSize = True
+        Me.lblMedAlerts.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.lblMedAlerts.Location = New System.Drawing.Point(960, 10)
+        Me.lblMedAlerts.Name = "lblMedAlerts"
+        Me.lblMedAlerts.Size = New System.Drawing.Size(92, 17)
+        Me.lblMedAlerts.TabIndex = 22
+        Me.lblMedAlerts.Text = "Medical alerts"
+        '
+        'chkDiabetes
+        '
+        Me.chkDiabetes.AutoSize = True
+        Me.chkDiabetes.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.chkDiabetes.Location = New System.Drawing.Point(960, 34)
+        Me.chkDiabetes.Name = "chkDiabetes"
+        Me.chkDiabetes.Size = New System.Drawing.Size(120, 21)
+        Me.chkDiabetes.TabIndex = 23
+        Me.chkDiabetes.Text = "Diabetes"
+        Me.chkDiabetes.UseVisualStyleBackColor = True
+        '
+        'chkHypertension
+        '
+        Me.chkHypertension.AutoSize = True
+        Me.chkHypertension.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.chkHypertension.Location = New System.Drawing.Point(960, 62)
+        Me.chkHypertension.Name = "chkHypertension"
+        Me.chkHypertension.Size = New System.Drawing.Size(120, 21)
+        Me.chkHypertension.TabIndex = 24
+        Me.chkHypertension.Text = "Hypertension"
+        Me.chkHypertension.UseVisualStyleBackColor = True
+        '
+        'chkHeartDisease
+        '
+        Me.chkHeartDisease.AutoSize = True
+        Me.chkHeartDisease.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.chkHeartDisease.Location = New System.Drawing.Point(960, 90)
+        Me.chkHeartDisease.Name = "chkHeartDisease"
+        Me.chkHeartDisease.Size = New System.Drawing.Size(120, 21)
+        Me.chkHeartDisease.TabIndex = 25
+        Me.chkHeartDisease.Text = "Heart disease"
+        Me.chkHeartDisease.UseVisualStyleBackColor = True
+        '
+        'chkAsthma
+        '
+        Me.chkAsthma.AutoSize = True
+        Me.chkAsthma.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.chkAsthma.Location = New System.Drawing.Point(960, 118)
+        Me.chkAsthma.Name = "chkAsthma"
+        Me.chkAsthma.Size = New System.Drawing.Size(120, 21)
+        Me.chkAsthma.TabIndex = 26
+        Me.chkAsthma.Text = "Asthma"
+        Me.chkAsthma.UseVisualStyleBackColor = True
+        '
+        'chkPregnant
+        '
+        Me.chkPregnant.AutoSize = True
+        Me.chkPregnant.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.chkPregnant.Location = New System.Drawing.Point(960, 146)
+        Me.chkPregnant.Name = "chkPregnant"
+        Me.chkPregnant.Size = New System.Drawing.Size(120, 21)
+        Me.chkPregnant.TabIndex = 27
+        Me.chkPregnant.Text = "Pregnant"
+        Me.chkPregnant.UseVisualStyleBackColor = True
+        '
+        'chkSmoker
+        '
+        Me.chkSmoker.AutoSize = True
+        Me.chkSmoker.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.chkSmoker.Location = New System.Drawing.Point(960, 174)
+        Me.chkSmoker.Name = "chkSmoker"
+        Me.chkSmoker.Size = New System.Drawing.Size(120, 21)
+        Me.chkSmoker.TabIndex = 28
+        Me.chkSmoker.Text = "Smoker"
+        Me.chkSmoker.UseVisualStyleBackColor = True
+        '
+        'chkBleedingDisorder
+        '
+        Me.chkBleedingDisorder.AutoSize = True
+        Me.chkBleedingDisorder.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.chkBleedingDisorder.Location = New System.Drawing.Point(960, 202)
+        Me.chkBleedingDisorder.Name = "chkBleedingDisorder"
+        Me.chkBleedingDisorder.Size = New System.Drawing.Size(120, 21)
+        Me.chkBleedingDisorder.TabIndex = 29
+        Me.chkBleedingDisorder.Text = "Bleeding disorder"
+        Me.chkBleedingDisorder.UseVisualStyleBackColor = True
+        '
+        'lnkUnsavedChanges
+        '
+        Me.lnkUnsavedChanges.AutoSize = True
+        Me.lnkUnsavedChanges.LinkColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(57, Byte), Integer), CType(CType(43, Byte), Integer))
+        Me.lnkUnsavedChanges.Location = New System.Drawing.Point(12, 422)
+        Me.lnkUnsavedChanges.Name = "lnkUnsavedChanges"
+        Me.lnkUnsavedChanges.Size = New System.Drawing.Size(205, 17)
+        Me.lnkUnsavedChanges.TabIndex = 30
+        Me.lnkUnsavedChanges.TabStop = True
+        Me.lnkUnsavedChanges.Text = "You have unsaved changes - Save now"
+        Me.lnkUnsavedChanges.Visible = False
         '
         'tabVisits
         '
@@ -3196,6 +3316,9 @@ Partial Class frmMain
         Me.pnlTop.BackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(248, Byte), Integer))
         Me.pnlTop.Controls.Add(Me.lblPatient)
         Me.pnlTop.Controls.Add(Me.cboPatient)
+        Me.pnlTop.Controls.Add(Me.lblAgeSexValue)
+        Me.pnlTop.Controls.Add(Me.lblContactVal)
+        Me.pnlTop.Controls.Add(Me.lblLastVisitVal)
         Me.pnlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlTop.Location = New System.Drawing.Point(10, 10)
         Me.pnlTop.Name = "pnlTop"
@@ -3222,6 +3345,33 @@ Partial Class frmMain
         Me.cboPatient.Name = "cboPatient"
         Me.cboPatient.Size = New System.Drawing.Size(420, 25)
         Me.cboPatient.TabIndex = 4
+        '
+        'lblAgeSexValue
+        '
+        Me.lblAgeSexValue.AutoSize = True
+        Me.lblAgeSexValue.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.lblAgeSexValue.Location = New System.Drawing.Point(510, 18)
+        Me.lblAgeSexValue.Name = "lblAgeSexValue"
+        Me.lblAgeSexValue.Size = New System.Drawing.Size(0, 17)
+        Me.lblAgeSexValue.TabIndex = 5
+        '
+        'lblContactVal
+        '
+        Me.lblContactVal.AutoSize = True
+        Me.lblContactVal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.lblContactVal.Location = New System.Drawing.Point(700, 18)
+        Me.lblContactVal.Name = "lblContactVal"
+        Me.lblContactVal.Size = New System.Drawing.Size(0, 17)
+        Me.lblContactVal.TabIndex = 6
+        '
+        'lblLastVisitVal
+        '
+        Me.lblLastVisitVal.AutoSize = True
+        Me.lblLastVisitVal.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.lblLastVisitVal.Location = New System.Drawing.Point(930, 18)
+        Me.lblLastVisitVal.Name = "lblLastVisitVal"
+        Me.lblLastVisitVal.Size = New System.Drawing.Size(0, 17)
+        Me.lblLastVisitVal.TabIndex = 7
         '
         'pnlProcedures
         '
@@ -5190,6 +5340,18 @@ Partial Class frmMain
     Friend WithEvents txtOtherNotes As TextBox
     Friend WithEvents btnSaveMedical As Button
     Friend WithEvents lblMedicalUpdated As Label
+    Friend WithEvents lblMedAlerts As Label
+    Friend WithEvents chkDiabetes As CheckBox
+    Friend WithEvents chkHypertension As CheckBox
+    Friend WithEvents chkHeartDisease As CheckBox
+    Friend WithEvents chkAsthma As CheckBox
+    Friend WithEvents chkPregnant As CheckBox
+    Friend WithEvents chkSmoker As CheckBox
+    Friend WithEvents chkBleedingDisorder As CheckBox
+    Friend WithEvents lnkUnsavedChanges As LinkLabel
+    Friend WithEvents lblAgeSexValue As Label
+    Friend WithEvents lblContactVal As Label
+    Friend WithEvents lblLastVisitVal As Label
     Friend WithEvents tabVisits As TabPage
     Friend WithEvents dgvVisits As DataGridView
     Friend WithEvents grpVisit As GroupBox
