@@ -193,9 +193,8 @@ Public Class frmMain
         Next
 
         Dim area As Charting.ChartArea = chtMonthlyRevenue.ChartAreas(0)
+        ser.IsXValueIndexed = True                ' bars sit at 1..days, so the axis shows no 0 or days+1
         area.AxisX.Interval = 1
-        area.AxisX.Minimum = 0
-        area.AxisX.Maximum = days + 1
         area.AxisX.Title = monthStart.ToString("MMMM yyyy")
         area.AxisX.MajorGrid.Enabled = False
         area.AxisY.Title = "Amount received (" & ChrW(&H20B1) & ")"
@@ -207,13 +206,13 @@ Public Class frmMain
     Private Sub LoadTopProcedureChart()
         Dim monthStart As New DateTime(Date.Today.Year, Date.Today.Month, 1)
         Dim t As DataTable = Db.Query("
-            SELECT pr.ProcedureName AS Name, SUM(t.Quantity) AS Cnt
+            SELECT pr.ProcedureName AS ProcName, CAST(SUM(t.Quantity) AS SIGNED) AS Cnt
             FROM tblTreatmentRecords t
             INNER JOIN tblDentalRecords r ON r.DentalRecordID = t.DentalRecordID
             INNER JOIN tblProcedures pr ON pr.ProcedureID = t.ProcedureID
             WHERE t.TreatmentStatus = 'Completed' AND r.VisitDate >= @s AND r.VisitDate < @e
             GROUP BY pr.ProcedureID, pr.ProcedureName
-            ORDER BY Cnt DESC, Name
+            ORDER BY Cnt DESC, pr.ProcedureName
             LIMIT 5",
             ("@s", monthStart), ("@e", monthStart.AddMonths(1)))
 
@@ -224,14 +223,31 @@ Public Class frmMain
         ser.ChartType = Charting.SeriesChartType.Bar
         ser.Color = ChartBlue
         ser.IsValueShownAsLabel = True
-        For Each r As DataRow In t.Rows
-            ser.Points.AddXY(r("Name").ToString(), Convert.ToInt32(r("Cnt")))
+        ser.ToolTip = "#VALX: #VALY time(s)"
+
+        ' A bar chart draws its first point at the bottom, so add the rows in reverse
+        ' to get the top procedure at the top.
+        For i As Integer = t.Rows.Count - 1 To 0 Step -1
+            ser.Points.AddXY(t.Rows(i)("ProcName").ToString(), Convert.ToInt32(t.Rows(i)("Cnt")))
         Next
 
+        If t.Rows.Count = 0 Then
+            chtTopProcedure.Titles.Add("No completed procedures recorded this month yet")
+        End If
+
         Dim area As Charting.ChartArea = chtTopProcedure.ChartAreas(0)
-        area.AxisX.IsReversed = True              ' the top procedure is drawn first (at the top)
         area.AxisX.Interval = 1
         area.AxisX.MajorGrid.Enabled = False
+        area.AxisX.LabelStyle.TruncatedLabels = False
+        area.AxisY.Minimum = 0
+        If t.Rows.Count > 0 Then
+            Dim maxCnt As Integer = Convert.ToInt32(t.Rows(0)("Cnt"))
+            area.AxisY.Maximum = maxCnt + Math.Max(1, CInt(Math.Ceiling(maxCnt * 0.15)))   ' room for the value label
+            area.AxisY.Interval = Math.Max(1, CInt(Math.Ceiling(maxCnt / 5.0)))             ' whole numbers only
+        Else
+            area.AxisY.Maximum = 5
+            area.AxisY.Interval = 1
+        End If
         area.AxisY.Title = "Times performed"
         area.AxisY.MajorGrid.LineColor = Color.Gainsboro
         area.AxisY.LabelStyle.Format = "0"
