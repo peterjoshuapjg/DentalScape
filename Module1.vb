@@ -464,7 +464,7 @@ Public NotInheritable Class Ui
     End Function
 
     ''' <summary>
-    ''' Required boxes: every text box (or combo box) in the list must have something in it (spaces only count as empty).
+    ''' Required boxes: every text box, combo box or tick-box date picker in the list must be filled in (spaces only count as empty).
     ''' Shows ONE message naming all the empty fields and puts the cursor in the first one.
     ''' </summary>
     Public Shared Function Require(ParamArray fields As (Box As Control, Name As String)()) As Boolean
@@ -473,7 +473,10 @@ Public NotInheritable Class Ui
         For Each f In fields
             Dim isEmpty As Boolean
             Dim cbo As ComboBox = TryCast(f.Box, ComboBox)
-            If cbo IsNot Nothing AndAlso cbo.DropDownStyle = ComboBoxStyle.DropDownList Then
+            Dim dtp As DateTimePicker = TryCast(f.Box, DateTimePicker)
+            If dtp IsNot Nothing Then
+                isEmpty = dtp.ShowCheckBox AndAlso Not dtp.Checked
+            ElseIf cbo IsNot Nothing AndAlso cbo.DropDownStyle = ComboBoxStyle.DropDownList Then
                 isEmpty = cbo.SelectedIndex < 0
             Else
                 isEmpty = f.Box.Text.Trim().Length = 0

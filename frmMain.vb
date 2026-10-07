@@ -1,6 +1,7 @@
 ﻿Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports Charting = System.Windows.Forms.DataVisualization.Charting
 
 ''' <summary>
 ''' The one and only working window. Every page is a Panel on this form; clicking a sidebar button
@@ -38,6 +39,16 @@ Public Class frmMain
         Me.WindowState = FormWindowState.Maximized
 
         lblUser.Text = Session.FullName & "   |   " & Session.Role
+
+        ' Codes are automatic: the procedure code box can be read but not typed in.
+        txtProcCode.ReadOnly = True
+
+        ' Dashboard low-stock list: read-only, whole-row selection (double-click opens Inventory).
+        dgvLowStockProducts.ReadOnly = True
+        dgvLowStockProducts.AllowUserToAddRows = False
+        dgvLowStockProducts.AllowUserToDeleteRows = False
+        dgvLowStockProducts.RowHeadersVisible = False
+        dgvLowStockProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
         _pages(btnNavDashboard) = New PageInfo("Dashboard", False, pnlDashboard, AddressOf OpenDashboard)
         _pages(btnNavPatients) = New PageInfo("Patients", False, pnlPatients, AddressOf OpenPatients)
@@ -113,6 +124,8 @@ Public Class frmMain
     ' ============================================================ DASHBOARD
     Private Sub OpenDashboard()
         pnlCardLow.Visible = Session.IsAdmin   ' inventory is an admin topic
+        lblLowStocks.Visible = Session.IsAdmin
+        dgvLowStockProducts.Visible = Session.IsAdmin
         LoadDashboard()
     End Sub
 
@@ -143,6 +156,102 @@ Public Class frmMain
             FROM vwAppointmentDetails
             WHERE AppointmentDate = CURDATE()
             ORDER BY StartTime"))
+
+        LoadRevenueChart()
+        LoadTopProcedureChart()
+        If Session.IsAdmin Then LoadLowStockGrid()
+    End Sub
+
+    Private Shared ReadOnly ChartBlue As Color = ColorTranslator.FromHtml("#0D317F")
+
+    ''' <summary>chtMonthlyRevenue: payments received on each day of the current month (void invoices left out).</summary>
+    Private Sub LoadRevenueChart()
+        Dim monthStart As New DateTime(Date.Today.Year, Date.Today.Month, 1)
+        Dim days As Integer = DateTime.DaysInMonth(monthStart.Year, monthStart.Month)
+        Dim t As DataTable = Db.Query("
+            SELECT DAY(p.PaymentDate) AS D, SUM(p.Amount) AS Amt
+            FROM tblPayments p
+            INNER JOIN tblInvoices i ON i.InvoiceID = p.InvoiceID
+            WHERE i.Status <> 'Void' AND p.PaymentDate >= @s AND p.PaymentDate < @e
+            GROUP BY DAY(p.PaymentDate)",
+            ("@s", monthStart), ("@e", monthStart.AddMonths(1)))
+
+        Dim perDay(days) As Decimal
+        For Each r As DataRow In t.Rows
+            perDay(Convert.ToInt32(r("D"))) = Convert.ToDecimal(r("Amt"))
+        Next
+
+        chtMonthlyRevenue.Series.Clear()
+        chtMonthlyRevenue.Legends.Clear()
+        chtMonthlyRevenue.Titles.Clear()
+        Dim ser As Charting.Series = chtMonthlyRevenue.Series.Add("Revenue")
+        ser.ChartType = Charting.SeriesChartType.Column
+        ser.Color = ChartBlue
+        ser.ToolTip = "Day #VALX: " & ChrW(&H20B1) & "#VALY{N2}"
+        For d As Integer = 1 To days
+            ser.Points.AddXY(d, perDay(d))
+        Next
+
+        Dim area As Charting.ChartArea = chtMonthlyRevenue.ChartAreas(0)
+        area.AxisX.Interval = 1
+        area.AxisX.Minimum = 0
+        area.AxisX.Maximum = days + 1
+        area.AxisX.Title = monthStart.ToString("MMMM yyyy")
+        area.AxisX.MajorGrid.Enabled = False
+        area.AxisY.Title = "Amount received (" & ChrW(&H20B1) & ")"
+        area.AxisY.LabelStyle.Format = "N0"
+        area.AxisY.MajorGrid.LineColor = Color.Gainsboro
+    End Sub
+
+    ''' <summary>chtTopProcedure: the five most-performed (Completed) procedures of the current month.</summary>
+    Private Sub LoadTopProcedureChart()
+        Dim monthStart As New DateTime(Date.Today.Year, Date.Today.Month, 1)
+        Dim t As DataTable = Db.Query("
+            SELECT pr.ProcedureName AS Name, SUM(t.Quantity) AS Cnt
+            FROM tblTreatmentRecords t
+            INNER JOIN tblDentalRecords r ON r.DentalRecordID = t.DentalRecordID
+            INNER JOIN tblProcedures pr ON pr.ProcedureID = t.ProcedureID
+            WHERE t.TreatmentStatus = 'Completed' AND r.VisitDate >= @s AND r.VisitDate < @e
+            GROUP BY pr.ProcedureID, pr.ProcedureName
+            ORDER BY Cnt DESC, Name
+            LIMIT 5",
+            ("@s", monthStart), ("@e", monthStart.AddMonths(1)))
+
+        chtTopProcedure.Series.Clear()
+        chtTopProcedure.Legends.Clear()
+        chtTopProcedure.Titles.Clear()
+        Dim ser As Charting.Series = chtTopProcedure.Series.Add("Times performed")
+        ser.ChartType = Charting.SeriesChartType.Bar
+        ser.Color = ChartBlue
+        ser.IsValueShownAsLabel = True
+        For Each r As DataRow In t.Rows
+            ser.Points.AddXY(r("Name").ToString(), Convert.ToInt32(r("Cnt")))
+        Next
+
+        Dim area As Charting.ChartArea = chtTopProcedure.ChartAreas(0)
+        area.AxisX.IsReversed = True              ' the top procedure is drawn first (at the top)
+        area.AxisX.Interval = 1
+        area.AxisX.MajorGrid.Enabled = False
+        area.AxisY.Title = "Times performed"
+        area.AxisY.MajorGrid.LineColor = Color.Gainsboro
+        area.AxisY.LabelStyle.Format = "0"
+    End Sub
+
+    ''' <summary>dgvLowStockProducts: products at or below their reorder level.</summary>
+    Private Sub LoadLowStockGrid()
+        Ui.Bind(dgvLowStockProducts, Db.Query("
+            SELECT ProductID AS ID, ProductCode AS Code, ProductName AS Product,
+                   CategoryName AS Category, CurrentStock AS Stock, ReorderLevel AS Reorder
+            FROM vwLowStockProducts
+            ORDER BY (CurrentStock - ReorderLevel), ProductName"))
+    End Sub
+
+    ' Double-click a low-stock product: go to Inventory with that product selected.
+    Private Sub dgvLowStockProducts_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvLowStockProducts.CellDoubleClick
+        If e.RowIndex < 0 OrElse Not Session.IsAdmin Then Return
+        Dim productId As Integer = Ui.SelectedId(dgvLowStockProducts)
+        OpenPage(btnNavInventory)
+        If productId > 0 Then Ui.Try(Sub() LoadProducts(productId))
     End Sub
 
     ' ============================================================ AUDIT LOG
@@ -169,7 +278,114 @@ Public Class frmMain
             ("@from", dtpFrom.Value.Date), ("@to", dtpTo.Value.Date.AddDays(1)))
         Ui.Bind(dgvLog, table)
         lblCount.Text = If(table.Rows.Count >= 1000, "Showing the latest 1,000 entries", table.Rows.Count & " entries")
+
+        ' KPI cards: counted over the whole date range (not just the 1,000 rows shown in the grid)
+        Dim k As DataRow = Db.Query("
+            SELECT COUNT(*) AS Total,
+                   IFNULL(SUM(Action = 'Login'), 0) AS Logins,
+                   IFNULL(SUM(Action = 'Logout'), 0) AS Logouts,
+                   IFNULL(SUM(Action NOT IN ('Login', 'Logout', 'Login Failed', 'Account Locked', 'Export Report')), 0) AS Changes
+            FROM tblAuditLogs
+            WHERE Timestamp >= @from AND Timestamp < @to",
+            ("@from", dtpFrom.Value.Date), ("@to", dtpTo.Value.Date.AddDays(1))).Rows(0)
+        lblTotalLogsCounter.Text = Convert.ToInt64(k("Total")).ToString("N0")
+        lblLoginCounter.Text = Convert.ToInt64(k("Logins")).ToString("N0")
+        lblChangesCounter.Text = Convert.ToInt64(k("Changes")).ToString("N0")
+        lblLogoutCounter.Text = Convert.ToInt64(k("Logouts")).ToString("N0")
     End Sub
+
+    ' ---- Export Reports: pick a report from the popup, then save it as a CSV (opens in Excel)
+    Private Sub btnExportReports_Click(sender As Object, e As EventArgs) Handles btnExportReports.Click
+        Dim choice As String = Reports.Pick()
+        If choice Is Nothing Then Return
+        Ui.Try(Sub()
+                   Dim table As DataTable = BuildReport(choice)
+                   Dim fileName As String = choice.Replace(" & ", "_").Replace(" ", "_") & "_" & DateTime.Today.ToString("yyyyMMdd") & ".csv"
+                   Dim path As String = Reports.SaveCsv(table, fileName)
+                   If path Is Nothing Then Return
+                   Audit.Log("Export Report", "Reports", Nothing, Nothing, $"{choice} ({table.Rows.Count} rows)")
+                   Ui.Info($"{choice} exported ({table.Rows.Count} rows):" & vbCrLf & path)
+               End Sub)
+    End Sub
+
+    Private Function BuildReport(choice As String) As DataTable
+        Select Case choice
+            Case "Audit Log"          ' follows the From / To dates on this page
+                Return Db.Query("
+                    SELECT DATE_FORMAT(a.Timestamp, '%Y-%m-%d %H:%i:%s') AS `Time`,
+                           IFNULL(u.Username, '(none)') AS `User`,
+                           a.Action, IFNULL(a.NewValue, '') AS Details
+                    FROM tblAuditLogs a
+                    LEFT JOIN tblUsers u ON u.UserID = a.UserID
+                    WHERE a.Timestamp >= @from AND a.Timestamp < @to
+                    ORDER BY a.AuditLogID DESC",
+                    ("@from", dtpFrom.Value.Date), ("@to", dtpTo.Value.Date.AddDays(1)))
+            Case "Patient Records"
+                Return Db.Query("
+                    SELECT PatientCode AS `Patient ID`, LastName AS `Last Name`, FirstName AS `First Name`,
+                           IFNULL(MiddleName, '') AS `Middle Name`,
+                           IFNULL(DATE_FORMAT(BirthDate, '%Y-%m-%d'), '') AS `Birth Date`,
+                           IFNULL(Gender, '') AS Gender, IFNULL(ContactNumber, '') AS `Contact Number`,
+                           IFNULL(Email, '') AS Email, IFNULL(Address, '') AS Address,
+                           IFNULL(EmergencyContactName, '') AS `Emergency Contact`,
+                           IFNULL(EmergencyContactNumber, '') AS `Emergency Number`,
+                           Status, DATE_FORMAT(RegistrationDate, '%Y-%m-%d') AS Registered
+                    FROM tblPatients ORDER BY LastName, FirstName")
+            Case "Appointments"
+                Return Db.Query("
+                    SELECT a.AppointmentCode AS `Appointment ID`,
+                           DATE_FORMAT(a.AppointmentDate, '%Y-%m-%d') AS `Date`,
+                           TIME_FORMAT(a.StartTime, '%h:%i %p') AS `Start`,
+                           IFNULL(TIME_FORMAT(a.EndTime, '%h:%i %p'), '') AS `End`,
+                           CONCAT(p.LastName, ', ', p.FirstName) AS Patient,
+                           CONCAT(s.FirstName, ' ', s.LastName) AS Dentist,
+                           t.TypeName AS `Type`, a.Status, IFNULL(a.Reason, '') AS Reason
+                    FROM tblAppointments a
+                    INNER JOIN tblPatients p ON p.PatientID = a.PatientID
+                    INNER JOIN tblStaff s ON s.StaffID = a.DentistID
+                    INNER JOIN tblAppointmentTypes t ON t.AppointmentTypeID = a.AppointmentTypeID
+                    ORDER BY a.AppointmentDate DESC, a.StartTime")
+            Case "Billing & Payments"
+                Return Db.Query("
+                    SELECT i.InvoiceNumber AS `Invoice No`,
+                           CONCAT(p.LastName, ', ', p.FirstName) AS Patient,
+                           DATE_FORMAT(i.InvoiceDate, '%Y-%m-%d') AS `Invoice Date`,
+                           i.SubTotal AS Subtotal, i.Discount, i.TotalAmount AS Total,
+                           i.AmountPaid AS Paid, i.Balance, i.Status,
+                           IFNULL(py.PaymentReference, '') AS `Payment Ref`,
+                           IFNULL(DATE_FORMAT(py.PaymentDate, '%Y-%m-%d %H:%i'), '') AS `Payment Date`,
+                           IFNULL(m.MethodName, '') AS Method, py.Amount AS `Payment Amount`
+                    FROM tblInvoices i
+                    INNER JOIN tblPatients p ON p.PatientID = i.PatientID
+                    LEFT JOIN tblPayments py ON py.InvoiceID = i.InvoiceID
+                    LEFT JOIN tblPaymentMethods m ON m.PaymentMethodID = py.PaymentMethodID
+                    ORDER BY i.InvoiceDate DESC, i.InvoiceID DESC, py.PaymentID")
+            Case "Inventory"
+                Return Db.Query("
+                    SELECT p.ProductCode AS Code, p.ProductName AS Product, c.CategoryName AS Category,
+                           p.Unit, p.CurrentStock AS Stock, p.ReorderLevel AS `Reorder Level`,
+                           p.UnitCost AS `Unit Cost`, p.Status
+                    FROM tblProducts p
+                    INNER JOIN tblProductCategories c ON c.CategoryID = p.CategoryID
+                    ORDER BY p.ProductName")
+            Case "Clinical Records"
+                Return Db.Query("
+                    SELECT DATE_FORMAT(r.VisitDate, '%Y-%m-%d %H:%i') AS Visit,
+                           pt.PatientCode AS `Patient ID`, CONCAT(pt.LastName, ', ', pt.FirstName) AS Patient,
+                           CONCAT(s.FirstName, ' ', s.LastName) AS Dentist,
+                           IFNULL(r.ChiefComplaint, '') AS `Chief Complaint`, IFNULL(r.Diagnosis, '') AS Diagnosis,
+                           IFNULL(pr.ProcedureName, '') AS Procedure, IFNULL(tr.ToothNumber, '') AS Tooth,
+                           tr.TotalAmount AS `Treatment Total`, IFNULL(tr.TreatmentStatus, '') AS `Treatment Status`,
+                           IFNULL(DATE_FORMAT(r.NextVisitDate, '%Y-%m-%d'), '') AS `Next Visit`
+                    FROM tblDentalRecords r
+                    INNER JOIN tblPatients pt ON pt.PatientID = r.PatientID
+                    INNER JOIN tblStaff s ON s.StaffID = r.DentistID
+                    LEFT JOIN tblTreatmentRecords tr ON tr.DentalRecordID = r.DentalRecordID
+                    LEFT JOIN tblProcedures pr ON pr.ProcedureID = tr.ProcedureID
+                    ORDER BY r.VisitDate DESC, r.DentalRecordID, tr.TreatmentRecordID")
+        End Select
+        Return New DataTable()
+    End Function
 
     ' ============================================================ PATIENTS
     Private _patId As Integer          ' 0 = a new, unsaved patient
@@ -270,7 +486,11 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If Not Ui.Require((txtFirstName, "First name"), (txtLastName, "Last name")) Then Return
+        ' every patient detail is required
+        If Not Ui.Require((txtFirstName, "First name"), (txtMiddleName, "Middle name"), (txtLastName, "Last name"),
+                          (dtpBirth, "Birth date"), (cboGender, "Gender"),
+                          (txtContact, "Contact number"), (txtEmail, "Email"), (txtAddress, "Address"),
+                          (txtEmergName, "Emergency contact name"), (txtEmergNum, "Emergency contact number")) Then Return
         If Not Ui.CheckPhone(txtContact, "Contact number") Then Return
         If Not Ui.CheckEmail(txtEmail) Then Return
         If Not Ui.CheckPhone(txtEmergNum, "Emergency contact number") Then Return
@@ -806,7 +1026,8 @@ Public Class frmMain
     ''' <summary>Enables/disables the groups depending on whether the invoice exists and is not void.</summary>
     Private Sub ApplyInvoiceState()
         Dim saved As Boolean = _invId > 0
-        Dim isOpen As Boolean = saved AndAlso txtStatus.Text <> "Void"
+        Dim isPaid As Boolean = saved AndAlso txtStatus.Text = "Paid"      ' paid in full: locked for good
+        Dim isOpen As Boolean = saved AndAlso txtStatus.Text <> "Void" AndAlso Not isPaid
         cboInvoicePatient.Enabled = Not saved
         numDiscount.Enabled = Not saved OrElse isOpen
         btnSaveInvoice.Enabled = Not saved OrElse isOpen
@@ -818,6 +1039,19 @@ Public Class frmMain
     Private Sub btnNewInvoice_Click(sender As Object, e As EventArgs) Handles btnNewInvoice.Click
         NewInvoice()
     End Sub
+
+    ''' <summary>
+    ''' True (and a message) when the saved invoice is already paid in full. A paid invoice can no longer be
+    ''' changed, voided or have items removed. Checked against the database, not just the screen.
+    ''' </summary>
+    Private Function InvoiceIsPaid() As Boolean
+        If _invId = 0 Then Return False
+        Dim st As String = Convert.ToString(Db.Scalar("SELECT Status FROM tblInvoices WHERE InvoiceID=@id", ("@id", _invId)))
+        If st <> "Paid" Then Return False
+        Ui.Warn("This invoice is already paid, so it can no longer be changed or deleted.")
+        LoadInvoices(_invId)
+        Return True
+    End Function
 
     ' ------------------------------------------------------------ save invoice header
     Private Sub btnSaveInvoice_Click(sender As Object, e As EventArgs) Handles btnSaveInvoice.Click
@@ -843,6 +1077,7 @@ Public Class frmMain
                        LoadInvoices(CInt(newId))
                        Ui.Info($"Invoice {number} created. Now add the items.")
                    Else
+                       If InvoiceIsPaid() Then Return
                        Using tx As New Tx(True)
                            tx.Exec("UPDATE tblInvoices SET Discount=@d WHERE InvoiceID=@id",
                                ("@d", numDiscount.Value), ("@id", _invId))
@@ -888,6 +1123,7 @@ Public Class frmMain
             "Void this invoice?")
         If Not Ui.Confirm(msg) Then Return
         Ui.Try(Sub()
+                   If InvoiceIsPaid() Then Return
                    Db.Exec("UPDATE tblInvoices SET Status='Void' WHERE InvoiceID=@id", ("@id", _invId))
                    Audit.Log("Void Invoice", "tblInvoices", _invId, Nothing, txtInvoiceNo.Text)
                    LoadInvoices(_invId)
@@ -920,6 +1156,7 @@ Public Class frmMain
         End If
 
         Ui.Try(Sub()
+                   If InvoiceIsPaid() Then Return
                    Using tx As New Tx(True)
                        tx.Exec("INSERT INTO tblInvoiceItems (InvoiceID, Description, Quantity, UnitPrice, Discount)
                           VALUES (@i, @d, @q, @p, @disc)",
@@ -946,6 +1183,7 @@ Public Class frmMain
         End If
         If Not Ui.Confirm("Remove the selected item?") Then Return
         Ui.Try(Sub()
+                   If InvoiceIsPaid() Then Return
                    Using tx As New Tx(True)
                        tx.Exec("DELETE FROM tblInvoiceItems WHERE InvoiceItemID=@id AND InvoiceID=@inv",
                            ("@id", itemId), ("@inv", _invId))
@@ -976,6 +1214,7 @@ Public Class frmMain
         Dim methodId As Integer = method.Value
 
         Ui.Try(Sub()
+                   If InvoiceIsPaid() Then Return
                    Dim balance As Decimal = Convert.ToDecimal(Db.Scalar(
                        "SELECT Balance FROM tblInvoices WHERE InvoiceID=@id", ("@id", _invId)))
                    If amount > balance AndAlso
@@ -1596,7 +1835,7 @@ Public Class frmMain
 
     Private Sub NewProcedure()
         _procId = 0
-        txtProcCode.Clear()
+        txtProcCode.Text = "(assigned on save)"
         txtName.Clear()
         txtDescription.Clear()
         numPrice.Value = 0
@@ -1605,7 +1844,7 @@ Public Class frmMain
         _procLoading = True
         dgvProcedures.ClearSelection()
         _procLoading = False
-        txtProcCode.Focus()
+        txtName.Focus()
     End Sub
 
     Private Sub btnNewProcedure_Click(sender As Object, e As EventArgs) Handles btnNewProcedure.Click
@@ -1613,14 +1852,18 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSaveProcedure_Click(sender As Object, e As EventArgs) Handles btnSaveProcedure.Click
-        If Not Ui.Require((txtProcCode, "Procedure code"), (txtName, "Procedure name")) Then Return
-        Dim code As String = txtProcCode.Text.Trim()
+        If Not Ui.Require((txtName, "Procedure name")) Then Return
+        Dim code As String = txtProcCode.Text.Trim()      ' new procedures get their code below
         Dim name As String = txtName.Text.Trim()
         Dim duration As Object = If(numDuration.Value > 0, CObj(CInt(numDuration.Value)), Nothing)
         Dim status As String = If(cboProcStatus.SelectedIndex >= 0, cboProcStatus.Text, "Active")
 
         Ui.Try(Sub()
                    If _procId = 0 Then
+                       ' automatic code in the existing PR-001 style: one more than the highest number in use
+                       Dim nextNo As Integer = Convert.ToInt32(Db.Scalar(
+                           "SELECT IFNULL(MAX(CAST(SUBSTRING(ProcedureCode, 4) AS UNSIGNED)), 0) + 1 FROM tblProcedures WHERE ProcedureCode LIKE 'PR-%'"))
+                       code = $"PR-{nextNo:D3}"
                        Dim newId As Long = Db.Insert("
                     INSERT INTO tblProcedures (ProcedureCode, ProcedureName, Description, StandardPrice, EstimatedDuration, Status)
                     VALUES (@c, @n, @d, @p, @e, @s)",
