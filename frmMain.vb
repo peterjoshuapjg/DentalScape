@@ -200,6 +200,16 @@ Public Class frmMain
         area.AxisY.Title = "Amount received (" & ChrW(&H20B1) & ")"
         area.AxisY.LabelStyle.Format = "N0"
         area.AxisY.MajorGrid.LineColor = Color.Gainsboro
+
+        ' Dynamic Y scale: gridlines every 10,000, top rounds up to the next 10k above the highest day.
+        Dim peak As Double = 0
+        For d As Integer = 1 To days
+            If CDbl(perDay(d)) > peak Then peak = CDbl(perDay(d))
+        Next
+        Const stepSize As Double = 10000
+        area.AxisY.Minimum = 0
+        area.AxisY.Interval = stepSize
+        area.AxisY.Maximum = Math.Max(stepSize, Math.Ceiling(peak / stepSize) * stepSize)
     End Sub
 
     ''' <summary>chtTopProcedure: the five most-performed (Completed) procedures of the current month.</summary>
