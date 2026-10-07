@@ -549,6 +549,7 @@ Public Class frmMain
 
     ' ============================================================ APPOINTMENTS
     Private _apptId As Integer                 ' 0 = new appointment
+    Private _apptOrigDate As DateTime = DateTime.MinValue   ' date the loaded appointment had before editing
     Private _apptLoading As Boolean            ' grid / control binding in progress
     Private _apptInit As Boolean               ' page is (re)opening - ignore filter events
 
@@ -660,7 +661,11 @@ Public Class frmMain
         Ui.SelectValue(cboApptPatient, r("PatientID"))
         Ui.SelectValue(cboDentist, r("DentistID"))
         Ui.SelectValue(cboType, r("AppointmentTypeID"))
-        dtpDate.Value = Convert.ToDateTime(r("AppointmentDate"))
+        Dim loadedDate As DateTime = Convert.ToDateTime(r("AppointmentDate")).Date
+        _apptOrigDate = loadedDate
+        ' Past dates cannot be picked, but an existing past appointment must still be able to open.
+        dtpDate.MinDate = If(loadedDate < DateTime.Today, loadedDate, DateTime.Today)
+        dtpDate.Value = loadedDate
         Ui.SetTime(dtpStart, r("StartTime"))
         Ui.SetTime(dtpEnd, r("EndTime"))
         txtReason.Text = Ui.Txt(r("Reason"))
@@ -678,7 +683,10 @@ Public Class frmMain
         cboApptPatient.Text = ""
         cboDentist.SelectedIndex = If(cboDentist.Items.Count = 1, 0, -1)
         cboType.SelectedIndex = -1
-        dtpDate.Value = If(chkAllDates.Checked, DateTime.Today, dtpFilterDate.Value.Date)
+        _apptOrigDate = DateTime.MinValue
+        dtpDate.MinDate = DateTime.Today                 ' past dates cannot be selected
+        Dim startDate As DateTime = If(chkAllDates.Checked, DateTime.Today, dtpFilterDate.Value.Date)
+        dtpDate.Value = If(startDate < DateTime.Today, DateTime.Today, startDate)
         dtpStart.Value = DateTime.Today.AddHours(9)
         dtpEnd.Checked = False
         txtReason.Clear()
@@ -841,6 +849,10 @@ Public Class frmMain
         End If
         Dim status As String = If(cboApptStatus.SelectedIndex >= 0, cboApptStatus.Text, "Pending")
         Dim apptDate As DateTime = dtpDate.Value.Date
+        If apptDate < DateTime.Today AndAlso (_apptId = 0 OrElse apptDate <> _apptOrigDate) Then
+            Ui.Warn("Appointments cannot be set on a past date. Choose today or a later date.")
+            Return
+        End If
         Dim checkEnd As TimeSpan = If(endTime IsNot Nothing, DirectCast(endTime, TimeSpan), start.Add(TimeSpan.FromMinutes(30)))
         Dim patientId As Integer = patient.Value
         Dim dentistId As Integer = dentist.Value
