@@ -1288,7 +1288,7 @@ Public Class frmMain
         dgvVisits.DataSource = Nothing
         dgvTreatments.DataSource = Nothing
         dgvChart.DataSource = Nothing
-        ctlDentalChart.ClearConditions()
+        ctlDentalChart1.ClearConditions()
         NewVisit()
         NewChart()
         tabMain.SelectedIndex = 0
@@ -1674,18 +1674,18 @@ Public Class frmMain
 
     ' Colour the odontogram from the chart table (newest row per tooth wins)
     Private Sub RefreshOdontogram(table As DataTable)
-        ctlDentalChart.ClearConditions()
+        ctlDentalChart1.ClearConditions()
         Dim seen As New HashSet(Of Integer)
         For Each r As DataRow In table.Rows
             Dim tooth As Integer
             If Integer.TryParse(Ui.Txt(r("Tooth")), tooth) AndAlso seen.Add(tooth) Then
-                ctlDentalChart.SetCondition(tooth, Ui.Txt(r("Dental Condition")))
+                ctlDentalChart1.SetCondition(tooth, Ui.Txt(r("Dental Condition")))
             End If
         Next
     End Sub
 
     ' Click a tooth: open its latest entry, or start a new one for that tooth
-    Private Sub ctlDentalChart_ToothClicked(tooth As Integer) Handles ctlDentalChart.ToothClicked
+    Private Sub ctlDentalChart1_ToothClicked(tooth As Integer) Handles ctlDentalChart1.ToothClicked
         If _recPatientId = 0 Then Return
         For Each row As DataGridViewRow In dgvChart.Rows
             If Ui.Txt(row.Cells("Tooth").Value) = tooth.ToString() Then
@@ -1697,14 +1697,14 @@ Public Class frmMain
         Next
         NewChart()
         txtChartTooth.Text = tooth.ToString()
-        ctlDentalChart.SelectedTooth = tooth
+        ctlDentalChart1.SelectedTooth = tooth
         cboCondition.Focus()
     End Sub
 
     ' Keep the highlight in sync when typing a tooth number
     Private Sub txtChartTooth_TextChanged(sender As Object, e As EventArgs) Handles txtChartTooth.TextChanged
         Dim n As Integer
-        ctlDentalChart.SelectedTooth = If(Integer.TryParse(txtChartTooth.Text.Trim(), n), n, 0)
+        ctlDentalChart1.SelectedTooth = If(Integer.TryParse(txtChartTooth.Text.Trim(), n), n, 0)
     End Sub
     Private Sub LoadChartEntry(id As Integer)
         Dim table As DataTable = Db.Query("SELECT * FROM tblDentalChart WHERE DentalChartID = @id", ("@id", id))
@@ -2366,4 +2366,5 @@ Public Class frmMain
     Private Sub EmailBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEmail.KeyPress, txtStaffEmail.KeyPress, txtSupEmail.KeyPress
         If e.KeyChar = " "c Then e.Handled = True
     End Sub
+
 End Class

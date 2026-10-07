@@ -391,6 +391,7 @@ Partial Class frmMain
         Me.pnlInvoiceLeft = New System.Windows.Forms.Panel()
         Me.cboStatusFilter = New System.Windows.Forms.ComboBox()
         Me.dgvInvoices = New System.Windows.Forms.DataGridView()
+        Me.ctlDentalChart1 = New DentalScape.DentalChartControl()
         Me.pnlSidebar.SuspendLayout()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlHeader.SuspendLayout()
@@ -812,7 +813,7 @@ Partial Class frmMain
         Me.pnlDashboard.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlDashboard.Location = New System.Drawing.Point(220, 56)
         Me.pnlDashboard.Name = "pnlDashboard"
-        Me.pnlDashboard.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
+        Me.pnlDashboard.Padding = New System.Windows.Forms.Padding(10)
         Me.pnlDashboard.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlDashboard.TabIndex = 21
         '
@@ -1154,7 +1155,7 @@ Partial Class frmMain
         Me.pnlInventory.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlInventory.Location = New System.Drawing.Point(220, 56)
         Me.pnlInventory.Name = "pnlInventory"
-        Me.pnlInventory.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
+        Me.pnlInventory.Padding = New System.Windows.Forms.Padding(10)
         Me.pnlInventory.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlInventory.TabIndex = 22
         '
@@ -1177,7 +1178,7 @@ Partial Class frmMain
         Me.tabProducts.Controls.Add(Me.pnlProdLeft)
         Me.tabProducts.Location = New System.Drawing.Point(4, 29)
         Me.tabProducts.Name = "tabProducts"
-        Me.tabProducts.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.tabProducts.Padding = New System.Windows.Forms.Padding(6)
         Me.tabProducts.Size = New System.Drawing.Size(1672, 971)
         Me.tabProducts.TabIndex = 2
         Me.tabProducts.Text = "Products && Stock"
@@ -1614,8 +1615,8 @@ Partial Class frmMain
         Me.tabSuppliers.Controls.Add(Me.pnlSupLeft)
         Me.tabSuppliers.Location = New System.Drawing.Point(4, 29)
         Me.tabSuppliers.Name = "tabSuppliers"
-        Me.tabSuppliers.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.tabSuppliers.Size = New System.Drawing.Size(1209, 787)
+        Me.tabSuppliers.Padding = New System.Windows.Forms.Padding(6)
+        Me.tabSuppliers.Size = New System.Drawing.Size(1672, 971)
         Me.tabSuppliers.TabIndex = 3
         Me.tabSuppliers.Text = "Suppliers"
         '
@@ -1627,7 +1628,7 @@ Partial Class frmMain
         Me.pnlSupRight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlSupRight.Location = New System.Drawing.Point(842, 6)
         Me.pnlSupRight.Name = "pnlSupRight"
-        Me.pnlSupRight.Size = New System.Drawing.Size(361, 775)
+        Me.pnlSupRight.Size = New System.Drawing.Size(824, 959)
         Me.pnlSupRight.TabIndex = 39
         '
         'grpSupplier
@@ -1651,7 +1652,7 @@ Partial Class frmMain
         Me.grpSupplier.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpSupplier.Location = New System.Drawing.Point(8, 8)
         Me.grpSupplier.Name = "grpSupplier"
-        Me.grpSupplier.Size = New System.Drawing.Size(661, 360)
+        Me.grpSupplier.Size = New System.Drawing.Size(1124, 360)
         Me.grpSupplier.TabIndex = 43
         Me.grpSupplier.TabStop = False
         Me.grpSupplier.Text = "Supplier"
@@ -1811,7 +1812,7 @@ Partial Class frmMain
         Me.pnlSupLeft.Dock = System.Windows.Forms.DockStyle.Left
         Me.pnlSupLeft.Location = New System.Drawing.Point(6, 6)
         Me.pnlSupLeft.Name = "pnlSupLeft"
-        Me.pnlSupLeft.Size = New System.Drawing.Size(836, 775)
+        Me.pnlSupLeft.Size = New System.Drawing.Size(836, 959)
         Me.pnlSupLeft.TabIndex = 40
         '
         'dgvSuppliers
@@ -1834,7 +1835,7 @@ Partial Class frmMain
         Me.dgvSuppliers.RowHeadersWidth = 51
         Me.dgvSuppliers.RowTemplate.Height = 26
         Me.dgvSuppliers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvSuppliers.Size = New System.Drawing.Size(820, 715)
+        Me.dgvSuppliers.Size = New System.Drawing.Size(820, 899)
         Me.dgvSuppliers.TabIndex = 42
         '
         'pnlAppointment
@@ -1844,7 +1845,7 @@ Partial Class frmMain
         Me.pnlAppointment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlAppointment.Location = New System.Drawing.Point(220, 56)
         Me.pnlAppointment.Name = "pnlAppointment"
-        Me.pnlAppointment.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
+        Me.pnlAppointment.Padding = New System.Windows.Forms.Padding(10)
         Me.pnlAppointment.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlAppointment.TabIndex = 23
         '
@@ -2242,7 +2243,7 @@ Partial Class frmMain
         Me.pnlPatients.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlPatients.Location = New System.Drawing.Point(220, 56)
         Me.pnlPatients.Name = "pnlPatients"
-        Me.pnlPatients.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
+        Me.pnlPatients.Padding = New System.Windows.Forms.Padding(10)
         Me.pnlPatients.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlPatients.TabIndex = 24
         '
@@ -2666,7 +2667,7 @@ Partial Class frmMain
         Me.pnlClinicalRecord.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlClinicalRecord.Location = New System.Drawing.Point(220, 56)
         Me.pnlClinicalRecord.Name = "pnlClinicalRecord"
-        Me.pnlClinicalRecord.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
+        Me.pnlClinicalRecord.Padding = New System.Windows.Forms.Padding(10)
         Me.pnlClinicalRecord.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlClinicalRecord.TabIndex = 25
         '
@@ -2711,7 +2712,7 @@ Partial Class frmMain
         Me.tabMedical.Controls.Add(Me.lnkUnsavedChanges)
         Me.tabMedical.Location = New System.Drawing.Point(4, 26)
         Me.tabMedical.Name = "tabMedical"
-        Me.tabMedical.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
+        Me.tabMedical.Padding = New System.Windows.Forms.Padding(6)
         Me.tabMedical.Size = New System.Drawing.Size(1672, 922)
         Me.tabMedical.TabIndex = 5
         Me.tabMedical.Text = "Medical History"
@@ -2961,8 +2962,8 @@ Partial Class frmMain
         Me.tabVisits.Controls.Add(Me.grpTreat)
         Me.tabVisits.Location = New System.Drawing.Point(4, 26)
         Me.tabVisits.Name = "tabVisits"
-        Me.tabVisits.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.tabVisits.Size = New System.Drawing.Size(1209, 738)
+        Me.tabVisits.Padding = New System.Windows.Forms.Padding(6)
+        Me.tabVisits.Size = New System.Drawing.Size(1672, 922)
         Me.tabVisits.TabIndex = 6
         Me.tabVisits.Text = "Visit Records && Treatments"
         '
@@ -3379,12 +3380,13 @@ Partial Class frmMain
         'tabChart
         '
         Me.tabChart.BackColor = System.Drawing.Color.FromArgb(CType(CType(244, Byte), Integer), CType(CType(247, Byte), Integer), CType(CType(248, Byte), Integer))
+        Me.tabChart.Controls.Add(Me.ctlDentalChart1)
         Me.tabChart.Controls.Add(Me.dgvChart)
         Me.tabChart.Controls.Add(Me.grpChart)
         Me.tabChart.Location = New System.Drawing.Point(4, 26)
         Me.tabChart.Name = "tabChart"
-        Me.tabChart.Padding = New System.Windows.Forms.Padding(6, 6, 6, 6)
-        Me.tabChart.Size = New System.Drawing.Size(1209, 738)
+        Me.tabChart.Padding = New System.Windows.Forms.Padding(6)
+        Me.tabChart.Size = New System.Drawing.Size(1672, 922)
         Me.tabChart.TabIndex = 7
         Me.tabChart.Text = "Dental Chart"
         '
@@ -3408,7 +3410,7 @@ Partial Class frmMain
         Me.dgvChart.RowHeadersWidth = 51
         Me.dgvChart.RowTemplate.Height = 26
         Me.dgvChart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvChart.Size = New System.Drawing.Size(1248, 558)
+        Me.dgvChart.Size = New System.Drawing.Size(1711, 742)
         Me.dgvChart.TabIndex = 56
         '
         'grpChart
@@ -3621,7 +3623,7 @@ Partial Class frmMain
         Me.pnlProcedures.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlProcedures.Location = New System.Drawing.Point(220, 56)
         Me.pnlProcedures.Name = "pnlProcedures"
-        Me.pnlProcedures.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
+        Me.pnlProcedures.Padding = New System.Windows.Forms.Padding(10)
         Me.pnlProcedures.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlProcedures.TabIndex = 26
         '
@@ -3868,7 +3870,7 @@ Partial Class frmMain
         Me.pnlAuditlog.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlAuditlog.Location = New System.Drawing.Point(220, 56)
         Me.pnlAuditlog.Name = "pnlAuditlog"
-        Me.pnlAuditlog.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
+        Me.pnlAuditlog.Padding = New System.Windows.Forms.Padding(10)
         Me.pnlAuditlog.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlAuditlog.TabIndex = 27
         '
@@ -4104,7 +4106,7 @@ Partial Class frmMain
         Me.pnlStaff.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlStaff.Location = New System.Drawing.Point(220, 56)
         Me.pnlStaff.Name = "pnlStaff"
-        Me.pnlStaff.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
+        Me.pnlStaff.Padding = New System.Windows.Forms.Padding(10)
         Me.pnlStaff.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlStaff.TabIndex = 28
         '
@@ -4450,7 +4452,7 @@ Partial Class frmMain
         Me.pnlBillingpayments.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlBillingpayments.Location = New System.Drawing.Point(220, 56)
         Me.pnlBillingpayments.Name = "pnlBillingpayments"
-        Me.pnlBillingpayments.Padding = New System.Windows.Forms.Padding(10, 10, 10, 10)
+        Me.pnlBillingpayments.Padding = New System.Windows.Forms.Padding(10)
         Me.pnlBillingpayments.Size = New System.Drawing.Size(1700, 1024)
         Me.pnlBillingpayments.TabIndex = 29
         '
@@ -5018,6 +5020,21 @@ Partial Class frmMain
         Me.dgvInvoices.Size = New System.Drawing.Size(820, 948)
         Me.dgvInvoices.TabIndex = 5
         '
+        'ctlDentalChart1
+        '
+        Me.ctlDentalChart1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ctlDentalChart1.BackColor = System.Drawing.Color.White
+        Me.ctlDentalChart1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.ctlDentalChart1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.ctlDentalChart1.Location = New System.Drawing.Point(8, 8)
+        Me.ctlDentalChart1.Name = "ctlDentalChart1"
+        Me.ctlDentalChart1.SelectedTooth = 0
+        Me.ctlDentalChart1.Size = New System.Drawing.Size(1656, 340)
+        Me.ctlDentalChart1.TabIndex = 58
+        Me.ctlDentalChart1.Text = "DentalChartControl7"
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5523,4 +5540,11 @@ Partial Class frmMain
     Friend WithEvents lblLoginCounter As Label
     Friend WithEvents lblTotalLogsCounter As Label
     Friend WithEvents lblLogoutCounter As Label
+    Friend WithEvents DentalChartControl1 As DentalChartControl
+    Friend WithEvents DentalChartControl2 As DentalChartControl
+    Friend WithEvents DentalChartControl3 As DentalChartControl
+    Friend WithEvents DentalChartControl4 As DentalChartControl
+    Friend WithEvents DentalChartControl5 As DentalChartControl
+    Friend WithEvents DentalChartControl6 As DentalChartControl
+    Friend WithEvents ctlDentalChart1 As DentalChartControl
 End Class
