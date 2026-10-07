@@ -977,6 +977,7 @@ Public Class frmMain
     Private _invId As Integer              ' 0 = new invoice not yet saved
     Private _invLoading As Boolean
     Private _invInit As Boolean
+    Private _invPatientSearch As PatientSearch   ' lets the Patient box be typed into (ID or name), not only picked
 
     Private Sub OpenBilling()
         _invInit = True
@@ -987,6 +988,7 @@ Public Class frmMain
             Ui.Fill(cboInvoicePatient, Db.Query("
                 SELECT PatientID AS ID, CONCAT(PatientCode, ' - ', LastName, ', ', FirstName) AS Name
                 FROM tblPatients WHERE Status = 'Active' ORDER BY LastName, FirstName"), "Name", "ID")
+            If _invPatientSearch Is Nothing Then _invPatientSearch = New PatientSearch(cboInvoicePatient)
             Ui.Fill(cboProcedure, Db.Query("
                 SELECT ProcedureID AS ID, ProcedureName AS Name, StandardPrice AS Price
                 FROM tblProcedures WHERE Status = 'Active' ORDER BY ProcedureName"), "Name", "ID")
@@ -1082,6 +1084,7 @@ Public Class frmMain
         txtInvoiceNo.Text = "(assigned on save)"
         txtStatus.Text = "Draft"
         cboInvoicePatient.SelectedIndex = -1
+        cboInvoicePatient.Text = ""
         numDiscount.Value = 0
         lblSubTotal.Text = "Subtotal: " & Ui.Money(0)
         lblTotal.Text = "Total: " & Ui.Money(0)
@@ -1104,7 +1107,7 @@ Public Class frmMain
         cboInvoicePatient.Enabled = Not saved
         numDiscount.Enabled = Not saved OrElse isOpen
         btnSaveInvoice.Enabled = Not saved OrElse isOpen
-        btnVoid.Enabled = isOpen
+        btnVoid.Enabled = isOpen AndAlso txtStatus.Text <> "Partially Paid"     ' partly paid: cannot be voided
         grpItems.Enabled = isOpen
         grpPayments.Enabled = isOpen
     End Sub
@@ -1126,15 +1129,32 @@ Public Class frmMain
         Return True
     End Function
 
+    ''' <summary>
+    ''' True (and a message) when the saved invoice is partially paid (or has any payment at all) and so cannot
+    ''' be voided. Checked against the database, not just the screen.
+    ''' </summary>
+    Private Function InvoiceHasPayments() As Boolean
+        If _invId = 0 Then Return False
+        Dim st As String = Convert.ToString(Db.Scalar("SELECT Status FROM tblInvoices WHERE InvoiceID=@id", ("@id", _invId)))
+        Dim n As Integer = Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM tblPayments WHERE InvoiceID=@id", ("@id", _invId)))
+        If st <> "Partially Paid" AndAlso n = 0 Then Return False
+        Ui.Warn("This invoice is already partially paid, so it cannot be voided.")
+        LoadInvoices(_invId)
+        Return True
+    End Function
+
     ' ------------------------------------------------------------ save invoice header
     Private Sub btnSaveInvoice_Click(sender As Object, e As EventArgs) Handles btnSaveInvoice.Click
         Ui.Try(Sub()
                    If _invId = 0 Then
-                       Dim patient As Integer? = Ui.SelId(cboInvoicePatient)
-                       If Not patient.HasValue Then
-                           Ui.Warn("Select the patient to bill.")
+                       ' the Patient box can be typed into: a patient ID (PAT-00001) or part of the name
+                       If cboInvoicePatient.Text.Trim().Length = 0 Then
+                           Ui.Warn("Type or select the patient to bill.")
                            Return
                        End If
+                       Dim patient As Integer? = _invPatientSearch.Resolve(True)
+                       If Not patient.HasValue Then Return      ' Resolve already explained why
+                       Ui.SelectValue(cboInvoicePatient, patient.Value)
 
                        Dim nextId As Integer = Convert.ToInt32(Db.Scalar("SELECT IFNULL(MAX(InvoiceID), 0) + 1 FROM tblInvoices"))
                        Dim number As String = $"INV-{nextId:D5}"
@@ -1191,12 +1211,10 @@ Public Class frmMain
 
     Private Sub btnVoid_Click(sender As Object, e As EventArgs) Handles btnVoid.Click
         If _invId = 0 OrElse Not Session.IsAdmin Then Return
-        Dim msg As String = If(dgvPayments.Rows.Count > 0,
-            "This invoice already has payments. Voiding keeps the payment records but removes the invoice from balances." & vbCrLf & vbCrLf & "Void it?",
-            "Void this invoice?")
-        If Not Ui.Confirm(msg) Then Return
+        If InvoiceIsPaid() OrElse InvoiceHasPayments() Then Return     ' paid or partially paid: cannot be voided
+        If Not Ui.Confirm("Void this invoice?") Then Return
         Ui.Try(Sub()
-                   If InvoiceIsPaid() Then Return
+                   If InvoiceIsPaid() OrElse InvoiceHasPayments() Then Return
                    Db.Exec("UPDATE tblInvoices SET Status='Void' WHERE InvoiceID=@id", ("@id", _invId))
                    Audit.Log("Void Invoice", "tblInvoices", _invId, Nothing, txtInvoiceNo.Text)
                    LoadInvoices(_invId)

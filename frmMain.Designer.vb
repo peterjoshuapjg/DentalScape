@@ -4623,7 +4623,7 @@ Partial Class frmMain
         '
         'cboInvoicePatient
         '
-        Me.cboInvoicePatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboInvoicePatient.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown
         Me.cboInvoicePatient.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboInvoicePatient.FormattingEnabled = True
         Me.cboInvoicePatient.Location = New System.Drawing.Point(14, 96)
