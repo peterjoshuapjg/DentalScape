@@ -255,17 +255,55 @@ Public Class frmMain
     End Sub
 
     ' ============================================================ AUDIT LOG
+    Private Const LogPageSize As Integer = 25
+    Private _logPage As Integer = 0          ' zero-based current page of the audit grid
+
     Private Sub OpenAudit()
         dtpFrom.Value = DateTime.Today.AddDays(-7)
         dtpTo.Value = DateTime.Today
+        _logPage = 0
         LoadLog()
     End Sub
 
     Private Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
+        _logPage = 0                          ' a new search always starts at page 1
+        Ui.Try(AddressOf LoadLog)
+    End Sub
+
+    Private Sub btnLogPrev_Click(sender As Object, e As EventArgs) Handles btnLogPrev.Click
+        If _logPage > 0 Then
+            _logPage -= 1
+            Ui.Try(AddressOf LoadLog)
+        End If
+    End Sub
+
+    Private Sub btnLogNext_Click(sender As Object, e As EventArgs) Handles btnLogNext.Click
+        _logPage += 1                         ' LoadLog clamps this to the last page
         Ui.Try(AddressOf LoadLog)
     End Sub
 
     Private Sub LoadLog()
+        Dim fromDate As DateTime = dtpFrom.Value.Date
+        Dim toDate As DateTime = dtpTo.Value.Date.AddDays(1)
+
+        ' KPI cards + page count: counted over the whole date range (not just the 25 rows on this page)
+        Dim k As DataRow = Db.Query("
+            SELECT COUNT(*) AS Total,
+                   IFNULL(SUM(Action = 'Login'), 0) AS Logins,
+                   IFNULL(SUM(Action = 'Logout'), 0) AS Logouts,
+                   IFNULL(SUM(Action NOT IN ('Login', 'Logout', 'Login Failed', 'Account Locked', 'Export Report')), 0) AS Changes
+            FROM tblAuditLogs
+            WHERE Timestamp >= @from AND Timestamp < @to",
+            ("@from", fromDate), ("@to", toDate)).Rows(0)
+        Dim total As Long = Convert.ToInt64(k("Total"))
+        lblTotalLogsCounter.Text = total.ToString("N0")
+        lblLoginCounter.Text = Convert.ToInt64(k("Logins")).ToString("N0")
+        lblChangesCounter.Text = Convert.ToInt64(k("Changes")).ToString("N0")
+        lblLogoutCounter.Text = Convert.ToInt64(k("Logouts")).ToString("N0")
+
+        Dim pageCount As Integer = Math.Max(1, CInt(Math.Ceiling(total / CDbl(LogPageSize))))
+        _logPage = Math.Max(0, Math.Min(_logPage, pageCount - 1))
+
         Dim table As DataTable = Db.Query("
             SELECT DATE_FORMAT(a.Timestamp, '%Y-%m-%d %H:%i:%s') AS `Time`,
                    IFNULL(u.Username, '(none)') AS `User`,
@@ -274,24 +312,20 @@ Public Class frmMain
             LEFT JOIN tblUsers u ON u.UserID = a.UserID
             WHERE a.Timestamp >= @from AND a.Timestamp < @to
             ORDER BY a.AuditLogID DESC
-            LIMIT 1000",
-            ("@from", dtpFrom.Value.Date), ("@to", dtpTo.Value.Date.AddDays(1)))
+            LIMIT @size OFFSET @offset",
+            ("@from", fromDate), ("@to", toDate),
+            ("@size", LogPageSize), ("@offset", _logPage * LogPageSize))
         Ui.Bind(dgvLog, table)
-        lblCount.Text = If(table.Rows.Count >= 1000, "Showing the latest 1,000 entries", table.Rows.Count & " entries")
 
-        ' KPI cards: counted over the whole date range (not just the 1,000 rows shown in the grid)
-        Dim k As DataRow = Db.Query("
-            SELECT COUNT(*) AS Total,
-                   IFNULL(SUM(Action = 'Login'), 0) AS Logins,
-                   IFNULL(SUM(Action = 'Logout'), 0) AS Logouts,
-                   IFNULL(SUM(Action NOT IN ('Login', 'Logout', 'Login Failed', 'Account Locked', 'Export Report')), 0) AS Changes
-            FROM tblAuditLogs
-            WHERE Timestamp >= @from AND Timestamp < @to",
-            ("@from", dtpFrom.Value.Date), ("@to", dtpTo.Value.Date.AddDays(1))).Rows(0)
-        lblTotalLogsCounter.Text = Convert.ToInt64(k("Total")).ToString("N0")
-        lblLoginCounter.Text = Convert.ToInt64(k("Logins")).ToString("N0")
-        lblChangesCounter.Text = Convert.ToInt64(k("Changes")).ToString("N0")
-        lblLogoutCounter.Text = Convert.ToInt64(k("Logouts")).ToString("N0")
+        If total = 0 Then
+            lblCount.Text = "0 entries"
+        Else
+            Dim first As Long = CLng(_logPage) * LogPageSize + 1
+            lblCount.Text = $"Showing {first:N0}-{first + table.Rows.Count - 1:N0} of {total:N0} entries"
+        End If
+        lblLogPage.Text = $"Page {_logPage + 1:N0} of {pageCount:N0}   ({total:N0} entries)"
+        btnLogPrev.Enabled = _logPage > 0
+        btnLogNext.Enabled = _logPage < pageCount - 1
     End Sub
 
     ' ---- Export Reports: pick a report from the popup, then save it as a CSV (opens in Excel)

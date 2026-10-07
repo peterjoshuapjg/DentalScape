@@ -320,6 +320,9 @@ Partial Class frmMain
         Me.dtpTo = New System.Windows.Forms.DateTimePicker()
         Me.btnLoad = New System.Windows.Forms.Button()
         Me.dgvLog = New System.Windows.Forms.DataGridView()
+        Me.btnLogPrev = New System.Windows.Forms.Button()
+        Me.btnLogNext = New System.Windows.Forms.Button()
+        Me.lblLogPage = New System.Windows.Forms.Label()
         Me.pnlStaff = New System.Windows.Forms.Panel()
         Me.pnlStaffRight = New System.Windows.Forms.Panel()
         Me.grpStaff = New System.Windows.Forms.GroupBox()
@@ -3855,6 +3858,9 @@ Partial Class frmMain
         '
         'pnlAuditlog
         '
+        Me.pnlAuditlog.Controls.Add(Me.lblLogPage)
+        Me.pnlAuditlog.Controls.Add(Me.btnLogNext)
+        Me.pnlAuditlog.Controls.Add(Me.btnLogPrev)
         Me.pnlAuditlog.Controls.Add(Me.btnExportReports)
         Me.pnlAuditlog.Controls.Add(Me.Panel4)
         Me.pnlAuditlog.Controls.Add(Me.Panel3)
@@ -4096,8 +4102,52 @@ Partial Class frmMain
         Me.dgvLog.RowHeadersWidth = 51
         Me.dgvLog.RowTemplate.Height = 26
         Me.dgvLog.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvLog.Size = New System.Drawing.Size(1637, 781)
+        Me.dgvLog.Size = New System.Drawing.Size(1637, 737)
         Me.dgvLog.TabIndex = 15
+        '
+        'btnLogPrev
+        '
+        Me.btnLogPrev.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLogPrev.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnLogPrev.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLogPrev.FlatAppearance.BorderSize = 0
+        Me.btnLogPrev.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLogPrev.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnLogPrev.ForeColor = System.Drawing.Color.White
+        Me.btnLogPrev.Location = New System.Drawing.Point(1423, 969)
+        Me.btnLogPrev.Name = "btnLogPrev"
+        Me.btnLogPrev.Size = New System.Drawing.Size(110, 30)
+        Me.btnLogPrev.TabIndex = 16
+        Me.btnLogPrev.Text = "< Previous"
+        Me.btnLogPrev.UseVisualStyleBackColor = False
+        '
+        'btnLogNext
+        '
+        Me.btnLogNext.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLogNext.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnLogNext.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnLogNext.FlatAppearance.BorderSize = 0
+        Me.btnLogNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLogNext.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnLogNext.ForeColor = System.Drawing.Color.White
+        Me.btnLogNext.Location = New System.Drawing.Point(1553, 969)
+        Me.btnLogNext.Name = "btnLogNext"
+        Me.btnLogNext.Size = New System.Drawing.Size(110, 30)
+        Me.btnLogNext.TabIndex = 17
+        Me.btnLogNext.Text = "Next >"
+        Me.btnLogNext.UseVisualStyleBackColor = False
+        '
+        'lblLogPage
+        '
+        Me.lblLogPage.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblLogPage.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblLogPage.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.lblLogPage.Location = New System.Drawing.Point(1113, 974)
+        Me.lblLogPage.Name = "lblLogPage"
+        Me.lblLogPage.Size = New System.Drawing.Size(300, 21)
+        Me.lblLogPage.TabIndex = 18
+        Me.lblLogPage.Text = "Page 1 of 1"
+        Me.lblLogPage.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'pnlStaff
         '
@@ -5446,6 +5496,9 @@ Partial Class frmMain
     Friend WithEvents btnLoad As Button
     Friend WithEvents lblCount As Label
     Friend WithEvents dgvLog As DataGridView
+    Friend WithEvents btnLogPrev As Button
+    Friend WithEvents btnLogNext As Button
+    Friend WithEvents lblLogPage As Label
     Friend WithEvents pnlStaff As Panel
     Friend WithEvents pnlStaffRight As Panel
     Friend WithEvents grpStaff As GroupBox
