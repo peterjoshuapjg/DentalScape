@@ -212,7 +212,7 @@ Public Class frmMain
         area.AxisY.Maximum = Math.Max(stepSize, Math.Ceiling(peak / stepSize) * stepSize)
     End Sub
 
-    ''' <summary>chtTopProcedure: the five most-performed (Completed) procedures of the current month.</summary>
+    ''' <summary>chtTopProcedure: the five most-used procedures of this month's visits (cancelled treatments left out).</summary>
     Private Sub LoadTopProcedureChart()
         Dim monthStart As New DateTime(Date.Today.Year, Date.Today.Month, 1)
         Dim t As DataTable = Db.Query("
@@ -220,7 +220,7 @@ Public Class frmMain
             FROM tblTreatmentRecords t
             INNER JOIN tblDentalRecords r ON r.DentalRecordID = t.DentalRecordID
             INNER JOIN tblProcedures pr ON pr.ProcedureID = t.ProcedureID
-            WHERE t.TreatmentStatus = 'Completed' AND r.VisitDate >= @s AND r.VisitDate < @e
+            WHERE t.TreatmentStatus <> 'Cancelled' AND r.VisitDate >= @s AND r.VisitDate < @e
             GROUP BY pr.ProcedureID, pr.ProcedureName
             ORDER BY Cnt DESC, pr.ProcedureName
             LIMIT 5",
@@ -261,6 +261,7 @@ Public Class frmMain
         area.AxisY.Title = "Times performed"
         area.AxisY.MajorGrid.LineColor = Color.Gainsboro
         area.AxisY.LabelStyle.Format = "0"
+        chtTopProcedure.Invalidate()
     End Sub
 
     ''' <summary>dgvLowStockProducts: products at or below their reorder level.</summary>
