@@ -38,6 +38,8 @@ CREATE TABLE tblUsers (
     IsActive TINYINT(1) NOT NULL DEFAULT 1,
     CreatedAt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     LastLogin DATETIME NULL,
+    FailedAttempts INT NOT NULL DEFAULT 0,
+    LockedUntil DATETIME NULL,
     CONSTRAINT PK_tblUsers PRIMARY KEY (UserID),
     CONSTRAINT UQ_tblUsers_Username UNIQUE (Username),
     CONSTRAINT UQ_tblUsers_StaffID UNIQUE (StaffID),
@@ -232,6 +234,7 @@ CREATE TABLE tblTreatmentRecords (
     TotalAmount DECIMAL(12,2) AS ((Quantity * UnitPrice) - Discount) STORED,
     TreatmentStatus VARCHAR(30) NOT NULL DEFAULT 'Completed',
     Notes TEXT NULL,
+    MaterialsConsumed TINYINT(1) NOT NULL DEFAULT 0,
     CONSTRAINT PK_tblTreatmentRecords PRIMARY KEY (TreatmentRecordID),
     CONSTRAINT FK_tblTreatmentRecords_DentalRecord FOREIGN KEY (DentalRecordID) REFERENCES tblDentalRecords(DentalRecordID),
     CONSTRAINT FK_tblTreatmentRecords_Procedure FOREIGN KEY (ProcedureID) REFERENCES tblProcedures(ProcedureID),
@@ -376,6 +379,18 @@ CREATE TABLE tblProductSuppliers (
     CONSTRAINT UQ_tblProductSuppliers_ProductSupplier UNIQUE (ProductID, SupplierID),
     CONSTRAINT CK_tblProductSuppliers_Price CHECK (LastPurchasePrice IS NULL OR LastPurchasePrice >= 0),
     INDEX IX_tblProductSuppliers_Supplier (SupplierID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE tblProcedureMaterial (
+    ProcedureMaterialID INT NOT NULL AUTO_INCREMENT,
+    ProcedureID INT NOT NULL,
+    ProductCode VARCHAR(30) NOT NULL,
+    QuantityUsed INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_tblProcedureMaterial PRIMARY KEY (ProcedureMaterialID),
+    CONSTRAINT FK_tblProcedureMaterial_Procedure FOREIGN KEY (ProcedureID) REFERENCES tblProcedures(ProcedureID),
+    CONSTRAINT FK_tblProcedureMaterial_Product FOREIGN KEY (ProductCode) REFERENCES tblProducts(ProductCode) ON UPDATE CASCADE,
+    CONSTRAINT UQ_tblProcedureMaterial UNIQUE (ProcedureID, ProductCode),
+    CONSTRAINT CK_tblProcedureMaterial_Qty CHECK (QuantityUsed > 0)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE tblInventoryTransactions (
