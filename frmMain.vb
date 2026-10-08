@@ -2426,6 +2426,7 @@ Public Class frmMain
                    CONCAT(s.FirstName, ' ', s.LastName) AS Staff,
                    IF(u.IsActive = 1, 'Yes', 'No') AS Active,
                    IF(u.PasswordHash = 'SET_PASSWORD_FIRST', 'not set', 'set') AS Password,
+                   IF(u.LockedUntil IS NOT NULL AND u.LockedUntil > NOW(), 'Yes', 'No') AS Locked,
                    IFNULL(DATE_FORMAT(u.LastLogin, '%Y-%m-%d %H:%i'), 'never') AS `Last Login`
             FROM tblUsers u
             INNER JOIN tblRoles r ON r.RoleID = u.RoleID
@@ -2433,41 +2434,94 @@ Public Class frmMain
             ORDER BY r.RoleID"))
     End Sub
 
-    Private Sub btnResetPassword_Click(sender As Object, e As EventArgs) Handles btnResetPassword.Click
+    ''' <summary>The account selected in the grid, or 0 (with a warning) when none is selected.</summary>
+    Private Function SelectedAccount(ByRef username As String) As Integer
         Dim id As Integer = Ui.SelectedId(dgvUsers)
         If id = 0 Then
             Ui.Warn("Select an account first.")
+            Return 0
+        End If
+        username = Ui.Txt(dgvUsers.CurrentRow.Cells("Username").Value)
+        Return id
+    End Function
+
+    Private Sub ChangePassword(auditAction As String, prompt As String, doneText As String)
+        Dim username As String = Nothing
+        Dim id As Integer = SelectedAccount(username)
+        If id = 0 Then Return
+        Dim isSet As Boolean = Ui.Txt(dgvUsers.CurrentRow.Cells("Password").Value) = "set"
+        If auditAction = "Set Password" AndAlso isSet Then
+            Ui.Warn($"'{username}' already has a password. Use Reset Password to change it.")
             Return
         End If
-        Dim username As String = Ui.Txt(dgvUsers.CurrentRow.Cells("Username").Value)
+        If auditAction = "Reset Password" AndAlso Not isSet Then
+            Ui.Warn($"'{username}' has no password yet. Use Set Password first.")
+            Return
+        End If
 
-        Dim newPass As String = Ui.AskPassword("Set a new password for the account '" & username & "'.")
+        Dim newPass As String = Ui.AskPassword(String.Format(prompt, username))
         If newPass Is Nothing Then Return
         Ui.Try(Sub()
                    Db.Exec("UPDATE tblUsers SET PasswordHash=@h WHERE UserID=@id", ("@h", Pwd.Hash(newPass)), ("@id", id))
-                   Audit.Log("Reset Password", "tblUsers", id, Nothing, username)
+                   Audit.Log(auditAction, "tblUsers", id, Nothing, username)
                    LoadUsers()
-                   Ui.Info($"The password for '{username}' was changed.")
+                   Ui.Info(String.Format(doneText, username))
                End Sub)
     End Sub
 
-    Private Sub btnToggleActive_Click(sender As Object, e As EventArgs) Handles btnToggleActive.Click
-        Dim id As Integer = Ui.SelectedId(dgvUsers)
-        If id = 0 Then
-            Ui.Warn("Select an account first.")
+    Private Sub btnSetPassword_Click(sender As Object, e As EventArgs) Handles btnSetPassword.Click
+        ChangePassword("Set Password", "Set the first password for the account '{0}'.", "The password for '{0}' was set.")
+    End Sub
+
+    Private Sub btnResetPassword_Click(sender As Object, e As EventArgs) Handles btnResetPassword.Click
+        ChangePassword("Reset Password", "Set a new password for the account '{0}'.", "The password for '{0}' was changed.")
+    End Sub
+
+    Private Sub btnEnableAccount_Click(sender As Object, e As EventArgs) Handles btnEnableAccount.Click
+        Dim username As String = Nothing
+        Dim id As Integer = SelectedAccount(username)
+        If id = 0 Then Return
+        If Ui.Txt(dgvUsers.CurrentRow.Cells("Active").Value) = "Yes" Then
+            Ui.Info($"'{username}' is already enabled.")
             Return
         End If
+        Ui.Try(Sub()
+                   Db.Exec("UPDATE tblUsers SET IsActive=1 WHERE UserID=@id", ("@id", id))
+                   Audit.Log("Enable Account", "tblUsers", id, Nothing, username)
+                   LoadUsers()
+               End Sub)
+    End Sub
+
+    Private Sub btnDisableAccount_Click(sender As Object, e As EventArgs) Handles btnDisableAccount.Click
+        Dim username As String = Nothing
+        Dim id As Integer = SelectedAccount(username)
+        If id = 0 Then Return
         If id = Session.UserId Then
             Ui.Warn("You cannot disable the account you are signed in with.")
             Return
         End If
-        Dim username As String = Ui.Txt(dgvUsers.CurrentRow.Cells("Username").Value)
-        Dim active As Boolean = Ui.Txt(dgvUsers.CurrentRow.Cells("Active").Value) = "Yes"
-        If Not Ui.Confirm(If(active, $"Disable the account '{username}'?", $"Enable the account '{username}'?")) Then Return
+        If Ui.Txt(dgvUsers.CurrentRow.Cells("Active").Value) <> "Yes" Then
+            Ui.Info($"'{username}' is already disabled.")
+            Return
+        End If
+        If Not Ui.Confirm($"Disable the account '{username}'?") Then Return
         Ui.Try(Sub()
-                   Db.Exec("UPDATE tblUsers SET IsActive=@a WHERE UserID=@id", ("@a", If(active, 0, 1)), ("@id", id))
-                   Audit.Log(If(active, "Disable Account", "Enable Account"), "tblUsers", id, Nothing, username)
+                   Db.Exec("UPDATE tblUsers SET IsActive=0 WHERE UserID=@id", ("@id", id))
+                   Audit.Log("Disable Account", "tblUsers", id, Nothing, username)
                    LoadUsers()
+               End Sub)
+    End Sub
+
+    ' Unlock works straight away: it clears the lock and the failed-attempt count, so the 15-minute wait is skipped.
+    Private Sub btnUnlockAccount_Click(sender As Object, e As EventArgs) Handles btnUnlockAccount.Click
+        Dim username As String = Nothing
+        Dim id As Integer = SelectedAccount(username)
+        If id = 0 Then Return
+        Ui.Try(Sub()
+                   Db.Exec("UPDATE tblUsers SET LockedUntil=NULL, FailedAttempts=0 WHERE UserID=@id", ("@id", id))
+                   Audit.Log("Unlock Account", "tblUsers", id, Nothing, username)
+                   LoadUsers()
+                   Ui.Info($"'{username}' is unlocked and can sign in now.")
                End Sub)
     End Sub
 

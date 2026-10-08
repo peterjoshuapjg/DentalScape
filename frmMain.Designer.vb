@@ -347,7 +347,10 @@ Partial Class frmMain
         Me.grpUsers = New System.Windows.Forms.GroupBox()
         Me.dgvUsers = New System.Windows.Forms.DataGridView()
         Me.btnResetPassword = New System.Windows.Forms.Button()
-        Me.btnToggleActive = New System.Windows.Forms.Button()
+        Me.btnSetPassword = New System.Windows.Forms.Button()
+        Me.btnEnableAccount = New System.Windows.Forms.Button()
+        Me.btnDisableAccount = New System.Windows.Forms.Button()
+        Me.btnUnlockAccount = New System.Windows.Forms.Button()
         Me.pnlStaffLeft = New System.Windows.Forms.Panel()
         Me.dgvStaff = New System.Windows.Forms.DataGridView()
         Me.pnlBillingpayments = New System.Windows.Forms.Panel()
@@ -4401,7 +4404,10 @@ Partial Class frmMain
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grpUsers.Controls.Add(Me.dgvUsers)
         Me.grpUsers.Controls.Add(Me.btnResetPassword)
-        Me.grpUsers.Controls.Add(Me.btnToggleActive)
+        Me.grpUsers.Controls.Add(Me.btnSetPassword)
+        Me.grpUsers.Controls.Add(Me.btnEnableAccount)
+        Me.grpUsers.Controls.Add(Me.btnDisableAccount)
+        Me.grpUsers.Controls.Add(Me.btnUnlockAccount)
         Me.grpUsers.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
         Me.grpUsers.Location = New System.Drawing.Point(8, 348)
         Me.grpUsers.Name = "grpUsers"
@@ -4433,6 +4439,21 @@ Partial Class frmMain
         Me.dgvUsers.Size = New System.Drawing.Size(845, 120)
         Me.dgvUsers.TabIndex = 25
         '
+        'btnSetPassword
+        '
+        Me.btnSetPassword.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
+        Me.btnSetPassword.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnSetPassword.FlatAppearance.BorderSize = 0
+        Me.btnSetPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSetPassword.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnSetPassword.ForeColor = System.Drawing.Color.White
+        Me.btnSetPassword.Location = New System.Drawing.Point(14, 160)
+        Me.btnSetPassword.Name = "btnSetPassword"
+        Me.btnSetPassword.Size = New System.Drawing.Size(130, 32)
+        Me.btnSetPassword.TabIndex = 26
+        Me.btnSetPassword.Text = "Set Password"
+        Me.btnSetPassword.UseVisualStyleBackColor = False
+        '
         'btnResetPassword
         '
         Me.btnResetPassword.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(49, Byte), Integer), CType(CType(127, Byte), Integer))
@@ -4441,27 +4462,57 @@ Partial Class frmMain
         Me.btnResetPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnResetPassword.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.btnResetPassword.ForeColor = System.Drawing.Color.White
-        Me.btnResetPassword.Location = New System.Drawing.Point(14, 160)
+        Me.btnResetPassword.Location = New System.Drawing.Point(152, 160)
         Me.btnResetPassword.Name = "btnResetPassword"
-        Me.btnResetPassword.Size = New System.Drawing.Size(170, 32)
-        Me.btnResetPassword.TabIndex = 26
-        Me.btnResetPassword.Text = "Set / Reset Password"
+        Me.btnResetPassword.Size = New System.Drawing.Size(130, 32)
+        Me.btnResetPassword.TabIndex = 27
+        Me.btnResetPassword.Text = "Reset Password"
         Me.btnResetPassword.UseVisualStyleBackColor = False
         '
-        'btnToggleActive
+        'btnEnableAccount
         '
-        Me.btnToggleActive.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(232, Byte), Integer), CType(CType(235, Byte), Integer))
-        Me.btnToggleActive.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnToggleActive.FlatAppearance.BorderSize = 0
-        Me.btnToggleActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnToggleActive.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.btnToggleActive.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
-        Me.btnToggleActive.Location = New System.Drawing.Point(192, 160)
-        Me.btnToggleActive.Name = "btnToggleActive"
-        Me.btnToggleActive.Size = New System.Drawing.Size(150, 32)
-        Me.btnToggleActive.TabIndex = 27
-        Me.btnToggleActive.Text = "Enable / Disable"
-        Me.btnToggleActive.UseVisualStyleBackColor = False
+        Me.btnEnableAccount.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(232, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.btnEnableAccount.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEnableAccount.FlatAppearance.BorderSize = 0
+        Me.btnEnableAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEnableAccount.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnEnableAccount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.btnEnableAccount.Location = New System.Drawing.Point(290, 160)
+        Me.btnEnableAccount.Name = "btnEnableAccount"
+        Me.btnEnableAccount.Size = New System.Drawing.Size(110, 32)
+        Me.btnEnableAccount.TabIndex = 28
+        Me.btnEnableAccount.Text = "Enable"
+        Me.btnEnableAccount.UseVisualStyleBackColor = False
+        '
+        'btnDisableAccount
+        '
+        Me.btnDisableAccount.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(232, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.btnDisableAccount.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnDisableAccount.FlatAppearance.BorderSize = 0
+        Me.btnDisableAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDisableAccount.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnDisableAccount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.btnDisableAccount.Location = New System.Drawing.Point(408, 160)
+        Me.btnDisableAccount.Name = "btnDisableAccount"
+        Me.btnDisableAccount.Size = New System.Drawing.Size(110, 32)
+        Me.btnDisableAccount.TabIndex = 29
+        Me.btnDisableAccount.Text = "Disable"
+        Me.btnDisableAccount.UseVisualStyleBackColor = False
+        '
+        'btnUnlockAccount
+        '
+        Me.btnUnlockAccount.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(232, Byte), Integer), CType(CType(235, Byte), Integer))
+        Me.btnUnlockAccount.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnUnlockAccount.FlatAppearance.BorderSize = 0
+        Me.btnUnlockAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUnlockAccount.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.btnUnlockAccount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(24, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(48, Byte), Integer))
+        Me.btnUnlockAccount.Location = New System.Drawing.Point(526, 160)
+        Me.btnUnlockAccount.Name = "btnUnlockAccount"
+        Me.btnUnlockAccount.Size = New System.Drawing.Size(110, 32)
+        Me.btnUnlockAccount.TabIndex = 30
+        Me.btnUnlockAccount.Text = "Unlock"
+        Me.btnUnlockAccount.UseVisualStyleBackColor = False
         '
         'pnlStaffLeft
         '
@@ -5524,7 +5575,10 @@ Partial Class frmMain
     Friend WithEvents grpUsers As GroupBox
     Friend WithEvents dgvUsers As DataGridView
     Friend WithEvents btnResetPassword As Button
-    Friend WithEvents btnToggleActive As Button
+    Friend WithEvents btnSetPassword As Button
+    Friend WithEvents btnEnableAccount As Button
+    Friend WithEvents btnDisableAccount As Button
+    Friend WithEvents btnUnlockAccount As Button
     Friend WithEvents pnlStaffLeft As Panel
     Friend WithEvents dgvStaff As DataGridView
     Friend WithEvents pnlBillingpayments As Panel
