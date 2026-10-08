@@ -2344,7 +2344,39 @@ Public Class frmMain
         _staffLoading = True
         dgvStaff.ClearSelection()
         _staffLoading = False
+        UpdateStaffCode()
         txtStaffFirstName.Focus()
+    End Sub
+
+    ''' <summary>Code prefix for a staff position: Front Desk FD, Administrator ADM, Dental Assistant DA, Dentist DR.</summary>
+    Private Shared Function StaffPrefix(position As String) As String
+        Select Case position
+            Case "Front Desk" : Return "FD"
+            Case "Administrator" : Return "ADM"
+            Case "Dental Assistant" : Return "DA"
+            Case "Dentist" : Return "DR"
+            Case Else : Return "STF"
+        End Select
+    End Function
+
+    ''' <summary>Next free code for the position, e.g. DR-001, DR-002 (continues after the highest existing number).</summary>
+    Private Function NextStaffCode(position As String) As String
+        Dim prefix As String = StaffPrefix(position)
+        Dim highest As Integer = Convert.ToInt32(Db.Scalar(
+            "SELECT IFNULL(MAX(CAST(SUBSTRING(StaffCode, @len) AS UNSIGNED)), 0) FROM tblStaff WHERE StaffCode LIKE @like",
+            ("@len", prefix.Length + 2), ("@like", prefix & "-%")))
+        Return $"{prefix}-{highest + 1:D3}"
+    End Function
+
+    ''' <summary>Fills the Staff Code box for a NEW staff member as soon as a position is chosen.</summary>
+    Private Sub UpdateStaffCode()
+        If _staffId <> 0 OrElse cboPosition.SelectedIndex < 0 Then Return
+        Ui.Try(Sub() txtStaffCode.Text = NextStaffCode(Ui.GetText(cboPosition)))
+    End Sub
+
+    Private Sub cboPosition_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPosition.SelectedIndexChanged
+        If _staffLoading Then Return
+        UpdateStaffCode()
     End Sub
 
     Private Sub btnNewStaff_Click(sender As Object, e As EventArgs) Handles btnNewStaff.Click
@@ -2363,11 +2395,7 @@ Public Class frmMain
 
         Ui.Try(Sub()
                    If _staffId = 0 Then
-                       Dim code As String = txtStaffCode.Text.Trim()
-                       If code.Length = 0 Then
-                           Dim nextId As Integer = Convert.ToInt32(Db.Scalar("SELECT IFNULL(MAX(StaffID), 0) + 1 FROM tblStaff"))
-                           code = $"STF-{nextId:D3}"
-                       End If
+                       Dim code As String = NextStaffCode(position)   ' re-checked at save so two codes never clash
                        Dim newId As Long = Db.Insert("
                     INSERT INTO tblStaff (StaffCode, FirstName, LastName, ContactNumber, Email, Position, LicenseNumber, Status)
                     VALUES (@c, @fn, @ln, @ph, @em, @pos, @lic, @st)",

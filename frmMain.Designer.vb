@@ -4218,6 +4218,7 @@ Partial Class frmMain
         Me.txtStaffCode.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStaffCode.Location = New System.Drawing.Point(14, 44)
         Me.txtStaffCode.Name = "txtStaffCode"
+        Me.txtStaffCode.ReadOnly = True
         Me.txtStaffCode.Size = New System.Drawing.Size(413, 27)
         Me.txtStaffCode.TabIndex = 7
         '
