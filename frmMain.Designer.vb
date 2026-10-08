@@ -381,7 +381,9 @@ Partial Class frmMain
         Me.lblUnitPrice = New System.Windows.Forms.Label()
         Me.numUnitPrice = New System.Windows.Forms.NumericUpDown()
         Me.lblItemDiscount = New System.Windows.Forms.Label()
-        Me.numItemDiscount = New System.Windows.Forms.NumericUpDown()
+        Me.cboItemDiscount = New System.Windows.Forms.ComboBox()
+        Me.lblItemDiscountAmt = New System.Windows.Forms.Label()
+        Me.txtItemDiscountAmt = New System.Windows.Forms.TextBox()
         Me.btnAddItem = New System.Windows.Forms.Button()
         Me.btnRemoveItem = New System.Windows.Forms.Button()
         Me.dgvItems = New System.Windows.Forms.DataGridView()
@@ -481,7 +483,6 @@ Partial Class frmMain
         Me.grpItems.SuspendLayout()
         CType(Me.numQty, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitPrice, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numItemDiscount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvItems, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpPayments.SuspendLayout()
         CType(Me.numPayAmount, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -4792,7 +4793,9 @@ Partial Class frmMain
         Me.grpItems.Controls.Add(Me.lblUnitPrice)
         Me.grpItems.Controls.Add(Me.numUnitPrice)
         Me.grpItems.Controls.Add(Me.lblItemDiscount)
-        Me.grpItems.Controls.Add(Me.numItemDiscount)
+        Me.grpItems.Controls.Add(Me.cboItemDiscount)
+        Me.grpItems.Controls.Add(Me.lblItemDiscountAmt)
+        Me.grpItems.Controls.Add(Me.txtItemDiscountAmt)
         Me.grpItems.Controls.Add(Me.btnAddItem)
         Me.grpItems.Controls.Add(Me.btnRemoveItem)
         Me.grpItems.Controls.Add(Me.dgvItems)
@@ -4813,7 +4816,7 @@ Partial Class frmMain
         Me.lblProcedure.Name = "lblProcedure"
         Me.lblProcedure.Size = New System.Drawing.Size(288, 17)
         Me.lblProcedure.TabIndex = 23
-        Me.lblProcedure.Text = "Procedure (optional - fills description and price)"
+        Me.lblProcedure.Text = "Procedure * (fills description and price)"
         '
         'cboProcedure
         '
@@ -4884,7 +4887,11 @@ Partial Class frmMain
         Me.numUnitPrice.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.numUnitPrice.Location = New System.Drawing.Point(333, 96)
         Me.numUnitPrice.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
+        Me.numUnitPrice.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(244, Byte), Integer))
+        Me.numUnitPrice.InterceptArrowKeys = False
         Me.numUnitPrice.Name = "numUnitPrice"
+        Me.numUnitPrice.ReadOnly = True
+        Me.numUnitPrice.TabStop = False
         Me.numUnitPrice.Size = New System.Drawing.Size(90, 27)
         Me.numUnitPrice.TabIndex = 30
         Me.numUnitPrice.ThousandsSeparator = True
@@ -4900,16 +4907,40 @@ Partial Class frmMain
         Me.lblItemDiscount.TabIndex = 31
         Me.lblItemDiscount.Text = "Discount"
         '
-        'numItemDiscount
+        'cboItemDiscount
         '
-        Me.numItemDiscount.DecimalPlaces = 2
-        Me.numItemDiscount.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.numItemDiscount.Location = New System.Drawing.Point(449, 96)
-        Me.numItemDiscount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
-        Me.numItemDiscount.Name = "numItemDiscount"
-        Me.numItemDiscount.Size = New System.Drawing.Size(86, 27)
-        Me.numItemDiscount.TabIndex = 32
-        Me.numItemDiscount.ThousandsSeparator = True
+        Me.cboItemDiscount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboItemDiscount.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboItemDiscount.FormattingEnabled = True
+        Me.cboItemDiscount.Items.AddRange(New Object() {"None", "PWD", "Senior Citizen"})
+        Me.cboItemDiscount.Location = New System.Drawing.Point(449, 96)
+        Me.cboItemDiscount.Name = "cboItemDiscount"
+        Me.cboItemDiscount.Size = New System.Drawing.Size(150, 28)
+        Me.cboItemDiscount.TabIndex = 32
+        '
+        'lblItemDiscountAmt
+        '
+        Me.lblItemDiscountAmt.AutoSize = True
+        Me.lblItemDiscountAmt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblItemDiscountAmt.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.lblItemDiscountAmt.Location = New System.Drawing.Point(609, 76)
+        Me.lblItemDiscountAmt.Name = "lblItemDiscountAmt"
+        Me.lblItemDiscountAmt.Size = New System.Drawing.Size(106, 17)
+        Me.lblItemDiscountAmt.TabIndex = 56
+        Me.lblItemDiscountAmt.Text = "Discount amount"
+        '
+        'txtItemDiscountAmt
+        '
+        Me.txtItemDiscountAmt.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(244, Byte), Integer))
+        Me.txtItemDiscountAmt.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtItemDiscountAmt.Location = New System.Drawing.Point(609, 96)
+        Me.txtItemDiscountAmt.Name = "txtItemDiscountAmt"
+        Me.txtItemDiscountAmt.ReadOnly = True
+        Me.txtItemDiscountAmt.Size = New System.Drawing.Size(110, 27)
+        Me.txtItemDiscountAmt.TabIndex = 57
+        Me.txtItemDiscountAmt.TabStop = False
+        Me.txtItemDiscountAmt.Text = "0.00"
+        Me.txtItemDiscountAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'btnAddItem
         '
@@ -5274,7 +5305,6 @@ Partial Class frmMain
         Me.grpItems.PerformLayout()
         CType(Me.numQty, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numUnitPrice, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numItemDiscount, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvItems, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpPayments.ResumeLayout(False)
         Me.grpPayments.PerformLayout()
@@ -5614,7 +5644,9 @@ Partial Class frmMain
     Friend WithEvents lblUnitPrice As Label
     Friend WithEvents numUnitPrice As NumericUpDown
     Friend WithEvents lblItemDiscount As Label
-    Friend WithEvents numItemDiscount As NumericUpDown
+    Friend WithEvents cboItemDiscount As ComboBox
+    Friend WithEvents lblItemDiscountAmt As Label
+    Friend WithEvents txtItemDiscountAmt As TextBox
     Friend WithEvents btnAddItem As Button
     Friend WithEvents btnRemoveItem As Button
     Friend WithEvents dgvItems As DataGridView

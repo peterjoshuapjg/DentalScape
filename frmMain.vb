@@ -993,6 +993,7 @@ Public Class frmMain
                 SELECT PatientID AS ID, CONCAT(PatientCode, ' - ', LastName, ', ', FirstName) AS Name
                 FROM tblPatients WHERE Status = 'Active' ORDER BY LastName, FirstName"), "Name", "ID")
             If _invPatientSearch Is Nothing Then _invPatientSearch = New PatientSearch(cboInvoicePatient)
+            cboItemDiscount.SelectedIndex = 0   ' None
             Ui.Fill(cboProcedure, Db.Query("
                 SELECT ProcedureID AS ID, ProcedureName AS Name, StandardPrice AS Price
                 FROM tblProcedures WHERE Status = 'Active' ORDER BY ProcedureName"), "Name", "ID")
@@ -1235,20 +1236,32 @@ Public Class frmMain
         End If
     End Sub
 
+    ' PWD and Senior Citizen get 20% off the item (quantity x unit price); the amount is worked out automatically.
+    Private Function ItemDiscountAmount() As Decimal
+        If cboItemDiscount.SelectedIndex <= 0 Then Return 0D
+        Return Math.Round(numQty.Value * numUnitPrice.Value * SeniorPwdDiscountRate, 2, MidpointRounding.AwayFromZero)
+    End Function
+
+    Private Sub ItemDiscount_Changed(sender As Object, e As EventArgs) Handles cboItemDiscount.SelectedIndexChanged, numQty.ValueChanged, numUnitPrice.ValueChanged
+        If txtItemDiscountAmt Is Nothing Then Return
+        txtItemDiscountAmt.Text = ItemDiscountAmount().ToString("N2")
+    End Sub
+
     Private Sub btnAddItem_Click(sender As Object, e As EventArgs) Handles btnAddItem.Click
         If _invId = 0 Then
             Ui.Warn("Save the invoice first.")
+            Return
+        End If
+        ' the unit price comes from the procedure (it cannot be typed), so a procedure must be chosen
+        If cboProcedure.SelectedIndex < 0 Then
+            Ui.Warn("Select the procedure.")
             Return
         End If
         If Not Ui.Require((txtItemDesc, "Description")) Then Return
         Dim desc As String = txtItemDesc.Text.Trim()
         Dim qty As Integer = CInt(numQty.Value)
         Dim price As Decimal = numUnitPrice.Value
-        Dim disc As Decimal = numItemDiscount.Value
-        If disc > qty * price Then
-            Ui.Warn("The item discount cannot be more than quantity x unit price.")
-            Return
-        End If
+        Dim disc As Decimal = ItemDiscountAmount()
 
         Ui.Try(Sub()
                    If InvoiceIsPaid() Then Return
@@ -1265,7 +1278,7 @@ Public Class frmMain
                    txtItemDesc.Clear()
                    numQty.Value = 1
                    numUnitPrice.Value = 0
-                   numItemDiscount.Value = 0
+                   cboItemDiscount.SelectedIndex = 0
                    LoadInvoices(_invId)
                End Sub)
     End Sub
