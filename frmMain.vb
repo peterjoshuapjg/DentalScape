@@ -2292,6 +2292,7 @@ Public Class frmMain
     Private Sub OpenStaff()
         _staffId = 0
         txtStaffFirstName.Clear()
+        Ui.Try(Sub() EnsureStaffAccounts())
         LoadStaffGrid()
         LoadUsers()
     End Sub
@@ -2414,6 +2415,7 @@ Public Class frmMain
                     VALUES (@c, @fn, @ln, @ph, @em, @pos, @lic, @st)",
                            ("@c", code), ("@fn", first), ("@ln", last), ("@ph", Ui.Nz(txtStaffContact)), ("@em", email),
                            ("@pos", position), ("@lic", Ui.Nz(txtLicense)), ("@st", status))
+                       SyncStaffAccount(CInt(newId), position, first, last)
                        Audit.Log("Create Staff", "tblStaff", newId, Nothing, $"{code} {last}, {first} ({position})")
                        LoadStaffGrid(CInt(newId))
                    Else
@@ -2423,6 +2425,7 @@ Public Class frmMain
                     WHERE StaffID=@id",
                            ("@c", txtStaffCode.Text.Trim()), ("@fn", first), ("@ln", last), ("@ph", Ui.Nz(txtStaffContact)),
                            ("@em", email), ("@pos", position), ("@lic", Ui.Nz(txtLicense)), ("@st", status), ("@id", _staffId))
+                       SyncStaffAccount(_staffId, position, first, last)
                        Audit.Log("Update Staff", "tblStaff", _staffId, Nothing, $"{last}, {first} ({position}) {status}")
                        LoadStaffGrid(_staffId)
                    End If
@@ -2430,6 +2433,59 @@ Public Class frmMain
                    NewStaff()            ' auto-clear the form for the next entry
                    Ui.Info("Staff member saved.")
                End Sub)
+    End Sub
+
+    ' ------------------------------------------------------------ staff -> login account
+    ' Administrator and Front Desk staff get a login account automatically (no password yet: use Set Password).
+    ' Dentists and Dental Assistants do not log in, so a staff member moved to one of those loses (disables) the account.
+    Private Sub SyncStaffAccount(staffId As Integer, position As String, first As String, last As String)
+        Dim roleName As String = If(position = "Administrator", "Administrator", If(position = "Front Desk", "Front Desk", Nothing))
+        Dim existing As DataTable = Db.Query("SELECT UserID, Username, RoleID, IsActive FROM tblUsers WHERE StaffID=@s", ("@s", staffId))
+
+        If roleName Is Nothing Then
+            If existing.Rows.Count > 0 AndAlso Convert.ToInt32(existing.Rows(0)("IsActive")) = 1 Then
+                Dim uid As Integer = Convert.ToInt32(existing.Rows(0)("UserID"))
+                Db.Exec("UPDATE tblUsers SET IsActive=0 WHERE UserID=@id", ("@id", uid))
+                Audit.Log("Disable Account", "tblUsers", uid, Nothing, Ui.Txt(existing.Rows(0)("Username")))
+            End If
+            Return
+        End If
+
+        Dim roleId As Integer = Convert.ToInt32(Db.Scalar("SELECT RoleID FROM tblRoles WHERE RoleName=@r", ("@r", roleName)))
+        If existing.Rows.Count > 0 Then
+            Dim uid As Integer = Convert.ToInt32(existing.Rows(0)("UserID"))
+            If Convert.ToInt32(existing.Rows(0)("RoleID")) <> roleId Then
+                Db.Exec("UPDATE tblUsers SET RoleID=@r WHERE UserID=@id", ("@r", roleId), ("@id", uid))
+                Audit.Log("Change Account Role", "tblUsers", uid, Nothing, $"{Ui.Txt(existing.Rows(0)("Username"))} -> {roleName}")
+            End If
+            Return
+        End If
+
+        ' new account: username = firstname.lastname (letters and digits only), made unique with a number if needed
+        Dim rx As New System.Text.RegularExpressions.Regex("[^a-z0-9]")
+        Dim baseName As String = rx.Replace(first.ToLowerInvariant(), "") & "." & rx.Replace(last.ToLowerInvariant(), "")
+        If baseName = "." Then baseName = "user" & staffId
+        Dim username As String = baseName
+        Dim n As Integer = 1
+        While Convert.ToInt32(Db.Scalar("SELECT COUNT(*) FROM tblUsers WHERE Username=@u", ("@u", username))) > 0
+            n += 1
+            username = baseName & n
+        End While
+        Dim newId As Long = Db.Insert("INSERT INTO tblUsers (StaffID, Username, PasswordHash, RoleID) VALUES (@s, @u, @h, @r)",
+                                      ("@s", staffId), ("@u", username), ("@h", Pwd.FirstRunHash), ("@r", roleId))
+        Audit.Log("Create Account", "tblUsers", newId, Nothing, $"{username} ({roleName})")
+    End Sub
+
+    ' Staff saved earlier (before accounts were automatic) who still have no account get one when the panel opens.
+    Private Sub EnsureStaffAccounts()
+        Dim missing As DataTable = Db.Query("
+            SELECT s.StaffID, s.Position, s.FirstName, s.LastName
+            FROM tblStaff s
+            WHERE s.Position IN ('Administrator', 'Front Desk') AND s.Status = 'Active'
+              AND NOT EXISTS (SELECT 1 FROM tblUsers u WHERE u.StaffID = s.StaffID)")
+        For Each row As DataRow In missing.Rows
+            SyncStaffAccount(Convert.ToInt32(row("StaffID")), Ui.Txt(row("Position")), Ui.Txt(row("FirstName")), Ui.Txt(row("LastName")))
+        Next
     End Sub
 
     ' ------------------------------------------------------------ login accounts
