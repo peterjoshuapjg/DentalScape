@@ -453,6 +453,41 @@ Public NotInheritable Class Ui
         Return False
     End Function
 
+    ''' <summary>Exactly 11 digits (e.g. 09171234567). Warns and focuses the box when it is anything else.</summary>
+    Public Shared Function CheckPhone11(box As TextBox, label As String) As Boolean
+        Dim s As String = box.Text.Trim()
+        If System.Text.RegularExpressions.Regex.IsMatch(s, "^\d{11}$") Then Return True
+        Warn($"{label} must be exactly 11 digits (for example 09171234567).")
+        box.Focus()
+        box.SelectAll()
+        Return False
+    End Function
+
+    ''' <summary>
+    ''' Same check as Require, but shows one short message ("Please fill up all required fields")
+    ''' and puts the cursor in the first empty field.
+    ''' </summary>
+    Public Shared Function RequireAll(ParamArray fields As (Box As Control, Name As String)()) As Boolean
+        Dim firstEmpty As Control = Nothing
+        For Each f In fields
+            Dim isEmpty As Boolean
+            Dim cbo As ComboBox = TryCast(f.Box, ComboBox)
+            Dim dtp As DateTimePicker = TryCast(f.Box, DateTimePicker)
+            If dtp IsNot Nothing Then
+                isEmpty = dtp.ShowCheckBox AndAlso Not dtp.Checked
+            ElseIf cbo IsNot Nothing AndAlso cbo.DropDownStyle = ComboBoxStyle.DropDownList Then
+                isEmpty = cbo.SelectedIndex < 0
+            Else
+                isEmpty = f.Box.Text.Trim().Length = 0
+            End If
+            If isEmpty AndAlso firstEmpty Is Nothing Then firstEmpty = f.Box
+        Next
+        If firstEmpty Is Nothing Then Return True
+        Warn("Please fill up all required fields")
+        firstEmpty.Focus()
+        Return False
+    End Function
+
     ''' <summary>Optional email box: empty is fine, anything typed must be a valid address. Warns and focuses the box.</summary>
     Public Shared Function CheckEmail(box As TextBox) As Boolean
         Dim s As String = box.Text.Trim()

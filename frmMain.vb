@@ -43,6 +43,10 @@ Public Class frmMain
         ' Codes are automatic: the procedure code box can be read but not typed in.
         txtProcCode.ReadOnly = True
 
+        ' Patient phone numbers: digits only, 11 digits.
+        txtContact.MaxLength = 11
+        txtEmergNum.MaxLength = 11
+
         ' Dashboard low-stock list: read-only, whole-row selection (double-click opens Inventory).
         dgvLowStockProducts.ReadOnly = True
         dgvLowStockProducts.AllowUserToAddRows = False
@@ -548,13 +552,13 @@ Public Class frmMain
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         ' every patient detail is required
-        If Not Ui.Require((txtFirstName, "First name"), (txtMiddleName, "Middle name"), (txtLastName, "Last name"),
-                          (dtpBirth, "Birth date"), (cboGender, "Gender"),
-                          (txtContact, "Contact number"), (txtEmail, "Email"), (txtAddress, "Address"),
-                          (txtEmergName, "Emergency contact name"), (txtEmergNum, "Emergency contact number")) Then Return
-        If Not Ui.CheckPhone(txtContact, "Contact number") Then Return
+        If Not Ui.RequireAll((txtFirstName, "First name"), (txtMiddleName, "Middle name"), (txtLastName, "Last name"),
+                             (dtpBirth, "Birth date"), (cboGender, "Gender"),
+                             (txtContact, "Contact number"), (txtEmail, "Email"), (txtAddress, "Address"),
+                             (txtEmergName, "Emergency contact name"), (txtEmergNum, "Emergency contact number")) Then Return
+        If Not Ui.CheckPhone11(txtContact, "Contact number") Then Return
         If Not Ui.CheckEmail(txtEmail) Then Return
-        If Not Ui.CheckPhone(txtEmergNum, "Emergency contact number") Then Return
+        If Not Ui.CheckPhone11(txtEmergNum, "Emergency contact number") Then Return
         Dim first As String = txtFirstName.Text.Trim()
         Dim last As String = txtLastName.Text.Trim()
         Dim email As String = Ui.Nz(txtEmail)
@@ -2531,8 +2535,13 @@ Public Class frmMain
 
     ' ============================================================ INPUT RULES
     ' Phone boxes accept only digits and + - ( ) . space while typing (the full check is on Save).
-    Private Sub PhoneBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContact.KeyPress, txtEmergNum.KeyPress, txtStaffContact.KeyPress, txtSupPhone.KeyPress
+    Private Sub PhoneBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtStaffContact.KeyPress, txtSupPhone.KeyPress
         Ui.PhoneKey(e)
+    End Sub
+
+    ' Patient phone boxes accept digits only.
+    Private Sub PatientPhone_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContact.KeyPress, txtEmergNum.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then e.Handled = True
     End Sub
 
     ' Email boxes do not accept spaces.
