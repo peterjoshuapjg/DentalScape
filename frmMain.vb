@@ -1060,7 +1060,6 @@ Public Class frmMain
         txtInvoiceNo.Text = Ui.Txt(r("InvoiceNumber"))
         txtStatus.Text = Ui.Txt(r("Status"))
         Ui.SelectValue(cboInvoicePatient, r("PatientID"))
-        Ui.SetNum(numDiscount, r("Discount"))
         lblSubTotal.Text = "Subtotal: " & Ui.Money(r("SubTotal"))
         lblTotal.Text = "Total: " & Ui.Money(r("TotalAmount"))
         lblPaid.Text = "Paid: " & Ui.Money(r("AmountPaid"))
@@ -1090,7 +1089,6 @@ Public Class frmMain
         txtStatus.Text = "Draft"
         cboInvoicePatient.SelectedIndex = -1
         cboInvoicePatient.Text = ""
-        numDiscount.Value = 0
         lblSubTotal.Text = "Subtotal: " & Ui.Money(0)
         lblTotal.Text = "Total: " & Ui.Money(0)
         lblPaid.Text = "Paid: " & Ui.Money(0)
@@ -1110,8 +1108,7 @@ Public Class frmMain
         Dim isPaid As Boolean = saved AndAlso txtStatus.Text = "Paid"      ' paid in full: locked for good
         Dim isOpen As Boolean = saved AndAlso txtStatus.Text <> "Void" AndAlso Not isPaid
         cboInvoicePatient.Enabled = Not saved
-        numDiscount.Enabled = Not saved OrElse isOpen
-        btnSaveInvoice.Enabled = Not saved OrElse isOpen
+        btnSaveInvoice.Enabled = Not saved      ' Save only creates a new invoice (there is no invoice-level discount any more)
         btnVoid.Enabled = isOpen AndAlso txtStatus.Text <> "Partially Paid"     ' partly paid: cannot be voided
         grpItems.Enabled = isOpen
         grpPayments.Enabled = isOpen
@@ -1164,9 +1161,9 @@ Public Class frmMain
                        Dim nextId As Integer = Convert.ToInt32(Db.Scalar("SELECT IFNULL(MAX(InvoiceID), 0) + 1 FROM tblInvoices"))
                        Dim number As String = $"INV-{nextId:D5}"
                        Dim newId As Long = Db.Insert("
-                    INSERT INTO tblInvoices (InvoiceNumber, PatientID, Discount, Status)
-                    VALUES (@n, @p, @d, 'Unpaid')",
-                           ("@n", number), ("@p", patient.Value), ("@d", numDiscount.Value))
+                    INSERT INTO tblInvoices (InvoiceNumber, PatientID, Status)
+                    VALUES (@n, @p, 'Unpaid')",
+                           ("@n", number), ("@p", patient.Value))
                        Using tx As New Tx(True)
                            Recalc(tx, CInt(newId))
                            tx.Commit()
@@ -1174,16 +1171,6 @@ Public Class frmMain
                        Audit.Log("Create Invoice", "tblInvoices", newId, Nothing, number)
                        LoadInvoices(CInt(newId))
                        Ui.Info($"Invoice {number} created. Now add the items.")
-                   Else
-                       If InvoiceIsPaid() Then Return
-                       Using tx As New Tx(True)
-                           tx.Exec("UPDATE tblInvoices SET Discount=@d WHERE InvoiceID=@id",
-                               ("@d", numDiscount.Value), ("@id", _invId))
-                           Recalc(tx, _invId)
-                           tx.Commit()
-                       End Using
-                       Audit.Log("Update Invoice Discount", "tblInvoices", _invId, Nothing, numDiscount.Value.ToString("N2"))
-                       LoadInvoices(_invId)
                    End If
                End Sub)
     End Sub

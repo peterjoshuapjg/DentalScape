@@ -360,8 +360,6 @@ Partial Class frmMain
         Me.txtInvoiceNo = New System.Windows.Forms.TextBox()
         Me.lblInvoiceStatus = New System.Windows.Forms.Label()
         Me.txtStatus = New System.Windows.Forms.TextBox()
-        Me.lblDiscount = New System.Windows.Forms.Label()
-        Me.numDiscount = New System.Windows.Forms.NumericUpDown()
         Me.lblInvoicePatient = New System.Windows.Forms.Label()
         Me.cboInvoicePatient = New System.Windows.Forms.ComboBox()
         Me.lblSubTotal = New System.Windows.Forms.Label()
@@ -479,7 +477,6 @@ Partial Class frmMain
         Me.pnlBillingpayments.SuspendLayout()
         Me.pnlInvoiceRight.SuspendLayout()
         Me.grpInvoice.SuspendLayout()
-        CType(Me.numDiscount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpItems.SuspendLayout()
         CType(Me.numQty, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUnitPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -4587,8 +4584,6 @@ Partial Class frmMain
         Me.grpInvoice.Controls.Add(Me.txtInvoiceNo)
         Me.grpInvoice.Controls.Add(Me.lblInvoiceStatus)
         Me.grpInvoice.Controls.Add(Me.txtStatus)
-        Me.grpInvoice.Controls.Add(Me.lblDiscount)
-        Me.grpInvoice.Controls.Add(Me.numDiscount)
         Me.grpInvoice.Controls.Add(Me.lblInvoicePatient)
         Me.grpInvoice.Controls.Add(Me.cboInvoicePatient)
         Me.grpInvoice.Controls.Add(Me.lblSubTotal)
@@ -4647,28 +4642,6 @@ Partial Class frmMain
         Me.txtStatus.ReadOnly = True
         Me.txtStatus.Size = New System.Drawing.Size(174, 27)
         Me.txtStatus.TabIndex = 10
-        '
-        'lblDiscount
-        '
-        Me.lblDiscount.AutoSize = True
-        Me.lblDiscount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDiscount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblDiscount.Location = New System.Drawing.Point(417, 23)
-        Me.lblDiscount.Name = "lblDiscount"
-        Me.lblDiscount.Size = New System.Drawing.Size(78, 17)
-        Me.lblDiscount.TabIndex = 11
-        Me.lblDiscount.Text = "Discount (₱)"
-        '
-        'numDiscount
-        '
-        Me.numDiscount.DecimalPlaces = 2
-        Me.numDiscount.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.numDiscount.Location = New System.Drawing.Point(417, 43)
-        Me.numDiscount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
-        Me.numDiscount.Name = "numDiscount"
-        Me.numDiscount.Size = New System.Drawing.Size(197, 27)
-        Me.numDiscount.TabIndex = 12
-        Me.numDiscount.ThousandsSeparator = True
         '
         'lblInvoicePatient
         '
@@ -5300,7 +5273,6 @@ Partial Class frmMain
         Me.pnlInvoiceRight.ResumeLayout(False)
         Me.grpInvoice.ResumeLayout(False)
         Me.grpInvoice.PerformLayout()
-        CType(Me.numDiscount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpItems.ResumeLayout(False)
         Me.grpItems.PerformLayout()
         CType(Me.numQty, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5623,8 +5595,6 @@ Partial Class frmMain
     Friend WithEvents txtInvoiceNo As TextBox
     Friend WithEvents lblInvoiceStatus As Label
     Friend WithEvents txtStatus As TextBox
-    Friend WithEvents lblDiscount As Label
-    Friend WithEvents numDiscount As NumericUpDown
     Friend WithEvents lblInvoicePatient As Label
     Friend WithEvents cboInvoicePatient As ComboBox
     Friend WithEvents lblSubTotal As Label
