@@ -1369,6 +1369,7 @@ Public Class frmMain
 
         ' blank page until a patient is picked
         cboTreatStatus.SelectedIndex = 2    ' Completed
+        cboTreatDiscount.SelectedIndex = 0  ' None
         txtAllergies.Clear()
         txtMedications.Clear()
         txtConditions.Clear()
@@ -1662,7 +1663,7 @@ Public Class frmMain
     Private Sub LoadTreatments()
         Ui.Bind(dgvTreatments, Db.Query("
             SELECT t.TreatmentRecordID AS ID, pr.ProcedureName AS Service,
-                   IFNULL(t.ToothNumber, '') AS Tooth, t.Quantity AS Qty,
+                   IFNULL(t.ToothNumber, '') AS Tooth,
                    t.UnitPrice AS `Unit Price`, t.Discount, t.TotalAmount AS Total,
                    t.TreatmentStatus AS Status
             FROM tblTreatmentRecords t
@@ -1676,6 +1677,19 @@ Public Class frmMain
         If drv IsNot Nothing Then Ui.SetNum(numTreatPrice, drv("Price"))
     End Sub
 
+    ' PWD and Senior Citizen get 20% off the unit price (the amount is worked out automatically, not typed).
+    Private Const SeniorPwdDiscountRate As Decimal = 0.2D
+
+    Private Function TreatDiscountAmount() As Decimal
+        If cboTreatDiscount.SelectedIndex <= 0 Then Return 0D
+        Return Math.Round(numTreatPrice.Value * SeniorPwdDiscountRate, 2, MidpointRounding.AwayFromZero)
+    End Function
+
+    Private Sub TreatDiscount_Changed(sender As Object, e As EventArgs) Handles cboTreatDiscount.SelectedIndexChanged, numTreatPrice.ValueChanged
+        If txtTreatDiscountAmt Is Nothing Then Return
+        txtTreatDiscountAmt.Text = TreatDiscountAmount().ToString("N2")
+    End Sub
+
     Private Sub btnAddTreatment_Click(sender As Object, e As EventArgs) Handles btnAddTreatment.Click
         If _visitId = 0 Then
             Ui.Warn("Save the visit record first.")
@@ -1687,13 +1701,9 @@ Public Class frmMain
             Return
         End If
         Dim procId As Integer = proc.Value
-        Dim qty As Integer = CInt(numTreatQty.Value)
+        ' one treatment row = one tooth (or the whole mouth when no tooth is picked), so the quantity is always 1
         Dim price As Decimal = numTreatPrice.Value
-        Dim disc As Decimal = numTreatDiscount.Value
-        If disc > qty * price Then
-            Ui.Warn("The discount cannot be more than quantity x unit price.")
-            Return
-        End If
+        Dim disc As Decimal = TreatDiscountAmount()
 
         Ui.Try(Sub()
                    Dim dentistId As Object = Db.Scalar("SELECT DentistID FROM tblDentalRecords WHERE DentalRecordID=@id", ("@id", _visitId))
@@ -1701,15 +1711,14 @@ Public Class frmMain
                 INSERT INTO tblTreatmentRecords
                     (DentalRecordID, ProcedureID, DentistID, ToothNumber, Quantity, UnitPrice, Discount, TreatmentStatus)
                 VALUES (@v, @pr, @d, @t, @q, @u, @disc, @st)",
-                       ("@v", _visitId), ("@pr", procId), ("@d", dentistId), ("@t", Ui.Nz(txtTreatTooth)), ("@q", qty),
+                       ("@v", _visitId), ("@pr", procId), ("@d", dentistId), ("@t", If(cboTreatTooth.SelectedIndex > 0, CObj(cboTreatTooth.Text), Nothing)), ("@q", 1),
                        ("@u", price), ("@disc", disc), ("@st", cboTreatStatus.Text))
                    Audit.Log("Add Treatment", "tblTreatmentRecords", newId, Nothing, cboTreatProcedure.Text)
 
                    cboTreatProcedure.SelectedIndex = -1
-                   txtTreatTooth.Clear()
-                   numTreatQty.Value = 1
+                   cboTreatTooth.SelectedIndex = 0
                    numTreatPrice.Value = 0
-                   numTreatDiscount.Value = 0
+                   cboTreatDiscount.SelectedIndex = 0
                    LoadTreatments()
                End Sub)
     End Sub

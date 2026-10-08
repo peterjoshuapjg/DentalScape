@@ -248,13 +248,13 @@ Partial Class frmMain
         Me.lblTreatProcedure = New System.Windows.Forms.Label()
         Me.cboTreatProcedure = New System.Windows.Forms.ComboBox()
         Me.lblTreatTooth = New System.Windows.Forms.Label()
-        Me.txtTreatTooth = New System.Windows.Forms.TextBox()
-        Me.lblTreatQty = New System.Windows.Forms.Label()
-        Me.numTreatQty = New System.Windows.Forms.NumericUpDown()
+        Me.cboTreatTooth = New System.Windows.Forms.ComboBox()
         Me.lblTreatPrice = New System.Windows.Forms.Label()
         Me.numTreatPrice = New System.Windows.Forms.NumericUpDown()
         Me.lblTreatDiscount = New System.Windows.Forms.Label()
-        Me.numTreatDiscount = New System.Windows.Forms.NumericUpDown()
+        Me.cboTreatDiscount = New System.Windows.Forms.ComboBox()
+        Me.lblTreatDiscountAmt = New System.Windows.Forms.Label()
+        Me.txtTreatDiscountAmt = New System.Windows.Forms.TextBox()
         Me.lblTreatStatus = New System.Windows.Forms.Label()
         Me.cboTreatStatus = New System.Windows.Forms.ComboBox()
         Me.btnAddTreatment = New System.Windows.Forms.Button()
@@ -448,9 +448,7 @@ Partial Class frmMain
         CType(Me.dgvVisits, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpVisit.SuspendLayout()
         Me.grpTreat.SuspendLayout()
-        CType(Me.numTreatQty, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numTreatPrice, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.numTreatDiscount, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvTreatments, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabChart.SuspendLayout()
         CType(Me.dgvChart, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -3193,13 +3191,13 @@ Partial Class frmMain
         Me.grpTreat.Controls.Add(Me.lblTreatProcedure)
         Me.grpTreat.Controls.Add(Me.cboTreatProcedure)
         Me.grpTreat.Controls.Add(Me.lblTreatTooth)
-        Me.grpTreat.Controls.Add(Me.txtTreatTooth)
-        Me.grpTreat.Controls.Add(Me.lblTreatQty)
-        Me.grpTreat.Controls.Add(Me.numTreatQty)
+        Me.grpTreat.Controls.Add(Me.cboTreatTooth)
         Me.grpTreat.Controls.Add(Me.lblTreatPrice)
         Me.grpTreat.Controls.Add(Me.numTreatPrice)
         Me.grpTreat.Controls.Add(Me.lblTreatDiscount)
-        Me.grpTreat.Controls.Add(Me.numTreatDiscount)
+        Me.grpTreat.Controls.Add(Me.cboTreatDiscount)
+        Me.grpTreat.Controls.Add(Me.lblTreatDiscountAmt)
+        Me.grpTreat.Controls.Add(Me.txtTreatDiscountAmt)
         Me.grpTreat.Controls.Add(Me.lblTreatStatus)
         Me.grpTreat.Controls.Add(Me.cboTreatStatus)
         Me.grpTreat.Controls.Add(Me.btnAddTreatment)
@@ -3242,39 +3240,22 @@ Partial Class frmMain
         Me.lblTreatTooth.TabIndex = 43
         Me.lblTreatTooth.Text = "Tooth"
         '
-        'txtTreatTooth
+        'cboTreatTooth
         '
-        Me.txtTreatTooth.Location = New System.Drawing.Point(252, 42)
-        Me.txtTreatTooth.Name = "txtTreatTooth"
-        Me.txtTreatTooth.Size = New System.Drawing.Size(70, 25)
-        Me.txtTreatTooth.TabIndex = 44
-        '
-        'lblTreatQty
-        '
-        Me.lblTreatQty.AutoSize = True
-        Me.lblTreatQty.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblTreatQty.Location = New System.Drawing.Point(330, 22)
-        Me.lblTreatQty.Name = "lblTreatQty"
-        Me.lblTreatQty.Size = New System.Drawing.Size(30, 17)
-        Me.lblTreatQty.TabIndex = 45
-        Me.lblTreatQty.Text = "Qty"
-        '
-        'numTreatQty
-        '
-        Me.numTreatQty.Location = New System.Drawing.Point(330, 42)
-        Me.numTreatQty.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
-        Me.numTreatQty.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.numTreatQty.Name = "numTreatQty"
-        Me.numTreatQty.Size = New System.Drawing.Size(60, 25)
-        Me.numTreatQty.TabIndex = 46
-        Me.numTreatQty.ThousandsSeparator = True
-        Me.numTreatQty.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.cboTreatTooth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboTreatTooth.FormattingEnabled = True
+        Me.cboTreatTooth.Items.AddRange(New Object() {"", "11", "12", "13", "14", "15", "16", "17", "18", "21", "22", "23", "24", "25", "26", "27", "28", "31", "32", "33", "34", "35", "36", "37", "38", "41", "42", "43", "44", "45", "46", "47", "48"})
+        Me.cboTreatTooth.Location = New System.Drawing.Point(252, 42)
+        Me.cboTreatTooth.MaxDropDownItems = 12
+        Me.cboTreatTooth.Name = "cboTreatTooth"
+        Me.cboTreatTooth.Size = New System.Drawing.Size(70, 25)
+        Me.cboTreatTooth.TabIndex = 44
         '
         'lblTreatPrice
         '
         Me.lblTreatPrice.AutoSize = True
         Me.lblTreatPrice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblTreatPrice.Location = New System.Drawing.Point(398, 22)
+        Me.lblTreatPrice.Location = New System.Drawing.Point(330, 22)
         Me.lblTreatPrice.Name = "lblTreatPrice"
         Me.lblTreatPrice.Size = New System.Drawing.Size(66, 17)
         Me.lblTreatPrice.TabIndex = 47
@@ -3283,9 +3264,13 @@ Partial Class frmMain
         'numTreatPrice
         '
         Me.numTreatPrice.DecimalPlaces = 2
-        Me.numTreatPrice.Location = New System.Drawing.Point(398, 42)
+        Me.numTreatPrice.Location = New System.Drawing.Point(330, 42)
         Me.numTreatPrice.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
+        Me.numTreatPrice.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(244, Byte), Integer))
+        Me.numTreatPrice.InterceptArrowKeys = False
         Me.numTreatPrice.Name = "numTreatPrice"
+        Me.numTreatPrice.ReadOnly = True
+        Me.numTreatPrice.TabStop = False
         Me.numTreatPrice.Size = New System.Drawing.Size(90, 25)
         Me.numTreatPrice.TabIndex = 48
         Me.numTreatPrice.ThousandsSeparator = True
@@ -3294,21 +3279,43 @@ Partial Class frmMain
         '
         Me.lblTreatDiscount.AutoSize = True
         Me.lblTreatDiscount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblTreatDiscount.Location = New System.Drawing.Point(496, 22)
+        Me.lblTreatDiscount.Location = New System.Drawing.Point(428, 22)
         Me.lblTreatDiscount.Name = "lblTreatDiscount"
         Me.lblTreatDiscount.Size = New System.Drawing.Size(61, 17)
         Me.lblTreatDiscount.TabIndex = 49
         Me.lblTreatDiscount.Text = "Discount"
         '
-        'numTreatDiscount
+        'cboTreatDiscount
         '
-        Me.numTreatDiscount.DecimalPlaces = 2
-        Me.numTreatDiscount.Location = New System.Drawing.Point(496, 42)
-        Me.numTreatDiscount.Maximum = New Decimal(New Integer() {999999999, 0, 0, 131072})
-        Me.numTreatDiscount.Name = "numTreatDiscount"
-        Me.numTreatDiscount.Size = New System.Drawing.Size(98, 25)
-        Me.numTreatDiscount.TabIndex = 50
-        Me.numTreatDiscount.ThousandsSeparator = True
+        Me.cboTreatDiscount.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboTreatDiscount.FormattingEnabled = True
+        Me.cboTreatDiscount.Items.AddRange(New Object() {"None", "PWD", "Senior Citizen"})
+        Me.cboTreatDiscount.Location = New System.Drawing.Point(428, 42)
+        Me.cboTreatDiscount.Name = "cboTreatDiscount"
+        Me.cboTreatDiscount.Size = New System.Drawing.Size(130, 25)
+        Me.cboTreatDiscount.TabIndex = 50
+        '
+        'lblTreatDiscountAmt
+        '
+        Me.lblTreatDiscountAmt.AutoSize = True
+        Me.lblTreatDiscountAmt.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.lblTreatDiscountAmt.Location = New System.Drawing.Point(566, 22)
+        Me.lblTreatDiscountAmt.Name = "lblTreatDiscountAmt"
+        Me.lblTreatDiscountAmt.Size = New System.Drawing.Size(105, 17)
+        Me.lblTreatDiscountAmt.TabIndex = 55
+        Me.lblTreatDiscountAmt.Text = "Discount amount"
+        '
+        'txtTreatDiscountAmt
+        '
+        Me.txtTreatDiscountAmt.BackColor = System.Drawing.Color.FromArgb(CType(CType(240, Byte), Integer), CType(CType(243, Byte), Integer), CType(CType(244, Byte), Integer))
+        Me.txtTreatDiscountAmt.Location = New System.Drawing.Point(566, 42)
+        Me.txtTreatDiscountAmt.Name = "txtTreatDiscountAmt"
+        Me.txtTreatDiscountAmt.ReadOnly = True
+        Me.txtTreatDiscountAmt.Size = New System.Drawing.Size(105, 25)
+        Me.txtTreatDiscountAmt.TabIndex = 56
+        Me.txtTreatDiscountAmt.TabStop = False
+        Me.txtTreatDiscountAmt.Text = "0.00"
+        Me.txtTreatDiscountAmt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'lblTreatStatus
         '
@@ -5223,9 +5230,7 @@ Partial Class frmMain
         Me.grpVisit.PerformLayout()
         Me.grpTreat.ResumeLayout(False)
         Me.grpTreat.PerformLayout()
-        CType(Me.numTreatQty, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numTreatPrice, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.numTreatDiscount, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvTreatments, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabChart.ResumeLayout(False)
         CType(Me.dgvChart, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5494,13 +5499,13 @@ Partial Class frmMain
     Friend WithEvents lblTreatProcedure As Label
     Friend WithEvents cboTreatProcedure As ComboBox
     Friend WithEvents lblTreatTooth As Label
-    Friend WithEvents txtTreatTooth As TextBox
-    Friend WithEvents lblTreatQty As Label
-    Friend WithEvents numTreatQty As NumericUpDown
+    Friend WithEvents cboTreatTooth As ComboBox
     Friend WithEvents lblTreatPrice As Label
     Friend WithEvents numTreatPrice As NumericUpDown
     Friend WithEvents lblTreatDiscount As Label
-    Friend WithEvents numTreatDiscount As NumericUpDown
+    Friend WithEvents cboTreatDiscount As ComboBox
+    Friend WithEvents lblTreatDiscountAmt As Label
+    Friend WithEvents txtTreatDiscountAmt As TextBox
     Friend WithEvents lblTreatStatus As Label
     Friend WithEvents cboTreatStatus As ComboBox
     Friend WithEvents btnAddTreatment As Button
