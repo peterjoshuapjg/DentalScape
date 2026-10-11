@@ -2083,7 +2083,7 @@ Public Class frmMain
         dgvImaging.AllowUserToResizeRows = False
         ImageThumbnail.ImageLayout = DataGridViewImageCellLayout.Zoom
         ImageThumbnail.Width = 130
-
+        BuildImagePager()
         ClearImaging()
     End Sub
 
@@ -2092,10 +2092,13 @@ Public Class frmMain
         Try
             _imgPendingFile = ""
             _imgId = 0
+            _imgPage = 0
+            _imgPagePatient = 0
             ClearImageGrid()
             SetPreview(Nothing)
             cboImageType.SelectedIndex = -1
             dtpDateUploaded.Value = DateTime.Now
+            UpdateImagePager(0, 1)
         Finally
             _imgLoading = False
         End Try
@@ -2199,12 +2202,93 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Const ImagePageSize As Integer = 5      ' rows are 84 px tall, so 5 fit without scrolling
+    Private _imgPage As Integer = 0                 ' zero-based current page
+    Private _imgPagePatient As Integer = 0          ' patient the current page belongs to (new patient = back to page 1)
+    Private _btnImgPrev As Button
+    Private _btnImgNext As Button
+    Private _lblImgPage As Label
+    Private Shared Function MakePagerButton(text As String) As Button
+        Dim b As New Button() With {
+        .Text = text, .Size = New Size(110, 30), .FlatStyle = FlatStyle.Flat,
+        .BackColor = Color.FromArgb(13, 49, 127), .ForeColor = Color.White,
+        .Font = New Font("Segoe UI", 9.0F, FontStyle.Bold), .Cursor = Cursors.Hand}
+        b.FlatAppearance.BorderSize = 0
+        Return b
+    End Function
+
+    ''' <summary>Creates the Previous / Next buttons and the page label under the grid (once).</summary>
+    Private Sub BuildImagePager()
+        If _btnImgPrev IsNot Nothing Then Return
+        Dim host As Control = dgvImaging.Parent
+        Dim y As Integer = dgvImaging.Bottom + 8
+
+        _btnImgPrev = MakePagerButton("< Previous")
+        _btnImgPrev.Location = New Point(dgvImaging.Left, y)
+        _btnImgPrev.Anchor = AnchorStyles.Top Or AnchorStyles.Left
+
+        _btnImgNext = MakePagerButton("Next >")
+        _btnImgNext.Location = New Point(dgvImaging.Right - _btnImgNext.Width, y)
+        _btnImgNext.Anchor = AnchorStyles.Top Or AnchorStyles.Right
+
+        _lblImgPage = New Label() With {
+        .AutoSize = False, .TextAlign = ContentAlignment.MiddleCenter,
+        .Font = New Font("Segoe UI", 9.0F), .ForeColor = Color.FromArgb(13, 49, 127),
+        .Location = New Point(_btnImgPrev.Right + 8, y),
+        .Size = New Size(dgvImaging.Width - 2 * (_btnImgPrev.Width + 8), _btnImgPrev.Height),
+        .Anchor = AnchorStyles.Top Or AnchorStyles.Left Or AnchorStyles.Right}
+
+        AddHandler _btnImgPrev.Click, Sub() ChangeImagePage(-1)
+        AddHandler _btnImgNext.Click, Sub() ChangeImagePage(1)
+        host.Controls.AddRange(New Control() {_btnImgPrev, _btnImgNext, _lblImgPage})
+    End Sub
+
+    Private Sub ChangeImagePage(delta As Integer)
+        If _recPatientId = 0 Then Return
+        If _imgPendingFile.Length > 0 AndAlso
+       Not Ui.Confirm("You have an uploaded image that is not saved yet." & vbCrLf & "Discard it and change page?") Then Return
+        _imgPage = Math.Max(0, _imgPage + delta)       ' LoadImages clamps the upper end
+        Ui.Try(Sub() LoadImages())
+    End Sub
+
+    Private Sub UpdateImagePager(total As Integer, pageCount As Integer)
+        If _lblImgPage Is Nothing Then Return
+        _lblImgPage.Text = If(total = 0, "No images", $"Page {_imgPage + 1} of {pageCount}   ({total} images)")
+        _btnImgPrev.Enabled = _imgPage > 0
+        _btnImgNext.Enabled = _imgPage < pageCount - 1
+    End Sub
+
     ' ---- grid
     Private Sub LoadImages(Optional selectId As Integer = 0)
+        ' a different patient always starts on page 1
+        If _imgPagePatient <> _recPatientId Then
+            _imgPagePatient = _recPatientId
+            _imgPage = 0
+        End If
+
+        Dim total As Integer = Convert.ToInt32(Db.Scalar(
+        "SELECT COUNT(*) FROM tblMedicalImages WHERE PatientID = @p", ("@p", _recPatientId)))
+
+        ' an image to select (just saved / edited): open the page that contains it
+        If selectId > 0 Then
+            Dim before As Integer = Convert.ToInt32(Db.Scalar("
+            SELECT COUNT(*) FROM tblMedicalImages a
+            INNER JOIN tblMedicalImages b ON b.ImageID = @i
+            WHERE a.PatientID = @p
+              AND (a.DateUploaded > b.DateUploaded OR (a.DateUploaded = b.DateUploaded AND a.ImageID > b.ImageID))",
+            ("@i", selectId), ("@p", _recPatientId)))
+            _imgPage = before \ ImagePageSize
+        End If
+
+        Dim pageCount As Integer = Math.Max(1, CInt(Math.Ceiling(total / CDbl(ImagePageSize))))
+        _imgPage = Math.Max(0, Math.Min(_imgPage, pageCount - 1))
+
         Dim table As DataTable = Db.Query("
-    SELECT ImageID, ImageType, DateUploaded, ImagePath, ImageData
-    FROM tblMedicalImages WHERE PatientID = @p
-    ORDER BY DateUploaded DESC, ImageID DESC", ("@p", _recPatientId))
+        SELECT ImageID, ImageType, DateUploaded, ImagePath, ImageData
+        FROM tblMedicalImages WHERE PatientID = @p
+        ORDER BY DateUploaded DESC, ImageID DESC
+        LIMIT @size OFFSET @offset",
+        ("@p", _recPatientId), ("@size", ImagePageSize), ("@offset", _imgPage * ImagePageSize))
 
         _imgLoading = True
         Try
@@ -2214,7 +2298,7 @@ Public Class frmMain
                 Dim rel As String = Ui.Txt(r("ImagePath"))
                 Dim uploaded As DateTime = Convert.ToDateTime(r("DateUploaded"))
                 Dim idx As Integer = dgvImaging.Rows.Add(MakeThumb(BytesFromRow(r)), Ui.Txt(r("ImageType")),
-                                         uploaded.ToString("yyyy-MM-dd  hh:mm tt"), "View", rel)
+                                                     uploaded.ToString("yyyy-MM-dd  hh:mm tt"), "View", rel)
                 Dim row As DataGridViewRow = dgvImaging.Rows(idx)
                 row.Tag = Convert.ToInt32(r("ImageID"))
                 row.Cells("DateUploaded").Tag = uploaded
@@ -2232,6 +2316,7 @@ Public Class frmMain
         Finally
             _imgLoading = False
         End Try
+        UpdateImagePager(total, pageCount)
         ShowSelectedImage()
     End Sub
 
