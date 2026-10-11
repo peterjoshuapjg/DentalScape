@@ -217,8 +217,14 @@ Public NotInheritable Class Session
 
 End Class
 
-''' <summary>Writes one row to tblAuditLogs. Never throws - auditing must not break the screen.</summary>
+''' <summary>
+''' Writes one row to tblAuditLogs. Never throws - auditing must not break the screen.
+''' If the insert fails it repairs the table once (AuditLogID must be AUTO_INCREMENT) and retries;
+''' if it still fails, the reason is written to audit_errors.log next to the .exe instead of being lost.
+''' </summary>
 Public NotInheritable Class Audit
+
+    Private Shared _repaired As Boolean
 
     Private Sub New()
     End Sub
@@ -229,15 +235,49 @@ Public NotInheritable Class Audit
                           Optional oldValue As String = Nothing,
                           Optional newValue As String = Nothing)
         Try
-            Db.Exec("INSERT INTO tblAuditLogs (UserID, Action, EntityName, RecordID, OldValue, NewValue, IPAddress)
-                      VALUES (@u, @a, @e, @r, @o, @n, @ip)",
-                ("@u", If(Session.UserId = 0, Nothing, CObj(Session.UserId))),
-                ("@a", action),
-                ("@e", entity),
-                ("@r", If(recordId Is Nothing, Nothing, recordId.ToString())),
-                ("@o", oldValue),
-                ("@n", newValue),
-                ("@ip", Environment.MachineName))
+            InsertRow(action, entity, recordId, oldValue, newValue)
+        Catch ex As Exception
+            Dim failure As Exception = ex
+            Try
+                If Not _repaired Then
+                    _repaired = True
+                    EnsureAutoIncrement()
+                    InsertRow(action, entity, recordId, oldValue, newValue)
+                    Return
+                End If
+            Catch ex2 As Exception
+                failure = ex2
+            End Try
+            WriteFailure(action, failure)
+        End Try
+    End Sub
+
+    Private Shared Sub InsertRow(action As String, entity As String, recordId As Object, oldValue As String, newValue As String)
+        Db.Exec("INSERT INTO tblAuditLogs (UserID, Action, EntityName, RecordID, OldValue, NewValue, IPAddress)
+                  VALUES (@u, @a, @e, @r, @o, @n, @ip)",
+            ("@u", If(Session.UserId = 0, Nothing, CObj(Session.UserId))),
+            ("@a", action),
+            ("@e", entity),
+            ("@r", If(recordId Is Nothing, Nothing, recordId.ToString())),
+            ("@o", oldValue),
+            ("@n", newValue),
+            ("@ip", Environment.MachineName))
+    End Sub
+
+    ''' <summary>An imported dump can lose AUTO_INCREMENT on AuditLogID, so every new row collides on id 0.</summary>
+    Private Shared Sub EnsureAutoIncrement()
+        Dim extra As Object = Db.Scalar("SELECT EXTRA FROM information_schema.COLUMNS
+                                         WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'tblAuditLogs' AND COLUMN_NAME = 'AuditLogID'")
+        If extra IsNot Nothing AndAlso extra.ToString().ToLowerInvariant().Contains("auto_increment") Then Return
+        ' a row stored with id 0 would block the change, so give it a real id first
+        Db.Exec("UPDATE tblAuditLogs SET AuditLogID = (SELECT m FROM (SELECT IFNULL(MAX(AuditLogID), 0) + 1 AS m FROM tblAuditLogs) t) WHERE AuditLogID = 0")
+        Db.Exec("ALTER TABLE tblAuditLogs MODIFY AuditLogID BIGINT NOT NULL AUTO_INCREMENT")
+    End Sub
+
+    Private Shared Sub WriteFailure(action As String, ex As Exception)
+        Try
+            System.IO.File.AppendAllText(System.IO.Path.Combine(Application.StartupPath, "audit_errors.log"),
+                $"{DateTime.Now:yyyy-MM-dd HH:mm:ss}  [{action}]  {ex.Message}{vbCrLf}")
         Catch
         End Try
     End Sub

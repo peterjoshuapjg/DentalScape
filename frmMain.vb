@@ -2392,7 +2392,7 @@ Public Class frmMain
         Using viewer As frmFullImage = BuildViewer(rowIndex)
             If viewer Is Nothing Then Return
             viewer.PrintReport(Me)
-            Audit.Log("Print Medical Image", Convert.ToInt32(dgvImaging.Rows(rowIndex).Tag))
+            Audit.Log("Print Medical Image", "tblMedicalImages", dgvImaging.Rows(rowIndex).Tag)
         End Using
     End Sub
 
