@@ -1,5 +1,6 @@
 ﻿Imports System.Data
 Imports System.Drawing
+Imports System.IO
 Imports System.Windows.Forms
 Imports Charting = System.Windows.Forms.DataVisualization.Charting
 
@@ -370,7 +371,7 @@ Public Class frmMain
             SELECT COUNT(*) AS Total,
                    IFNULL(SUM(Action = 'Login'), 0) AS Logins,
                    IFNULL(SUM(Action = 'Logout'), 0) AS Logouts,
-                   IFNULL(SUM(Action NOT IN ('Login', 'Logout', 'Login Failed', 'Account Locked', 'Export Report')), 0) AS Changes
+                   IFNULL(SUM(Action NOT IN ('Login', 'Logout', 'Login Failed', 'Account Locked', 'Export Report', 'Download Medical Image')), 0) AS Changes
             FROM tblAuditLogs
             WHERE Timestamp >= @from AND Timestamp < @to",
             ("@from", fromDate), ("@to", toDate)).Rows(0)
@@ -1531,6 +1532,7 @@ Public Class frmMain
         ctlDentalChart1.ClearConditions()
         NewVisit()
         NewChart()
+        InitImaging()
         tabMain.SelectedIndex = 0
         tabMain.Enabled = False
     End Sub
@@ -1550,6 +1552,7 @@ Public Class frmMain
         tabMain.Enabled = _recPatientId > 0
         If _recPatientId = 0 Then
             ClearPatientHeader()
+            ClearImaging()
             Return
         End If
         Ui.Try(Sub()
@@ -1557,6 +1560,7 @@ Public Class frmMain
                    LoadMedical()
                    LoadVisits()
                    LoadChart()
+                   LoadImages()
                End Sub)
     End Sub
 
@@ -2024,6 +2028,407 @@ Public Class frmMain
                    _chartId = 0
                    LoadChart()
                End Sub)
+    End Sub
+
+    ' ------------------------------------------------------------ medical imaging (X-ray) tab
+    ' Files are copied into  <CommonApplicationData>\DentalScape\MedicalImages\<PatientID>\  and only the path
+    ' relative to that folder is stored in tblMedicalImages (so the folder can be moved or backed up as a whole).
+    ' Flow: Upload Image (pick a file, preview it) -> choose type/date -> Save.  Selecting a saved image shows it
+    ' in the preview; Save then edits its type/date.  Action > View opens it full screen.  Download Image saves a copy.
+    ' Owner and Frontdesk: select an image and press Delete.
+    Private Const MaxImageBytes As Long = 25L * 1024L * 1024L
+    Private Const ImageFileFilter As String = "Images (*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tif;*.tiff)|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tif;*.tiff"
+    Private Shared ReadOnly ImageTypeList As String() = {
+        "Periapical X-ray", "Bitewing X-ray", "Panoramic X-ray", "Cephalometric X-ray",
+        "CBCT / 3D Scan", "Intraoral Photo", "Extraoral Photo", "Other"}
+    Private Shared ReadOnly ImageRoot As String = System.IO.Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "DentalScape", "MedicalImages")
+
+    Private _imgPendingFile As String = ""      ' file chosen with Upload Image but not saved yet ("" = none)
+    Private _imgId As Integer                   ' ImageID of the saved image shown in the preview (0 = none / new upload)
+    Private _imgLoading As Boolean
+    Private _xrayPlaceholder As Image           ' the "X-ray Preview" picture the designer put in picXray
+
+    Private Sub InitImaging()
+        ' the table is created on first use, so an older database needs no manual import
+        Db.Exec("
+            CREATE TABLE IF NOT EXISTS tblMedicalImages (
+                ImageID          INT(11)      NOT NULL AUTO_INCREMENT,
+                PatientID        INT(11)      NOT NULL,
+                ImageType        VARCHAR(50)  NOT NULL,
+                ImagePath        VARCHAR(255) NOT NULL,
+                OriginalFileName VARCHAR(255) DEFAULT NULL,
+                DateUploaded     DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                UploadedBy       INT(11)      DEFAULT NULL,
+                PRIMARY KEY (ImageID),
+                KEY IX_tblMedicalImages_Patient (PatientID, DateUploaded),
+                KEY IX_tblMedicalImages_UploadedBy (UploadedBy)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci")
+
+        If _xrayPlaceholder Is Nothing Then _xrayPlaceholder = picXray.Image
+
+        cboImageType.DropDownStyle = ComboBoxStyle.DropDownList
+        If cboImageType.Items.Count = 0 Then cboImageType.Items.AddRange(ImageTypeList)
+        dtpDateUploaded.CustomFormat = "yyyy-MM-dd  hh:mm tt"
+
+        ' the thumbnails need taller rows, and with only a few rows visible the grid must be able to scroll
+        Ui.StyleGrid(dgvImaging)
+        dgvImaging.ScrollBars = ScrollBars.Vertical
+        dgvImaging.RowTemplate.Height = 84
+        dgvImaging.AllowUserToResizeRows = False
+        ImageThumbnail.ImageLayout = DataGridViewImageCellLayout.Zoom
+        ImageThumbnail.Width = 130
+
+        ClearImaging()
+    End Sub
+
+    Private Sub ClearImaging()
+        _imgLoading = True
+        Try
+            _imgPendingFile = ""
+            _imgId = 0
+            ClearImageGrid()
+            SetPreview(Nothing)
+            cboImageType.SelectedIndex = -1
+            dtpDateUploaded.Value = DateTime.Now
+        Finally
+            _imgLoading = False
+        End Try
+    End Sub
+
+    Private Sub ClearImageGrid()
+        Dim old As New List(Of Image)
+        For Each row As DataGridViewRow In dgvImaging.Rows
+            Dim thumb As Image = TryCast(row.Cells("ImageThumbnail").Value, Image)
+            If thumb IsNot Nothing Then old.Add(thumb)
+        Next
+        dgvImaging.Rows.Clear()
+        For Each thumb As Image In old
+            thumb.Dispose()
+        Next
+    End Sub
+
+    ' ---- file / picture helpers
+    ''' <summary>Loads a picture without keeping the file locked (so it can be deleted or replaced later).</summary>
+    Private Shared Function LoadImageNoLock(filePath As String) As Image
+        Using fs As New FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)
+            Using img As Image = Image.FromStream(fs, False, True)
+                Return New Bitmap(img)
+            End Using
+        End Using
+    End Function
+
+    Private Shared Function MakeThumb(filePath As String) As Image
+        Const W As Integer = 120
+        Const H As Integer = 78
+        Dim bmp As New Bitmap(W, H)
+        Using g As Graphics = Graphics.FromImage(bmp)
+            g.Clear(Color.FromArgb(60, 60, 60))
+            Try
+                Using full As Image = LoadImageNoLock(filePath)
+                    Dim scale As Double = Math.Min(W / CDbl(full.Width), H / CDbl(full.Height))
+                    Dim tw As Integer = Math.Max(1, CInt(full.Width * scale))
+                    Dim th As Integer = Math.Max(1, CInt(full.Height * scale))
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
+                    g.DrawImage(full, (W - tw) \ 2, (H - th) \ 2, tw, th)
+                End Using
+            Catch
+                Using f As New Font("Segoe UI", 9.0F)
+                    g.DrawString("File missing", f, Brushes.White, 22, 30)
+                End Using
+            End Try
+        End Using
+        Return bmp
+    End Function
+
+    Private Shared Function ImageFullPath(relativePath As String) As String
+        Return System.IO.Path.Combine(ImageRoot, relativePath)
+    End Function
+
+    Private Shared Function SafeFileName(name As String) As String
+        For Each c As Char In System.IO.Path.GetInvalidFileNameChars()
+            name = name.Replace(c, "_"c)
+        Next
+        Return name.Replace(" ", "_").Replace("/", "-")
+    End Function
+
+    ''' <summary>Puts a picture in the big preview (Nothing = the "X-ray Preview" placeholder) and frees the previous one.</summary>
+    Private Sub SetPreview(img As Image)
+        Dim previous As Image = picXray.Image
+        If img Is Nothing Then
+            picXray.SizeMode = PictureBoxSizeMode.CenterImage
+            picXray.Image = _xrayPlaceholder
+        Else
+            picXray.SizeMode = PictureBoxSizeMode.Zoom
+            picXray.Image = img
+        End If
+        If previous IsNot Nothing AndAlso Not ReferenceEquals(previous, _xrayPlaceholder) AndAlso Not ReferenceEquals(previous, picXray.Image) Then
+            previous.Dispose()
+        End If
+    End Sub
+
+    ' ---- grid
+    Private Sub LoadImages(Optional selectId As Integer = 0)
+        Dim table As DataTable = Db.Query("
+            SELECT ImageID, ImageType, DateUploaded, ImagePath
+            FROM tblMedicalImages WHERE PatientID = @p
+            ORDER BY DateUploaded DESC, ImageID DESC", ("@p", _recPatientId))
+
+        _imgLoading = True
+        Try
+            _imgPendingFile = ""
+            ClearImageGrid()
+            For Each r As DataRow In table.Rows
+                Dim rel As String = Ui.Txt(r("ImagePath"))
+                Dim uploaded As DateTime = Convert.ToDateTime(r("DateUploaded"))
+                Dim idx As Integer = dgvImaging.Rows.Add(MakeThumb(ImageFullPath(rel)), Ui.Txt(r("ImageType")),
+                                                         uploaded.ToString("yyyy-MM-dd  hh:mm tt"), "View", rel)
+                Dim row As DataGridViewRow = dgvImaging.Rows(idx)
+                row.Tag = Convert.ToInt32(r("ImageID"))
+                row.Cells("DateUploaded").Tag = uploaded
+            Next
+            dgvImaging.ClearSelection()
+            dgvImaging.CurrentCell = Nothing
+            If dgvImaging.Rows.Count > 0 Then
+                Dim target As DataGridViewRow = dgvImaging.Rows(0)
+                For Each row As DataGridViewRow In dgvImaging.Rows
+                    If selectId > 0 AndAlso Convert.ToInt32(row.Tag) = selectId Then target = row
+                Next
+                dgvImaging.CurrentCell = target.Cells("ImageType")
+                target.Selected = True
+            End If
+        Finally
+            _imgLoading = False
+        End Try
+        ShowSelectedImage()
+    End Sub
+
+    ''' <summary>Shows the grid's current image in the preview and fills the type / date boxes from it.</summary>
+    Private Sub ShowSelectedImage()
+        Dim row As DataGridViewRow = dgvImaging.CurrentRow
+        If row Is Nothing OrElse row.Tag Is Nothing Then
+            _imgId = 0
+            SetPreview(Nothing)
+            cboImageType.SelectedIndex = -1
+            dtpDateUploaded.Value = DateTime.Now
+            Return
+        End If
+
+        _imgId = Convert.ToInt32(row.Tag)
+        Dim imgType As String = Ui.Txt(row.Cells("ImageType").Value)
+        If imgType.Length > 0 AndAlso cboImageType.FindStringExact(imgType) < 0 Then cboImageType.Items.Add(imgType)
+        Ui.SetText(cboImageType, imgType)
+        If TypeOf row.Cells("DateUploaded").Tag Is DateTime Then dtpDateUploaded.Value = CType(row.Cells("DateUploaded").Tag, DateTime)
+
+        Dim fullPath As String = ImageFullPath(Ui.Txt(row.Cells("ImagePath").Value))
+        If File.Exists(fullPath) Then
+            SetPreview(LoadImageNoLock(fullPath))
+        Else
+            SetPreview(Nothing)
+        End If
+    End Sub
+
+    Private Sub dgvImaging_SelectionChanged(sender As Object, e As EventArgs) Handles dgvImaging.SelectionChanged
+        If _imgLoading OrElse _recPatientId = 0 Then Return
+        Dim row As DataGridViewRow = dgvImaging.CurrentRow
+        If row Is Nothing OrElse Not row.Selected OrElse row.Tag Is Nothing Then Return
+        If _imgPendingFile.Length = 0 AndAlso Convert.ToInt32(row.Tag) = _imgId Then Return
+        _imgPendingFile = ""            ' picking a saved image drops an upload that was not saved yet
+        Ui.Try(AddressOf ShowSelectedImage)
+    End Sub
+
+    Private Sub dgvImaging_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvImaging.CellContentClick
+        If e.RowIndex < 0 OrElse e.ColumnIndex <> dgvImaging.Columns("Action").Index Then Return
+        Ui.Try(Sub() ViewFullImage(e.RowIndex))
+    End Sub
+
+    Private Sub dgvImaging_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvImaging.CellDoubleClick
+        If e.RowIndex < 0 OrElse e.ColumnIndex = dgvImaging.Columns("Action").Index Then Return
+        Ui.Try(Sub() ViewFullImage(e.RowIndex))
+    End Sub
+
+    Private Sub ViewFullImage(rowIndex As Integer)
+        Dim row As DataGridViewRow = dgvImaging.Rows(rowIndex)
+        Dim fullPath As String = ImageFullPath(Ui.Txt(row.Cells("ImagePath").Value))
+        If Not File.Exists(fullPath) Then
+            Ui.Warn("The image file could not be found:" & vbCrLf & fullPath)
+            Return
+        End If
+        Dim caption As String = cboPatient.Text & "   |   " & Ui.Txt(row.Cells("ImageType").Value) & "   |   " & Ui.Txt(row.Cells("DateUploaded").Value)
+        Using viewer As New frmFullImage(LoadImageNoLock(fullPath), caption)   ' the viewer disposes the picture
+            viewer.ShowDialog(Me)
+        End Using
+    End Sub
+
+    ' ---- Upload Image: choose a file and preview it (nothing is stored until Save)
+    Private Sub btnUploadImage_Click(sender As Object, e As EventArgs) Handles btnUploadImage.Click
+        If _recPatientId = 0 Then Return
+        Dim chosen As String
+        Using dlg As New OpenFileDialog() With {
+                .Title = "Choose an X-ray or image file", .Filter = ImageFileFilter, .CheckFileExists = True, .Multiselect = False}
+            If dlg.ShowDialog(Me) <> DialogResult.OK Then Return
+            chosen = dlg.FileName
+        End Using
+        Ui.Try(Sub() BeginUpload(chosen))
+    End Sub
+
+    Private Sub BeginUpload(fileName As String)
+        If New FileInfo(fileName).Length > MaxImageBytes Then
+            Ui.Warn("That file is larger than 25 MB. Please choose a smaller image.")
+            Return
+        End If
+        Dim preview As Image
+        Try
+            preview = LoadImageNoLock(fileName)
+        Catch
+            Ui.Warn("That file is not a valid image.")
+            Return
+        End Try
+
+        _imgLoading = True
+        Try
+            dgvImaging.ClearSelection()
+            dgvImaging.CurrentCell = Nothing
+        Finally
+            _imgLoading = False
+        End Try
+        _imgId = 0
+        _imgPendingFile = fileName
+        SetPreview(preview)
+        cboImageType.SelectedIndex = -1
+        dtpDateUploaded.Value = DateTime.Now
+        cboImageType.Focus()
+    End Sub
+
+    ' ---- Save: store the new upload, or update the type / date of the selected image
+    Private Sub btnSaveImage_Click(sender As Object, e As EventArgs) Handles btnSaveImage.Click
+        If _recPatientId = 0 Then Return
+        If _imgPendingFile.Length = 0 AndAlso _imgId = 0 Then
+            Ui.Warn("Click Upload Image to choose a file first, or select an image from the list to change its type or date.")
+            Return
+        End If
+        If cboImageType.SelectedIndex < 0 Then
+            Ui.Warn("Please choose the image type.")
+            Return
+        End If
+        If dtpDateUploaded.Value > DateTime.Now.AddMinutes(1) Then
+            Ui.Warn("The date uploaded cannot be in the future.")
+            Return
+        End If
+
+        Dim imgType As String = cboImageType.Text
+        If _imgPendingFile.Length > 0 Then
+            Ui.Try(Sub() SaveNewImage(imgType))
+        Else
+            Ui.Try(Sub() UpdateImage(imgType))
+        End If
+    End Sub
+
+    Private Sub SaveNewImage(imgType As String)
+        Dim source As String = _imgPendingFile
+        Dim ext As String = System.IO.Path.GetExtension(source).ToLowerInvariant()
+        Dim rel As String = System.IO.Path.Combine(_recPatientId.ToString(),
+            DateTime.Now.ToString("yyyyMMdd_HHmmss") & "_" & Guid.NewGuid().ToString("N").Substring(0, 8) & ext)
+        Dim target As String = ImageFullPath(rel)
+        Directory.CreateDirectory(System.IO.Path.GetDirectoryName(target))
+        File.Copy(source, target, False)
+
+        Dim newId As Long
+        Try
+            newId = Db.Insert("
+                INSERT INTO tblMedicalImages (PatientID, ImageType, ImagePath, OriginalFileName, DateUploaded, UploadedBy)
+                VALUES (@p, @t, @path, @name, @d, @u)",
+                ("@p", _recPatientId), ("@t", imgType), ("@path", rel),
+                ("@name", System.IO.Path.GetFileName(source)), ("@d", dtpDateUploaded.Value),
+                ("@u", If(Session.UserId = 0, Nothing, CObj(Session.UserId))))
+        Catch
+            Try
+                File.Delete(target)             ' do not leave an orphan file behind
+            Catch
+            End Try
+            Throw
+        End Try
+
+        Audit.Log("Upload Medical Image", "tblMedicalImages", newId, Nothing, imgType & " - " & System.IO.Path.GetFileName(source))
+        LoadImages(CInt(newId))
+        Ui.Info("Image saved.")
+    End Sub
+
+    Private Sub UpdateImage(imgType As String)
+        Dim current As DataTable = Db.Query("SELECT ImageType FROM tblMedicalImages WHERE ImageID = @i AND PatientID = @p",
+                                            ("@i", _imgId), ("@p", _recPatientId))
+        If current.Rows.Count = 0 Then
+            Ui.Warn("That image no longer exists.")
+            LoadImages()
+            Return
+        End If
+        Db.Exec("UPDATE tblMedicalImages SET ImageType = @t, DateUploaded = @d WHERE ImageID = @i",
+                ("@t", imgType), ("@d", dtpDateUploaded.Value), ("@i", _imgId))
+        Audit.Log("Update Medical Image", "tblMedicalImages", _imgId, Ui.Txt(current.Rows(0)("ImageType")), imgType)
+        LoadImages(_imgId)
+        Ui.Info("Image details updated.")
+    End Sub
+
+    ' ---- Download Image: save a copy of the selected image anywhere
+    Private Sub btnDownloadImage_Click(sender As Object, e As EventArgs) Handles btnDownloadImage.Click
+        If _imgId = 0 OrElse dgvImaging.CurrentRow Is Nothing Then
+            Ui.Warn("Select a saved image from the list first (a new upload must be saved before it can be downloaded).")
+            Return
+        End If
+        Ui.Try(AddressOf DownloadImage)
+    End Sub
+
+    Private Sub DownloadImage()
+        Dim row As DataGridViewRow = dgvImaging.CurrentRow
+        Dim source As String = ImageFullPath(Ui.Txt(row.Cells("ImagePath").Value))
+        If Not File.Exists(source) Then
+            Ui.Warn("The image file could not be found:" & vbCrLf & source)
+            Return
+        End If
+
+        Dim ext As String = System.IO.Path.GetExtension(source)
+        Dim code As String = cboPatient.Text.Split(New String() {" - "}, StringSplitOptions.None)(0)
+        Dim stamp As String = If(TypeOf row.Cells("DateUploaded").Tag Is DateTime, CType(row.Cells("DateUploaded").Tag, DateTime).ToString("yyyyMMdd"), DateTime.Today.ToString("yyyyMMdd"))
+        Dim suggested As String = SafeFileName(code & "_" & Ui.Txt(row.Cells("ImageType").Value) & "_" & stamp) & ext
+
+        Dim destination As String
+        Using dlg As New SaveFileDialog() With {
+                .Title = "Save a copy of this image", .FileName = suggested, .OverwritePrompt = True,
+                .Filter = "Original format (*" & ext & ")|*" & ext & "|All files (*.*)|*.*"}
+            If dlg.ShowDialog(Me) <> DialogResult.OK Then Return
+            destination = dlg.FileName
+        End Using
+
+        File.Copy(source, destination, True)
+        Audit.Log("Download Medical Image", "tblMedicalImages", _imgId, Nothing, System.IO.Path.GetFileName(destination))
+        Ui.Info("Image saved to:" & vbCrLf & destination)
+    End Sub
+
+    ' ---- Delete key on the list (Owner and Frontdesk)
+    Private Sub dgvImaging_KeyDown(sender As Object, e As KeyEventArgs) Handles dgvImaging.KeyDown
+        If e.KeyCode <> Keys.Delete OrElse _imgId = 0 Then Return
+        e.Handled = True
+        If Session.Role <> Session.OwnerRole AndAlso Session.Role <> Session.FrontdeskRole Then
+            Ui.Warn("Your account cannot delete medical images.")
+            Return
+        End If
+        If Not Ui.Confirm("Delete this image permanently?" & vbCrLf & "This cannot be undone.") Then Return
+        Ui.Try(AddressOf DeleteImage)
+    End Sub
+
+    Private Sub DeleteImage()
+        Dim current As DataTable = Db.Query("SELECT ImageType, ImagePath FROM tblMedicalImages WHERE ImageID = @i AND PatientID = @p",
+                                            ("@i", _imgId), ("@p", _recPatientId))
+        If current.Rows.Count > 0 Then
+            Dim fullPath As String = ImageFullPath(Ui.Txt(current.Rows(0)("ImagePath")))
+            Db.Exec("DELETE FROM tblMedicalImages WHERE ImageID = @i", ("@i", _imgId))
+            Audit.Log("Delete Medical Image", "tblMedicalImages", _imgId, Ui.Txt(current.Rows(0)("ImageType")), Nothing)
+            Try
+                If File.Exists(fullPath) Then File.Delete(fullPath)
+            Catch
+            End Try
+        End If
+        LoadImages()
     End Sub
 
     ' ============================================================ PROCEDURES & PRICES

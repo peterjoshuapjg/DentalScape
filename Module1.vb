@@ -590,6 +590,20 @@ Public NotInheritable Class Ui
 
     Public Shared Sub Bind(g As DataGridView, table As DataTable)
         g.DataSource = table
+        StyleGrid(g)
+
+        If g.Columns.Contains("ID") Then g.Columns("ID").Visible = False
+        For Each c As DataGridViewColumn In g.Columns
+            Dim dc As DataColumn = table.Columns(c.Name)
+            If dc IsNot Nothing AndAlso (dc.DataType Is GetType(Decimal) OrElse dc.DataType Is GetType(Double)) Then
+                c.DefaultCellStyle.Format = "N2"
+                c.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            End If
+        Next
+    End Sub
+
+    ''' <summary>The shared grid look only (header, selection colour, font). Also used by grids that are filled by hand.</summary>
+    Public Shared Sub StyleGrid(g As DataGridView)
         g.EnableHeadersVisualStyles = False
         g.ColumnHeadersDefaultCellStyle.BackColor = GridHeaderColor
         g.ColumnHeadersDefaultCellStyle.ForeColor = Color.White
@@ -605,15 +619,6 @@ Public NotInheritable Class Ui
         g.AlternatingRowsDefaultCellStyle.SelectionBackColor = GridSelectedColor
         g.AlternatingRowsDefaultCellStyle.SelectionForeColor = Color.FromArgb(24, 40, 48)
         g.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
-
-        If g.Columns.Contains("ID") Then g.Columns("ID").Visible = False
-        For Each c As DataGridViewColumn In g.Columns
-            Dim dc As DataColumn = table.Columns(c.Name)
-            If dc IsNot Nothing AndAlso (dc.DataType Is GetType(Decimal) OrElse dc.DataType Is GetType(Double)) Then
-                c.DefaultCellStyle.Format = "N2"
-                c.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            End If
-        Next
     End Sub
 
     ''' <summary>The hidden "ID" column of the current row (0 when nothing is selected).</summary>
