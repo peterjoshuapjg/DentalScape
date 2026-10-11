@@ -104,7 +104,7 @@ CREATE TABLE `tblauditlogs` (
   `NewValue` text DEFAULT NULL,
   `IPAddress` varchar(45) DEFAULT NULL,
   `Timestamp` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblauditlogs`
@@ -171,7 +171,7 @@ CREATE TABLE `tbldentalchart` (
   `Notes` text DEFAULT NULL,
   `UpdatedBy` int(11) DEFAULT NULL,
   `UpdatedAt` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbldentalchart`
@@ -206,7 +206,7 @@ CREATE TABLE `tbldentalrecords` (
   `ClinicalNotes` text DEFAULT NULL,
   `Recommendations` text DEFAULT NULL,
   `NextVisitDate` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbldentalrecords`
@@ -398,7 +398,7 @@ CREATE TABLE `tblmedicalhistory` (
   `HasSmoker` tinyint(1) NOT NULL DEFAULT 0,
   `HasBleedingDisorder` tinyint(1) NOT NULL DEFAULT 0,
   `UpdatedAt` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblmedicalhistory`
@@ -1095,7 +1095,7 @@ CREATE TABLE `tblroles` (
   `RoleID` int(11) NOT NULL,
   `RoleName` varchar(50) NOT NULL,
   `Description` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblroles`
@@ -1299,7 +1299,7 @@ CREATE TABLE `tblusers` (
   `LastLogin` datetime DEFAULT NULL,
   `FailedAttempts` int(11) NOT NULL DEFAULT 0,
   `LockedUntil` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblusers`
