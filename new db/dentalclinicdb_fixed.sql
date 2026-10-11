@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2026 at 08:25 AM
+-- Generation Time: Oct 11, 2026 at 04:11 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -111,7 +111,7 @@ CREATE TABLE `tblauditlogs` (
 --
 
 INSERT INTO `tblauditlogs` (`AuditLogID`, `UserID`, `Action`, `EntityName`, `RecordID`, `OldValue`, `NewValue`, `IPAddress`, `Timestamp`) VALUES
-(0, 1, 'Login', 'tblUsers', '1', NULL, NULL, 'DESKTOP-QB0QSD4', '2026-10-08 13:16:08'),
+(44, 1, 'Login', 'tblUsers', '1', NULL, NULL, 'DESKTOP-QB0QSD4', '2026-10-08 13:16:08'),
 (1, 1, 'Login', 'tblUsers', '1', NULL, NULL, '192.168.1.10', '2026-10-01 07:55:00'),
 (2, 2, 'Login', 'tblUsers', '2', NULL, NULL, '192.168.1.11', '2026-10-01 08:00:00'),
 (3, 2, 'Create Patient', 'tblPatients', '1', NULL, 'PAT-00001 John Santos', '192.168.1.11', '2026-10-01 08:10:00'),
@@ -246,7 +246,7 @@ CREATE TABLE `tblinventorytransactions` (
 --
 
 INSERT INTO `tblinventorytransactions` (`TransactionID`, `ProductID`, `TransactionType`, `Quantity`, `TransactionDate`, `Reference`, `PerformedBy`, `Notes`) VALUES
-(0, 1, 'Stock In', 50, '2026-10-08 20:44:18', NULL, 1, NULL),
+(57, 1, 'Stock In', 50, '2026-10-08 20:44:18', NULL, 1, NULL),
 (1, 1, 'Stock In', 65, '2026-10-01 08:01:00', 'PO-202610-001', 1, 'October opening stock'),
 (2, 1, 'Stock Out', 15, '2026-10-03 11:00:00', 'APT-202610-001', 2, 'October procedure usage'),
 (3, 2, 'Stock In', 80, '2026-10-01 08:02:00', 'PO-202610-001', 1, 'October opening stock'),
@@ -326,7 +326,7 @@ CREATE TABLE `tblinvoiceitems` (
 --
 
 INSERT INTO `tblinvoiceitems` (`InvoiceItemID`, `InvoiceID`, `TreatmentRecordID`, `Description`, `Quantity`, `UnitPrice`, `Discount`) VALUES
-(0, 9, NULL, 'Dental Crown', 1, 10000.00, 2000.00),
+(11, 9, NULL, 'Dental Crown', 1, 10000.00, 2000.00),
 (1, 1, 1, 'Dental Consultation', 1, 500.00, 0.00),
 (2, 2, 2, 'Dental Cleaning', 1, 800.00, 0.00),
 (3, 3, 3, 'Dental Filling', 1, 1200.00, 0.00),
@@ -363,7 +363,7 @@ CREATE TABLE `tblinvoices` (
 --
 
 INSERT INTO `tblinvoices` (`InvoiceID`, `InvoiceNumber`, `PatientID`, `AppointmentID`, `InvoiceDate`, `SubTotal`, `Discount`, `TotalAmount`, `AmountPaid`, `Status`) VALUES
-(0, 'INV-00011', 5, NULL, '2026-10-08 20:52:37', 0.00, 0.00, 0.00, 0.00, 'Unpaid'),
+(11, 'INV-00011', 5, NULL, '2026-10-08 20:52:37', 0.00, 0.00, 0.00, 0.00, 'Unpaid'),
 (1, 'INV-202610-001', 1, 1, '2026-10-01 09:15:00', 500.00, 0.00, 500.00, 500.00, 'Paid'),
 (2, 'INV-202610-002', 2, 2, '2026-10-01 10:20:00', 800.00, 0.00, 800.00, 800.00, 'Paid'),
 (3, 'INV-202610-003', 3, 3, '2026-10-02 13:30:00', 1200.00, 0.00, 1200.00, 600.00, 'Partially Paid'),
@@ -417,6 +417,30 @@ INSERT INTO `tblmedicalhistory` (`MedicalHistoryID`, `PatientID`, `Allergies`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblmedicalimages`
+--
+
+CREATE TABLE `tblmedicalimages` (
+  `ImageID` int(11) NOT NULL,
+  `PatientID` int(11) NOT NULL,
+  `ImageType` varchar(50) NOT NULL,
+  `ImagePath` varchar(255) NOT NULL,
+  `OriginalFileName` varchar(255) DEFAULT NULL,
+  `DateUploaded` datetime NOT NULL DEFAULT current_timestamp(),
+  `UploadedBy` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblmedicalimages`
+--
+
+INSERT INTO `tblmedicalimages` (`ImageID`, `PatientID`, `ImageType`, `ImagePath`, `OriginalFileName`, `DateUploaded`, `UploadedBy`) VALUES
+(1, 5, 'Panoramic X-ray', '5\\20261011_202245_54927f16.jpg', 'images.jpg', '2026-10-11 20:22:28', 1),
+(2, 8, 'Other', '8\\20261011_204535_6f4456bb.jpg', 'images (1).jpg', '2026-10-11 20:45:28', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblpatients`
 --
 
@@ -442,7 +466,7 @@ CREATE TABLE `tblpatients` (
 --
 
 INSERT INTO `tblpatients` (`PatientID`, `PatientCode`, `FirstName`, `MiddleName`, `LastName`, `BirthDate`, `Gender`, `ContactNumber`, `Email`, `Address`, `EmergencyContactName`, `EmergencyContactNumber`, `RegistrationDate`, `Status`) VALUES
-(0, 'PAT-00009', 'Peter Joshua', 'Finis', 'Galang', '2002-04-17', 'Male', '09495924039', 'joshua@gmail.com', 'San Pedro Laguna', 'Mother', '09123456789', '2026-10-08 13:18:04', 'Active'),
+(9, 'PAT-00009', 'Peter Joshua', 'Finis', 'Galang', '2002-04-17', 'Male', '09495924039', 'joshua@gmail.com', 'San Pedro Laguna', 'Mother', '09123456789', '2026-10-08 13:18:04', 'Active'),
 (1, 'PAT-00001', 'John', 'Michael', 'Santos', '1999-02-14', 'Male', '09181230001', 'john.santos@gmail.com', 'Muntinlupa City', 'Maria Santos', '09181230002', '2026-10-01 08:10:00', 'Active'),
 (2, 'PAT-00002', 'Angela', 'Marie', 'Cruz', '2001-06-21', 'Female', '09181230003', 'angela.cruz@gmail.com', 'Las Pinas City', 'Ramon Cruz', '09181230004', '2026-10-01 09:00:00', 'Active'),
 (3, 'PAT-00003', 'Harvey', 'Ischei', 'Elloso', '2006-05-29', 'Male', '09181230005', 'harvey.elloso@gmail.com', 'San Pedro Laguna', 'Liza Elloso', '09181230006', '2026-10-02 10:15:00', 'Active'),
@@ -490,14 +514,14 @@ CREATE TABLE `tblpayments` (
   `PaymentMethodID` int(11) NOT NULL,
   `ReceivedBy` int(11) NOT NULL,
   `Notes` text DEFAULT NULL
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblpayments`
 --
 
 INSERT INTO `tblpayments` (`PaymentID`, `InvoiceID`, `PaymentReference`, `ReferenceNumber`, `PaymentDate`, `Amount`, `PaymentMethodID`, `ReceivedBy`, `Notes`) VALUES
-(0, 9, 'PAY-00011', NULL, '2026-10-08 20:55:21', 12000.00, 2, 2, NULL),
+(11, 9, 'PAY-00011', NULL, '2026-10-08 20:55:21', 12000.00, 2, 2, NULL),
 (1, 1, 'PAY-202610-001', NULL, '2026-10-01 09:16:00', 500.00, 1, 2, 'Paid in full.'),
 (2, 2, 'PAY-202610-002', NULL, '2026-10-01 10:21:00', 800.00, 2, 2, 'Paid in full via GCash.'),
 (3, 3, 'PAY-202610-003', NULL, '2026-10-02 13:31:00', 600.00, 1, 2, 'Partial payment.'),
@@ -808,36 +832,6 @@ INSERT INTO `tblprocedures` (`ProcedureID`, `ProcedureCode`, `ProcedureName`, `D
 (27, 'PR-027', 'Root Canal Re-treatment', 'Repeat root canal treatment for a previously treated tooth', 10000.00, 120, 'Active'),
 (28, 'PR-028', 'Pulpotomy', 'Removal of infected pulp from the crown portion of a tooth', 3000.00, 60, 'Active'),
 (29, 'PR-029', 'Post and Core', 'Placement of a post and core for tooth restoration', 5000.00, 90, 'Active'),
-(30, 'PR-030', 'Retainer', 'Fabrication and fitting of an orthodontic retainer', 5000.00, 60, 'Active'),
-(1, 'PR-001', 'Dental Consultation', 'General dental consultation', 500.00, 30, 'Active'),
-(2, 'PR-002', 'Dental Cleaning', 'Routine dental cleaning', 800.00, 60, 'Active'),
-(3, 'PR-003', 'Dental Filling', 'Composite dental filling', 1200.00, 60, 'Active'),
-(4, 'PR-004', 'Tooth Extraction', 'Basic tooth extraction', 1500.00, 60, 'Active'),
-(5, 'PR-005', 'Root Canal', 'Root canal treatment', 8000.00, 90, 'Active'),
-(6, 'PR-006', 'Orthodontic Adjustment', 'Routine orthodontic adjustment', 1000.00, 30, 'Active'),
-(7, 'PR-007', 'Dental X-Ray', 'Intraoral dental X-ray examination', 500.00, 15, 'Active'),
-(8, 'PR-008', 'Panoramic X-Ray', 'Panoramic radiographic examination of the teeth and jaw', 1000.00, 30, 'Active'),
-(9, 'PR-009', 'Dental Crown', 'Placement of a dental crown', 10000.00, 90, 'Active'),
-(10, 'PR-010', 'Gum Treatment', 'Treatment for gum inflammation and periodontal problems', 2500.00, 60, 'Active'),
-(11, 'PR-011', 'Tooth Restoration', 'Restoration of damaged or decayed tooth', 1500.00, 60, 'Active'),
-(12, 'PR-012', 'Surgical Tooth Extraction', 'Surgical removal of a tooth', 4000.00, 90, 'Active'),
-(13, 'PR-013', 'Wisdom Tooth Extraction', 'Extraction of an impacted or problematic wisdom tooth', 6000.00, 120, 'Active'),
-(14, 'PR-014', 'Dental X-Ray', 'Intraoral dental X-ray examination', 500.00, 15, 'Active'),
-(15, 'PR-015', 'Panoramic X-Ray', 'Panoramic radiographic examination of the teeth and jaw', 1000.00, 30, 'Active'),
-(16, 'PR-016', 'Dental Crown', 'Placement of a dental crown', 10000.00, 90, 'Active'),
-(17, 'PR-017', 'Dental Bridge', 'Replacement of missing teeth using a dental bridge', 20000.00, 120, 'Active'),
-(18, 'PR-018', 'Partial Denture', 'Fabrication and fitting of a partial denture', 10000.00, 120, 'Active'),
-(19, 'PR-019', 'Complete Denture', 'Fabrication and fitting of a complete denture', 20000.00, 180, 'Active'),
-(20, 'PR-020', 'Denture Adjustment', 'Adjustment and fitting of an existing denture', 800.00, 30, 'Active'),
-(21, 'PR-021', 'Teeth Whitening', 'Professional teeth whitening procedure', 8000.00, 90, 'Active'),
-(22, 'PR-022', 'Composite Veneer', 'Application of composite veneer to improve tooth appearance', 5000.00, 90, 'Active'),
-(23, 'PR-023', 'Tooth Polishing', 'Polishing of teeth to remove surface stains', 500.00, 30, 'Active'),
-(24, 'PR-024', 'Gum Treatment', 'Treatment for gum inflammation and periodontal problems', 2500.00, 60, 'Active'),
-(25, 'PR-025', 'Dental Splint', 'Placement of a dental splint to stabilize teeth', 5000.00, 90, 'Active'),
-(26, 'PR-026', 'Odontectomy', 'Surgical removal of an impacted tooth', 8000.00, 120, 'Active'),
-(27, 'PR-027', 'Root Canal Re-treatment', 'Repeat root canal treatment for a previously treated tooth', 10000.00, 120, 'Active'),
-(28, 'PR-028', 'Pulpotomy', 'Removal of infected pulp from the crown portion of a tooth', 3000.00, 60, 'Active'),
-(29, 'PR-029', 'Post and Core', 'Placement of a post and core for tooth restoration', 5000.00, 90, 'Active'),
 (30, 'PR-030', 'Retainer', 'Fabrication and fitting of an orthodontic retainer', 5000.00, 60, 'Active');
 
 -- --------------------------------------------------------
@@ -930,50 +924,6 @@ INSERT INTO `tblproducts` (`ProductID`, `ProductCode`, `ProductName`, `CategoryI
 (41, 'PRD-041', 'Cheek Retractor', 5, 'Piece', 20, 5, 150.00, 'Active'),
 (42, 'PRD-042', 'Calcium Hydroxide', 5, 'Syringe', 20, 5, 300.00, 'Active'),
 (43, 'PRD-043', 'Dental Post', 5, 'Piece', 30, 5, 450.00, 'Active'),
-(44, 'PRD-044', 'Cheek Retractor (Sterilizable)', 5, 'Piece', 20, 5, 180.00, 'Active'),
-(1, 'PRD-001', 'Cotton Rolls', 1, 'Pack', 50, 10, 80.00, 'Active'),
-(2, 'PRD-002', 'Dental Gauze', 1, 'Pack', 50, 10, 80.00, 'Active'),
-(3, 'PRD-003', 'Saliva Ejector', 1, 'Piece', 100, 20, 5.00, 'Active'),
-(4, 'PRD-004', 'Disposable Syringe', 1, 'Piece', 100, 20, 8.00, 'Active'),
-(5, 'PRD-005', 'Syringe Needle', 1, 'Piece', 100, 20, 7.00, 'Active'),
-(6, 'PRD-006', 'Microbrush Applicator', 1, 'Piece', 200, 30, 6.00, 'Active'),
-(7, 'PRD-007', 'Polishing Cup', 1, 'Piece', 100, 20, 12.00, 'Active'),
-(8, 'PRD-008', 'X-Ray Sensor Sleeve', 1, 'Piece', 100, 20, 15.00, 'Active'),
-(9, 'PRD-009', 'X-Ray Bite Block Cover', 1, 'Piece', 100, 20, 10.00, 'Active'),
-(10, 'PRD-010', 'Suture Thread', 1, 'Piece', 100, 20, 35.00, 'Active'),
-(11, 'PRD-011', 'Local Anesthetic', 2, 'Cartridge', 100, 20, 45.00, 'Active'),
-(12, 'PRD-012', 'Fluoride', 2, 'Tube', 30, 5, 120.00, 'Active'),
-(13, 'PRD-013', 'Chlorhexidine Solution', 2, 'Bottle', 20, 5, 180.00, 'Active'),
-(14, 'PRD-014', 'Disposable Gloves', 3, 'Pair', 200, 40, 12.00, 'Active'),
-(15, 'PRD-015', 'Surgical Mask', 3, 'Piece', 200, 40, 5.00, 'Active'),
-(16, 'PRD-016', 'Patient Dental Bib', 3, 'Piece', 200, 40, 4.00, 'Active'),
-(17, 'PRD-017', 'Patient Protective Eyewear', 3, 'Piece', 20, 5, 80.00, 'Active'),
-(18, 'PRD-018', 'Patient Disposable Gown', 3, 'Piece', 50, 10, 35.00, 'Active'),
-(19, 'PRD-019', 'Surface Disinfectant', 4, 'Bottle', 20, 5, 120.00, 'Active'),
-(20, 'PRD-020', 'Alcohol', 4, 'Bottle', 20, 5, 90.00, 'Active'),
-(21, 'PRD-021', 'Hand Sanitizer', 4, 'Bottle', 20, 5, 100.00, 'Active'),
-(22, 'PRD-022', 'Sterilization Pouches', 4, 'Pack', 30, 5, 150.00, 'Active'),
-(23, 'PRD-023', 'Instrument Cleaning Solution', 4, 'Bottle', 20, 5, 200.00, 'Active'),
-(24, 'PRD-024', 'Composite Resin', 5, 'Syringe', 30, 5, 350.00, 'Active'),
-(25, 'PRD-025', 'Etching Gel', 5, 'Syringe', 30, 5, 300.00, 'Active'),
-(26, 'PRD-026', 'Bonding Agent', 5, 'Bottle', 20, 5, 450.00, 'Active'),
-(27, 'PRD-027', 'Dental Sealant', 5, 'Syringe', 20, 5, 400.00, 'Active'),
-(28, 'PRD-028', 'Prophy Paste', 5, 'Tube', 30, 5, 180.00, 'Active'),
-(29, 'PRD-029', 'Temporary Filling Material', 5, 'Kit', 20, 5, 500.00, 'Active'),
-(30, 'PRD-030', 'Dental Files', 5, 'Piece', 50, 10, 90.00, 'Active'),
-(31, 'PRD-031', 'Gutta Percha', 5, 'Piece', 100, 20, 25.00, 'Active'),
-(32, 'PRD-032', 'Root Canal Sealer', 5, 'Kit', 10, 3, 650.00, 'Active'),
-(33, 'PRD-033', 'Orthodontic Wire', 5, 'Roll', 20, 5, 700.00, 'Active'),
-(34, 'PRD-034', 'Elastic Ligature', 5, 'Piece', 500, 100, 5.00, 'Active'),
-(35, 'PRD-035', 'Dental Impression Material', 5, 'Pack', 30, 5, 250.00, 'Active'),
-(36, 'PRD-036', 'Dental Alginate', 5, 'Pack', 30, 5, 220.00, 'Active'),
-(37, 'PRD-037', 'Temporary Crown Material', 5, 'Kit', 10, 3, 900.00, 'Active'),
-(38, 'PRD-038', 'Dental Cement', 5, 'Kit', 15, 3, 700.00, 'Active'),
-(39, 'PRD-039', 'Whitening Gel', 5, 'Kit', 10, 3, 1200.00, 'Active'),
-(40, 'PRD-040', 'Gingival Barrier', 5, 'Kit', 10, 3, 500.00, 'Active'),
-(41, 'PRD-041', 'Cheek Retractor', 5, 'Piece', 20, 5, 150.00, 'Active'),
-(42, 'PRD-042', 'Calcium Hydroxide', 5, 'Syringe', 20, 5, 300.00, 'Active'),
-(43, 'PRD-043', 'Dental Post', 5, 'Piece', 30, 5, 450.00, 'Active'),
 (44, 'PRD-044', 'Cheek Retractor (Sterilizable)', 5, 'Piece', 20, 5, 180.00, 'Active');
 
 -- --------------------------------------------------------
@@ -996,50 +946,6 @@ CREATE TABLE `tblproductsuppliers` (
 --
 
 INSERT INTO `tblproductsuppliers` (`ProductSupplierID`, `ProductID`, `SupplierID`, `SupplierProductCode`, `LastPurchasePrice`, `IsPreferred`) VALUES
-(1, 1, 1, 'SUP1-PRD-001', 73.60, 1),
-(2, 2, 1, 'SUP1-PRD-002', 73.60, 1),
-(3, 3, 1, 'SUP1-PRD-003', 4.60, 1),
-(4, 4, 1, 'SUP1-PRD-004', 7.36, 1),
-(5, 5, 1, 'SUP1-PRD-005', 6.44, 1),
-(6, 6, 1, 'SUP1-PRD-006', 5.52, 1),
-(7, 7, 1, 'SUP1-PRD-007', 11.04, 1),
-(8, 8, 1, 'SUP1-PRD-008', 13.80, 1),
-(9, 9, 1, 'SUP1-PRD-009', 9.20, 1),
-(10, 10, 1, 'SUP1-PRD-010', 32.20, 1),
-(11, 11, 1, 'SUP1-PRD-011', 41.40, 1),
-(12, 12, 1, 'SUP1-PRD-012', 110.40, 1),
-(13, 13, 1, 'SUP1-PRD-013', 165.60, 1),
-(14, 14, 2, 'SUP2-PRD-014', 11.04, 1),
-(15, 15, 2, 'SUP2-PRD-015', 4.60, 1),
-(16, 16, 2, 'SUP2-PRD-016', 3.68, 1),
-(17, 17, 2, 'SUP2-PRD-017', 73.60, 1),
-(18, 18, 2, 'SUP2-PRD-018', 32.20, 1),
-(19, 19, 2, 'SUP2-PRD-019', 110.40, 1),
-(20, 20, 2, 'SUP2-PRD-020', 82.80, 1),
-(21, 21, 2, 'SUP2-PRD-021', 92.00, 1),
-(22, 22, 2, 'SUP2-PRD-022', 138.00, 1),
-(23, 23, 2, 'SUP2-PRD-023', 184.00, 1),
-(24, 24, 3, 'SUP3-PRD-024', 322.00, 1),
-(25, 25, 3, 'SUP3-PRD-025', 276.00, 1),
-(26, 26, 3, 'SUP3-PRD-026', 414.00, 1),
-(27, 27, 3, 'SUP3-PRD-027', 368.00, 1),
-(28, 28, 3, 'SUP3-PRD-028', 165.60, 1),
-(29, 29, 3, 'SUP3-PRD-029', 460.00, 1),
-(30, 30, 3, 'SUP3-PRD-030', 82.80, 1),
-(31, 31, 3, 'SUP3-PRD-031', 23.00, 1),
-(32, 32, 3, 'SUP3-PRD-032', 598.00, 1),
-(33, 33, 3, 'SUP3-PRD-033', 644.00, 1),
-(34, 34, 3, 'SUP3-PRD-034', 4.60, 1),
-(35, 35, 3, 'SUP3-PRD-035', 230.00, 1),
-(36, 36, 3, 'SUP3-PRD-036', 202.40, 1),
-(37, 37, 3, 'SUP3-PRD-037', 828.00, 1),
-(38, 38, 3, 'SUP3-PRD-038', 644.00, 1),
-(39, 39, 3, 'SUP3-PRD-039', 1104.00, 1),
-(40, 40, 3, 'SUP3-PRD-040', 460.00, 1),
-(41, 41, 3, 'SUP3-PRD-041', 138.00, 1),
-(42, 42, 3, 'SUP3-PRD-042', 276.00, 1),
-(43, 43, 3, 'SUP3-PRD-043', 414.00, 1),
-(44, 44, 3, 'SUP3-PRD-044', 165.60, 1),
 (1, 1, 1, 'SUP1-PRD-001', 73.60, 1),
 (2, 2, 1, 'SUP1-PRD-002', 73.60, 1),
 (3, 3, 1, 'SUP1-PRD-003', 4.60, 1),
@@ -1162,9 +1068,6 @@ CREATE TABLE `tblsuppliers` (
 INSERT INTO `tblsuppliers` (`SupplierID`, `SupplierName`, `ContactPerson`, `ContactNumber`, `Email`, `Address`, `Status`) VALUES
 (1, 'DentalMed Supply Co.', 'Ramon Villanueva', '09190000001', 'sales@dentalmed.ph', 'Makati City', 'Active'),
 (2, 'OralCare Distributors', 'Leah Mendoza', '09190000002', 'orders@oralcare.ph', 'Pasig City', 'Active'),
-(3, 'Prime Dental Materials', 'Carlo Bautista', '09190000003', 'sales@primedental.ph', 'Quezon City', 'Active'),
-(1, 'DentalMed Supply Co.', 'Ramon Villanueva', '09190000001', 'sales@dentalmed.ph', 'Makati City', 'Active'),
-(2, 'OralCare Distributors', 'Leah Mendoza', '09190000002', 'orders@oralcare.ph', 'Pasig City', 'Active'),
 (3, 'Prime Dental Materials', 'Carlo Bautista', '09190000003', 'sales@primedental.ph', 'Quezon City', 'Active');
 
 -- --------------------------------------------------------
@@ -1199,17 +1102,6 @@ INSERT INTO `tbltreatmentplanitems` (`PlanItemID`, `TreatmentPlanID`, `Procedure
 (8, 4, 6, NULL, 1, 1000.00, 'Planned', '2026-10-08'),
 (9, 4, 6, NULL, 1, 1000.00, 'Planned', '2026-10-08'),
 (10, 5, 2, NULL, 1, 800.00, 'Completed', '2026-10-06'),
-(11, 5, 10, NULL, 1, 2500.00, 'Planned', '2026-10-08'),
-(1, 1, 5, '14', 1, 8000.00, 'In Progress', '2026-10-07'),
-(2, 1, 9, '14', 1, 10000.00, 'Planned', '2026-10-08'),
-(3, 2, 5, '16', 1, 8000.00, 'In Progress', '2026-10-03'),
-(4, 2, 9, '16', 1, 10000.00, 'Planned', '2026-10-07'),
-(5, 2, 7, '16', 1, 500.00, 'Planned', '2026-10-07'),
-(6, 3, 4, '46', 1, 1500.00, 'Completed', '2026-10-03'),
-(7, 4, 6, NULL, 1, 1000.00, 'Completed', '2026-10-04'),
-(8, 4, 6, NULL, 1, 1000.00, 'Planned', '2026-10-08'),
-(9, 4, 6, NULL, 1, 1000.00, 'Planned', '2026-10-08'),
-(10, 5, 2, NULL, 1, 800.00, 'Completed', '2026-10-06'),
 (11, 5, 10, NULL, 1, 2500.00, 'Planned', '2026-10-08');
 
 -- --------------------------------------------------------
@@ -1234,11 +1126,6 @@ CREATE TABLE `tbltreatmentplans` (
 --
 
 INSERT INTO `tbltreatmentplans` (`TreatmentPlanID`, `PatientID`, `DentistID`, `PlanDate`, `Diagnosis`, `TotalEstimatedCost`, `Status`, `Notes`) VALUES
-(1, 1, 3, '2026-10-01', 'Caries on tooth 14', 18000.00, 'Active', 'Root canal and final crown planned.'),
-(2, 4, 4, '2026-10-03', 'Pulpitis on tooth 16', 18500.00, 'Active', 'Root canal, crown and radiographic follow-up planned.'),
-(3, 5, 5, '2026-10-03', 'Non-restorable tooth 46', 1500.00, 'Completed', 'Extraction completed.'),
-(4, 6, 6, '2026-10-04', 'Orthodontic maintenance', 3000.00, 'Active', 'Continue monthly adjustments.'),
-(5, 8, 4, '2026-10-06', 'Gingival inflammation', 3300.00, 'Active', 'Cleaning and gum treatment recommended.'),
 (1, 1, 3, '2026-10-01', 'Caries on tooth 14', 18000.00, 'Active', 'Root canal and final crown planned.'),
 (2, 4, 4, '2026-10-03', 'Pulpitis on tooth 16', 18500.00, 'Active', 'Root canal, crown and radiographic follow-up planned.'),
 (3, 5, 5, '2026-10-03', 'Non-restorable tooth 46', 1500.00, 'Completed', 'Extraction completed.'),
@@ -1306,13 +1193,13 @@ CREATE TABLE `tblusers` (
 --
 
 INSERT INTO `tblusers` (`UserID`, `StaffID`, `Username`, `PasswordHash`, `RoleID`, `IsActive`, `CreatedAt`, `LastLogin`, `FailedAttempts`, `LockedUntil`) VALUES
-(1, 1, 'owner', 'SET_PASSWORD_FIRST', 1, 1, '2026-10-07 13:51:15', '2026-10-11 13:16:18', 0, NULL),
-(2, 2, 'frontdesk', 'SET_PASSWORD_FIRST', 2, 1, '2026-10-07 13:51:15', '2026-10-11 14:19:56', 0, NULL),
+(1, 1, 'owner', 'PBKDF2$100000$VNQl7qqv9Mf675+rUzrpMQ==$Ciw9VzEa1oZGELonipqoa5JY8V8n1hQIX88B5WVDfLw=', 1, 1, '2026-10-07 13:51:15', '2026-10-11 22:05:15', 0, NULL),
+(2, 2, 'frontdesk', 'PBKDF2$100000$pnakPZJo6KJWJjAkNPsf4w==$lI8rx1akLPEsJJe1IZ1Mr3VKrMFlTBzCotDwwJiB468=', 2, 1, '2026-10-07 13:51:15', '2026-10-11 21:45:01', 0, NULL),
 (3, 3, 'dentist.richelle', 'SET_PASSWORD_FIRST', 3, 1, '2026-10-01 07:40:00', '2026-10-11 14:03:50', 3, '2026-10-11 14:27:06'),
-(4, 4, 'dentist.maria', 'SET_PASSWORD_FIRST', 3, 1, '2026-10-01 07:45:00', '2026-10-11 14:21:59', 0, NULL),
+(4, 4, 'dentist.maria', 'PBKDF2$100000$GYhVQMkNFHCem9xJaSMHSA==$m6DpcSxlYgLNSeFP83SPSEpsqp1jwVAi7DT4wc4FYvE=', 3, 1, '2026-10-01 07:45:00', '2026-10-11 18:35:08', 2, NULL),
 (5, 5, 'juan.delacruz', 'SET_PASSWORD_FIRST', 3, 1, '2026-10-11 14:02:06', NULL, 0, NULL),
 (6, 6, 'angela.reyes', 'SET_PASSWORD_FIRST', 3, 1, '2026-10-11 14:02:06', NULL, 0, NULL),
-(7, 7, 'it', 'SET_PASSWORD_FIRST', 4, 1, '2026-10-11 14:02:06', '2026-10-11 14:20:43', 0, NULL);
+(7, 7, 'it', 'PBKDF2$100000$ynLq3brMoMTCdKT7fhVdEw==$HQFQ7WDqTcmU+CoYZsxz0ACdqibWfGw5OhL68jE1Dbc=', 4, 1, '2026-10-11 14:02:06', '2026-10-11 21:44:05', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -1476,6 +1363,14 @@ ALTER TABLE `tblmedicalhistory`
   ADD UNIQUE KEY `UQ_tblMedicalHistory_Patient` (`PatientID`);
 
 --
+-- Indexes for table `tblmedicalimages`
+--
+ALTER TABLE `tblmedicalimages`
+  ADD PRIMARY KEY (`ImageID`),
+  ADD KEY `IX_tblMedicalImages_Patient` (`PatientID`,`DateUploaded`),
+  ADD KEY `IX_tblMedicalImages_UploadedBy` (`UploadedBy`);
+
+--
 -- Indexes for table `tblpatients`
 --
 ALTER TABLE `tblpatients`
@@ -1538,8 +1433,152 @@ ALTER TABLE `tblusers`
   ADD UNIQUE KEY `UQ_tblUsers_StaffID` (`StaffID`);
 
 --
+-- Indexes for table `tblprocedures`
+--
+ALTER TABLE `tblprocedures`
+  ADD PRIMARY KEY (`ProcedureID`),
+  ADD UNIQUE KEY `UQ_tblProcedures_ProcedureCode` (`ProcedureCode`);
+
+--
+-- Indexes for table `tblproducts`
+--
+ALTER TABLE `tblproducts`
+  ADD PRIMARY KEY (`ProductID`),
+  ADD UNIQUE KEY `UQ_tblProducts_ProductCode` (`ProductCode`),
+  ADD KEY `IX_tblProducts_Category` (`CategoryID`);
+
+--
+-- Indexes for table `tblproductsuppliers`
+--
+ALTER TABLE `tblproductsuppliers`
+  ADD PRIMARY KEY (`ProductSupplierID`),
+  ADD UNIQUE KEY `UQ_tblProductSuppliers_ProductSupplier` (`ProductID`,`SupplierID`),
+  ADD KEY `IX_tblProductSuppliers_Supplier` (`SupplierID`);
+
+--
+-- Indexes for table `tblsuppliers`
+--
+ALTER TABLE `tblsuppliers`
+  ADD PRIMARY KEY (`SupplierID`),
+  ADD UNIQUE KEY `UQ_tblSuppliers_SupplierName` (`SupplierName`);
+
+--
+-- Indexes for table `tbltreatmentplanitems`
+--
+ALTER TABLE `tbltreatmentplanitems`
+  ADD PRIMARY KEY (`PlanItemID`),
+  ADD KEY `IX_tblTreatmentPlanItems_Plan` (`TreatmentPlanID`),
+  ADD KEY `IX_tblTreatmentPlanItems_Procedure` (`ProcedureID`);
+
+--
+-- Indexes for table `tbltreatmentplans`
+--
+ALTER TABLE `tbltreatmentplans`
+  ADD PRIMARY KEY (`TreatmentPlanID`),
+  ADD KEY `IX_tblTreatmentPlans_PatientID` (`PatientID`);
+
+--
+-- Indexes for table `tbltreatmentrecords`
+--
+ALTER TABLE `tbltreatmentrecords`
+  ADD PRIMARY KEY (`TreatmentRecordID`),
+  ADD KEY `IX_tblTreatmentRecords_DentalRecord` (`DentalRecordID`),
+  ADD KEY `IX_tblTreatmentRecords_Procedure` (`ProcedureID`),
+  ADD KEY `IX_tblTreatmentRecords_Dentist` (`DentistID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `tblappointments`
+--
+ALTER TABLE `tblappointments`
+  MODIFY `AppointmentID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblappointmenttypes`
+--
+ALTER TABLE `tblappointmenttypes`
+  MODIFY `AppointmentTypeID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblauditlogs`
+--
+ALTER TABLE `tblauditlogs`
+  MODIFY `AuditLogID` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbldentalchart`
+--
+ALTER TABLE `tbldentalchart`
+  MODIFY `DentalChartID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbldentalrecords`
+--
+ALTER TABLE `tbldentalrecords`
+  MODIFY `DentalRecordID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblinventorytransactions`
+--
+ALTER TABLE `tblinventorytransactions`
+  MODIFY `TransactionID` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblinvoiceitems`
+--
+ALTER TABLE `tblinvoiceitems`
+  MODIFY `InvoiceItemID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblinvoices`
+--
+ALTER TABLE `tblinvoices`
+  MODIFY `InvoiceID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblmedicalhistory`
+--
+ALTER TABLE `tblmedicalhistory`
+  MODIFY `MedicalHistoryID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblpatients`
+--
+ALTER TABLE `tblpatients`
+  MODIFY `PatientID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblpaymentmethods`
+--
+ALTER TABLE `tblpaymentmethods`
+  MODIFY `PaymentMethodID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblpayments`
+--
+ALTER TABLE `tblpayments`
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblprocedurematerial`
+--
+ALTER TABLE `tblprocedurematerial`
+  MODIFY `ProcedureMaterialID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblproductcategories`
+--
+ALTER TABLE `tblproductcategories`
+  MODIFY `CategoryID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblmedicalimages`
+--
+ALTER TABLE `tblmedicalimages`
+  MODIFY `ImageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tblroles`
@@ -1558,6 +1597,47 @@ ALTER TABLE `tblstaff`
 --
 ALTER TABLE `tblusers`
   MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `tblprocedures`
+--
+ALTER TABLE `tblprocedures`
+  MODIFY `ProcedureID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblproducts`
+--
+ALTER TABLE `tblproducts`
+  MODIFY `ProductID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblproductsuppliers`
+--
+ALTER TABLE `tblproductsuppliers`
+  MODIFY `ProductSupplierID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblsuppliers`
+--
+ALTER TABLE `tblsuppliers`
+  MODIFY `SupplierID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbltreatmentplanitems`
+--
+ALTER TABLE `tbltreatmentplanitems`
+  MODIFY `PlanItemID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbltreatmentplans`
+--
+ALTER TABLE `tbltreatmentplans`
+  MODIFY `TreatmentPlanID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbltreatmentrecords`
+--
+ALTER TABLE `tbltreatmentrecords`
+  MODIFY `TreatmentRecordID` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
