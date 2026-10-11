@@ -2122,15 +2122,42 @@ Public Class frmMain
             End Using
         End Using
     End Function
+    ''' <summary>Bytes of a stored image: from the database, or (old rows) from the local file if it exists.</summary>
+    Private Shared Function BytesFromRow(r As DataRow) As Byte()
+        If r("ImageData") IsNot DBNull.Value Then
+            Dim b As Byte() = DirectCast(r("ImageData"), Byte())
+            If b.Length > 0 Then Return b
+        End If
+        Dim rel As String = Ui.Txt(r("ImagePath"))
+        If rel.Length > 0 Then
+            Dim p As String = ImageFullPath(rel)
+            If File.Exists(p) Then Return File.ReadAllBytes(p)
+        End If
+        Return Nothing
+    End Function
 
-    Private Shared Function MakeThumb(filePath As String) As Image
+    Private Shared Function GetImageBytes(imageId As Integer) As Byte()
+        Dim t As DataTable = Db.Query("SELECT ImageData, ImagePath FROM tblMedicalImages WHERE ImageID = @i", ("@i", imageId))
+        If t.Rows.Count = 0 Then Return Nothing
+        Return BytesFromRow(t.Rows(0))
+    End Function
+
+    Private Shared Function ImageFromBytes(data As Byte()) As Image
+        Using ms As New MemoryStream(data)
+            Using img As Image = Image.FromStream(ms, False, True)
+                Return New Bitmap(img)
+            End Using
+        End Using
+    End Function
+    Private Shared Function MakeThumb(data As Byte()) As Image
         Const W As Integer = 120
         Const H As Integer = 78
         Dim bmp As New Bitmap(W, H)
         Using g As Graphics = Graphics.FromImage(bmp)
             g.Clear(Color.FromArgb(60, 60, 60))
             Try
-                Using full As Image = LoadImageNoLock(filePath)
+                If data Is Nothing Then Throw New FileNotFoundException()
+                Using full As Image = ImageFromBytes(data)
                     Dim scale As Double = Math.Min(W / CDbl(full.Width), H / CDbl(full.Height))
                     Dim tw As Integer = Math.Max(1, CInt(full.Width * scale))
                     Dim th As Integer = Math.Max(1, CInt(full.Height * scale))
@@ -2175,9 +2202,9 @@ Public Class frmMain
     ' ---- grid
     Private Sub LoadImages(Optional selectId As Integer = 0)
         Dim table As DataTable = Db.Query("
-            SELECT ImageID, ImageType, DateUploaded, ImagePath
-            FROM tblMedicalImages WHERE PatientID = @p
-            ORDER BY DateUploaded DESC, ImageID DESC", ("@p", _recPatientId))
+    SELECT ImageID, ImageType, DateUploaded, ImagePath, ImageData
+    FROM tblMedicalImages WHERE PatientID = @p
+    ORDER BY DateUploaded DESC, ImageID DESC", ("@p", _recPatientId))
 
         _imgLoading = True
         Try
@@ -2186,8 +2213,8 @@ Public Class frmMain
             For Each r As DataRow In table.Rows
                 Dim rel As String = Ui.Txt(r("ImagePath"))
                 Dim uploaded As DateTime = Convert.ToDateTime(r("DateUploaded"))
-                Dim idx As Integer = dgvImaging.Rows.Add(MakeThumb(ImageFullPath(rel)), Ui.Txt(r("ImageType")),
-                                                         uploaded.ToString("yyyy-MM-dd  hh:mm tt"), "View", rel)
+                Dim idx As Integer = dgvImaging.Rows.Add(MakeThumb(BytesFromRow(r)), Ui.Txt(r("ImageType")),
+                                         uploaded.ToString("yyyy-MM-dd  hh:mm tt"), "View", rel)
                 Dim row As DataGridViewRow = dgvImaging.Rows(idx)
                 row.Tag = Convert.ToInt32(r("ImageID"))
                 row.Cells("DateUploaded").Tag = uploaded
@@ -2225,9 +2252,9 @@ Public Class frmMain
         Ui.SetText(cboImageType, imgType)
         If TypeOf row.Cells("DateUploaded").Tag Is DateTime Then dtpDateUploaded.Value = CType(row.Cells("DateUploaded").Tag, DateTime)
 
-        Dim fullPath As String = ImageFullPath(Ui.Txt(row.Cells("ImagePath").Value))
-        If File.Exists(fullPath) Then
-            SetPreview(LoadImageNoLock(fullPath))
+        Dim data As Byte() = GetImageBytes(_imgId)
+        If data IsNot Nothing Then
+            SetPreview(ImageFromBytes(data))
         Else
             SetPreview(Nothing)
         End If
@@ -2336,9 +2363,9 @@ Public Class frmMain
     ' ---- build the viewer for a row (shared by View and Print)
     Private Function BuildViewer(rowIndex As Integer) As frmFullImage
         Dim row As DataGridViewRow = dgvImaging.Rows(rowIndex)
-        Dim fullPath As String = ImageFullPath(Ui.Txt(row.Cells("ImagePath").Value))
-        If Not File.Exists(fullPath) Then
-            Ui.Warn("The image file could not be found:" & vbCrLf & fullPath)
+        Dim data As Byte() = GetImageBytes(Convert.ToInt32(row.Tag))
+        If data Is Nothing Then
+            Ui.Warn("The image data could not be found.")
             Return Nothing
         End If
 
@@ -2346,7 +2373,7 @@ Public Class frmMain
         Dim imgDate As String = Ui.Txt(row.Cells("DateUploaded").Value)
         Dim caption As String = cboPatient.Text & "   |   " & imgType & "   |   " & imgDate
 
-        Dim viewer As New frmFullImage(LoadImageNoLock(fullPath), caption)
+        Dim viewer As New frmFullImage(ImageFromBytes(data), caption)
         viewer.Patient = LoadPatientRecord(_recPatientId.ToString())
         viewer.ImageType = imgType
         viewer.ImageDate = imgDate
@@ -2436,28 +2463,13 @@ Public Class frmMain
 
     Private Sub SaveNewImage(imgType As String)
         Dim source As String = _imgPendingFile
-        Dim ext As String = System.IO.Path.GetExtension(source).ToLowerInvariant()
-        Dim rel As String = System.IO.Path.Combine(_recPatientId.ToString(),
-            DateTime.Now.ToString("yyyyMMdd_HHmmss") & "_" & Guid.NewGuid().ToString("N").Substring(0, 8) & ext)
-        Dim target As String = ImageFullPath(rel)
-        Directory.CreateDirectory(System.IO.Path.GetDirectoryName(target))
-        File.Copy(source, target, False)
-
-        Dim newId As Long
-        Try
-            newId = Db.Insert("
-                INSERT INTO tblMedicalImages (PatientID, ImageType, ImagePath, OriginalFileName, DateUploaded, UploadedBy)
-                VALUES (@p, @t, @path, @name, @d, @u)",
-                ("@p", _recPatientId), ("@t", imgType), ("@path", rel),
-                ("@name", System.IO.Path.GetFileName(source)), ("@d", dtpDateUploaded.Value),
-                ("@u", If(Session.UserId = 0, Nothing, CObj(Session.UserId))))
-        Catch
-            Try
-                File.Delete(target)
-            Catch
-            End Try
-            Throw
-        End Try
+        Dim bytes As Byte() = File.ReadAllBytes(source)
+        Dim newId As Long = Db.Insert("
+        INSERT INTO tblMedicalImages (PatientID, ImageType, ImagePath, OriginalFileName, DateUploaded, UploadedBy, ImageData)
+        VALUES (@p, @t, @path, @name, @d, @u, @data)",
+        ("@p", _recPatientId), ("@t", imgType), ("@path", ""),
+        ("@name", System.IO.Path.GetFileName(source)), ("@d", dtpDateUploaded.Value),
+        ("@u", If(Session.UserId = 0, Nothing, CObj(Session.UserId))), ("@data", bytes))
 
         Audit.Log("Upload Medical Image", "tblMedicalImages", newId, Nothing, imgType & " - " & System.IO.Path.GetFileName(source))
         LoadImages(CInt(newId))
@@ -2490,26 +2502,29 @@ Public Class frmMain
 
     Private Sub DownloadImage()
         Dim row As DataGridViewRow = dgvImaging.CurrentRow
-        Dim source As String = ImageFullPath(Ui.Txt(row.Cells("ImagePath").Value))
-        If Not File.Exists(source) Then
-            Ui.Warn("The image file could not be found:" & vbCrLf & source)
+        Dim data As Byte() = GetImageBytes(_imgId)
+        If data Is Nothing Then
+            Ui.Warn("The image data could not be found.")
             Return
         End If
 
-        Dim ext As String = System.IO.Path.GetExtension(source)
+        Dim meta As DataTable = Db.Query("SELECT OriginalFileName FROM tblMedicalImages WHERE ImageID = @i", ("@i", _imgId))
+        Dim ext As String = If(meta.Rows.Count > 0, System.IO.Path.GetExtension(Ui.Txt(meta.Rows(0)("OriginalFileName"))), "")
+        If ext.Length = 0 Then ext = ".jpg"
+
         Dim code As String = cboPatient.Text.Split(New String() {" - "}, StringSplitOptions.None)(0)
         Dim stamp As String = If(TypeOf row.Cells("DateUploaded").Tag Is DateTime, CType(row.Cells("DateUploaded").Tag, DateTime).ToString("yyyyMMdd"), DateTime.Today.ToString("yyyyMMdd"))
         Dim suggested As String = SafeFileName(code & "_" & Ui.Txt(row.Cells("ImageType").Value) & "_" & stamp) & ext
 
         Dim destination As String
         Using dlg As New SaveFileDialog() With {
-                .Title = "Save a copy of this image", .FileName = suggested, .OverwritePrompt = True,
-                .Filter = "Original format (*" & ext & ")|*" & ext & "|All files (*.*)|*.*"}
+            .Title = "Save a copy of this image", .FileName = suggested, .OverwritePrompt = True,
+            .Filter = "Original format (*" & ext & ")|*" & ext & "|All files (*.*)|*.*"}
             If dlg.ShowDialog(Me) <> DialogResult.OK Then Return
             destination = dlg.FileName
         End Using
 
-        File.Copy(source, destination, True)
+        File.WriteAllBytes(destination, data)
         Audit.Log("Download Medical Image", "tblMedicalImages", _imgId, Nothing, System.IO.Path.GetFileName(destination))
         Ui.Info("Image saved to:" & vbCrLf & destination)
     End Sub
@@ -2539,6 +2554,21 @@ Public Class frmMain
             End Try
         End If
         LoadImages()
+    End Sub
+    Private Sub MigrateImagesToDb()
+        Dim t As DataTable = Db.Query("SELECT ImageID, ImagePath FROM tblMedicalImages WHERE ImageData IS NULL AND ImagePath <> ''")
+        Dim done As Integer = 0, missing As Integer = 0
+        For Each r As DataRow In t.Rows
+            Dim p As String = ImageFullPath(Ui.Txt(r("ImagePath")))
+            If File.Exists(p) Then
+                Db.Exec("UPDATE tblMedicalImages SET ImageData = @d WHERE ImageID = @i",
+                    ("@d", File.ReadAllBytes(p)), ("@i", Convert.ToInt32(r("ImageID"))))
+                done += 1
+            Else
+                missing += 1
+            End If
+        Next
+        Ui.Info($"Migrated {done} image(s). {missing} file(s) not found on this PC.")
     End Sub
 
     ' ============================================================ PROCEDURES & PRICES
