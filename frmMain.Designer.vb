@@ -390,6 +390,8 @@ Partial Class frmMain
         Me.cboMethod = New System.Windows.Forms.ComboBox()
         Me.lblPayAmount = New System.Windows.Forms.Label()
         Me.numPayAmount = New System.Windows.Forms.NumericUpDown()
+        Me.lblPayRef = New System.Windows.Forms.Label()
+        Me.txtPayRef = New System.Windows.Forms.TextBox()
         Me.lblPayNotes = New System.Windows.Forms.Label()
         Me.txtPayNotes = New System.Windows.Forms.TextBox()
         Me.btnReceive = New System.Windows.Forms.Button()
@@ -4347,7 +4349,7 @@ Partial Class frmMain
         '
         Me.cboPosition.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboPosition.FormattingEnabled = True
-        Me.cboPosition.Items.AddRange(New Object() {"Dentist", "Dental Assistant", "Administrator", "Front Desk"})
+        Me.cboPosition.Items.AddRange(New Object() {"Dentist", "Dental Assistant", "Owner", "IT", "Frontdesk"})
         Me.cboPosition.Location = New System.Drawing.Point(14, 212)
         Me.cboPosition.Name = "cboPosition"
         Me.cboPosition.Size = New System.Drawing.Size(413, 28)
@@ -4419,7 +4421,7 @@ Partial Class frmMain
         Me.grpUsers.Size = New System.Drawing.Size(1197, 220)
         Me.grpUsers.TabIndex = 24
         Me.grpUsers.TabStop = False
-        Me.grpUsers.Text = "Login accounts (Administrator and Front Desk)"
+        Me.grpUsers.Text = "Login accounts (Owner, IT, Frontdesk and Dentist)"
         '
         'dgvUsers
         '
@@ -4976,6 +4978,8 @@ Partial Class frmMain
         Me.grpPayments.Controls.Add(Me.cboMethod)
         Me.grpPayments.Controls.Add(Me.lblPayAmount)
         Me.grpPayments.Controls.Add(Me.numPayAmount)
+        Me.grpPayments.Controls.Add(Me.lblPayRef)
+        Me.grpPayments.Controls.Add(Me.txtPayRef)
         Me.grpPayments.Controls.Add(Me.lblPayNotes)
         Me.grpPayments.Controls.Add(Me.txtPayNotes)
         Me.grpPayments.Controls.Add(Me.btnReceive)
@@ -5031,12 +5035,33 @@ Partial Class frmMain
         Me.numPayAmount.TabIndex = 40
         Me.numPayAmount.ThousandsSeparator = True
         '
+        'lblPayRef
+        '
+        Me.lblPayRef.AutoSize = True
+        Me.lblPayRef.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPayRef.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
+        Me.lblPayRef.Location = New System.Drawing.Point(332, 21)
+        Me.lblPayRef.Name = "lblPayRef"
+        Me.lblPayRef.Size = New System.Drawing.Size(143, 17)
+        Me.lblPayRef.TabIndex = 45
+        Me.lblPayRef.Text = "Reference No. (online only)"
+        '
+        'txtPayRef
+        '
+        Me.txtPayRef.Enabled = False
+        Me.txtPayRef.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPayRef.Location = New System.Drawing.Point(332, 41)
+        Me.txtPayRef.MaxLength = 13
+        Me.txtPayRef.Name = "txtPayRef"
+        Me.txtPayRef.Size = New System.Drawing.Size(190, 27)
+        Me.txtPayRef.TabIndex = 41
+        '
         'lblPayNotes
         '
         Me.lblPayNotes.AutoSize = True
         Me.lblPayNotes.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPayNotes.ForeColor = System.Drawing.Color.FromArgb(CType(CType(95, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(120, Byte), Integer))
-        Me.lblPayNotes.Location = New System.Drawing.Point(332, 21)
+        Me.lblPayNotes.Location = New System.Drawing.Point(540, 21)
         Me.lblPayNotes.Name = "lblPayNotes"
         Me.lblPayNotes.Size = New System.Drawing.Size(43, 17)
         Me.lblPayNotes.TabIndex = 41
@@ -5045,7 +5070,7 @@ Partial Class frmMain
         'txtPayNotes
         '
         Me.txtPayNotes.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPayNotes.Location = New System.Drawing.Point(332, 41)
+        Me.txtPayNotes.Location = New System.Drawing.Point(540, 41)
         Me.txtPayNotes.Name = "txtPayNotes"
         Me.txtPayNotes.Size = New System.Drawing.Size(190, 27)
         Me.txtPayNotes.TabIndex = 42
@@ -5625,6 +5650,8 @@ Partial Class frmMain
     Friend WithEvents cboMethod As ComboBox
     Friend WithEvents lblPayAmount As Label
     Friend WithEvents numPayAmount As NumericUpDown
+    Friend WithEvents lblPayRef As Label
+    Friend WithEvents txtPayRef As TextBox
     Friend WithEvents lblPayNotes As Label
     Friend WithEvents txtPayNotes As TextBox
     Friend WithEvents btnReceive As Button

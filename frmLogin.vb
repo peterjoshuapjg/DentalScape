@@ -3,7 +3,7 @@
 Public Class frmLogin
 
     Private Const MaxAttempts As Integer = 3     ' wrong passwords allowed before the account is locked
-    Private Const LockMinutes As Integer = 15    ' how long a locked account stays locked (admin can unlock sooner)
+    Private Const LockMinutes As Integer = 15    ' how long a locked account stays locked (Owner or IT can unlock sooner)
 
     Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.StartPosition = FormStartPosition.CenterScreen
@@ -32,7 +32,7 @@ Public Class frmLogin
 
         Try
             Dim table As DataTable = Db.Query("
-                SELECT u.UserID, u.PasswordHash, u.IsActive, r.RoleName, s.Status AS StaffStatus,
+                SELECT u.UserID, u.StaffID, u.PasswordHash, u.IsActive, r.RoleName, s.Status AS StaffStatus,
                        CONCAT(s.FirstName, ' ', s.LastName) AS FullName, u.FailedAttempts,
                        IFNULL(CEIL(TIMESTAMPDIFF(SECOND, NOW(), u.LockedUntil) / 60), 0) AS LockMins
                 FROM tblUsers u
@@ -50,7 +50,7 @@ Public Class frmLogin
             Dim hash As String = row("PasswordHash").ToString()
 
             If Not Convert.ToBoolean(row("IsActive")) OrElse row("StaffStatus").ToString() <> "Active" Then
-                Ui.Warn("This account is disabled. Please contact the administrator.")
+                Ui.Warn("This account is disabled. Please contact the Owner or IT.")
                 Return
             End If
 
@@ -59,7 +59,7 @@ Public Class frmLogin
             If lockMins > 0 Then
                 Audit.Log("Login Failed", "tblUsers", Nothing, Nothing, user & " (account locked)")
                 Ui.Warn($"This account is locked after {MaxAttempts} wrong passwords." & vbCrLf &
-                        $"Try again in about {lockMins} minute(s), or ask the administrator to unlock it.")
+                        $"Try again in about {lockMins} minute(s), or ask the Owner or IT to unlock it.")
                 txtPassword.Clear()
                 Return
             End If
@@ -77,6 +77,7 @@ Public Class frmLogin
             End If
 
             Session.UserId = userId
+            Session.StaffId = Convert.ToInt32(row("StaffID"))
             Session.Username = user
             Session.FullName = row("FullName").ToString()
             Session.Role = row("RoleName").ToString()
@@ -110,7 +111,7 @@ Public Class frmLogin
                     ("@f", failed), ("@id", userId))
             Audit.Log("Account Locked", "tblUsers", userId, Nothing, user)
             Ui.Warn($"Incorrect password {MaxAttempts} times." & vbCrLf &
-                    $"The account is locked for {LockMinutes} minutes. The administrator can unlock it sooner.")
+                    $"The account is locked for {LockMinutes} minutes. The Owner or IT can unlock it sooner.")
         Else
             Db.Exec("UPDATE tblUsers SET FailedAttempts = @f WHERE UserID = @id", ("@f", failed), ("@id", userId))
             Ui.Warn("Incorrect username or password." & vbCrLf &

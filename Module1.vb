@@ -140,23 +140,70 @@ Public NotInheritable Class Tx
 
 End Class
 
-''' <summary>The signed-in user. Two roles only: Administrator and Front Desk.</summary>
+''' <summary>The signed-in user. Four roles: Owner, IT, Frontdesk and Dentist (what each can open is set in frmMain.frmMain_Load).</summary>
 Public NotInheritable Class Session
 
     Private Sub New()
     End Sub
 
-    Public Const AdminRole As String = "Administrator"
-    Public Const FrontDeskRole As String = "Front Desk"
+    Public Const OwnerRole As String = "Owner"
+    Public Const ITRole As String = "IT"
+    Public Const FrontdeskRole As String = "Frontdesk"
+    Public Const DentistRole As String = "Dentist"
 
     Public Shared Property UserId As Integer
     Public Shared Property Username As String = ""
     Public Shared Property FullName As String = ""
     Public Shared Property Role As String = ""
+    ''' <summary>tblStaff.StaffID of the signed-in account (for a Dentist this is the DentistID on their appointments).</summary>
+    Public Shared Property StaffId As Integer
 
-    Public Shared ReadOnly Property IsAdmin As Boolean
+    ''' <summary>The Owner has full access and is the only role that may void invoices.</summary>
+    Public Shared ReadOnly Property IsOwner As Boolean
         Get
-            Return Role = AdminRole
+            Return Role = OwnerRole
+        End Get
+    End Property
+
+    ''' <summary>Dashboard "Revenue this Month" chart: Owner only (IT, Frontdesk and Dentist must not see it).</summary>
+    Public Shared ReadOnly Property CanSeeRevenue As Boolean
+        Get
+            Return Role = OwnerRole
+        End Get
+    End Property
+
+    ''' <summary>A Dentist only reads appointments that are set to their own account.</summary>
+    Public Shared ReadOnly Property IsDentist As Boolean
+        Get
+            Return Role = DentistRole
+        End Get
+    End Property
+
+    ''' <summary>Who may book, edit or cancel appointments (a Dentist can only read them).</summary>
+    Public Shared ReadOnly Property CanEditAppointments As Boolean
+        Get
+            Return Role = OwnerRole OrElse Role = FrontdeskRole
+        End Get
+    End Property
+
+    ''' <summary>DentistID to filter appointment queries by: the signed-in dentist, or 0 (no filter) for everyone else.</summary>
+    Public Shared ReadOnly Property AppointmentDentistFilter As Integer
+        Get
+            Return If(IsDentist, StaffId, 0)
+        End Get
+    End Property
+
+    ''' <summary>Inventory access (also decides whether the dashboard shows the low-stock list).</summary>
+    Public Shared ReadOnly Property CanUseInventory As Boolean
+        Get
+            Return Role = OwnerRole OrElse Role = FrontdeskRole
+        End Get
+    End Property
+
+    ''' <summary>The staff positions that get a login account. The position name is also the role name.</summary>
+    Public Shared ReadOnly Property LoginPositions As String()
+        Get
+            Return New String() {OwnerRole, ITRole, FrontdeskRole, DentistRole}
         End Get
     End Property
 
@@ -165,6 +212,7 @@ Public NotInheritable Class Session
         Username = ""
         FullName = ""
         Role = ""
+        StaffId = 0
     End Sub
 
 End Class

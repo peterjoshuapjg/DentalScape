@@ -12,20 +12,26 @@ Public Class frmMain
     ' ============================================================ navigation (panel.Hide / panel.Show)
     Private NotInheritable Class PageInfo
         Public ReadOnly Property Title As String
-        Public ReadOnly Property AdminOnly As Boolean
+        Public ReadOnly Property Roles As String()
         Public ReadOnly Property Host As Panel
         Public ReadOnly Property OnOpen As Action
 
-        Public Sub New(title As String, adminOnly As Boolean, host As Panel, onOpen As Action)
+        Public Sub New(title As String, roles As String(), host As Panel, onOpen As Action)
             Me.Title = title
-            Me.AdminOnly = adminOnly
+            Me.Roles = roles
             Me.Host = host
             Me.OnOpen = onOpen
         End Sub
+
+        ''' <summary>True when the signed-in role is allowed to open this page.</summary>
+        Public Function IsAllowed() As Boolean
+            Return Array.IndexOf(Roles, Session.Role) >= 0
+        End Function
     End Class
 
     Private ReadOnly _pages As New Dictionary(Of Button, PageInfo)()
     Private _current As Panel
+    Private _revenueChartLoc, _revenueLabelLoc, _topProcChartLoc, _topProcLabelLoc As Point
 
     ''' <summary>True when the user chose "Sign Out" (so the sign-in screen comes back).</summary>
     Public Property LoggedOut As Boolean
@@ -54,20 +60,45 @@ Public Class frmMain
         dgvLowStockProducts.RowHeadersVisible = False
         dgvLowStockProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect
 
-        _pages(btnNavDashboard) = New PageInfo("Dashboard", False, pnlDashboard, AddressOf OpenDashboard)
-        _pages(btnNavPatients) = New PageInfo("Patients", False, pnlPatients, AddressOf OpenPatients)
-        _pages(btnNavAppointments) = New PageInfo("Appointments", False, pnlAppointment, AddressOf OpenAppointments)
-        _pages(btnNavBilling) = New PageInfo("Billing & Payments", False, pnlBillingpayments, AddressOf OpenBilling)
-        _pages(btnNavClinical) = New PageInfo("Clinical Records", True, pnlClinicalRecord, AddressOf OpenClinical)
-        _pages(btnNavProcedures) = New PageInfo("Procedures & Prices", True, pnlProcedures, AddressOf OpenProcedures)
-        _pages(btnNavInventory) = New PageInfo("Inventory", True, pnlInventory, AddressOf OpenInventory)
-        _pages(btnNavStaff) = New PageInfo("Staff & Accounts", True, pnlStaff, AddressOf OpenStaff)
-        _pages(btnNavAudit) = New PageInfo("Audit Log", True, pnlAuditlog, AddressOf OpenAudit)
+        ' Who can open what. A page that is not listed for the signed-in role is hidden from the sidebar.
+        '   Owner      everything
+        '   IT         Dashboard (no monthly revenue), Staff & Accounts, Audit Log
+        '   Frontdesk  Dashboard (no monthly revenue), Patients, Appointments, Billing & Payments, Clinical Records, Procedures & Prices, Inventory
+        '   Dentist    Dashboard (no monthly revenue), Patients, Appointments (read-only, only their own)
+        Const Owner As String = Session.OwnerRole
+        Const IT As String = Session.ITRole
+        Const Frontdesk As String = Session.FrontdeskRole
+        Const Dentist As String = Session.DentistRole
 
-        ' Start with every page panel hidden; the Front Desk account never sees the admin-only pages.
+        _pages(btnNavDashboard) = New PageInfo("Dashboard", {Owner, IT, Frontdesk, Dentist}, pnlDashboard, AddressOf OpenDashboard)
+        _pages(btnNavPatients) = New PageInfo("Patients", {Owner, Frontdesk, Dentist}, pnlPatients, AddressOf OpenPatients)
+        _pages(btnNavAppointments) = New PageInfo("Appointments", {Owner, Frontdesk, Dentist}, pnlAppointment, AddressOf OpenAppointments)
+        _pages(btnNavBilling) = New PageInfo("Billing & Payments", {Owner, Frontdesk}, pnlBillingpayments, AddressOf OpenBilling)
+        _pages(btnNavClinical) = New PageInfo("Clinical Records", {Owner, Frontdesk}, pnlClinicalRecord, AddressOf OpenClinical)
+        _pages(btnNavProcedures) = New PageInfo("Procedures & Prices", {Owner, Frontdesk}, pnlProcedures, AddressOf OpenProcedures)
+        _pages(btnNavInventory) = New PageInfo("Inventory", {Owner, Frontdesk}, pnlInventory, AddressOf OpenInventory)
+        _pages(btnNavStaff) = New PageInfo("Staff & Accounts", {Owner, IT}, pnlStaff, AddressOf OpenStaff)
+        _pages(btnNavAudit) = New PageInfo("Audit Log", {Owner, IT}, pnlAuditlog, AddressOf OpenAudit)
+
+        ' Remember where the dashboard charts sit (they move up when the revenue chart is hidden).
+        _revenueChartLoc = chtMonthlyRevenue.Location
+        _revenueLabelLoc = lblMonthlyRevenue.Location
+        _topProcChartLoc = chtTopProcedure.Location
+        _topProcLabelLoc = lblTopProcedures.Location
+
+        ' Start with every page panel hidden; the sidebar only shows the pages this role may open.
         For Each kv In _pages
             kv.Value.Host.Hide()
-            kv.Key.Visible = Not (kv.Value.AdminOnly AndAlso Not Session.IsAdmin)
+            kv.Key.Visible = kv.Value.IsAllowed()
+        Next
+
+        ' The sidebar buttons sit at fixed positions, so pack the visible ones together (no gaps for IT / Dentist).
+        Dim navTop As Integer = btnNavDashboard.Top
+        For Each b As Button In New Button() {btnNavDashboard, btnNavPatients, btnNavAppointments, btnNavBilling,
+                                              btnNavClinical, btnNavProcedures, btnNavInventory, btnNavStaff, btnNavAudit}
+            If Not b.Visible Then Continue For
+            b.Top = navTop
+            navTop += 46
         Next
 
         OpenPage(btnNavDashboard)
@@ -80,8 +111,8 @@ Public Class frmMain
     Private Sub OpenPage(button As Button)
         Dim page As PageInfo = Nothing
         If Not _pages.TryGetValue(button, page) Then Return
-        If page.AdminOnly AndAlso Not Session.IsAdmin Then
-            Ui.Warn("Only the administrator can open this page.")
+        If Not page.IsAllowed() Then
+            Ui.Warn("Your account (" & Session.Role & ") cannot open this page.")
             Return
         End If
 
@@ -127,9 +158,21 @@ Public Class frmMain
 
     ' ============================================================ DASHBOARD
     Private Sub OpenDashboard()
-        pnlCardLow.Visible = Session.IsAdmin   ' inventory is an admin topic
-        lblLowStocks.Visible = Session.IsAdmin
-        dgvLowStockProducts.Visible = Session.IsAdmin
+        ' Low-stock list: only for roles that can open Inventory (Owner, Frontdesk).
+        pnlCardLow.Visible = Session.CanUseInventory
+        lblLowStocks.Visible = Session.CanUseInventory
+        dgvLowStockProducts.Visible = Session.CanUseInventory
+
+        ' Monthly revenue: Owner only. For the others (IT, Frontdesk, Dentist) the top-procedures chart moves up into its place.
+        chtMonthlyRevenue.Visible = Session.CanSeeRevenue
+        lblMonthlyRevenue.Visible = Session.CanSeeRevenue
+        If Session.CanSeeRevenue Then
+            lblTopProcedures.Location = _topProcLabelLoc
+            chtTopProcedure.Location = _topProcChartLoc
+        Else
+            lblTopProcedures.Location = _revenueLabelLoc
+            chtTopProcedure.Location = _revenueChartLoc
+        End If
         LoadDashboard()
     End Sub
 
@@ -138,32 +181,37 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadDashboard()
+        ' @dn = 0 for everyone except a Dentist, who only sees the appointments set to their own account.
+        Dim dn As Integer = Session.AppointmentDentistFilter
         lblTodayCount.Text = Convert.ToString(Db.Scalar(
-            "SELECT COUNT(*) FROM tblAppointments WHERE AppointmentDate = CURDATE() AND Status NOT IN ('Cancelled','No-show')"))
+            "SELECT COUNT(*) FROM tblAppointments WHERE AppointmentDate = CURDATE() AND Status NOT IN ('Cancelled','No-show') AND (@dn = 0 OR DentistID = @dn)",
+            ("@dn", dn)))
         lblPendingCount.Text = Convert.ToString(Db.Scalar(
-            "SELECT COUNT(*) FROM tblAppointments WHERE Status = 'Pending' AND AppointmentDate >= CURDATE()"))
+            "SELECT COUNT(*) FROM tblAppointments WHERE Status = 'Pending' AND AppointmentDate >= CURDATE() AND (@dn = 0 OR DentistID = @dn)",
+            ("@dn", dn)))
 
         Dim unpaid As DataTable = Db.Query(
             "SELECT COUNT(*) AS Cnt, IFNULL(SUM(Balance), 0) AS Bal FROM tblInvoices WHERE Status IN ('Unpaid','Partially Paid')")
         lblUnpaidCount.Text = Convert.ToString(unpaid.Rows(0)("Cnt"))
         lblUnpaidAmount.Text = Ui.Money(unpaid.Rows(0)("Bal")) & " outstanding"
 
-        If Session.IsAdmin Then
+        If Session.CanUseInventory Then
             lblLowStockCount.Text = Convert.ToString(Db.Scalar("SELECT COUNT(*) FROM vwLowStockProducts"))
         End If
 
         Ui.Bind(dgvToday, Db.Query("
-            SELECT AppointmentCode AS Code,
-                   TIME_FORMAT(StartTime, '%h:%i %p') AS `Time`,
-                   PatientName AS Patient, DentistName AS Dentist,
-                   AppointmentType AS `Type`, Status
-            FROM vwAppointmentDetails
-            WHERE AppointmentDate = CURDATE()
-            ORDER BY StartTime"))
+            SELECT v.AppointmentCode AS Code,
+                   TIME_FORMAT(v.StartTime, '%h:%i %p') AS `Time`,
+                   v.PatientName AS Patient, v.DentistName AS Dentist,
+                   v.AppointmentType AS `Type`, v.Status
+            FROM vwAppointmentDetails v
+            INNER JOIN tblAppointments a ON a.AppointmentID = v.AppointmentID
+            WHERE v.AppointmentDate = CURDATE() AND (@dn = 0 OR a.DentistID = @dn)
+            ORDER BY v.StartTime", ("@dn", dn)))
 
-        LoadRevenueChart()
+        If Session.CanSeeRevenue Then LoadRevenueChart()      ' never even queried for IT / Frontdesk / Dentist
         LoadTopProcedureChart()
-        If Session.IsAdmin Then LoadLowStockGrid()
+        If Session.CanUseInventory Then LoadLowStockGrid()
     End Sub
 
     Private Shared ReadOnly ChartBlue As Color = ColorTranslator.FromHtml("#0D317F")
@@ -279,7 +327,7 @@ Public Class frmMain
 
     ' Double-click a low-stock product: go to Inventory with that product selected.
     Private Sub dgvLowStockProducts_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvLowStockProducts.CellDoubleClick
-        If e.RowIndex < 0 OrElse Not Session.IsAdmin Then Return
+        If e.RowIndex < 0 OrElse Not Session.CanUseInventory Then Return
         Dim productId As Integer = Ui.SelectedId(dgvLowStockProducts)
         OpenPage(btnNavInventory)
         If productId > 0 Then Ui.Try(Sub() LoadProducts(productId))
@@ -419,7 +467,7 @@ Public Class frmMain
                            i.AmountPaid AS Paid, i.Balance, i.Status,
                            IFNULL(py.PaymentReference, '') AS `Payment Ref`,
                            IFNULL(DATE_FORMAT(py.PaymentDate, '%Y-%m-%d %H:%i'), '') AS `Payment Date`,
-                           IFNULL(m.MethodName, '') AS Method, py.Amount AS `Payment Amount`
+                           IFNULL(m.MethodName, '') AS Method, IFNULL(py.ReferenceNumber, '') AS `Ref No`, py.Amount AS `Payment Amount`
                     FROM tblInvoices i
                     INNER JOIN tblPatients p ON p.PatientID = i.PatientID
                     LEFT JOIN tblPayments py ON py.InvoiceID = i.InvoiceID
@@ -627,10 +675,26 @@ Public Class frmMain
         cboFilterStatus.SelectedIndex = 0
         Try
             LoadApptLookups()
+            ApplyApptPermissions()
         Finally
             _apptInit = False
         End Try
         LoadApptGrid()
+    End Sub
+
+    ''' <summary>A Dentist can only read appointments: every input is locked and New / Save / Cancel are hidden.</summary>
+    Private Sub ApplyApptPermissions()
+        If Session.CanEditAppointments Then Return
+        btnNewAppt.Visible = False
+        btnSaveAppt.Visible = False
+        btnCancelAppt.Visible = False
+        For Each c As Control In grpAppointment.Controls
+            If TypeOf c Is TextBoxBase Then
+                DirectCast(c, TextBoxBase).ReadOnly = True      ' stays readable / selectable
+            ElseIf TypeOf c Is ComboBox OrElse TypeOf c Is DateTimePicker Then
+                c.Enabled = False
+            End If
+        Next
     End Sub
 
     Private Sub LoadApptLookups()
@@ -673,8 +737,10 @@ Public Class frmMain
             INNER JOIN tblAppointmentTypes t ON t.AppointmentTypeID = a.AppointmentTypeID
             WHERE (@showAll = 1 OR a.AppointmentDate = @d)
               AND (@st = '' OR a.Status = @st)
+              AND (@dn = 0 OR a.DentistID = @dn)
             ORDER BY a.AppointmentDate, a.StartTime",
-            ("@showAll", If(chkAllDates.Checked, 1, 0)), ("@d", dtpFilterDate.Value.Date), ("@st", status))
+            ("@showAll", If(chkAllDates.Checked, 1, 0)), ("@d", dtpFilterDate.Value.Date), ("@st", status),
+            ("@dn", Session.AppointmentDentistFilter))
 
         _apptLoading = True
         Ui.Bind(dgvAppointments, table)
@@ -714,7 +780,8 @@ Public Class frmMain
     End Sub
 
     Private Sub LoadAppointment(id As Integer)
-        Dim table As DataTable = Db.Query("SELECT * FROM tblAppointments WHERE AppointmentID = @id", ("@id", id))
+        Dim table As DataTable = Db.Query("SELECT * FROM tblAppointments WHERE AppointmentID = @id AND (@dn = 0 OR DentistID = @dn)",
+                                          ("@id", id), ("@dn", Session.AppointmentDentistFilter))
         If table.Rows.Count = 0 Then Return
         Dim r As DataRow = table.Rows(0)
 
@@ -742,7 +809,7 @@ Public Class frmMain
     Private Sub NewAppointment()
         _apptLoading = True
         _apptId = 0
-        txtApptCode.Text = "(assigned on save)"
+        txtApptCode.Text = If(Session.CanEditAppointments, "(assigned on save)", "")
         cboApptStatus.SelectedIndex = 0
         cboApptPatient.SelectedIndex = -1
         cboApptPatient.Text = ""
@@ -864,6 +931,7 @@ Public Class frmMain
 
 
     Private Sub btnNewAppt_Click(sender As Object, e As EventArgs) Handles btnNewAppt.Click
+        If Not Session.CanEditAppointments Then Return
         NewAppointment()
     End Sub
 
@@ -887,6 +955,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnSaveAppt_Click(sender As Object, e As EventArgs) Handles btnSaveAppt.Click
+        If Not Session.CanEditAppointments Then Return      ' a Dentist can only read appointments
         Dim patient As Integer? = ResolveApptPatient(True)
         If Not patient.HasValue Then
             If cboApptPatient.Text.Trim().Length = 0 Then Ui.Warn("Enter the patient's name or patient ID.")
@@ -897,7 +966,7 @@ Public Class frmMain
         Dim apptType As Integer? = Ui.SelId(cboType)
         If Not dentist.HasValue Then
             Ui.Warn(If(cboDentist.Items.Count = 0,
-                       "There is no active dentist yet. The administrator must add a staff member with the position ""Dentist"" first.",
+                       "There is no active dentist yet. The Owner or IT must add a staff member with the position ""Dentist"" first.",
                        "Select a dentist."))
             Return
         End If
@@ -968,6 +1037,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnCancelAppt_Click(sender As Object, e As EventArgs) Handles btnCancelAppt.Click
+        If Not Session.CanEditAppointments Then Return
         If _apptId = 0 Then Return
         If Not Ui.Confirm("Cancel this appointment?") Then Return
         Ui.Try(Sub()
@@ -1000,7 +1070,8 @@ Public Class frmMain
             Ui.Fill(cboMethod, Db.Query("
                 SELECT PaymentMethodID AS ID, MethodName AS Name
                 FROM tblPaymentMethods WHERE Status = 'Active' ORDER BY PaymentMethodID"), "Name", "ID")
-            btnVoid.Visible = Session.IsAdmin       ' only the administrator may void invoices
+            btnVoid.Visible = Session.IsOwner       ' only the Owner may void invoices
+            UpdatePayRefBox()                       ' hidden until GCash / Bank Transfer / Debit/Credit Card is picked
         Finally
             _invInit = False
         End Try
@@ -1073,7 +1144,7 @@ Public Class frmMain
         Ui.Bind(dgvPayments, Db.Query("
             SELECT p.PaymentID AS ID, p.PaymentReference AS Reference,
                    DATE_FORMAT(p.PaymentDate, '%Y-%m-%d %H:%i') AS `Date`,
-                   m.MethodName AS Method, p.Amount, u.Username AS `Received By`
+                   m.MethodName AS Method, IFNULL(p.ReferenceNumber, '') AS `Ref No`, p.Amount, u.Username AS `Received By`
             FROM tblPayments p
             INNER JOIN tblPaymentMethods m ON m.PaymentMethodID = p.PaymentMethodID
             INNER JOIN tblUsers u ON u.UserID = p.ReceivedBy
@@ -1202,7 +1273,7 @@ Public Class frmMain
     End Sub
 
     Private Sub btnVoid_Click(sender As Object, e As EventArgs) Handles btnVoid.Click
-        If _invId = 0 OrElse Not Session.IsAdmin Then Return
+        If _invId = 0 OrElse Not Session.IsOwner Then Return
         If InvoiceIsPaid() OrElse InvoiceHasPayments() Then Return     ' paid or partially paid: cannot be voided
         If Not Ui.Confirm("Void this invoice?") Then Return
         Ui.Try(Sub()
@@ -1291,6 +1362,64 @@ Public Class frmMain
     End Sub
 
     ' ------------------------------------------------------------ payments
+    ' GCash, Bank Transfer and Debit/Credit Card payments must carry the transaction reference number:
+    ' digits only, 8 to 13 of them. For Cash (or no method chosen yet) the reference box is not shown at all.
+    Private Const RefMinDigits As Integer = 8
+    Private Const RefMaxDigits As Integer = 13
+    Private Const PayNotesLeftWithRef As Integer = 540      ' where the Notes box sits while the reference box is showing
+
+    Private Shared ReadOnly RefMethods As String() = {"GCash", "Bank Transfer", "Debit/Credit Card"}
+
+    Private Shared Function NeedsReference(methodName As String) As Boolean
+        Return Array.Exists(RefMethods, Function(m) String.Equals(m, methodName, StringComparison.OrdinalIgnoreCase))
+    End Function
+
+    ''' <summary>Shows the reference box (and label) only for GCash, Bank Transfer and Debit/Credit Card; otherwise hides and clears it.</summary>
+    Private Sub UpdatePayRefBox()
+        Dim needed As Boolean = NeedsReference(cboMethod.Text)
+        lblPayRef.Visible = needed
+        txtPayRef.Visible = needed
+        txtPayRef.Enabled = needed
+        If Not needed Then txtPayRef.Clear()
+        lblPayRef.Text = "Reference No. * (8-13 digits)"
+        ' Notes slide left into the free space while the reference box is hidden.
+        Dim notesLeft As Integer = If(needed, PayNotesLeftWithRef, txtPayRef.Left)
+        lblPayNotes.Left = notesLeft
+        txtPayNotes.Left = notesLeft
+    End Sub
+
+    Private Sub cboMethod_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboMethod.SelectedIndexChanged
+        UpdatePayRefBox()
+    End Sub
+
+    ' Reference box: digits only while typing (and pasted text is cleaned too).
+    Private Sub txtPayRef_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPayRef.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+    End Sub
+
+    Private Sub txtPayRef_TextChanged(sender As Object, e As EventArgs) Handles txtPayRef.TextChanged
+        Dim digits As String = System.Text.RegularExpressions.Regex.Replace(txtPayRef.Text, "\D", "")
+        If digits.Length > RefMaxDigits Then digits = digits.Substring(0, RefMaxDigits)
+        If digits <> txtPayRef.Text Then
+            txtPayRef.Text = digits
+            txtPayRef.SelectionStart = txtPayRef.TextLength
+        End If
+    End Sub
+
+    ''' <summary>True when the reference number is acceptable for the chosen method. Warns and focuses the box otherwise.</summary>
+    Private Function CheckPaymentReference(methodName As String) As Boolean
+        If Not NeedsReference(methodName) Then Return True
+        Dim refNo As String = txtPayRef.Text.Trim()
+        If Not System.Text.RegularExpressions.Regex.IsMatch(refNo, "^\d{" & RefMinDigits & "," & RefMaxDigits & "}$") Then
+            Ui.Warn($"A {methodName} payment needs the reference number." & vbCrLf & vbCrLf &
+                    $"Enter {RefMinDigits} to {RefMaxDigits} digits, numbers only (no spaces or letters).")
+            txtPayRef.Focus()
+            txtPayRef.SelectAll()
+            Return False
+        End If
+        Return True
+    End Function
+
     Private Sub btnReceive_Click(sender As Object, e As EventArgs) Handles btnReceive.Click
         If _invId = 0 Then
             Ui.Warn("Save the invoice first.")
@@ -1306,6 +1435,9 @@ Public Class frmMain
             Ui.Warn("Enter the amount received.")
             Return
         End If
+        Dim methodName As String = cboMethod.Text
+        If Not CheckPaymentReference(methodName) Then Return
+        Dim refNo As String = If(NeedsReference(methodName), txtPayRef.Text.Trim(), Nothing)
         Dim methodId As Integer = method.Value
 
         Ui.Try(Sub()
@@ -1317,22 +1449,34 @@ Public Class frmMain
                        Return
                    End If
 
+                   ' The same transaction reference must not be recorded twice for the same method.
+                   If refNo IsNot Nothing AndAlso Convert.ToInt32(Db.Scalar(
+                          "SELECT COUNT(*) FROM tblPayments WHERE PaymentMethodID=@m AND ReferenceNumber=@r",
+                          ("@m", methodId), ("@r", refNo))) > 0 Then
+                       Ui.Warn($"The reference number {refNo} was already used for a {methodName} payment." & vbCrLf & "Please check the number.")
+                       txtPayRef.Focus()
+                       txtPayRef.SelectAll()
+                       Return
+                   End If
+
                    Dim reference As String
                    Dim payId As Long
                    Using tx As New Tx(True)
                        Dim nextId As Integer = Convert.ToInt32(tx.Scalar("SELECT IFNULL(MAX(PaymentID), 0) + 1 FROM tblPayments"))
                        reference = $"PAY-{nextId:D5}"
                        payId = tx.Insert("
-                    INSERT INTO tblPayments (InvoiceID, PaymentReference, Amount, PaymentMethodID, ReceivedBy, Notes)
-                    VALUES (@i, @ref, @a, @m, @u, @n)",
-                           ("@i", _invId), ("@ref", reference), ("@a", amount), ("@m", methodId),
+                    INSERT INTO tblPayments (InvoiceID, PaymentReference, ReferenceNumber, Amount, PaymentMethodID, ReceivedBy, Notes)
+                    VALUES (@i, @ref, @rn, @a, @m, @u, @n)",
+                           ("@i", _invId), ("@ref", reference), ("@rn", refNo), ("@a", amount), ("@m", methodId),
                            ("@u", Session.UserId), ("@n", Ui.Nz(txtPayNotes)))
                        Recalc(tx, _invId)
                        tx.Commit()
                    End Using
-                   Audit.Log("Receive Payment", "tblPayments", payId, Nothing, $"{reference} {amount:N2} for {txtInvoiceNo.Text}")
+                   Audit.Log("Receive Payment", "tblPayments", payId, Nothing,
+                             $"{reference} {amount:N2} for {txtInvoiceNo.Text} via {methodName}" & If(refNo IsNot Nothing, $" (ref {refNo})", ""))
 
                    numPayAmount.Value = 0
+                   txtPayRef.Clear()
                    txtPayNotes.Clear()
                    LoadInvoices(_invId)
                End Sub)
@@ -2362,11 +2506,12 @@ Public Class frmMain
         txtStaffFirstName.Focus()
     End Sub
 
-    ''' <summary>Code prefix for a staff position: Front Desk FD, Administrator ADM, Dental Assistant DA, Dentist DR.</summary>
+    ''' <summary>Code prefix for a staff position: Frontdesk FD, Owner OWN, IT IT, Dental Assistant DA, Dentist DR.</summary>
     Private Shared Function StaffPrefix(position As String) As String
         Select Case position
-            Case "Front Desk" : Return "FD"
-            Case "Administrator" : Return "ADM"
+            Case "Frontdesk" : Return "FD"
+            Case "Owner" : Return "OWN"
+            Case "IT" : Return "IT"
             Case "Dental Assistant" : Return "DA"
             Case "Dentist" : Return "DR"
             Case Else : Return "STF"
@@ -2436,10 +2581,11 @@ Public Class frmMain
     End Sub
 
     ' ------------------------------------------------------------ staff -> login account
-    ' Administrator and Front Desk staff get a login account automatically (no password yet: use Set Password).
-    ' Dentists and Dental Assistants do not log in, so a staff member moved to one of those loses (disables) the account.
+    ' Owner, IT, Frontdesk and Dentist staff get a login account automatically (no password yet: use Set Password,
+    ' or the person chooses one at the first sign-in). The role has the same name as the position.
+    ' Dental Assistants do not log in, so a staff member moved to that position loses (disables) the account.
     Private Sub SyncStaffAccount(staffId As Integer, position As String, first As String, last As String)
-        Dim roleName As String = If(position = "Administrator", "Administrator", If(position = "Front Desk", "Front Desk", Nothing))
+        Dim roleName As String = If(Array.IndexOf(Session.LoginPositions, position) >= 0, position, Nothing)
         Dim existing As DataTable = Db.Query("SELECT UserID, Username, RoleID, IsActive FROM tblUsers WHERE StaffID=@s", ("@s", staffId))
 
         If roleName Is Nothing Then
@@ -2451,6 +2597,7 @@ Public Class frmMain
             Return
         End If
 
+        EnsureRoles()
         Dim roleId As Integer = Convert.ToInt32(Db.Scalar("SELECT RoleID FROM tblRoles WHERE RoleName=@r", ("@r", roleName)))
         If existing.Rows.Count > 0 Then
             Dim uid As Integer = Convert.ToInt32(existing.Rows(0)("UserID"))
@@ -2476,13 +2623,24 @@ Public Class frmMain
         Audit.Log("Create Account", "tblUsers", newId, Nothing, $"{username} ({roleName})")
     End Sub
 
-    ' Staff saved earlier (before accounts were automatic) who still have no account get one when the panel opens.
+    ''' <summary>Makes sure the four roles exist in tblRoles (an older database may only have two of them).</summary>
+    Private Sub EnsureRoles()
+        For Each roleName As String In Session.LoginPositions
+            Db.Exec("INSERT INTO tblRoles (RoleName, Description) SELECT @n, @d FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM tblRoles WHERE RoleName = @n)",
+                    ("@n", roleName), ("@d", "Role: " & roleName))
+        Next
+    End Sub
+
+    ' Staff who have no account, or whose account role does not match their position (for example a Dentist
+    ' whose account carries the wrong role), are fixed when the Staff & Accounts page opens.
     Private Sub EnsureStaffAccounts()
+        EnsureRoles()
         Dim missing As DataTable = Db.Query("
             SELECT s.StaffID, s.Position, s.FirstName, s.LastName
             FROM tblStaff s
-            WHERE s.Position IN ('Administrator', 'Front Desk') AND s.Status = 'Active'
-              AND NOT EXISTS (SELECT 1 FROM tblUsers u WHERE u.StaffID = s.StaffID)")
+            WHERE s.Position IN ('Owner', 'IT', 'Frontdesk', 'Dentist') AND s.Status = 'Active'
+              AND NOT EXISTS (SELECT 1 FROM tblUsers u INNER JOIN tblRoles r ON r.RoleID = u.RoleID
+                              WHERE u.StaffID = s.StaffID AND r.RoleName = s.Position)")
         For Each row As DataRow In missing.Rows
             SyncStaffAccount(Convert.ToInt32(row("StaffID")), Ui.Txt(row("Position")), Ui.Txt(row("FirstName")), Ui.Txt(row("LastName")))
         Next
