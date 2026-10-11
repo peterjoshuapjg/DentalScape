@@ -65,7 +65,7 @@ Public Class frmMain
         '   Owner      everything
         '   IT         Dashboard (no monthly revenue), Staff & Accounts, Audit Log
         '   Frontdesk  Dashboard (no monthly revenue), Patients, Appointments, Billing & Payments, Clinical Records, Procedures & Prices, Inventory
-        '   Dentist    Dashboard (no monthly revenue), Patients, Appointments (read-only, only their own)
+        '   Dentist    Dashboard (no monthly revenue), Patients, Appointments (read-only, only their own), Clinical Records
         Const Owner As String = Session.OwnerRole
         Const IT As String = Session.ITRole
         Const Frontdesk As String = Session.FrontdeskRole
@@ -75,7 +75,7 @@ Public Class frmMain
         _pages(btnNavPatients) = New PageInfo("Patients", {Owner, Frontdesk, Dentist}, pnlPatients, AddressOf OpenPatients)
         _pages(btnNavAppointments) = New PageInfo("Appointments", {Owner, Frontdesk, Dentist}, pnlAppointment, AddressOf OpenAppointments)
         _pages(btnNavBilling) = New PageInfo("Billing & Payments", {Owner, Frontdesk}, pnlBillingpayments, AddressOf OpenBilling)
-        _pages(btnNavClinical) = New PageInfo("Clinical Records", {Owner, Frontdesk}, pnlClinicalRecord, AddressOf OpenClinical)
+        _pages(btnNavClinical) = New PageInfo("Clinical Records", {Owner, Frontdesk, Dentist}, pnlClinicalRecord, AddressOf OpenClinical)
         _pages(btnNavProcedures) = New PageInfo("Procedures & Prices", {Owner, Frontdesk}, pnlProcedures, AddressOf OpenProcedures)
         _pages(btnNavInventory) = New PageInfo("Inventory", {Owner, Frontdesk}, pnlInventory, AddressOf OpenInventory)
         _pages(btnNavStaff) = New PageInfo("Staff & Accounts", {Owner, IT}, pnlStaff, AddressOf OpenStaff)
@@ -1755,6 +1755,7 @@ Public Class frmMain
         _visitId = 0
         dtpVisit.Value = DateTime.Now
         cboVisitDentist.SelectedIndex = If(cboVisitDentist.Items.Count = 1, 0, -1)
+        If Session.IsDentist Then Ui.SelectValue(cboVisitDentist, Session.StaffId)     ' a Dentist's new visits default to themselves
         Ui.SetDate(dtpNextVisit, Nothing)
         txtComplaint.Clear()
         txtDiagnosis.Clear()
