@@ -1,7 +1,9 @@
 ﻿Imports System.Data
 Imports System.Drawing
+Imports System.Drawing.Printing
 Imports System.IO
 Imports System.Windows.Forms
+Imports DentalScape.frmFullImage
 Imports Charting = System.Windows.Forms.DataVisualization.Charting
 
 ''' <summary>
@@ -9,6 +11,8 @@ Imports Charting = System.Windows.Forms.DataVisualization.Charting
 ''' hides the current panel and shows the chosen one (see OpenPage). All screen logic is in this file.
 ''' </summary>
 Public Class frmMain
+    Private WithEvents pd As New PrintDocument()
+    Private imgToPrint As Image
 
     ' ============================================================ navigation (panel.Hide / panel.Show)
     Private NotInheritable Class PageInfo
@@ -2040,7 +2044,7 @@ Public Class frmMain
     Private Const MaxImageBytes As Long = 25L * 1024L * 1024L
     Private Const ImageFileFilter As String = "Images (*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tif;*.tiff)|*.jpg;*.jpeg;*.png;*.bmp;*.gif;*.tif;*.tiff"
     Private Shared ReadOnly ImageTypeList As String() = {
-        "Periapical X-ray", "Bitewing X-ray", "Panoramic X-ray", "Cephalometric X-ray",
+        "Periapical X-ray", "Bitewing X-ray", "Panoramic X-ray", "Cephalometric X-ray", "Occlusal X-ray",
         "CBCT / 3D Scan", "Intraoral Photo", "Extraoral Photo", "Other"}
     Private Shared ReadOnly ImageRoot As String = System.IO.Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "DentalScape", "MedicalImages")
@@ -2238,28 +2242,133 @@ Public Class frmMain
         Ui.Try(AddressOf ShowSelectedImage)
     End Sub
 
-    Private Sub dgvImaging_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvImaging.CellContentClick
-        If e.RowIndex < 0 OrElse e.ColumnIndex <> dgvImaging.Columns("Action").Index Then Return
-        Ui.Try(Sub() ViewFullImage(e.RowIndex))
-    End Sub
-
     Private Sub dgvImaging_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvImaging.CellDoubleClick
         If e.RowIndex < 0 OrElse e.ColumnIndex = dgvImaging.Columns("Action").Index Then Return
         Ui.Try(Sub() ViewFullImage(e.RowIndex))
     End Sub
 
-    Private Sub ViewFullImage(rowIndex As Integer)
+    Private Const ActBtnW As Integer = 52
+    Private Const ActBtnH As Integer = 24
+    Private Const ActGap As Integer = 10
+
+    Private Sub DrawActionButton(g As Graphics, r As Rectangle, text As String)
+        Dim navy As Color = Color.FromArgb(13, 49, 127)
+        Using fill As New SolidBrush(navy),
+          sf As New StringFormat() With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center},
+          f As New Font("Segoe UI", 9.0F, FontStyle.Regular)
+            g.FillRectangle(fill, r)
+            g.DrawString(text, f, Brushes.White, New RectangleF(r.X, r.Y, r.Width, r.Height), sf)
+        End Using
+    End Sub
+
+    Private Shared Sub ActionRects(cell As Rectangle, ByRef viewRect As Rectangle, ByRef printRect As Rectangle)
+        Dim total As Integer = ActBtnW * 2 + ActGap
+        Dim x As Integer = cell.X + (cell.Width - total) \ 2
+        Dim y As Integer = cell.Y + (cell.Height - ActBtnH) \ 2
+        viewRect = New Rectangle(x, y, ActBtnW, ActBtnH)
+        printRect = New Rectangle(x + ActBtnW + ActGap, y, ActBtnW, ActBtnH)
+    End Sub
+
+    Private Shared Function RoundedRect(r As Rectangle, radius As Integer) As System.Drawing.Drawing2D.GraphicsPath
+        Dim d As Integer = radius * 2
+        Dim p As New System.Drawing.Drawing2D.GraphicsPath()
+        p.AddArc(r.X, r.Y, d, d, 180, 90)
+        p.AddArc(r.Right - d, r.Y, d, d, 270, 90)
+        p.AddArc(r.Right - d, r.Bottom - d, d, d, 0, 90)
+        p.AddArc(r.X, r.Bottom - d, d, d, 90, 90)
+        p.CloseFigure()
+        Return p
+    End Function
+
+    Private Sub DrawActionButton(g As Graphics, r As Rectangle, text As String, filled As Boolean)
+        Dim navy As Color = Color.FromArgb(13, 49, 127)
+        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias
+        Using path As System.Drawing.Drawing2D.GraphicsPath = RoundedRect(r, 6),
+          fill As New SolidBrush(If(filled, navy, Color.White)),
+          pen As New Pen(navy, 1.5F),
+          txt As New SolidBrush(If(filled, Color.White, navy)),
+          sf As New StringFormat() With {.Alignment = StringAlignment.Center, .LineAlignment = StringAlignment.Center},
+          f As New Font("Segoe UI", 9.0F, FontStyle.Bold)
+            g.FillPath(fill, path)
+            g.DrawPath(pen, path)
+            g.DrawString(text, f, txt, New RectangleF(r.X, r.Y, r.Width, r.Height), sf)
+        End Using
+    End Sub
+
+    Private Sub dgvImaging_CellPainting(sender As Object, e As DataGridViewCellPaintingEventArgs) Handles dgvImaging.CellPainting
+        If e.RowIndex < 0 OrElse e.ColumnIndex <> dgvImaging.Columns("Action").Index Then Return
+        e.PaintBackground(e.ClipBounds, True)
+        Dim v, p As Rectangle
+        ActionRects(e.CellBounds, v, p)
+        DrawActionButton(e.Graphics, v, "View")
+        DrawActionButton(e.Graphics, p, "Print")
+        e.Handled = True
+    End Sub
+
+    Private Sub dgvImaging_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvImaging.CellMouseClick
+        If e.Button <> MouseButtons.Left OrElse e.RowIndex < 0 OrElse e.ColumnIndex <> dgvImaging.Columns("Action").Index Then Return
+        Dim cell As Rectangle = dgvImaging.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, False)
+        Dim v, p As Rectangle
+        ActionRects(New Rectangle(0, 0, cell.Width, cell.Height), v, p)    ' e.Location is relative to the cell
+        If v.Contains(e.Location) Then
+            Ui.Try(Sub() ViewFullImage(e.RowIndex))
+        ElseIf p.Contains(e.Location) Then
+            Ui.Try(Sub() PrintImage(e.RowIndex))
+        End If
+    End Sub
+
+    ' hand cursor when hovering a button
+    Private Sub dgvImaging_CellMouseMove(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgvImaging.CellMouseMove
+        Dim overBtn As Boolean = False
+        If e.RowIndex >= 0 AndAlso e.ColumnIndex = dgvImaging.Columns("Action").Index Then
+            Dim cell As Rectangle = dgvImaging.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, False)
+            Dim v, p As Rectangle
+            ActionRects(New Rectangle(0, 0, cell.Width, cell.Height), v, p)
+            overBtn = v.Contains(e.Location) OrElse p.Contains(e.Location)
+        End If
+        dgvImaging.Cursor = If(overBtn, Cursors.Hand, Cursors.Default)
+    End Sub
+
+    Private Sub dgvImaging_CellMouseLeave(sender As Object, e As DataGridViewCellEventArgs) Handles dgvImaging.CellMouseLeave
+        dgvImaging.Cursor = Cursors.Default
+    End Sub
+
+    ' ---- build the viewer for a row (shared by View and Print)
+    Private Function BuildViewer(rowIndex As Integer) As frmFullImage
         Dim row As DataGridViewRow = dgvImaging.Rows(rowIndex)
         Dim fullPath As String = ImageFullPath(Ui.Txt(row.Cells("ImagePath").Value))
         If Not File.Exists(fullPath) Then
             Ui.Warn("The image file could not be found:" & vbCrLf & fullPath)
-            Return
+            Return Nothing
         End If
-        Dim caption As String = cboPatient.Text & "   |   " & Ui.Txt(row.Cells("ImageType").Value) & "   |   " & Ui.Txt(row.Cells("DateUploaded").Value)
-        Using viewer As New frmFullImage(LoadImageNoLock(fullPath), caption)   ' the viewer disposes the picture
+
+        Dim imgType As String = Ui.Txt(row.Cells("ImageType").Value)
+        Dim imgDate As String = Ui.Txt(row.Cells("DateUploaded").Value)
+        Dim caption As String = cboPatient.Text & "   |   " & imgType & "   |   " & imgDate
+
+        Dim viewer As New frmFullImage(LoadImageNoLock(fullPath), caption)
+        viewer.Patient = LoadPatientRecord(_recPatientId.ToString())
+        viewer.ImageType = imgType
+        viewer.ImageDate = imgDate
+        viewer.Logo = My.Resources.Resources._275598907_108216355160810_3692065727390731471_n1
+        Return viewer
+    End Function
+
+    Private Sub ViewFullImage(rowIndex As Integer)
+        Using viewer As frmFullImage = BuildViewer(rowIndex)
+            If viewer Is Nothing Then Return
             viewer.ShowDialog(Me)
         End Using
     End Sub
+
+    Private Sub PrintImage(rowIndex As Integer)
+        Using viewer As frmFullImage = BuildViewer(rowIndex)
+            If viewer Is Nothing Then Return
+            viewer.PrintReport(Me)
+            Audit.Log("Print Medical Image", Convert.ToInt32(dgvImaging.Rows(rowIndex).Tag))
+        End Using
+    End Sub
+
 
     ' ---- Upload Image: choose a file and preview it (nothing is stored until Save)
     Private Sub btnUploadImage_Click(sender As Object, e As EventArgs) Handles btnUploadImage.Click
@@ -2344,7 +2453,7 @@ Public Class frmMain
                 ("@u", If(Session.UserId = 0, Nothing, CObj(Session.UserId))))
         Catch
             Try
-                File.Delete(target)             ' do not leave an orphan file behind
+                File.Delete(target)
             Catch
             End Try
             Throw
@@ -3178,4 +3287,72 @@ Public Class frmMain
         If e.KeyChar = " "c Then e.Handled = True
     End Sub
 
+    Private Function LoadPatientRecord(patientId As String) As PatientRecord
+        Dim rec As New PatientRecord()
+        Dim key As String = If(patientId, "").Trim()
+        If key.Length = 0 Then Return rec
+
+        Dim idNum As Integer
+        Integer.TryParse(key, idNum)
+
+        ' ---- demographics
+        Dim pt As DataTable = Db.Query("
+        SELECT PatientID, PatientCode, FirstName, MiddleName, LastName, BirthDate, Gender,
+               ContactNumber, Address
+        FROM tblPatients
+        WHERE PatientID = @id OR PatientCode = @code
+        LIMIT 1", ("@id", idNum), ("@code", key))
+        If pt.Rows.Count = 0 Then Return rec
+
+        Dim r As DataRow = pt.Rows(0)
+        Dim pid As Integer = Convert.ToInt32(r("PatientID"))
+
+        Dim middle As String = Ui.Txt(r("MiddleName"))
+        rec.PatientName = (Ui.Txt(r("FirstName")) & " " & middle & " " & Ui.Txt(r("LastName"))).Replace("  ", " ").Trim()
+        rec.PatientId = Ui.Txt(r("PatientCode"))
+        rec.Gender = Ui.Txt(r("Gender"))
+        rec.ContactNo = Ui.Txt(r("ContactNumber"))
+        rec.Address = Ui.Txt(r("Address"))
+
+        If r("BirthDate") IsNot DBNull.Value Then
+            Dim bd As Date = Convert.ToDateTime(r("BirthDate"))
+            Dim years As Integer = Date.Today.Year - bd.Year
+            If bd.Date > Date.Today.AddYears(-years) Then years -= 1
+            rec.DateOfBirth = bd.ToString("yyyy-MM-dd")
+            rec.Age = years.ToString()
+        End If
+
+        ' ---- medical history (allergies and current medications)
+        Dim mh As DataTable = Db.Query(
+        "SELECT Allergies, CurrentMedications FROM tblMedicalHistory WHERE PatientID = @p", ("@p", pid))
+        If mh.Rows.Count > 0 Then
+            rec.Allergies = Ui.Txt(mh.Rows(0)("Allergies"))
+            rec.Medications = Ui.Txt(mh.Rows(0)("CurrentMedications"))
+        End If
+
+        ' ---- most recent visit (diagnosis, notes, dentist)
+        Dim visit As DataTable = Db.Query("
+        SELECT r.VisitDate, r.Diagnosis, r.ClinicalNotes, r.Recommendations,
+               CONCAT(s.FirstName, ' ', s.LastName) AS Dentist
+        FROM tblDentalRecords r
+        INNER JOIN tblStaff s ON s.StaffID = r.DentistID
+        WHERE r.PatientID = @p
+        ORDER BY r.VisitDate DESC, r.DentalRecordID DESC
+        LIMIT 1", ("@p", pid))
+        If visit.Rows.Count > 0 Then
+            Dim v As DataRow = visit.Rows(0)
+            rec.VisitDate = Convert.ToDateTime(v("VisitDate")).ToString("yyyy-MM-dd")
+            rec.Diagnosis = Ui.Txt(v("Diagnosis"))
+            rec.Physician = Ui.Txt(v("Dentist"))
+
+            Dim notes As String = Ui.Txt(v("ClinicalNotes"))
+            Dim recs As String = Ui.Txt(v("Recommendations"))
+            If recs.Length > 0 Then
+                notes &= If(notes.Length > 0, vbCrLf, "") & "Recommendations: " & recs
+            End If
+            rec.Notes = notes
+        End If
+
+        Return rec
+    End Function
 End Class
